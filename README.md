@@ -46,6 +46,32 @@ app/
 - POC scrolling text avec Hiragana にほんご
 - Design dark mode moderne avec animations
 
+## Tests
+
+Infrastructure de tests configurée avec Jest et React Testing Library.
+
+### Lancer les tests
+
+```bash
+# Tests unitaires
+npm test
+
+# Mode watch (développement)
+npm run test:watch
+
+# Couverture de code
+npm run test:coverage
+```
+
+### Couverture actuelle
+
+- **Global:** 62.5% (composants principaux à 100%)
+- **DifficultySelector.tsx:** 100% (4 tests)
+- **LevelButton.tsx:** 100% (3 tests)
+- **index.tsx (HomeScreen):** 100% (5 tests)
+
+**Total:** 12 tests passants
+
 ## Développement
 
 Ce projet suit la méthodologie Claude Code avec agents spécialisés.

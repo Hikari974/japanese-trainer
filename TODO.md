@@ -13,12 +13,19 @@
 - [ ] Développer la page statistiques (app/stats.tsx actuellement placeholder)
 - [ ] Développer la page paramètres (app/settings.tsx actuellement placeholder)
 - [ ] Ajouter persistance des données avec AsyncStorage
+- [ ] Ajouter tests pour pages placeholder (stats.tsx, settings.tsx, poc-scroll.tsx)
 
 ## Moyen terme
 
 - [ ] Implémenter le système de statistiques complet
 - [ ] Configurer CI/CD avec DevOps Expert
 - [ ] Setup Expo EAS pour déploiement iOS/Android
+- [ ] Augmenter couverture de tests à 80%+
+
+## Complété
+
+- [x] Infrastructure de tests Jest + React Testing Library configurée (2025-11-10)
+- [x] Tests pour composants principaux: DifficultySelector, LevelButton, HomeScreen (12 tests, 100% coverage)
 
 ---
 

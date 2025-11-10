@@ -45,7 +45,12 @@ japanese-trainer/
 │   ├── CLAUDE.md
 │   └── project.yml
 ├── app/                  # expo-router structure
+│   ├── __tests__/
+│   │   └── index.test.tsx           # Tests HomeScreen (5 tests)
 │   ├── components/
+│   │   ├── __tests__/
+│   │   │   ├── DifficultySelector.test.tsx  # Tests (4 tests)
+│   │   │   └── LevelButton.test.tsx         # Tests (3 tests)
 │   │   ├── DifficultySelector.tsx  # Sélecteur compact de difficulté
 │   │   ├── LevelButton.tsx         # Bouton de niveau moderne
 │   │   └── ScrollingText.tsx       # POC scrolling text
@@ -60,6 +65,8 @@ japanese-trainer/
 ├── .gitignore
 ├── app.json             # Expo configuration
 ├── babel.config.js
+├── jest.config.js       # Configuration Jest
+├── jest.setup.js        # Mocks pour tests
 ├── package.json
 ├── tamagui.config.ts
 └── tsconfig.json
@@ -87,11 +94,19 @@ japanese-trainer/
   - 6 boutons de niveau en liste verticale (Kana, N5, N4, N3, N2, N1)
   - Navigation vers stats, settings, et POC
   - Design élégant avec animations
+- [x] Infrastructure de tests installée avec Jest et React Testing Library (8ac6acf)
+  - jest.config.js configuré pour React Native et Tamagui
+  - jest.setup.js avec mocks pour expo-router, react-native-reanimated, et Tamagui
+  - 12 tests créés avec 100% de couverture des composants principaux
+  - Tests LevelButton.test.tsx (3 tests)
+  - Tests DifficultySelector.test.tsx (4 tests)
+  - Tests index.test.tsx HomeScreen (5 tests)
 
 ### Ce qui reste à faire
 - [ ] Définir les Epic et User Stories pour l'apprentissage du japonais
 - [ ] Implémenter les premières fonctionnalités d'apprentissage
 - [ ] Créer les pages settings et stats (actuellement placeholders)
+- [ ] Ajouter tests pour ScrollingText, poc-scroll, et pages placeholder
 
 ---
 
@@ -197,6 +212,7 @@ User demande → Identifier agent → Invoquer → Lire plan → Résumer AGENT 
 - 49ad4f5 : Documentation (README.md, TODO.md)
 - f65e1c3 : Migration tokens Tamagui + accessibilité
 - 6cd8db4 : Fix dark theme (defaultTheme="dark")
+- 8ac6acf : Tests infrastructure (Jest + 12 tests, 100% couverture core)
 
 **Prochaine action :** Définir les fonctionnalités d'apprentissage
 
@@ -216,3 +232,4 @@ L'application tourne sur Android via Expo Go (port 8081).
 - ✅ Navigation fonctionnelle
 - ✅ Animations fluides
 - ✅ POC scrolling validé
+- ✅ Tests unitaires : 12/12 passent, 100% couverture composants principaux
