@@ -45,8 +45,15 @@ japanese-trainer/
 │   ├── CLAUDE.md
 │   └── project.yml
 ├── app/                  # expo-router structure
+│   ├── components/
+│   │   ├── DifficultySelector.tsx  # Sélecteur compact de difficulté
+│   │   ├── LevelButton.tsx         # Bouton de niveau moderne
+│   │   └── ScrollingText.tsx       # POC scrolling text
 │   ├── _layout.tsx      # Root layout avec TamaguiProvider
-│   ├── index.tsx        # Home screen
+│   ├── index.tsx        # Home screen avec UI moderne
+│   ├── poc-scroll.tsx   # POC scrolling text
+│   ├── settings.tsx     # Page paramètres (placeholder)
+│   ├── stats.tsx        # Page statistiques (placeholder)
 │   └── +not-found.tsx   # 404 screen
 ├── assets/              # Icons & splash screens
 ├── node_modules/
@@ -70,29 +77,36 @@ japanese-trainer/
 - [x] Projet Expo initialisé avec SDK 54 (58c5199)
 - [x] Tamagui v1.136.9 configuré et intégré
 - [x] expo-router v6.0.14 configuré avec structure app/
-- [x] Écran d'accueil créé avec composants Tamagui
-- [x] Dependencies installées (node_modules présent)
+- [x] Dépendances manquantes ajoutées (@tamagui/babel-plugin, react-native-worklets@0.5.1) (7c8392c)
+- [x] Application testée avec succès sur Android via Expo Go
+- [x] POC scrolling text créé avec にほんご en Hiragana (da8b4cc)
+  - 4 fenêtres de test avec différentes vitesses (50, 150, 300, 500 px/s)
+  - Utilise react-native-reanimated pour animations fluides
+- [x] Home page redesignée avec UI moderne dark mode (21c5cba)
+  - Sélecteur de difficulté compact avec cercles colorés
+  - 6 boutons de niveau en liste verticale (Kana, N5, N4, N3, N2, N1)
+  - Navigation vers stats, settings, et POC
+  - Design élégant avec animations
 
 ### Ce qui reste à faire
-- [ ] Tester l'application sur Android (`npm run android`)
-- [ ] Vérifier que l'application démarre sans erreurs
 - [ ] Définir les Epic et User Stories pour l'apprentissage du japonais
-- [ ] Implémenter les premières fonctionnalités
+- [ ] Implémenter les premières fonctionnalités d'apprentissage
+- [ ] Créer les pages settings et stats (actuellement placeholders)
 
 ---
 
 ## 🚀 Prochaines Étapes
 
 ### Immédiat (Prochaine tâche)
-1. **Tester sur Android** : Lancer `npm run android` pour vérifier l'application
+1. **Définir les fonctionnalités** : Planifier les features d'apprentissage du japonais
 
 ### Court Terme
-2. Définir les Epic et User Stories avec Epic Manager Agent
-3. Créer l'architecture de navigation de l'app
-4. Concevoir le système de thème (light/dark)
+2. Implémenter la logique d'entraînement (scrolling text avec input)
+3. Créer les pages settings et stats
+4. Ajouter persistance des données (AsyncStorage)
 
 ### Moyen Terme
-5. Implémenter les premières fonctionnalités d'apprentissage
+5. Implémenter le système de statistiques
 6. Configurer CI/CD avec DevOps Expert
 7. Setup Expo EAS pour déploiement
 
@@ -172,25 +186,30 @@ User demande → Identifier agent → Invoquer → Lire plan → Résumer AGENT 
 ---
 
 **Dernière mise à jour :** 2025-11-10
+
 **Commits :**
 - 724a0aa : Infrastructure Claude Code
 - 58c5199 : Initialisation Expo + Tamagui + expo-router
+- e82d398 : Update context après initialisation
+- 7c8392c : Fix dépendances manquantes (Tamagui, worklets)
+- da8b4cc : POC scrolling text avec Hiragana にほんご
+- 21c5cba : Redesign home screen avec UI moderne dark mode
 
-**Prochaine action :** Tester l'application sur Android avec `npm run android`
+**Prochaine action :** Définir les fonctionnalités d'apprentissage
 
-## 📲 Instructions de Test
+## 📲 Application Testée et Fonctionnelle
 
-Pour tester l'application sur Android :
+L'application tourne sur Android via Expo Go (port 8081).
 
-```bash
-# Option 1: Lancer sur émulateur/device Android
-npm run android
+**Fonctionnalités actuelles :**
+- Home screen avec sélection niveau/difficulté
+- POC scrolling text (accessible via icône 🧪)
+- Navigation vers stats et settings (pages placeholder)
+- Design dark mode élégant et moderne
 
-# Option 2: Démarrer le dev server
-npm start
-# Puis scanner le QR code avec Expo Go
-```
-
-**Note :** Au premier lancement, Expo générera automatiquement :
-- Le dossier `android/` avec les fichiers natifs
-- Le fichier `.expo-env.d.ts` pour TypeScript
+**Tests effectués :**
+- ✅ Build réussi
+- ✅ Affichage correct sur Android
+- ✅ Navigation fonctionnelle
+- ✅ Animations fluides
+- ✅ POC scrolling validé
