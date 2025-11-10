@@ -8,9 +8,9 @@
 ## 📊 Résumé du Projet
 
 **japanese-trainer** est une application mobile pour l'apprentissage du japonais construite avec Expo :
-- **Mobile :** Expo SDK 52.0.0 (React Native)
-- **Navigation :** expo-router (file-based routing)
-- **UI Library :** Tamagui (performance-focused, themes)
+- **Mobile :** Expo SDK 54.0.23 (React Native 0.81.5)
+- **Navigation :** expo-router v6.0.14 (file-based routing)
+- **UI Library :** Tamagui v1.136.9 (performance-focused, themes)
 - **Platforms :** iOS + Android
 - **Hébergement :** GitHub (`git@github.com:user/japanese-trainer.git`)
 
@@ -20,9 +20,17 @@
 
 ### Configuration Initiale
 - [x] Configuration du template Claude Code
-- [x] Choix stack: Expo SDK 52.0.0 + Tamagui + expo-router
+- [x] Choix stack: Expo SDK 54 + Tamagui v1.136.9 + expo-router v6.0.14
 - [x] Plateformes cibles: iOS et Android
 - [x] Pas de backend pour l'instant (application standalone)
+
+### Initialisation Projet (2025-11-10)
+- [x] Projet Expo initialisé avec SDK 54.0.23
+- [x] Tamagui v1.136.9 installé et configuré
+- [x] expo-router v6.0.14 configuré avec structure app/
+- [x] Dépendances installées (npm install)
+- [x] Assets créés (icon, splash, adaptive-icon)
+- [x] Commit initial du projet mobile
 
 ---
 
@@ -31,18 +39,23 @@
 ```
 japanese-trainer/
 ├── .claude/
-│   ├── core/
-│   │   ├── agents/
-│   │   ├── rules/
-│   │   └── templates/
-│   ├── plugins/
-│   │   └── mobile/
-│   ├── docs/
-│   ├── tasks/
+│   ├── core/              # Infrastructure Claude Code
+│   ├── plugins/mobile/    # Agents Expo & Mobile UI
+│   ├── tasks/            # Contexte session
 │   ├── CLAUDE.md
 │   └── project.yml
+├── app/                  # expo-router structure
+│   ├── _layout.tsx      # Root layout avec TamaguiProvider
+│   ├── index.tsx        # Home screen
+│   └── +not-found.tsx   # 404 screen
+├── assets/              # Icons & splash screens
+├── node_modules/
 ├── .gitignore
-└── (projet Expo à initialiser)
+├── app.json             # Expo configuration
+├── babel.config.js
+├── package.json
+├── tamagui.config.ts
+└── tsconfig.json
 ```
 
 ---
@@ -51,32 +64,37 @@ japanese-trainer/
 
 ### Ce qui est fait
 - [x] Repository Git initialisé
-- [x] Commit initial avec infrastructure Claude Code
+- [x] Commit initial avec infrastructure Claude Code (724a0aa)
 - [x] Configuration projet (project.yml, CLAUDE.md)
 - [x] .gitignore configuré pour Expo
+- [x] Projet Expo initialisé avec SDK 54 (58c5199)
+- [x] Tamagui v1.136.9 configuré et intégré
+- [x] expo-router v6.0.14 configuré avec structure app/
+- [x] Écran d'accueil créé avec composants Tamagui
+- [x] Dependencies installées (node_modules présent)
 
 ### Ce qui reste à faire
-- [ ] Initialiser projet Expo
-- [ ] Configurer Tamagui
-- [ ] Mettre en place expo-router
-- [ ] Créer structure de l'application
-- [ ] Définir les fonctionnalités de base
+- [ ] Tester l'application sur Android (`npm run android`)
+- [ ] Vérifier que l'application démarre sans erreurs
+- [ ] Définir les Epic et User Stories pour l'apprentissage du japonais
+- [ ] Implémenter les premières fonctionnalités
 
 ---
 
 ## 🚀 Prochaines Étapes
 
 ### Immédiat (Prochaine tâche)
-1. Initialiser le projet Expo avec SDK 52.0.0
+1. **Tester sur Android** : Lancer `npm run android` pour vérifier l'application
 
 ### Court Terme
-2. Installer et configurer Tamagui
-3. Configurer expo-router
-4. Créer architecture de base de l'app
+2. Définir les Epic et User Stories avec Epic Manager Agent
+3. Créer l'architecture de navigation de l'app
+4. Concevoir le système de thème (light/dark)
 
 ### Moyen Terme
-4. Définir les Epic et User Stories pour l'app d'apprentissage du japonais
-5. Implémenter les premières fonctionnalités
+5. Implémenter les premières fonctionnalités d'apprentissage
+6. Configurer CI/CD avec DevOps Expert
+7. Setup Expo EAS pour déploiement
 
 ---
 
@@ -85,11 +103,11 @@ japanese-trainer/
 ### Contexte Technique
 
 **Mobile :**
-- Framework : Expo SDK 52.0.0 (React Native)
-- Router : expo-router (file-based routing, moderne)
-- UI Library : Tamagui (performance, themes)
+- Framework : Expo SDK 54.0.23 (React Native 0.81.5)
+- Router : expo-router v6.0.14 (file-based routing, moderne)
+- UI Library : Tamagui v1.136.9 (performance, themes)
 - Platforms : iOS, Android
-- État actuel : Projet non initialisé, infrastructure Claude Code en place
+- État actuel : Projet initialisé, prêt à tester sur Android
 
 ### Stack Technique
 
@@ -154,4 +172,25 @@ User demande → Identifier agent → Invoquer → Lire plan → Résumer AGENT 
 ---
 
 **Dernière mise à jour :** 2025-11-10
-**Prochaine action :** Initialiser le projet Expo avec SDK 52.0.0
+**Commits :**
+- 724a0aa : Infrastructure Claude Code
+- 58c5199 : Initialisation Expo + Tamagui + expo-router
+
+**Prochaine action :** Tester l'application sur Android avec `npm run android`
+
+## 📲 Instructions de Test
+
+Pour tester l'application sur Android :
+
+```bash
+# Option 1: Lancer sur émulateur/device Android
+npm run android
+
+# Option 2: Démarrer le dev server
+npm start
+# Puis scanner le QR code avec Expo Go
+```
+
+**Note :** Au premier lancement, Expo générera automatiquement :
+- Le dossier `android/` avec les fichiers natifs
+- Le fichier `.expo-env.d.ts` pour TypeScript
