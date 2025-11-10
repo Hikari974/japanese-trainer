@@ -1,6 +1,7 @@
-import { XStack, H1, Button, Text } from 'tamagui';
+import { XStack, H1, Button } from 'tamagui';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
 
 interface AppHeaderProps {
   title: string;
@@ -28,25 +29,27 @@ export function AppHeader({ title, showBackButton = false, onBackPress }: AppHea
       borderBottomWidth={1}
       borderBottomColor="$borderColor"
       alignItems="center"
-      justifyContent="center"
-      position="relative"
+      justifyContent="space-between"
       backgroundColor="$background"
     >
-      {showBackButton && (
+      {showBackButton ? (
         <Button
-          size="$3"
+          size="$4"
           chromeless
-          position="absolute"
-          left="$4"
           onPress={handleBackPress}
           accessibilityLabel="Retour"
+          pressStyle={{ opacity: 0.6, scale: 0.95 }}
+          animation="quick"
         >
-          <Text fontSize={24}>←</Text>
+          <Ionicons name="arrow-back" size={28} color="#fff" />
         </Button>
+      ) : (
+        <XStack width={48} />
       )}
       <H1 fontSize={24} color="$color" fontWeight="bold">
         {title}
       </H1>
+      <XStack width={48} />
     </XStack>
   );
 }

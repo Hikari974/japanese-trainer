@@ -20,13 +20,27 @@ export default function HomeScreen() {
     if (preferences && !isLoading) {
       setDifficulty(preferences.lastDifficulty);
       setSelectedLevel(preferences.lastLevel);
+      if (__DEV__) {
+        console.log('Preferences loaded:', preferences);
+      }
     }
   }, [preferences, isLoading]);
 
   const handleLevelPress = (level: Level) => {
     setSelectedLevel(level);
+    // Save preference immediately
+    updatePreferences({ lastLevel: level });
     if (__DEV__) {
-      console.log(`Selected: ${level} - ${difficulty}`);
+      console.log(`Level saved: ${level}`);
+    }
+  };
+
+  const handleDifficultyChange = (newDifficulty: Difficulty) => {
+    setDifficulty(newDifficulty);
+    // Save preference immediately
+    updatePreferences({ lastDifficulty: newDifficulty });
+    if (__DEV__) {
+      console.log(`Difficulty saved: ${newDifficulty}`);
     }
   };
 
@@ -85,7 +99,7 @@ export default function HomeScreen() {
       </XStack>
 
       {/* Difficulty Selector */}
-      <DifficultySelector value={difficulty} onChange={setDifficulty} />
+      <DifficultySelector value={difficulty} onChange={handleDifficultyChange} />
 
       {/* Level List */}
       <YStack flex={1} paddingHorizontal="$4" paddingTop="$4" gap="$2.5">
