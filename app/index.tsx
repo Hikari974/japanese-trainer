@@ -1,17 +1,27 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { YStack, XStack, H1, Button, Text } from 'tamagui';
 import { Link, useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { DifficultySelector, type Difficulty } from './components/DifficultySelector';
 import { LevelButton, type Level } from './components/LevelButton';
+import { usePreferences } from './hooks/usePreferences';
 
 const levels: Level[] = ['Kana', 'N5', 'N4', 'N3', 'N2', 'N1'];
 
 export default function HomeScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
+  const { preferences, isLoading, updatePreferences } = usePreferences();
   const [difficulty, setDifficulty] = useState<Difficulty>('Normal');
   const [selectedLevel, setSelectedLevel] = useState<Level | null>(null);
+
+  // Load saved preferences on mount
+  useEffect(() => {
+    if (preferences && !isLoading) {
+      setDifficulty(preferences.lastDifficulty);
+      setSelectedLevel(preferences.lastLevel);
+    }
+  }, [preferences, isLoading]);
 
   const handleLevelPress = (level: Level) => {
     setSelectedLevel(level);
@@ -20,8 +30,14 @@ export default function HomeScreen() {
     }
   };
 
-  const handleStartSession = () => {
+  const handleStartSession = async () => {
     if (selectedLevel) {
+      // Save preferences before navigation
+      await updatePreferences({
+        lastLevel: selectedLevel,
+        lastDifficulty: difficulty,
+      });
+
       router.push({
         pathname: '/training',
         params: { level: selectedLevel, difficulty },

@@ -42,6 +42,8 @@ japanese-trainer/
 │   ├── core/              # Infrastructure Claude Code
 │   ├── plugins/mobile/    # Agents Expo & Mobile UI
 │   ├── tasks/            # Contexte session
+│   ├── state/            # State management
+│   │   └── last-action.json         # Orchestrator state tracking
 │   ├── CLAUDE.md
 │   └── project.yml
 ├── app/                  # expo-router structure
@@ -51,11 +53,20 @@ japanese-trainer/
 │   │   ├── __tests__/
 │   │   │   ├── DifficultySelector.test.tsx  # Tests (4 tests)
 │   │   │   └── LevelButton.test.tsx         # Tests (3 tests)
-│   │   ├── DifficultySelector.tsx  # Sélecteur compact de difficulté
-│   │   ├── LevelButton.tsx         # Bouton de niveau moderne
-│   │   └── ScrollingText.tsx       # POC scrolling text
-│   ├── _layout.tsx      # Root layout avec TamaguiProvider (headerShown: false)
-│   ├── index.tsx        # Home screen avec UI moderne + bouton session
+│   │   ├── AppHeader.tsx            # Header réutilisable avec safe area
+│   │   ├── DifficultySelector.tsx   # Sélecteur compact de difficulté
+│   │   ├── LevelButton.tsx          # Bouton de niveau moderne
+│   │   └── ScrollingText.tsx        # POC scrolling text
+│   ├── hooks/
+│   │   ├── __tests__/
+│   │   │   └── usePreferences.test.tsx      # Tests hook (9 tests)
+│   │   └── usePreferences.ts        # Hook React pour préférences utilisateur
+│   ├── services/
+│   │   ├── __tests__/
+│   │   │   └── preferences.test.ts          # Tests service (12 tests)
+│   │   └── preferences.ts           # Service AsyncStorage pour préférences
+│   ├── _layout.tsx      # Root layout avec SafeAreaProvider + TamaguiProvider
+│   ├── index.tsx        # Home screen avec UI + sauvegarde préférences
 │   ├── training.tsx     # Page de session d'entraînement
 │   ├── poc-scroll.tsx   # POC scrolling text
 │   ├── settings.tsx     # Page paramètres (placeholder)
@@ -67,7 +78,7 @@ japanese-trainer/
 ├── app.json             # Expo configuration
 ├── babel.config.js
 ├── jest.config.js       # Configuration Jest
-├── jest.setup.js        # Mocks pour tests
+├── jest.setup.js        # Mocks pour tests (AsyncStorage, Tamagui, expo-router)
 ├── package.json
 ├── tamagui.config.ts
 └── tsconfig.json
@@ -107,30 +118,56 @@ japanese-trainer/
   - Page training.tsx créée (affiche niveau + difficulté sélectionnés)
   - Bouton "Commencer la session" ajouté dans index.tsx (désactivé si aucun niveau)
   - 3 nouveaux tests pour le bouton session (15 tests total, tous passants)
+- [x] Android Safe Area fixes (9f4aafbb)
+  - react-native-safe-area-context installé et configuré
+  - SafeAreaProvider ajouté dans _layout.tsx
+  - AppHeader component créé (header réutilisable avec safe area + back button)
+  - Toutes les pages utilisent AppHeader pour navigation cohérente
+  - Content respect status bar et navigation bar Android
+- [x] Enforcement framework template synchronisé (ea0b8fd)
+  - CLAUDE.md mis à jour (76→538 lignes) avec règles strictes
+  - ENFORCEMENT.md créé (662 lignes) - détection violations automatique
+  - CHECKPOINTS.md créé (337 lignes) - checklist pre-commit obligatoire
+  - AUTO_CHECKS.md créé (665 lignes) - vérifications pré-réponse
+  - State management initialisé (last-action.json)
+  - Procédures maintenant appliquées automatiquement
+- [x] Gestion préférences utilisateur avec AsyncStorage (100% local, offline-first)
+  - @react-native-async-storage/async-storage installé
+  - Service preferences.ts créé (60 lignes) - loadPreferences(), savePreferences()
+  - Hook usePreferences.ts créé (27 lignes) - API React: { preferences, isLoading, updatePreferences }
+  - index.tsx modifié - chargement préférences au montage + sauvegarde avant navigation
+  - Pré-sélection automatique dernière difficulté + dernier niveau
+  - Stockage 100% local device (iOS/Android, pas de serveur)
+  - Tests complets créés :
+    - preferences.test.ts (12 tests unitaires service)
+    - usePreferences.test.tsx (9 tests hook React)
+    - Couverture: 100% statements/functions/lines, 81.25% branches
+    - 21 tests préférences + 15 tests existants = 36 tests total, tous passants
 
 ### Ce qui reste à faire
 - [ ] Implémenter la logique d'entraînement dans training.tsx (scrolling text avec input)
 - [ ] Définir les Epic et User Stories pour l'apprentissage du japonais
 - [ ] Créer les pages settings et stats (actuellement placeholders)
 - [ ] Ajouter tests pour training.tsx, ScrollingText, poc-scroll
-- [ ] Ajouter persistance des données (AsyncStorage)
+- [ ] Ajouter statistiques persistantes (étendre système AsyncStorage)
 
 ---
 
 ## 🚀 Prochaines Étapes
 
 ### Immédiat (Prochaine tâche)
-1. **Définir les fonctionnalités** : Planifier les features d'apprentissage du japonais
+1. **Implémenter la logique d'entraînement** : scrolling text avec input utilisateur dans training.tsx
+2. **Définir les fonctionnalités** : Planifier les features d'apprentissage du japonais (Epic Manager)
 
 ### Court Terme
-2. Implémenter la logique d'entraînement (scrolling text avec input)
-3. Créer les pages settings et stats
-4. Ajouter persistance des données (AsyncStorage)
+3. Créer le système de statistiques (page stats.tsx + stockage AsyncStorage)
+4. Implémenter la page settings (préférences UI, vitesse défilement, etc.)
+5. Ajouter tests pour training.tsx et ScrollingText
 
 ### Moyen Terme
-5. Implémenter le système de statistiques
-6. Configurer CI/CD avec DevOps Expert
-7. Setup Expo EAS pour déploiement
+6. Implémenter système de progression utilisateur (niveaux débloqués, achievements)
+7. Configurer CI/CD avec DevOps Expert
+8. Setup Expo EAS pour déploiement production
 
 ---
 
@@ -209,9 +246,9 @@ User demande → Identifier agent → Invoquer → Lire plan → Résumer AGENT 
 
 **Dernière mise à jour :** 2025-11-10
 
-**Commits :**
-- 724a0aa : Infrastructure Claude Code
-- 58c5199 : Initialisation Expo + Tamagui + expo-router
+**Commits Session 1:**
+- 724a0aa : Infrastructure Claude Code (framework méthodologie)
+- 58c5199 : Initialisation Expo SDK 54 + Tamagui + expo-router
 - e82d398 : Update context après initialisation
 - 7c8392c : Fix dépendances manquantes (Tamagui, worklets)
 - da8b4cc : POC scrolling text avec Hiragana にほんご
@@ -219,11 +256,16 @@ User demande → Identifier agent → Invoquer → Lire plan → Résumer AGENT 
 - 49ad4f5 : Documentation (README.md, TODO.md)
 - f65e1c3 : Migration tokens Tamagui + accessibilité
 - 6cd8db4 : Fix dark theme (defaultTheme="dark")
-- 8ac6acf : Tests infrastructure (Jest + 12 tests, 100% couverture core)
+- 8ac6acf : Tests infrastructure (Jest + 12 tests, 100% couverture)
 - db2717d : Mise à jour documentation (README, TODO, context)
 - d1370b4 : Bouton session + page training.tsx (15 tests total)
 
-**Prochaine action :** Implémenter la logique d'entraînement dans training.tsx
+**Commits Session 2 (continuation):**
+- 9f4aafbb : Android safe area fixes (SafeAreaProvider + AppHeader component)
+- ea0b8fd : Template sync enforcement framework (procédures strictes)
+- (pending) : Gestion préférences utilisateur AsyncStorage (36 tests total)
+
+**Prochaine action :** Commit préférences utilisateur + Documentation Maintainer
 
 ## 📲 Application Testée et Fonctionnelle
 
@@ -231,17 +273,22 @@ L'application tourne sur Android via Expo Go (port 8081).
 
 **Fonctionnalités actuelles :**
 - Home screen avec sélection niveau/difficulté
-- Bouton "Commencer la session" (désactivé si aucun niveau sélectionné)
+- **Préférences persistantes** : dernier niveau + difficulté sauvegardés et pré-sélectionnés (100% local)
+- Bouton "Commencer la session" (désactivé si aucun niveau, sauvegarde préférences avant navigation)
 - Page training.tsx (affiche configuration de la session)
 - POC scrolling text (accessible via icône 🧪)
 - Navigation vers stats et settings (pages placeholder)
+- Headers consistants avec safe area Android (status bar + nav bar respectées)
 - Design dark mode élégant et moderne sans header système
 
 **Tests effectués :**
 - ✅ Build réussi
-- ✅ Affichage correct sur Android
-- ✅ Navigation fonctionnelle
+- ✅ Affichage correct sur Android avec safe areas
+- ✅ Navigation fonctionnelle avec headers cohérents
 - ✅ Animations fluides
 - ✅ POC scrolling validé
-- ✅ Tests unitaires : 15/15 passent, 100% couverture composants principaux
+- ✅ **Tests unitaires : 36/36 passent**
+  - 15 tests UI (HomeScreen, LevelButton, DifficultySelector)
+  - 21 tests préférences (service + hook, 100% couverture)
 - ✅ Bouton session testé et fonctionnel
+- ✅ Préférences sauvegardées et chargées correctement (AsyncStorage)
