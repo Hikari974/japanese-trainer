@@ -1,18 +1,18 @@
-import { YStack, H1, H2, Button, Text } from 'tamagui';
+import { YStack, H2, Button, Text } from 'tamagui';
 import { useRouter, useLocalSearchParams } from 'expo-router';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { AppHeader } from './components/AppHeader';
 
 export default function TrainingScreen() {
   const router = useRouter();
+  const insets = useSafeAreaInsets();
   const params = useLocalSearchParams<{ level: string; difficulty: string }>();
 
   return (
-    <YStack flex={1} backgroundColor="$background" padding="$4" gap="$4">
-      {/* Header */}
-      <YStack gap="$2" paddingTop="$4">
-        <H1 fontSize={32} color="$color" textAlign="center">
-          Session d'entraînement
-        </H1>
-      </YStack>
+    <YStack flex={1} backgroundColor="$background">
+      <AppHeader title="Session d'entraînement" showBackButton />
+
+      <YStack flex={1} padding="$4" gap="$4" paddingBottom={insets.bottom + 16}>
 
       {/* Session Info */}
       <YStack
@@ -35,24 +35,13 @@ export default function TrainingScreen() {
         </YStack>
       </YStack>
 
-      {/* Placeholder message */}
-      <YStack flex={1} justifyContent="center" alignItems="center" padding="$4">
-        <Text fontSize={16} color="$colorTranslucent" textAlign="center">
-          Fonctionnalité d'entraînement à implémenter
-        </Text>
+        {/* Placeholder message */}
+        <YStack flex={1} justifyContent="center" alignItems="center" padding="$4">
+          <Text fontSize={16} color="$colorTranslucent" textAlign="center">
+            Fonctionnalité d'entraînement à implémenter
+          </Text>
+        </YStack>
       </YStack>
-
-      {/* Back button */}
-      <Button
-        size="$5"
-        backgroundColor="$backgroundHover"
-        onPress={() => router.back()}
-        accessibilityLabel="Retour à l'accueil"
-      >
-        <Text fontSize={18} color="$color">
-          Retour
-        </Text>
-      </Button>
     </YStack>
   );
 }

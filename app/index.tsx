@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { YStack, XStack, H1, Button, Text } from 'tamagui';
 import { Link, useRouter } from 'expo-router';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { DifficultySelector, type Difficulty } from './components/DifficultySelector';
 import { LevelButton, type Level } from './components/LevelButton';
 
@@ -8,6 +9,7 @@ const levels: Level[] = ['Kana', 'N5', 'N4', 'N3', 'N2', 'N1'];
 
 export default function HomeScreen() {
   const router = useRouter();
+  const insets = useSafeAreaInsets();
   const [difficulty, setDifficulty] = useState<Difficulty>('Normal');
   const [selectedLevel, setSelectedLevel] = useState<Level | null>(null);
 
@@ -33,8 +35,9 @@ export default function HomeScreen() {
       <XStack
         justifyContent="space-between"
         alignItems="center"
+        paddingTop={insets.top + 16}
         paddingHorizontal="$4"
-        paddingVertical="$4"
+        paddingBottom="$4"
         borderBottomWidth={1}
         borderBottomColor="$borderColor"
       >
@@ -81,7 +84,7 @@ export default function HomeScreen() {
       </YStack>
 
       {/* Start Session Button */}
-      <YStack paddingHorizontal="$4" paddingBottom="$4">
+      <YStack paddingHorizontal="$4" paddingBottom={insets.bottom + 16}>
         <Button
           size="$5"
           backgroundColor={selectedLevel ? '$levelN3' : '$backgroundHover'}

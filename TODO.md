@@ -9,11 +9,11 @@
 
 ## Court terme
 
-- [ ] Implémenter la logique d'entraînement (scrolling text avec input utilisateur)
+- [ ] Implémenter logique d'entraînement dans training.tsx (scrolling text avec input utilisateur)
 - [ ] Développer la page statistiques (app/stats.tsx actuellement placeholder)
 - [ ] Développer la page paramètres (app/settings.tsx actuellement placeholder)
 - [ ] Ajouter persistance des données avec AsyncStorage
-- [ ] Ajouter tests pour pages placeholder (stats.tsx, settings.tsx, poc-scroll.tsx)
+- [ ] Ajouter tests pour pages placeholder (stats.tsx, settings.tsx, poc-scroll.tsx, training.tsx)
 
 ## Moyen terme
 
@@ -26,6 +26,8 @@
 
 - [x] Infrastructure de tests Jest + React Testing Library configurée (2025-11-10)
 - [x] Tests pour composants principaux: DifficultySelector, LevelButton, HomeScreen (12 tests, 100% coverage)
+- [x] Session d'entraînement: navigation + bouton + validation de sélection (2025-11-10, commit d1370b4)
+- [x] Tests session d'entraînement: 3 tests ajoutés pour le bouton session (total: 15 tests)
 
 ---
 

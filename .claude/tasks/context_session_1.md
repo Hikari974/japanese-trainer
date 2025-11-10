@@ -46,7 +46,7 @@ japanese-trainer/
 │   └── project.yml
 ├── app/                  # expo-router structure
 │   ├── __tests__/
-│   │   └── index.test.tsx           # Tests HomeScreen (5 tests)
+│   │   └── index.test.tsx           # Tests HomeScreen (8 tests)
 │   ├── components/
 │   │   ├── __tests__/
 │   │   │   ├── DifficultySelector.test.tsx  # Tests (4 tests)
@@ -54,8 +54,9 @@ japanese-trainer/
 │   │   ├── DifficultySelector.tsx  # Sélecteur compact de difficulté
 │   │   ├── LevelButton.tsx         # Bouton de niveau moderne
 │   │   └── ScrollingText.tsx       # POC scrolling text
-│   ├── _layout.tsx      # Root layout avec TamaguiProvider
-│   ├── index.tsx        # Home screen avec UI moderne
+│   ├── _layout.tsx      # Root layout avec TamaguiProvider (headerShown: false)
+│   ├── index.tsx        # Home screen avec UI moderne + bouton session
+│   ├── training.tsx     # Page de session d'entraînement
 │   ├── poc-scroll.tsx   # POC scrolling text
 │   ├── settings.tsx     # Page paramètres (placeholder)
 │   ├── stats.tsx        # Page statistiques (placeholder)
@@ -101,12 +102,18 @@ japanese-trainer/
   - Tests LevelButton.test.tsx (3 tests)
   - Tests DifficultySelector.test.tsx (4 tests)
   - Tests index.test.tsx HomeScreen (5 tests)
+- [x] Fonctionnalité de session d'entraînement ajoutée (d1370b4)
+  - Header système caché dans _layout.tsx pour UI plus propre
+  - Page training.tsx créée (affiche niveau + difficulté sélectionnés)
+  - Bouton "Commencer la session" ajouté dans index.tsx (désactivé si aucun niveau)
+  - 3 nouveaux tests pour le bouton session (15 tests total, tous passants)
 
 ### Ce qui reste à faire
+- [ ] Implémenter la logique d'entraînement dans training.tsx (scrolling text avec input)
 - [ ] Définir les Epic et User Stories pour l'apprentissage du japonais
-- [ ] Implémenter les premières fonctionnalités d'apprentissage
 - [ ] Créer les pages settings et stats (actuellement placeholders)
-- [ ] Ajouter tests pour ScrollingText, poc-scroll, et pages placeholder
+- [ ] Ajouter tests pour training.tsx, ScrollingText, poc-scroll
+- [ ] Ajouter persistance des données (AsyncStorage)
 
 ---
 
@@ -213,8 +220,10 @@ User demande → Identifier agent → Invoquer → Lire plan → Résumer AGENT 
 - f65e1c3 : Migration tokens Tamagui + accessibilité
 - 6cd8db4 : Fix dark theme (defaultTheme="dark")
 - 8ac6acf : Tests infrastructure (Jest + 12 tests, 100% couverture core)
+- db2717d : Mise à jour documentation (README, TODO, context)
+- d1370b4 : Bouton session + page training.tsx (15 tests total)
 
-**Prochaine action :** Définir les fonctionnalités d'apprentissage
+**Prochaine action :** Implémenter la logique d'entraînement dans training.tsx
 
 ## 📲 Application Testée et Fonctionnelle
 
@@ -222,9 +231,11 @@ L'application tourne sur Android via Expo Go (port 8081).
 
 **Fonctionnalités actuelles :**
 - Home screen avec sélection niveau/difficulté
+- Bouton "Commencer la session" (désactivé si aucun niveau sélectionné)
+- Page training.tsx (affiche configuration de la session)
 - POC scrolling text (accessible via icône 🧪)
 - Navigation vers stats et settings (pages placeholder)
-- Design dark mode élégant et moderne
+- Design dark mode élégant et moderne sans header système
 
 **Tests effectués :**
 - ✅ Build réussi
@@ -232,4 +243,5 @@ L'application tourne sur Android via Expo Go (port 8081).
 - ✅ Navigation fonctionnelle
 - ✅ Animations fluides
 - ✅ POC scrolling validé
-- ✅ Tests unitaires : 12/12 passent, 100% couverture composants principaux
+- ✅ Tests unitaires : 15/15 passent, 100% couverture composants principaux
+- ✅ Bouton session testé et fonctionnel

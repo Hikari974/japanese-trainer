@@ -1,10 +1,15 @@
-import { YStack, H2, Paragraph, XStack } from 'tamagui';
+import { YStack, Paragraph, XStack } from 'tamagui';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ScrollingText } from './components/ScrollingText';
+import { AppHeader } from './components/AppHeader';
 
 export default function PocScrollScreen() {
+  const insets = useSafeAreaInsets();
+
   return (
-    <YStack flex={1} padding="$4" backgroundColor="$background" gap="$4">
-      <H2>POC - Défilement Hiragana</H2>
+    <YStack flex={1} backgroundColor="$background">
+      <AppHeader title="POC - Défilement" showBackButton />
+      <YStack flex={1} padding="$4" paddingBottom={insets.bottom + 16} gap="$4">
       <Paragraph theme="alt2">
         Test de にほんご (nihongo) avec différentes vitesses et tailles
       </Paragraph>
@@ -53,9 +58,10 @@ export default function PocScrollScreen() {
         <ScrollingText text="にほんご" speed={500} windowWidth={250} fontSize={28} />
       </YStack>
 
-      <Paragraph fontSize={12} color="$gray10" marginTop="$4">
-        Testez la fluidité et la lisibilité à différentes vitesses
-      </Paragraph>
+        <Paragraph fontSize={12} color="$gray10" marginTop="$4">
+          Testez la fluidité et la lisibilité à différentes vitesses
+        </Paragraph>
+      </YStack>
     </YStack>
   );
 }

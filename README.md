@@ -34,6 +34,7 @@ app/
 │   └── ScrollingText.tsx
 ├── _layout.tsx         # Root layout avec TamaguiProvider
 ├── index.tsx           # Home screen
+├── training.tsx        # Page de session d'entraînement
 ├── poc-scroll.tsx      # POC scrolling text
 ├── settings.tsx        # Paramètres (placeholder)
 └── stats.tsx           # Statistiques (placeholder)
@@ -43,6 +44,8 @@ app/
 
 - Home screen avec sélection de niveau (Kana, N5, N4, N3, N2, N1)
 - Sélecteur de difficulté (Facile, Moyen, Difficile)
+- Session d'entraînement avec navigation vers page dédiée (niveau + difficulté)
+- Bouton "Commencer la session" avec validation de sélection
 - POC scrolling text avec Hiragana にほんご
 - Design dark mode moderne avec animations
 
@@ -68,9 +71,9 @@ npm run test:coverage
 - **Global:** 62.5% (composants principaux à 100%)
 - **DifficultySelector.tsx:** 100% (4 tests)
 - **LevelButton.tsx:** 100% (3 tests)
-- **index.tsx (HomeScreen):** 100% (5 tests)
+- **index.tsx (HomeScreen):** 100% (8 tests - inclut tests session)
 
-**Total:** 12 tests passants
+**Total:** 15 tests passants
 
 ## Développement
 
