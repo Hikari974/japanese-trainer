@@ -194,6 +194,9 @@ User demande → Identifier agent → Invoquer → Lire plan → Résumer AGENT 
 - 7c8392c : Fix dépendances manquantes (Tamagui, worklets)
 - da8b4cc : POC scrolling text avec Hiragana にほんご
 - 21c5cba : Redesign home screen avec UI moderne dark mode
+- 49ad4f5 : Documentation (README.md, TODO.md)
+- f65e1c3 : Migration tokens Tamagui + accessibilité
+- 6cd8db4 : Fix dark theme (defaultTheme="dark")
 
 **Prochaine action :** Définir les fonctionnalités d'apprentissage
 
