@@ -1,0 +1,287 @@
+# Configuration Epic & User Stories - Epic Manager Agent
+
+version: "1.0.0"
+description: "Configuration pour la gestion des Epic et User Stories"
+
+# Seuils et limites
+thresholds:
+  max_us_per_epic:
+    recommended: 8
+    warning: 10
+    max: 15
+
+  max_acceptance_criteria:
+    recommended: 5
+    max: 8
+
+  estimation_range:
+    epic:
+      min_days: 3
+      max_days: 30
+      warning_above: 20  # Epic trop gros, à découper
+
+    user_story:
+      min_days: 0.5
+      max_days: 7
+      warning_above: 5  # US trop grosse, à découper
+
+# Format numérotation
+numbering:
+  epic_format: "epic-{number:03d}.md"  # epic-001.md, epic-002.md
+  us_format: "us-{epic:03d}-{letter}.md"  # us-001-A.md, us-001-B.md
+
+  epic_title_format: "Epic {number:03d} - {title}"
+  us_title_format: "User Story {epic:03d}-{letter} – {title}"
+
+  us_letters: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O"]
+
+# Niveaux de complexité
+complexity:
+  levels:
+    - name: "Simple"
+      description: "Modification mineure, peu de logique, 1-2 jours"
+      estimation_days: [1, 2]
+      examples:
+        - "Ajouter un champ à un formulaire"
+        - "Modifier un label"
+        - "Créer une page statique simple"
+
+    - name: "Moyenne"
+      description: "Logique métier modérée, intégrations simples, 3-4 jours"
+      estimation_days: [3, 4]
+      examples:
+        - "Créer un CRUD complet"
+        - "Intégrer une API externe simple"
+        - "Ajouter validation complexe"
+
+    - name: "Complexe"
+      description: "Logique métier avancée, multiples intégrations, 5-7 jours"
+      estimation_days: [5, 6, 7]
+      examples:
+        - "Système de workflow multi-étapes"
+        - "Intégration paiement avec gestion erreurs"
+        - "Système de permissions granulaires"
+
+# Status Epic
+epic_status:
+  - "À planifier"
+  - "En cours"
+  - "En validation"
+  - "Terminé"
+  - "Annulé"
+  - "En attente"
+
+# Status User Story
+us_status:
+  - "À faire"
+  - "En cours"
+  - "En review"
+  - "Terminée"
+  - "Bloquée"
+  - "Annulée"
+
+# Critères INVEST
+invest_criteria:
+  I_Independent:
+    description: "La User Story peut être développée indépendamment des autres"
+    questions:
+      - "Cette US peut-elle être développée seule ?"
+      - "Y a-t-il des dépendances bloquantes ?"
+      - "Peut-on la mettre en production seule ?"
+
+  N_Negotiable:
+    description: "Les détails peuvent être discutés et ajustés"
+    questions:
+      - "L'approche est-elle flexible ?"
+      - "Peut-on adapter le périmètre ?"
+      - "Y a-t-il plusieurs solutions possibles ?"
+
+  V_Valuable:
+    description: "Apporte de la valeur métier tangible"
+    questions:
+      - "Quelle valeur pour l'utilisateur final ?"
+      - "Quel problème métier résout-elle ?"
+      - "Peut-on mesurer l'impact ?"
+
+  E_Estimable:
+    description: "On peut estimer le temps de développement"
+    questions:
+      - "Les exigences sont-elles claires ?"
+      - "L'équipe comprend-elle ce qui est demandé ?"
+      - "Y a-t-il trop d'inconnues ?"
+
+  S_Small:
+    description: "Suffisamment petite pour être développée rapidement"
+    questions:
+      - "Peut-on la terminer en < 1 semaine ?"
+      - "Est-elle trop grosse (> 7 jours) ?"
+      - "Peut-on la découper davantage ?"
+
+  T_Testable:
+    description: "On peut valider qu'elle fonctionne correctement"
+    questions:
+      - "Les critères d'acceptation sont-ils clairs ?"
+      - "Peut-on écrire des tests automatisés ?"
+      - "Comment vérifier que c'est terminé ?"
+
+# Templates de questions pour qualification
+qualification_questions:
+  context:
+    - "Qui sont les utilisateurs cibles ?"
+    - "Quel problème métier cherche-t-on à résoudre ?"
+    - "Pourquoi maintenant ? Quelle est l'urgence ?"
+    - "Y a-t-il des contraintes réglementaires/légales ?"
+
+  scope:
+    - "Quelles sont les fonctionnalités essentielles (MVP) ?"
+    - "Quelles sont les fonctionnalités optionnelles (nice-to-have) ?"
+    - "Qu'est-ce qui est explicitement HORS périmètre ?"
+    - "Y a-t-il des cas d'usage spécifiques à considérer ?"
+
+  users:
+    - "Quels sont les différents rôles utilisateurs ?"
+    - "Quels sont les workflows utilisateurs typiques ?"
+    - "Y a-t-il des besoins d'accessibilité ?"
+    - "Quel est le niveau technique des utilisateurs ?"
+
+  data:
+    - "Quelles données doivent être manipulées ?"
+    - "Y a-t-il des contraintes de volumétrie ?"
+    - "Quels sont les besoins de migration de données ?"
+    - "Y a-t-il des besoins d'import/export ?"
+
+  integrations:
+    - "Y a-t-il des systèmes externes à intégrer ?"
+    - "Quelles APIs doivent être consommées/exposées ?"
+    - "Y a-t-il des dépendances avec d'autres fonctionnalités ?"
+
+  constraints:
+    - "Quelles sont les contraintes de performance ?"
+    - "Y a-t-il des contraintes de sécurité spécifiques ?"
+    - "Quelles sont les contraintes budgétaires/temps ?"
+    - "Y a-t-il des contraintes techniques imposées ?"
+
+  success:
+    - "Comment mesurer le succès de cette fonctionnalité ?"
+    - "Quels KPIs doivent être trackés ?"
+    - "Quels sont les critères de validation métier ?"
+
+# Règles de dépendances
+dependencies:
+  epic_to_epic:
+    allowed: true
+    description: "Un Epic peut dépendre d'un autre Epic (ex: Epic Auth requis avant Epic Payments)"
+
+  us_to_us:
+    allowed: true
+    description: "Une US peut dépendre d'une autre US (même Epic ou Epic différent)"
+
+  circular_dependencies:
+    allowed: false
+    description: "Les dépendances circulaires sont interdites"
+
+# Découpage recommandé
+splitting_guidelines:
+  by_user_role:
+    description: "Découper par rôle utilisateur"
+    example: "US Admin / US Utilisateur final"
+
+  by_crud:
+    description: "Découper par opérations CRUD"
+    example: "US Create / US Read / US Update / US Delete"
+
+  by_workflow_step:
+    description: "Découper par étape de workflow"
+    example: "US Création brouillon / US Soumission / US Validation / US Publication"
+
+  by_priority:
+    description: "Découper MVP vs Nice-to-have"
+    example: "US Fonctionnalité de base / US Fonctionnalité avancée"
+
+  by_complexity:
+    description: "Découper partie simple vs complexe"
+    example: "US Configuration manuelle / US Configuration automatique"
+
+# Format livraison Epic
+epic_delivery_format:
+  filename: "epic-{number:03d}.md"
+  location: ".claude/docs/epics/"
+
+  required_sections:
+    - "Titre avec numéro"
+    - "Date et Status"
+    - "Objectif Global"
+    - "Contexte Métier"
+    - "Périmètre (inclus/exclus)"
+    - "Liste User Stories"
+    - "Estimation globale"
+    - "Risques"
+    - "Critères de succès"
+    - "Questions non répondues"
+
+# Format livraison User Story
+us_delivery_format:
+  filename: "us-{epic:03d}-{letter}.md"
+  location: ".claude/docs/epics/"
+
+  required_sections:
+    - "Titre avec numéro"
+    - "Epic Parent (lien)"
+    - "Complexité et Estimation"
+    - "User Story (En tant que... Je veux... Afin de...)"
+    - "Critères INVEST"
+    - "Critères d'acceptation (max 5)"
+    - "Points d'attention"
+    - "Questions en suspens"
+    - "Prochaines actions"
+
+# Validation Rules
+validation:
+  epic:
+    - rule: "has_at_least_one_us"
+      message: "Un Epic doit contenir au moins 1 User Story"
+
+    - rule: "has_objective"
+      message: "Un Epic doit avoir un objectif global clair"
+
+    - rule: "has_success_criteria"
+      message: "Un Epic doit avoir des critères de succès mesurables"
+
+    - rule: "estimation_within_range"
+      message: "Estimation Epic doit être entre 3 et 30 jours"
+
+  user_story:
+    - rule: "follows_invest"
+      message: "User Story doit respecter critères INVEST"
+
+    - rule: "has_acceptance_criteria"
+      message: "User Story doit avoir des critères d'acceptation (1-5)"
+
+    - rule: "has_clear_value"
+      message: "User Story doit expliciter la valeur métier"
+
+    - rule: "estimation_realistic"
+      message: "Estimation US doit être entre 0.5 et 7 jours"
+
+# Intégration avec TODO.md
+todo_integration:
+  phase_format: "Epic {number:03d} - {title}"
+  task_format: "[ ] US {epic:03d}-{letter} - {title}"
+
+  example: |
+    ## Phase: Epic 002 - Système de Notification Email
+    - [ ] US 002-A - Configuration Email Admin
+    - [ ] US 002-B - Workflow Automatique Notifications
+    - [ ] US 002-C - Templates Personnalisables
+
+# Notes d'utilisation
+notes: |
+  Configuration pour Epic Manager Agent.
+
+  Workflow recommandé :
+  1. /epic → Créer nouvel Epic avec qualification
+  2. Agent pose questions, découpe en Epic/US
+  3. User valide le découpage
+  4. Agent crée fichiers Epic + User Stories
+  5. /validepic <numero> → Écrit dans TODO.md
+  6. /plan <numero> → Planifie prochaine US

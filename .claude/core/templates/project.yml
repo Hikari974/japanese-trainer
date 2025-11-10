@@ -1,0 +1,168 @@
+# ==============================================================================
+# Project Configuration - Claude Code Agents
+# ==============================================================================
+#
+# This file defines your project's technical stack and active agents.
+# Copy this template and customize it for your project.
+#
+# ==============================================================================
+
+project:
+  name: "{{PROJECT_NAME}}"              # Ex: "my-saas-app", "api-backend"
+  repository: "{{GIT_REMOTE}}"          # Ex: "git@github.com:user/repo.git"
+  version: "0.1.0"                       # Semantic versioning (MAJOR.MINOR.PATCH)
+
+stack:
+  backend:
+    framework: null                      # fastapi, django, nestjs, express, null
+    language: null                       # python, typescript, javascript, null
+    version: null                        # Ex: "Python 3.11+", "Node 18+"
+
+  frontend:
+    framework: null                      # react, vue, angular, null
+    meta: null                           # Ex: "Vite + React 18 + TypeScript"
+    version: null                        # Ex: "React 18+", "Vue 3+"
+
+  database:
+    type: null                           # postgresql, mongodb, mysql, null
+    version: null                        # Ex: "PostgreSQL 15+", "MongoDB 6+"
+
+  mobile:
+    framework: null                      # expo, null
+    sdk_version: null                    # Ex: "52.0.0" (Expo SDK)
+    router: null                         # expo-router, react-navigation, null
+    ui_library: null                     # tamagui, react-native-paper, native-base, null
+    platforms: []                        # ["ios", "android"]
+
+agents:
+  core:
+    - devops-expert                      # Always active
+    - docs-maintainer                    # Always active
+    - code-reviewer                      # Always active
+    - test-engineer                      # Always active
+    - epic-manager                       # Always active
+
+  plugins:
+    backend: []                          # ["fastapi-expert"], ["django-expert"], etc.
+    frontend: []                         # ["react-expert"], ["vue-expert"], etc.
+    database: []                         # ["postgresql-expert"], ["mongodb-expert"], etc.
+    mobile: []                           # ["expo-expert", "mobile-ui-expert"]
+    other: []                            # ["security-expert"], etc.
+
+paths:
+  backend: "backend/"                    # backend/, server/, api/
+  frontend: "frontend/"                  # frontend/, client/, web/
+  docs: ".claude/docs/"
+  tasks: ".claude/tasks/"
+
+product:
+  estimation_format: "jours-heures"      # Format estimation (jours-heures, story-points, t-shirt)
+  complexity_levels:                     # Niveaux complexité User Stories
+    - "Simple"                           # 1-2 jours
+    - "Moyenne"                          # 3-4 jours
+    - "Complexe"                         # 5-7 jours
+
+  max_us_per_epic: 8                     # Nombre max User Stories par Epic (recommandé)
+
+  epic_status:                           # Status possibles Epic
+    - "À planifier"
+    - "En cours"
+    - "En validation"
+    - "Terminé"
+
+testing:
+  coverage:
+    unit: 80                             # Minimum unit test coverage (%)
+    integration: 70                      # Minimum integration test coverage (%)
+    e2e: 60                              # Minimum e2e test coverage (%)
+    critical: 100                        # Coverage for critical code (auth, payment, security)
+
+  commands:
+    test: null                           # Ex: "npm test", "pytest"
+    coverage: null                       # Ex: "npm test -- --coverage", "pytest --cov=app tests/"
+    watch: null                          # Ex: "npm test -- --watch", "pytest-watch"
+
+  patterns:
+    test_files: []                       # Ex: ["**/*.test.ts", "test_*.py"]
+    exclude: []                          # Ex: ["**/node_modules/**", "**/__mocks__/**"]
+
+conventions:
+  commit:
+    format: "type(scope): description"
+    types: ["feat", "fix", "refactor", "docs", "chore", "test", "style"]
+
+  versioning:
+    format: "MAJOR.MINOR.PATCH"          # Semantic versioning
+
+  branches:
+    format: "type/description"
+
+# ==============================================================================
+# Example Configurations
+# ==============================================================================
+
+# FastAPI + React + PostgreSQL:
+# stack:
+#   backend:
+#     framework: "fastapi"
+#     language: "python"
+#     version: "Python 3.11+"
+#   frontend:
+#     framework: "react"
+#     meta: "Vite + React 18 + TypeScript"
+#     version: "React 18+"
+#   database:
+#     type: "postgresql"
+#     version: "PostgreSQL 15+"
+# agents:
+#   plugins:
+#     backend: ["fastapi-expert"]
+#     frontend: ["react-expert"]
+#     database: ["postgresql-expert"]
+# testing:
+#   commands:
+#     test: "pytest && npm test"
+#     coverage: "pytest --cov=backend tests/ && npm test -- --coverage"
+#   patterns:
+#     test_files: ["test_*.py", "**/*.test.ts", "**/*.test.tsx"]
+#     exclude: ["**/node_modules/**", "**/__pycache__/**"]
+
+# Django + Vue + MongoDB:
+# stack:
+#   backend:
+#     framework: "django"
+#     language: "python"
+#     version: "Python 3.10+"
+#   frontend:
+#     framework: "vue"
+#     meta: "Vite + Vue 3 + TypeScript"
+#     version: "Vue 3+"
+#   database:
+#     type: "mongodb"
+#     version: "MongoDB 6+"
+# agents:
+#   plugins:
+#     backend: ["django-expert"]
+#     frontend: ["vue-expert"]
+#     database: ["mongodb-expert"]
+
+# Expo Mobile + FastAPI Backend:
+# stack:
+#   backend:
+#     framework: "fastapi"
+#     language: "python"
+#     version: "Python 3.11+"
+#   mobile:
+#     framework: "expo"
+#     sdk_version: "52.0.0"
+#     router: "expo-router"
+#     ui_library: "tamagui"
+#     platforms: ["ios", "android"]
+#   database:
+#     type: "postgresql"
+#     version: "PostgreSQL 15+"
+# agents:
+#   plugins:
+#     backend: ["fastapi-expert"]
+#     mobile: ["expo-expert", "mobile-ui-expert"]
+#     database: ["postgresql-expert"]
