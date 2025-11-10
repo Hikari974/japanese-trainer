@@ -14,14 +14,20 @@ node_modules/
 .expo/
 dist/
 web-build/
+expo-env.d.ts
 
 # Native
+.kotlin/
 *.orig.*
 *.jks
 *.p8
 *.p12
 *.key
 *.mobileprovision
+
+# Generated native folders
+/ios
+/android
 
 # Metro
 .metro-health-check*

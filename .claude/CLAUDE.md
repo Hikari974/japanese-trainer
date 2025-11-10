@@ -1,7 +1,7 @@
-# {{PROJECT_NAME}}
+# japanese-trainer
 
-**Version:** {{VERSION}}
-**Stack:** {{STACK_SUMMARY}}
+**Version:** 0.1.0
+**Stack:** Expo SDK 52.0.0 (React Native) + Tamagui + expo-router
 
 ## Configuration
 
@@ -38,9 +38,6 @@
 - Epic, User Stories, Product → Epic Manager Agent → `.claude/core/agents/epic-manager.md`
 
 **Plugin Agents (selon stack configuré dans project.yml):**
-- Backend → Backend Expert → `.claude/plugins/backend/{{BACKEND_FRAMEWORK}}-expert.md`
-- Frontend → Frontend Expert → `.claude/plugins/frontend/{{FRONTEND_FRAMEWORK}}-expert.md`
-- Database → Database Expert → `.claude/plugins/database/{{DATABASE_TYPE}}-expert.md`
 - Mobile SDK/Config → Expo Expert → `.claude/plugins/mobile/expo-expert.md`
 - Mobile UI/UX → Mobile UI Expert → `.claude/plugins/mobile/mobile-ui-expert.md`
 
