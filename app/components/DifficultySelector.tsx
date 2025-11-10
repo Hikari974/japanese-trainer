@@ -4,10 +4,10 @@ const difficulties = ['Facile', 'Normal', 'Difficile', 'Extrême'] as const;
 export type Difficulty = typeof difficulties[number];
 
 const difficultyColors = {
-  Facile: '#4ade80',
-  Normal: '#60a5fa',
-  Difficile: '#f59e0b',
-  Extrême: '#ef4444',
+  Facile: '$difficultyEasy',
+  Normal: '$difficultyNormal',
+  Difficile: '$difficultyHard',
+  Extrême: '$difficultyExtreme',
 };
 
 interface DifficultySelectorProps {
@@ -38,16 +38,19 @@ export function DifficultySelector({ value, onChange }: DifficultySelectorProps)
             opacity={isSelected ? 1 : 0.5}
             pressStyle={{ opacity: 0.7, scale: 0.95 }}
             animation="quick"
+            accessibilityRole="button"
+            accessibilityLabel={`Difficulté ${difficulty}`}
+            accessibilityState={{ selected: isSelected }}
           >
             <Circle
               size={isSelected ? 14 : 10}
               backgroundColor={color}
               borderWidth={isSelected ? 2 : 0}
-              borderColor="#0a0a0a"
+              borderColor="$background"
             />
             <Text
               fontSize={11}
-              color={isSelected ? color : '#888'}
+              color={isSelected ? color : '$darkTextTertiary'}
               fontWeight={isSelected ? 'bold' : 'normal'}
             >
               {difficulty}

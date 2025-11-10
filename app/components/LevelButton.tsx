@@ -9,12 +9,12 @@ interface LevelButtonProps {
 }
 
 const levelColors = {
-  Kana: '#10b981',
-  N5: '#3b82f6',
-  N4: '#8b5cf6',
-  N3: '#a855f7',
-  N2: '#ec4899',
-  N1: '#ef4444',
+  Kana: '$levelKana',
+  N5: '$levelN5',
+  N4: '$levelN4',
+  N3: '$levelN3',
+  N2: '$levelN2',
+  N1: '$levelN1',
 };
 
 export function LevelButton({ level, isSelected, onPress }: LevelButtonProps) {
@@ -24,21 +24,24 @@ export function LevelButton({ level, isSelected, onPress }: LevelButtonProps) {
     <Button
       onPress={onPress}
       height={58}
-      backgroundColor={isSelected ? `${color}20` : '#1a1a1a'}
+      backgroundColor={isSelected ? '$backgroundHover' : '$backgroundHover'}
       borderWidth={isSelected ? 2 : 0}
       borderColor={isSelected ? color : 'transparent'}
       borderRadius="$6"
       pressStyle={{
         scale: 0.98,
-        backgroundColor: isSelected ? `${color}30` : '#252525',
+        backgroundColor: '$backgroundPress',
       }}
       animation="quick"
+      accessibilityLabel={`Niveau ${level}`}
+      accessibilityRole="button"
+      accessibilityState={{ selected: isSelected }}
     >
       <YStack justifyContent="center" alignItems="center">
         <Text
           fontSize={22}
           fontWeight={isSelected ? '700' : '600'}
-          color={isSelected ? color : '#aaa'}
+          color={isSelected ? color : '$darkTextSecondary'}
           letterSpacing={0.5}
         >
           {level}

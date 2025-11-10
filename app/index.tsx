@@ -12,11 +12,13 @@ export default function HomeScreen() {
 
   const handleLevelPress = (level: Level) => {
     setSelectedLevel(level);
-    console.log(`Selected: ${level} - ${difficulty}`);
+    if (__DEV__) {
+      console.log(`Selected: ${level} - ${difficulty}`);
+    }
   };
 
   return (
-    <YStack flex={1} backgroundColor="#0a0a0a">
+    <YStack flex={1} backgroundColor="$background">
       {/* Header */}
       <XStack
         justifyContent="space-between"
@@ -24,29 +26,29 @@ export default function HomeScreen() {
         paddingHorizontal="$4"
         paddingVertical="$4"
         borderBottomWidth={1}
-        borderBottomColor="#2a2a2a"
+        borderBottomColor="$borderColor"
       >
         {/* Stats Link */}
         <Link href="/stats" asChild>
-          <Button size="$3" chromeless>
+          <Button size="$3" chromeless accessibilityLabel="Voir les statistiques">
             <Text fontSize={18}>📊</Text>
           </Button>
         </Link>
 
         {/* Title */}
-        <H1 fontSize={24} color="#ffffff" fontWeight="bold">
+        <H1 fontSize={24} color="$color" fontWeight="bold">
           日本語 Trainer
         </H1>
 
         {/* Settings & POC */}
         <XStack gap="$2">
           <Link href="/poc-scroll" asChild>
-            <Button size="$3" chromeless>
+            <Button size="$3" chromeless accessibilityLabel="Tester le POC">
               <Text fontSize={16}>🧪</Text>
             </Button>
           </Link>
           <Link href="/settings" asChild>
-            <Button size="$3" chromeless>
+            <Button size="$3" chromeless accessibilityLabel="Paramètres">
               <Text fontSize={18}>⚙️</Text>
             </Button>
           </Link>
