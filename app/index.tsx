@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { YStack, XStack, H1, Button, Text } from 'tamagui';
-import { Link } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
 import { DifficultySelector, type Difficulty } from './components/DifficultySelector';
 import { LevelButton, type Level } from './components/LevelButton';
 
 const levels: Level[] = ['Kana', 'N5', 'N4', 'N3', 'N2', 'N1'];
 
 export default function HomeScreen() {
+  const router = useRouter();
   const [difficulty, setDifficulty] = useState<Difficulty>('Normal');
   const [selectedLevel, setSelectedLevel] = useState<Level | null>(null);
 
@@ -14,6 +15,15 @@ export default function HomeScreen() {
     setSelectedLevel(level);
     if (__DEV__) {
       console.log(`Selected: ${level} - ${difficulty}`);
+    }
+  };
+
+  const handleStartSession = () => {
+    if (selectedLevel) {
+      router.push({
+        pathname: '/training',
+        params: { level: selectedLevel, difficulty },
+      });
     }
   };
 
@@ -59,7 +69,7 @@ export default function HomeScreen() {
       <DifficultySelector value={difficulty} onChange={setDifficulty} />
 
       {/* Level List */}
-      <YStack flex={1} paddingHorizontal="$4" paddingTop="$4" paddingBottom="$4" gap="$2.5">
+      <YStack flex={1} paddingHorizontal="$4" paddingTop="$4" gap="$2.5">
         {levels.map((level) => (
           <LevelButton
             key={level}
@@ -68,6 +78,24 @@ export default function HomeScreen() {
             onPress={() => handleLevelPress(level)}
           />
         ))}
+      </YStack>
+
+      {/* Start Session Button */}
+      <YStack paddingHorizontal="$4" paddingBottom="$4">
+        <Button
+          size="$5"
+          backgroundColor={selectedLevel ? '$levelN3' : '$backgroundHover'}
+          disabled={!selectedLevel}
+          onPress={handleStartSession}
+          pressStyle={{ opacity: 0.8, scale: 0.98 }}
+          disabledStyle={{ opacity: 0.4 }}
+          accessibilityLabel="Commencer la session"
+          accessibilityState={{ disabled: !selectedLevel }}
+        >
+          <Text fontSize={18} fontWeight="bold" color={selectedLevel ? '$background' : '$colorTranslucent'}>
+            Commencer la session
+          </Text>
+        </Button>
       </YStack>
     </YStack>
   );

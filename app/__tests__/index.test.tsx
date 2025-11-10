@@ -58,4 +58,28 @@ describe('HomeScreen', () => {
     expect(getByLabelText('Paramètres')).toBeTruthy();
     expect(getByLabelText('Tester le POC')).toBeTruthy();
   });
+
+  it('should show start session button', () => {
+    const { getByLabelText } = render(<HomeScreen />);
+
+    const startButton = getByLabelText('Commencer la session');
+    expect(startButton).toBeTruthy();
+  });
+
+  it('should disable start button when no level selected', () => {
+    const { getByLabelText } = render(<HomeScreen />);
+
+    const startButton = getByLabelText('Commencer la session');
+    expect(startButton.props.accessibilityState.disabled).toBe(true);
+  });
+
+  it('should enable start button when level is selected', () => {
+    const { getByLabelText } = render(<HomeScreen />);
+
+    const n5Button = getByLabelText('Niveau N5');
+    fireEvent.press(n5Button);
+
+    const startButton = getByLabelText('Commencer la session');
+    expect(startButton.props.accessibilityState.disabled).toBe(false);
+  });
 });
