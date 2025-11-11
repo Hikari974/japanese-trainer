@@ -18,6 +18,8 @@ describe('preferences service', () => {
       expect(prefs).toEqual({
         lastLevel: null,
         lastDifficulty: 'Normal',
+        wordsPerSession: 10,
+        translationLanguage: 'en',
       });
       expect(mockAsyncStorage.getItem).toHaveBeenCalledWith('@japanese_trainer:user_preferences');
     });
@@ -26,6 +28,8 @@ describe('preferences service', () => {
       const validPrefs: UserPreferences = {
         lastLevel: 'N3',
         lastDifficulty: 'Difficile',
+        wordsPerSession: 10,
+        translationLanguage: 'en',
       };
       mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify(validPrefs));
 
@@ -43,6 +47,8 @@ describe('preferences service', () => {
       expect(prefs).toEqual({
         lastLevel: 'N5',
         lastDifficulty: 'Normal', // fallback to default
+        wordsPerSession: 10,
+        translationLanguage: 'en',
       });
     });
 
@@ -54,6 +60,8 @@ describe('preferences service', () => {
       expect(prefs).toEqual({
         lastLevel: null,
         lastDifficulty: 'Normal',
+        wordsPerSession: 10,
+        translationLanguage: 'en',
       });
     });
 
@@ -65,6 +73,8 @@ describe('preferences service', () => {
       expect(prefs).toEqual({
         lastLevel: null,
         lastDifficulty: 'Normal',
+        wordsPerSession: 10,
+        translationLanguage: 'en',
       });
     });
 
@@ -76,6 +86,8 @@ describe('preferences service', () => {
       expect(prefs).toEqual({
         lastLevel: null,
         lastDifficulty: 'Normal',
+        wordsPerSession: 10,
+        translationLanguage: 'en',
       });
     });
 
@@ -88,6 +100,8 @@ describe('preferences service', () => {
       expect(prefs).toEqual({
         lastLevel: null,
         lastDifficulty: 'Normal',
+        wordsPerSession: 10,
+        translationLanguage: 'en',
       });
 
       consoleWarnSpy.mockRestore();
@@ -99,12 +113,16 @@ describe('preferences service', () => {
       const existingPrefs: UserPreferences = {
         lastLevel: 'Kana',
         lastDifficulty: 'Facile',
+        wordsPerSession: 10,
+        translationLanguage: 'en',
       };
       mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify(existingPrefs));
 
       const newPrefs: UserPreferences = {
         lastLevel: 'N5',
         lastDifficulty: 'Normal',
+        wordsPerSession: 10,
+        translationLanguage: 'en',
       };
 
       await savePreferences(newPrefs);
@@ -119,6 +137,8 @@ describe('preferences service', () => {
       const existingPrefs: UserPreferences = {
         lastLevel: 'N3',
         lastDifficulty: 'Normal',
+        wordsPerSession: 10,
+        translationLanguage: 'en',
       };
       mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify(existingPrefs));
 
@@ -129,6 +149,8 @@ describe('preferences service', () => {
         JSON.stringify({
           lastLevel: 'N2',
           lastDifficulty: 'Normal', // preserved
+          wordsPerSession: 10,
+          translationLanguage: 'en',
         })
       );
     });
@@ -143,6 +165,8 @@ describe('preferences service', () => {
         JSON.stringify({
           lastLevel: 'N4',
           lastDifficulty: 'Normal', // default
+          wordsPerSession: 10,
+          translationLanguage: 'en',
         })
       );
     });
@@ -161,6 +185,8 @@ describe('preferences service', () => {
       const existingPrefs: UserPreferences = {
         lastLevel: 'N3',
         lastDifficulty: 'Normal',
+        wordsPerSession: 10,
+        translationLanguage: 'en',
       };
       mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify(existingPrefs));
 
@@ -171,6 +197,8 @@ describe('preferences service', () => {
         JSON.stringify({
           lastLevel: 'N3', // preserved
           lastDifficulty: 'Extrême',
+          wordsPerSession: 10,
+          translationLanguage: 'en',
         })
       );
     });

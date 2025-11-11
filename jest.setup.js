@@ -36,6 +36,34 @@ jest.mock('expo-router', () => ({
   }),
 }));
 
+// Mock expo-localization
+jest.mock('expo-localization', () => ({
+  getLocales: jest.fn(() => [
+    {
+      languageCode: 'en',
+      languageTag: 'en-US',
+      regionCode: 'US',
+      currencyCode: 'USD',
+      currencySymbol: '$',
+      decimalSeparator: '.',
+      digitGroupingSeparator: ',',
+    },
+  ]),
+  locale: 'en-US',
+  locales: [
+    {
+      languageCode: 'en',
+      languageTag: 'en-US',
+      regionCode: 'US',
+    },
+  ],
+}));
+
+// Mock detectLanguage utility
+jest.mock('./app/utils/detectLanguage', () => ({
+  detectLanguage: jest.fn(() => 'en'),
+}));
+
 // Mock react-native-reanimated
 jest.mock('react-native-reanimated', () => {
   const Reanimated = require('react-native-reanimated/mock');

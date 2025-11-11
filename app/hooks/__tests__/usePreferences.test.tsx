@@ -24,6 +24,8 @@ describe('usePreferences hook', () => {
     const storedPrefs: UserPreferences = {
       lastLevel: 'N3',
       lastDifficulty: 'Difficile',
+      wordsPerSession: 10,
+      translationLanguage: 'en',
     };
     mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify(storedPrefs));
 
@@ -48,6 +50,8 @@ describe('usePreferences hook', () => {
     expect(result.current.preferences).toEqual({
       lastLevel: null,
       lastDifficulty: 'Normal',
+      wordsPerSession: 10,
+      translationLanguage: 'en',
     });
   });
 
@@ -55,6 +59,8 @@ describe('usePreferences hook', () => {
     const initialPrefs: UserPreferences = {
       lastLevel: 'N5',
       lastDifficulty: 'Normal',
+      wordsPerSession: 10,
+      translationLanguage: 'en',
     };
     mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify(initialPrefs));
     mockAsyncStorage.setItem.mockResolvedValue();
@@ -75,6 +81,8 @@ describe('usePreferences hook', () => {
     expect(result.current.preferences).toEqual({
       lastLevel: 'N4',
       lastDifficulty: 'Normal',
+      wordsPerSession: 10,
+      translationLanguage: 'en',
     });
 
     // Check storage was called
@@ -83,6 +91,8 @@ describe('usePreferences hook', () => {
       JSON.stringify({
         lastLevel: 'N4',
         lastDifficulty: 'Normal',
+        wordsPerSession: 10,
+        translationLanguage: 'en',
       })
     );
   });
@@ -91,6 +101,8 @@ describe('usePreferences hook', () => {
     const initialPrefs: UserPreferences = {
       lastLevel: 'N3',
       lastDifficulty: 'Normal',
+      wordsPerSession: 10,
+      translationLanguage: 'en',
     };
     mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify(initialPrefs));
     mockAsyncStorage.setItem.mockResolvedValue();
@@ -108,6 +120,8 @@ describe('usePreferences hook', () => {
     expect(result.current.preferences).toEqual({
       lastLevel: 'N3',
       lastDifficulty: 'Extrême',
+      wordsPerSession: 10,
+      translationLanguage: 'en',
     });
   });
 
@@ -152,6 +166,8 @@ describe('usePreferences hook', () => {
     expect(result.current.preferences).toEqual({
       lastLevel: null,
       lastDifficulty: 'Normal',
+      wordsPerSession: 10,
+      translationLanguage: 'en',
     });
 
     consoleWarnSpy.mockRestore();
@@ -162,6 +178,8 @@ describe('usePreferences hook', () => {
     const initialPrefs: UserPreferences = {
       lastLevel: 'N5',
       lastDifficulty: 'Normal',
+      wordsPerSession: 10,
+      translationLanguage: 'en',
     };
     mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify(initialPrefs));
     mockAsyncStorage.setItem.mockRejectedValue(new Error('Storage error'));
@@ -183,6 +201,8 @@ describe('usePreferences hook', () => {
     expect(result.current.preferences).toEqual({
       lastLevel: 'N4',
       lastDifficulty: 'Normal',
+      wordsPerSession: 10,
+      translationLanguage: 'en',
     });
 
     consoleErrorSpy.mockRestore();
@@ -192,6 +212,8 @@ describe('usePreferences hook', () => {
     const initialPrefs: UserPreferences = {
       lastLevel: 'Kana',
       lastDifficulty: 'Facile',
+      wordsPerSession: 10,
+      translationLanguage: 'en',
     };
     mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify(initialPrefs));
     mockAsyncStorage.setItem.mockResolvedValue();
@@ -212,6 +234,8 @@ describe('usePreferences hook', () => {
     expect(result.current.preferences).toEqual({
       lastLevel: 'N1',
       lastDifficulty: 'Extrême',
+      wordsPerSession: 10,
+      translationLanguage: 'en',
     });
 
     expect(mockAsyncStorage.setItem).toHaveBeenCalledWith(
@@ -219,6 +243,8 @@ describe('usePreferences hook', () => {
       JSON.stringify({
         lastLevel: 'N1',
         lastDifficulty: 'Extrême',
+        wordsPerSession: 10,
+        translationLanguage: 'en',
       })
     );
   });
