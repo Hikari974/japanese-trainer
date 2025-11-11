@@ -48,28 +48,42 @@ japanese-trainer/
 │   └── project.yml
 ├── app/                  # expo-router structure
 │   ├── __tests__/
-│   │   └── index.test.tsx           # Tests HomeScreen (8 tests)
+│   │   └── index.test.tsx           # Tests HomeScreen (15 tests)
 │   ├── components/
 │   │   ├── __tests__/
 │   │   │   ├── DifficultySelector.test.tsx  # Tests (4 tests)
 │   │   │   └── LevelButton.test.tsx         # Tests (3 tests)
-│   │   ├── AppHeader.tsx            # Header réutilisable avec safe area
+│   │   ├── AppHeader.tsx            # Header réutilisable avec safe area (60px)
 │   │   ├── DifficultySelector.tsx   # Sélecteur compact de difficulté
 │   │   ├── LevelButton.tsx          # Bouton de niveau moderne
-│   │   └── ScrollingText.tsx        # POC scrolling text
+│   │   ├── RomajiKeyboard.tsx       # Grid romaji 5x10 (56 lignes, mémorisé)
+│   │   ├── ScrollingText.tsx        # Scrolling text optimisé (single-pass)
+│   │   └── ScrollingTextContainer.tsx # Container mémorisé (custom memoization)
+│   ├── data/
+│   │   ├── words_kana.ts            # 137 mots Hiragana/Katakana
+│   │   ├── words_n5.ts              # 134 mots JLPT N5
+│   │   ├── words_n4.ts              # 121 mots JLPT N4
+│   │   ├── words_n3.ts              # 113 mots JLPT N3
+│   │   ├── words_n2.ts              # 118 mots JLPT N2
+│   │   └── words_n1.ts              # 103 mots JLPT N1
 │   ├── hooks/
 │   │   ├── __tests__/
 │   │   │   └── usePreferences.test.tsx      # Tests hook (9 tests)
-│   │   └── usePreferences.ts        # Hook React pour préférences utilisateur
+│   │   └── usePreferences.ts        # Hook React pour préférences (level + difficulty + language)
 │   ├── services/
 │   │   ├── __tests__/
 │   │   │   └── preferences.test.ts          # Tests service (12 tests)
-│   │   └── preferences.ts           # Service AsyncStorage pour préférences
+│   │   ├── preferences.ts           # Service AsyncStorage pour préférences
+│   │   └── wordSelection.ts         # Service sélection aléatoire 10 mots
+│   ├── types/
+│   │   └── word.ts                  # WordEntry + DisplayWord interfaces
+│   ├── utils/
+│   │   └── detectLanguage.ts        # Détection langue device (expo-localization)
 │   ├── _layout.tsx      # Root layout avec SafeAreaProvider + TamaguiProvider
 │   ├── index.tsx        # Home screen avec UI + sauvegarde préférences
-│   ├── training.tsx     # Page de session d'entraînement
+│   ├── training.tsx     # Page session d'entraînement (239 lignes, bilingue)
 │   ├── poc-scroll.tsx   # POC scrolling text
-│   ├── settings.tsx     # Page paramètres (placeholder)
+│   ├── settings.tsx     # Page paramètres (sélecteur langue FR/EN)
 │   ├── stats.tsx        # Page statistiques (placeholder)
 │   └── +not-found.tsx   # 404 screen
 ├── assets/              # Icons & splash screens
@@ -79,7 +93,7 @@ japanese-trainer/
 ├── babel.config.js
 ├── jest.config.js       # Configuration Jest
 ├── jest.setup.js        # Mocks pour tests (AsyncStorage, Tamagui, expo-router)
-├── package.json
+├── package.json         # Dépendances : expo-localization ajouté
 ├── tamagui.config.ts
 └── tsconfig.json
 ```
@@ -152,12 +166,47 @@ japanese-trainer/
   - Mock words temporaires (にほんご, こんにちは, ありがとう)
   - Interface compacte tenant sur un écran complet (optimisée pour Android safe area)
 
+- [x] Système de mots complet avec JLPT (commit ea5d322)
+  - 5 listes de mots intégrées (Kana: 137, N5: 134, N4: 121, N3: 113, N2: 118, N1: 103)
+  - Format: kanji, kana, romaji, traductions FR/EN, niveau JLPT
+  - Service wordSelection.ts : sélection aléatoire 10 mots par niveau/difficulté
+  - DisplayWord interface étendue : translations { fr, en }
+  - Système de préférences étendu : level + difficulty persistés
+
+- [x] Système langue FR/EN avec auto-détection (commit 103ee45)
+  - expo-localization installé pour détection langue device
+  - Utilitaire detectLanguage.ts : détection auto FR/EN
+  - Sélecteur langue dans settings.tsx (2 boutons FR/EN)
+  - Préférences étendues : language ('fr' | 'en') avec auto-détection au premier lancement
+  - Labels bilingues : "Mots" / "Words", "Départs" / "Starts", "Paramètres" / "Settings", etc.
+  - Support traductions dans DisplayWord (translations.fr / translations.en)
+
+- [x] UI training restructurée et optimisée (commit 103ee45)
+  - Barre compteurs : "Mots: 1/10" + "Départs: 3" (bilingue selon langue)
+  - Toggle traduction avec icône œil 👁️ (affiche/masque traduction selon langue)
+  - Bouton "Start" déplacé à côté de la fenêtre ScrollingText (layout horizontal)
+  - Badges session : niveau + difficulté affichés en haut
+  - AppHeader réduit de 80px à 60px pour meilleur usage écran
+  - RomajiKeyboard extrait en composant séparé (56 lignes, 46 boutons sans animations)
+
+- [x] Optimisations performance ScrollingText (commit 103ee45)
+  - **Problème résolu :** Saccades pendant défilement (conflit ScrollView + Reanimated)
+  - **Solution 1 :** Suppression ScrollView (conflit JS/UI thread éliminé)
+  - **Solution 2 :** Suppression animation="quick" de 50 boutons RomajiKeyboard (50 AnimatedViews → 0)
+  - **Solution 3 :** ScrollingTextContainer avec memoization custom
+    - Composant mémorisé empêchant re-renders inutiles
+    - Comparaison custom : speed, windowWidth, fontSize, currentWord.id, onScrollComplete
+    - Props ScrollingText mémorisées (useCallback pour stabilité références)
+  - **Solution 4 :** Animation single-pass (loop infini → une fois puis hide)
+  - **Résultat :** ScrollingText aussi fluide que POC, zéro saccades
+
 ### Ce qui reste à faire
-- [ ] Intégrer les 5 listes de mots pour l'entraînement
 - [ ] Définir les Epic et User Stories pour l'apprentissage du japonais
-- [ ] Créer les pages settings et stats (actuellement placeholders)
-- [ ] Ajouter tests pour training.tsx, ScrollingText, poc-scroll
+- [ ] Créer la page stats (actuellement placeholder)
+- [ ] Ajouter tests pour training.tsx (dette technique P0 - 239 lignes)
+- [ ] Ajouter tests pour ScrollingText, ScrollingTextContainer, RomajiKeyboard
 - [ ] Ajouter statistiques persistantes (étendre système AsyncStorage)
+- [ ] Améliorer page settings (actuellement sélecteur langue basique)
 
 ---
 
@@ -252,7 +301,7 @@ User demande → Identifier agent → Invoquer → Lire plan → Résumer AGENT 
 
 ---
 
-**Dernière mise à jour :** 2025-11-10
+**Dernière mise à jour :** 2025-11-11
 
 **Commits Session 1:**
 - 724a0aa : Infrastructure Claude Code (framework méthodologie)
@@ -271,21 +320,34 @@ User demande → Identifier agent → Invoquer → Lire plan → Résumer AGENT 
 **Commits Session 2 (continuation):**
 - 9f4aafbb : Android safe area fixes (SafeAreaProvider + AppHeader component)
 - ea0b8fd : Template sync enforcement framework (procédures strictes)
-- (pending) : Gestion préférences utilisateur AsyncStorage (36 tests total)
+- 0c346c4 : Préférences utilisateur AsyncStorage (36 tests total)
+- 37f0ae7 : Training session UI complète (239 lignes, 5 zones)
+- 96008aa : Système mots JLPT complet (726 mots, 5 listes)
+- ea5d322 : Word system + préférences étendues (level + difficulty persistés)
+- 103ee45 : Système langue FR/EN + optimisations performance ScrollingText
 
-**Prochaine action :** Commit préférences utilisateur + Documentation Maintainer
+**Prochaine action :** Définir Epic/User Stories (Epic Manager Agent)
 
 ## 📲 Application Testée et Fonctionnelle
 
 L'application tourne sur Android via Expo Go (port 8081).
 
 **Fonctionnalités actuelles :**
-- Home screen avec sélection niveau/difficulté
-- **Préférences persistantes** : dernier niveau + difficulté sauvegardés et pré-sélectionnés (100% local)
-- Bouton "Commencer la session" (désactivé si aucun niveau, sauvegarde préférences avant navigation)
-- Page training.tsx (affiche configuration de la session)
+- Home screen avec sélection niveau/difficulté (6 niveaux: Kana, N5, N4, N3, N2, N1)
+- **Préférences persistantes** : level + difficulty + language sauvegardés (100% local AsyncStorage)
+- **Système langue FR/EN** : auto-détection device + sélecteur manuel dans settings
+- **Système mots complet** : 726 mots (Kana: 137, N5: 134, N4: 121, N3: 113, N2: 118, N1: 103)
+- **Page training fonctionnelle :**
+  - ScrollingText fluide (optimisé, zéro saccades)
+  - Grid romaji 5x10 (46 boutons syllables)
+  - Compteurs : mots (1/10) + départs (clicks Start)
+  - Toggle traduction avec icône œil 👁️
+  - Validation flexible romaji (shi/si, tsu/tu, chi/ti, fu/hu)
+  - Layout horizontal : Start button + ScrollingText window
+  - Traductions bilingues selon langue sélectionnée
 - POC scrolling text (accessible via icône 🧪)
-- Navigation vers stats et settings (pages placeholder)
+- Page settings : sélecteur langue FR/EN
+- Navigation vers stats (page placeholder)
 - Headers consistants avec safe area Android (status bar + nav bar respectées)
 - Design dark mode élégant et moderne sans header système
 
@@ -293,10 +355,16 @@ L'application tourne sur Android via Expo Go (port 8081).
 - ✅ Build réussi
 - ✅ Affichage correct sur Android avec safe areas
 - ✅ Navigation fonctionnelle avec headers cohérents
-- ✅ Animations fluides
+- ✅ Animations fluides (ScrollingText optimisé)
 - ✅ POC scrolling validé
 - ✅ **Tests unitaires : 36/36 passent**
   - 15 tests UI (HomeScreen, LevelButton, DifficultySelector)
   - 21 tests préférences (service + hook, 100% couverture)
 - ✅ Bouton session testé et fonctionnel
 - ✅ Préférences sauvegardées et chargées correctement (AsyncStorage)
+- ✅ **Training session testée sur device :**
+  - ScrollingText fluide sans saccades (performance optimale)
+  - Toggle traduction fonctionnel
+  - Validation romaji flexible testée
+  - Compteurs mots/départs fonctionnels
+  - Système langue FR/EN validé
