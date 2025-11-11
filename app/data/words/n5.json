@@ -2,85 +2,6695 @@
   "level": "N5",
   "version": "1.0.0",
   "words": [
-    {
-      "id": 1,
-      "kanji": "～駅",
-      "kana": "～えき",
-      "romaji": "eki",
-      "translations": {
-        "fr": "gare",
-        "en": "station"
-      }
-    },
-    {
-      "id": 2,
-      "kanji": "～円",
-      "kana": "～えん",
-      "romaji": "en",
-      "translations": {
-        "fr": "yen",
-        "en": "yen"
-      }
-    },
-    {
-      "id": 3,
-      "kanji": "～階",
-      "kana": "～かい",
-      "romaji": "kai",
-      "translations": {
-        "fr": "étage",
-        "en": "floor"
-      }
-    },
-    {
-      "id": 4,
-      "kanji": "～回",
-      "kana": "～かい",
-      "romaji": "kai",
-      "translations": {
-        "fr": "fois",
-        "en": "times"
-      }
-    },
-    {
-      "id": 5,
-      "kanji": "～日間",
-      "kana": "～かかん",
-      "romaji": "kakan",
-      "translations": {
-        "fr": "jours",
-        "en": "for days"
-      }
-    },
-    {
-      "id": 6,
-      "kanji": "～カ月",
-      "kana": "～かげつ",
-      "romaji": "kagetsu",
-      "translations": {
-        "fr": "mois",
-        "en": "months"
-      }
-    },
-    {
-      "id": 7,
-      "kanji": "～方",
-      "kana": "～かた",
-      "romaji": "kata",
-      "translations": {
-        "fr": "manière",
-        "en": "how to"
-      }
-    },
-    {
-      "id": 8,
-      "kanji": "～月",
-      "kana": "～がつ",
-      "romaji": "gatsu",
-      "translations": {
-        "fr": "mois",
-        "en": "month"
-      }
+  {
+    "id": 1,
+    "kanji": "毎月",
+    "kana": "まいげつ",
+    "romaji": "maigetsu",
+    "translations": {
+      "fr": "tous les mois",
+      "en": "every month"
     }
-  ]
+  },
+  {
+    "id": 2,
+    "kanji": "太い",
+    "kana": "ふとい",
+    "romaji": "futoi",
+    "translations": {
+      "fr": "gras",
+      "en": "fat"
+    }
+  },
+  {
+    "id": 3,
+    "kanji": "五日",
+    "kana": "いつか",
+    "romaji": "itsuka",
+    "translations": {
+      "fr": "5ème jour du mois",
+      "en": "five days, fifth day"
+    }
+  },
+  {
+    "id": 4,
+    "kanji": "出る",
+    "kana": "でる",
+    "romaji": "deru",
+    "translations": {
+      "fr": "apparaître, partir",
+      "en": "to appear,to leave"
+    }
+  },
+  {
+    "id": 5,
+    "kanji": "話",
+    "kana": "はなし",
+    "romaji": "hanashi",
+    "translations": {
+      "fr": "parole, histoire",
+      "en": "talk,story"
+    }
+  },
+  {
+    "id": 6,
+    "kanji": "写真",
+    "kana": "しゃしん",
+    "romaji": "shyashin",
+    "translations": {
+      "fr": "photographie",
+      "en": "photograph"
+    }
+  },
+  {
+    "id": 7,
+    "kanji": "大きな",
+    "kana": "おおきな",
+    "romaji": "ookina",
+    "translations": {
+      "fr": "grand",
+      "en": "big"
+    }
+  },
+  {
+    "id": 8,
+    "kanji": "曇り",
+    "kana": "くもり",
+    "romaji": "kumori",
+    "translations": {
+      "fr": "temps nuageux",
+      "en": "cloudy weather"
+    }
+  },
+  {
+    "id": 9,
+    "kanji": "白い",
+    "kana": "しろい",
+    "romaji": "shiroi",
+    "translations": {
+      "fr": "blanc (adj)",
+      "en": "White"
+    }
+  },
+  {
+    "id": 10,
+    "kanji": "",
+    "kana": "かかる",
+    "romaji": "kakaru",
+    "translations": {
+      "fr": "prendre (temps/argent)",
+      "en": "to take time or money"
+    }
+  },
+  {
+    "id": 11,
+    "kanji": "",
+    "kana": "どう",
+    "romaji": "dou",
+    "translations": {
+      "fr": "comment",
+      "en": "how,in what way"
+    }
+  },
+  {
+    "id": 12,
+    "kanji": "",
+    "kana": "ドア",
+    "romaji": "doya",
+    "translations": {
+      "fr": "porte occidentale",
+      "en": "Western style door"
+    }
+  },
+  {
+    "id": 13,
+    "kanji": "飲み物",
+    "kana": "のみもの",
+    "romaji": "nomimono",
+    "translations": {
+      "fr": "boisson",
+      "en": "a drink"
+    }
+  },
+  {
+    "id": 14,
+    "kanji": "掃除",
+    "kana": "そうじする",
+    "romaji": "soujisuru",
+    "translations": {
+      "fr": "nettoyer",
+      "en": "to clean, to sweep"
+    }
+  },
+  {
+    "id": 15,
+    "kanji": "",
+    "kana": "たいへん",
+    "romaji": "taihen",
+    "translations": {
+      "fr": "très",
+      "en": "very"
+    }
+  },
+  {
+    "id": 16,
+    "kanji": "時間",
+    "kana": "じかん",
+    "romaji": "jikan",
+    "translations": {
+      "fr": "heure",
+      "en": "Time"
+    }
+  },
+  {
+    "id": 17,
+    "kanji": "昼御飯",
+    "kana": "ひるごはん",
+    "romaji": "hirugohan",
+    "translations": {
+      "fr": "déjeuner",
+      "en": "midday meal"
+    }
+  },
+  {
+    "id": 18,
+    "kanji": "店",
+    "kana": "みせ",
+    "romaji": "mise",
+    "translations": {
+      "fr": "magasin",
+      "en": "shop"
+    }
+  },
+  {
+    "id": 19,
+    "kanji": "火曜日",
+    "kana": "かようび",
+    "romaji": "kayoubi",
+    "translations": {
+      "fr": "mardi",
+      "en": "Tuesday"
+    }
+  },
+  {
+    "id": 20,
+    "kanji": "",
+    "kana": "あさって",
+    "romaji": "asatte",
+    "translations": {
+      "fr": "après-demain",
+      "en": "day after tomorrow"
+    }
+  },
+  {
+    "id": 21,
+    "kanji": "誰",
+    "kana": "だれか",
+    "romaji": "dareka",
+    "translations": {
+      "fr": "quelqu'un",
+      "en": "somebody"
+    }
+  },
+  {
+    "id": 22,
+    "kanji": "",
+    "kana": "ええ",
+    "romaji": "ee",
+    "translations": {
+      "fr": "oui",
+      "en": "yes"
+    }
+  },
+  {
+    "id": 23,
+    "kanji": "丈夫",
+    "kana": "じょうぶ",
+    "romaji": "jyoubu",
+    "translations": {
+      "fr": "robuste",
+      "en": "strong, durable"
+    }
+  },
+  {
+    "id": 24,
+    "kanji": "",
+    "kana": "ほんとう",
+    "romaji": "hontou",
+    "translations": {
+      "fr": "vérité",
+      "en": "truth"
+    }
+  },
+  {
+    "id": 25,
+    "kanji": "先週",
+    "kana": "せんしゅう",
+    "romaji": "senshyuu",
+    "translations": {
+      "fr": "la semaine dernière",
+      "en": "last week"
+    }
+  },
+  {
+    "id": 26,
+    "kanji": "",
+    "kana": "ワイシャツ",
+    "romaji": "waishatsu",
+    "translations": {
+      "fr": "chemise",
+      "en": "business shirt"
+    }
+  },
+  {
+    "id": 27,
+    "kanji": "会う",
+    "kana": "あう",
+    "romaji": "au",
+    "translations": {
+      "fr": "rencontrer",
+      "en": "to meet"
+    }
+  },
+  {
+    "id": 28,
+    "kanji": "西",
+    "kana": "にし",
+    "romaji": "nishi",
+    "translations": {
+      "fr": "ouest",
+      "en": "west"
+    }
+  },
+  {
+    "id": 29,
+    "kanji": "狭い",
+    "kana": "せまい",
+    "romaji": "semai",
+    "translations": {
+      "fr": "étroit",
+      "en": "Narrow"
+    }
+  },
+  {
+    "id": 30,
+    "kanji": "覚える",
+    "kana": "おぼえる",
+    "romaji": "oboeru",
+    "translations": {
+      "fr": "retenir",
+      "en": "to remember"
+    }
+  },
+  {
+    "id": 31,
+    "kanji": "入れる",
+    "kana": "いれる",
+    "romaji": "ireru",
+    "translations": {
+      "fr": "mettre",
+      "en": "to put in"
+    }
+  },
+  {
+    "id": 32,
+    "kanji": "道",
+    "kana": "みち",
+    "romaji": "michi",
+    "translations": {
+      "fr": "rue",
+      "en": "street"
+    }
+  },
+  {
+    "id": 33,
+    "kanji": "電気",
+    "kana": "でんき",
+    "romaji": "denki",
+    "translations": {
+      "fr": "électricité",
+      "en": "electricity,electric light"
+    }
+  },
+  {
+    "id": 34,
+    "kanji": "学生",
+    "kana": "がくせい",
+    "romaji": "gakusei",
+    "translations": {
+      "fr": "étudiant",
+      "en": "Student"
+    }
+  },
+  {
+    "id": 35,
+    "kanji": "御飯",
+    "kana": "ごはん",
+    "romaji": "gohan",
+    "translations": {
+      "fr": "riz, repas",
+      "en": "cooked rice, meal"
+    }
+  },
+  {
+    "id": 36,
+    "kanji": "",
+    "kana": "テープレコーダー",
+    "romaji": "teepurekoodaa",
+    "translations": {
+      "fr": "magnétophone",
+      "en": "tape recorder"
+    }
+  },
+  {
+    "id": 37,
+    "kanji": "近い",
+    "kana": "ちかい",
+    "romaji": "chikai",
+    "translations": {
+      "fr": "proximité",
+      "en": "near"
+    }
+  },
+  {
+    "id": 38,
+    "kanji": "昨日",
+    "kana": "きのう",
+    "romaji": "kinou",
+    "translations": {
+      "fr": "hier",
+      "en": "Yesterday"
+    }
+  },
+  {
+    "id": 39,
+    "kanji": "後",
+    "kana": "あと",
+    "romaji": "ato",
+    "translations": {
+      "fr": "après",
+      "en": "afterwards"
+    }
+  },
+  {
+    "id": 40,
+    "kanji": "作文",
+    "kana": "さくぶん",
+    "romaji": "sakubun",
+    "translations": {
+      "fr": "composition",
+      "en": "composition, writing"
+    }
+  },
+  {
+    "id": 41,
+    "kanji": "終る",
+    "kana": "おわる",
+    "romaji": "owaru",
+    "translations": {
+      "fr": "finir",
+      "en": "to finish"
+    }
+  },
+  {
+    "id": 42,
+    "kanji": "",
+    "kana": "もっと",
+    "romaji": "motto",
+    "translations": {
+      "fr": "plus",
+      "en": "more"
+    }
+  },
+  {
+    "id": 43,
+    "kanji": "お兄さん",
+    "kana": "おにいさん",
+    "romaji": "oniisan",
+    "translations": {
+      "fr": "aîné",
+      "en": "(honorable) older brother"
+    }
+  },
+  {
+    "id": 44,
+    "kanji": "目",
+    "kana": "め",
+    "romaji": "me",
+    "translations": {
+      "fr": "œil",
+      "en": "eye"
+    }
+  },
+  {
+    "id": 45,
+    "kanji": "門",
+    "kana": "もん",
+    "romaji": "mon",
+    "translations": {
+      "fr": "portail",
+      "en": "gate"
+    }
+  },
+  {
+    "id": 46,
+    "kanji": "",
+    "kana": "スリッパ",
+    "romaji": "surippa",
+    "translations": {
+      "fr": "pantoufles",
+      "en": "Slippers"
+    }
+  },
+  {
+    "id": 47,
+    "kanji": "読む",
+    "kana": "よむ",
+    "romaji": "yomu",
+    "translations": {
+      "fr": "lire",
+      "en": "to read"
+    }
+  },
+  {
+    "id": 48,
+    "kanji": "",
+    "kana": "ニュース",
+    "romaji": "niuusu",
+    "translations": {
+      "fr": "actualités",
+      "en": "news"
+    }
+  },
+  {
+    "id": 49,
+    "kanji": "冷たい",
+    "kana": "つめたい",
+    "romaji": "tsumetai",
+    "translations": {
+      "fr": "froid",
+      "en": "cold to the touch"
+    }
+  },
+  {
+    "id": 50,
+    "kanji": "地図",
+    "kana": "ちず",
+    "romaji": "chizu",
+    "translations": {
+      "fr": "carte",
+      "en": "map"
+    }
+  },
+  {
+    "id": 51,
+    "kanji": "学校",
+    "kana": "がっこう",
+    "romaji": "gakkou",
+    "translations": {
+      "fr": "école",
+      "en": "School"
+    }
+  },
+  {
+    "id": 52,
+    "kanji": "煩い",
+    "kana": "うるさい",
+    "romaji": "urusai",
+    "translations": {
+      "fr": "bruyant",
+      "en": "noisy, annoying"
+    }
+  },
+  {
+    "id": 53,
+    "kanji": "三日",
+    "kana": "みっか",
+    "romaji": "mikka",
+    "translations": {
+      "fr": "3ème jour du mois",
+      "en": "three days, third day of the month"
+    }
+  },
+  {
+    "id": 54,
+    "kanji": "大使館",
+    "kana": "たいしかん",
+    "romaji": "taishikan",
+    "translations": {
+      "fr": "ambassade",
+      "en": "embassy"
+    }
+  },
+  {
+    "id": 55,
+    "kanji": "青い",
+    "kana": "あおい",
+    "romaji": "aoi",
+    "translations": {
+      "fr": "bleu",
+      "en": "blue"
+    }
+  },
+  {
+    "id": 56,
+    "kanji": "駅",
+    "kana": "えき",
+    "romaji": "eki",
+    "translations": {
+      "fr": "gare",
+      "en": "station"
+    }
+  },
+  {
+    "id": 57,
+    "kanji": "",
+    "kana": "パーティー",
+    "romaji": "paatii",
+    "translations": {
+      "fr": "fête",
+      "en": "party"
+    }
+  },
+  {
+    "id": 58,
+    "kanji": "座る",
+    "kana": "すわる",
+    "romaji": "suwaru",
+    "translations": {
+      "fr": "s'asseoir",
+      "en": "to sit"
+    }
+  },
+  {
+    "id": 59,
+    "kanji": "二人",
+    "kana": "ふたり",
+    "romaji": "futari",
+    "translations": {
+      "fr": "deux personnes",
+      "en": "two people"
+    }
+  },
+  {
+    "id": 60,
+    "kanji": "来年",
+    "kana": "らいねん",
+    "romaji": "rainen",
+    "translations": {
+      "fr": "l'année prochaine",
+      "en": "next year"
+    }
+  },
+  {
+    "id": 61,
+    "kanji": "飛ぶ",
+    "kana": "とぶ",
+    "romaji": "tobu",
+    "translations": {
+      "fr": "voler",
+      "en": "to fly,to hop"
+    }
+  },
+  {
+    "id": 62,
+    "kanji": "起きる",
+    "kana": "おきる",
+    "romaji": "okiru",
+    "translations": {
+      "fr": "se lever",
+      "en": "to get up"
+    }
+  },
+  {
+    "id": 63,
+    "kanji": "四",
+    "kana": "し ",
+    "romaji": "shi ",
+    "translations": {
+      "fr": "quatre",
+      "en": "Four"
+    }
+  },
+  {
+    "id": 64,
+    "kanji": "私",
+    "kana": "わたし",
+    "romaji": "watashi",
+    "translations": {
+      "fr": "moi-même",
+      "en": "I,myself"
+    }
+  },
+  {
+    "id": 65,
+    "kanji": "毎晩",
+    "kana": "まいばん",
+    "romaji": "maiban",
+    "translations": {
+      "fr": "chaque nuit",
+      "en": "every night"
+    }
+  },
+  {
+    "id": 66,
+    "kanji": "八",
+    "kana": "はち",
+    "romaji": "hachi",
+    "translations": {
+      "fr": "huit",
+      "en": "eight"
+    }
+  },
+  {
+    "id": 67,
+    "kanji": "喫茶店",
+    "kana": "きっさてん",
+    "romaji": "kissaten",
+    "translations": {
+      "fr": "café",
+      "en": "coffee lounge"
+    }
+  },
+  {
+    "id": 68,
+    "kanji": "二つ",
+    "kana": "ふたつ",
+    "romaji": "futatsu",
+    "translations": {
+      "fr": "deux",
+      "en": "two"
+    }
+  },
+  {
+    "id": 69,
+    "kanji": "",
+    "kana": "フィルム",
+    "romaji": "firumu",
+    "translations": {
+      "fr": "pellicule",
+      "en": "roll of film"
+    }
+  },
+  {
+    "id": 70,
+    "kanji": "古い",
+    "kana": "ふるい",
+    "romaji": "furui",
+    "translations": {
+      "fr": "ancien",
+      "en": "old (not used for people)"
+    }
+  },
+  {
+    "id": 71,
+    "kanji": "二日",
+    "kana": "ふつか",
+    "romaji": "futsuka",
+    "translations": {
+      "fr": "2ème jour du mois",
+      "en": "two days, second day of the month"
+    }
+  },
+  {
+    "id": 72,
+    "kanji": "外国",
+    "kana": "がいこく",
+    "romaji": "gaikoku",
+    "translations": {
+      "fr": "étranger",
+      "en": "foreign country"
+    }
+  },
+  {
+    "id": 73,
+    "kanji": "",
+    "kana": "みんな",
+    "romaji": "minna",
+    "translations": {
+      "fr": "tout le monde",
+      "en": "everyone"
+    }
+  },
+  {
+    "id": 74,
+    "kanji": "庭",
+    "kana": "にわ",
+    "romaji": "niwa",
+    "translations": {
+      "fr": "jardin",
+      "en": "garden"
+    }
+  },
+  {
+    "id": 75,
+    "kanji": "",
+    "kana": "たいへん",
+    "romaji": "taihen",
+    "translations": {
+      "fr": "difficile",
+      "en": "difficult situation"
+    }
+  },
+  {
+    "id": 76,
+    "kanji": "広い",
+    "kana": "ひろい",
+    "romaji": "hiroi",
+    "translations": {
+      "fr": "spacieux",
+      "en": "spacious,wide"
+    }
+  },
+  {
+    "id": 77,
+    "kanji": "",
+    "kana": "こっち",
+    "romaji": "kocchi",
+    "translations": {
+      "fr": "celui-ci (obj)",
+      "en": "this person or way"
+    }
+  },
+  {
+    "id": 78,
+    "kanji": "",
+    "kana": "ペン",
+    "romaji": "pen",
+    "translations": {
+      "fr": "stylo",
+      "en": "pen"
+    }
+  },
+  {
+    "id": 79,
+    "kanji": "置く",
+    "kana": "おく",
+    "romaji": "oku",
+    "translations": {
+      "fr": "placer",
+      "en": "to put"
+    }
+  },
+  {
+    "id": 80,
+    "kanji": "一緒",
+    "kana": "いっしょ",
+    "romaji": "isshyo",
+    "translations": {
+      "fr": "ensemble",
+      "en": "together"
+    }
+  },
+  {
+    "id": 81,
+    "kanji": "",
+    "kana": "じゃ",
+    "romaji": "jya",
+    "translations": {
+      "fr": "alors",
+      "en": "well then…"
+    }
+  },
+  {
+    "id": 82,
+    "kanji": "",
+    "kana": "バス",
+    "romaji": "basu",
+    "translations": {
+      "fr": "autobus",
+      "en": "bus"
+    }
+  },
+  {
+    "id": 83,
+    "kanji": "洗う",
+    "kana": "あらう",
+    "romaji": "arau",
+    "translations": {
+      "fr": "laver",
+      "en": "to wash"
+    }
+  },
+  {
+    "id": 84,
+    "kanji": "映画館",
+    "kana": "えいがかん",
+    "romaji": "eigakan",
+    "translations": {
+      "fr": "cinéma",
+      "en": "cinema"
+    }
+  },
+  {
+    "id": 85,
+    "kanji": "",
+    "kana": "それから",
+    "romaji": "sorekara",
+    "translations": {
+      "fr": "après",
+      "en": "after that"
+    }
+  },
+  {
+    "id": 86,
+    "kanji": "低い",
+    "kana": "ひくい",
+    "romaji": "hikui",
+    "translations": {
+      "fr": "court",
+      "en": "short,low"
+    }
+  },
+  {
+    "id": 87,
+    "kanji": "卵",
+    "kana": "たまご",
+    "romaji": "tamago",
+    "translations": {
+      "fr": "œuf",
+      "en": "egg"
+    }
+  },
+  {
+    "id": 88,
+    "kanji": "言葉",
+    "kana": "ことば",
+    "romaji": "kotoba",
+    "translations": {
+      "fr": "mot, langue",
+      "en": "word, language"
+    }
+  },
+  {
+    "id": 89,
+    "kanji": "青",
+    "kana": "あお",
+    "romaji": "ao",
+    "translations": {
+      "fr": "bleu",
+      "en": "blue"
+    }
+  },
+  {
+    "id": 90,
+    "kanji": "降る",
+    "kana": "ふる",
+    "romaji": "furu",
+    "translations": {
+      "fr": "tomber",
+      "en": "to fall, e.g. rain or snow"
+    }
+  },
+  {
+    "id": 91,
+    "kanji": "",
+    "kana": "ナイフ",
+    "romaji": "naifu",
+    "translations": {
+      "fr": "couteau",
+      "en": "knife"
+    }
+  },
+  {
+    "id": 92,
+    "kanji": "暇",
+    "kana": "ひま",
+    "romaji": "hima",
+    "translations": {
+      "fr": "temps libre",
+      "en": "free time"
+    }
+  },
+  {
+    "id": 93,
+    "kanji": "飴",
+    "kana": "あめ",
+    "romaji": "ame",
+    "translations": {
+      "fr": "bonbon",
+      "en": "candy"
+    }
+  },
+  {
+    "id": 94,
+    "kanji": "",
+    "kana": "なぜ",
+    "romaji": "naze",
+    "translations": {
+      "fr": "pourquoi",
+      "en": "why"
+    }
+  },
+  {
+    "id": 95,
+    "kanji": "灰皿",
+    "kana": "はいざら",
+    "romaji": "haizara",
+    "translations": {
+      "fr": "cendrier",
+      "en": "ashtray"
+    }
+  },
+  {
+    "id": 96,
+    "kanji": "違う",
+    "kana": "ちがう",
+    "romaji": "chigau",
+    "translations": {
+      "fr": "différer",
+      "en": "to differ"
+    }
+  },
+  {
+    "id": 97,
+    "kanji": "",
+    "kana": "カップ",
+    "romaji": "kappu",
+    "translations": {
+      "fr": "tasse",
+      "en": "Cup"
+    }
+  },
+  {
+    "id": 98,
+    "kanji": "交差点",
+    "kana": "こうさてん",
+    "romaji": "kousaten",
+    "translations": {
+      "fr": "carrefour",
+      "en": "intersection"
+    }
+  },
+  {
+    "id": 99,
+    "kanji": "宿題",
+    "kana": "しゅくだい",
+    "romaji": "shyukudai",
+    "translations": {
+      "fr": "devoir",
+      "en": "homework"
+    }
+  },
+  {
+    "id": 100,
+    "kanji": "漢字",
+    "kana": "かんじ",
+    "romaji": "kanji",
+    "translations": {
+      "fr": "kanji",
+      "en": "Chinese character"
+    }
+  },
+  {
+    "id": 101,
+    "kanji": "",
+    "kana": "セーター",
+    "romaji": "seetaa",
+    "translations": {
+      "fr": "pull",
+      "en": "sweater, jumper"
+    }
+  },
+  {
+    "id": 102,
+    "kanji": "地下鉄",
+    "kana": "ちかてつ",
+    "romaji": "chikatetsu",
+    "translations": {
+      "fr": "métro",
+      "en": "underground train"
+    }
+  },
+  {
+    "id": 103,
+    "kanji": "",
+    "kana": "テープ",
+    "romaji": "teepu",
+    "translations": {
+      "fr": "cassette",
+      "en": "tape"
+    }
+  },
+  {
+    "id": 104,
+    "kanji": "水",
+    "kana": "みず",
+    "romaji": "mizu",
+    "translations": {
+      "fr": "eau",
+      "en": "water"
+    }
+  },
+  {
+    "id": 105,
+    "kanji": "",
+    "kana": "プール",
+    "romaji": "puuru",
+    "translations": {
+      "fr": "piscine",
+      "en": "swimming pool"
+    }
+  },
+  {
+    "id": 106,
+    "kanji": "帽子",
+    "kana": "ぼうし",
+    "romaji": "boushi",
+    "translations": {
+      "fr": "chapeau",
+      "en": "hat"
+    }
+  },
+  {
+    "id": 107,
+    "kanji": "持つ",
+    "kana": "もつ",
+    "romaji": "motsu",
+    "translations": {
+      "fr": "tenir",
+      "en": "to hold"
+    }
+  },
+  {
+    "id": 108,
+    "kanji": "渡す",
+    "kana": "わたす",
+    "romaji": "watasu",
+    "translations": {
+      "fr": "remettre",
+      "en": "to hand over"
+    }
+  },
+  {
+    "id": 109,
+    "kanji": "朝御飯",
+    "kana": "あさごはん",
+    "romaji": "asagohan",
+    "translations": {
+      "fr": "petit-déjeuner",
+      "en": "breakfast"
+    }
+  },
+  {
+    "id": 110,
+    "kanji": "温い",
+    "kana": "ぬるい",
+    "romaji": "nurui",
+    "translations": {
+      "fr": "tiède",
+      "en": "luke warm"
+    }
+  },
+  {
+    "id": 111,
+    "kanji": "上着",
+    "kana": "うわぎ",
+    "romaji": "uwagi",
+    "translations": {
+      "fr": "veste",
+      "en": "jacket"
+    }
+  },
+  {
+    "id": 112,
+    "kanji": "",
+    "kana": "なる",
+    "romaji": "naru",
+    "translations": {
+      "fr": "devenir",
+      "en": "to become"
+    }
+  },
+  {
+    "id": 113,
+    "kanji": "文章",
+    "kana": "ぶんしょう",
+    "romaji": "bunshyou",
+    "translations": {
+      "fr": "phrase",
+      "en": "sentence,text"
+    }
+  },
+  {
+    "id": 114,
+    "kanji": "九つ",
+    "kana": "ここのつ",
+    "romaji": "kokonotsu",
+    "translations": {
+      "fr": "neuf (adj)",
+      "en": "Nine"
+    }
+  },
+  {
+    "id": 115,
+    "kanji": "",
+    "kana": "ちょうど",
+    "romaji": "chyoudo",
+    "translations": {
+      "fr": "exactement",
+      "en": "exactly"
+    }
+  },
+  {
+    "id": 116,
+    "kanji": "有名",
+    "kana": "ゆうめい",
+    "romaji": "yuumei",
+    "translations": {
+      "fr": "célèbre",
+      "en": "famous"
+    }
+  },
+  {
+    "id": 117,
+    "kanji": "万",
+    "kana": "まん",
+    "romaji": "man",
+    "translations": {
+      "fr": "dix mille",
+      "en": "ten thousand"
+    }
+  },
+  {
+    "id": 118,
+    "kanji": "戸",
+    "kana": "と",
+    "romaji": "to",
+    "translations": {
+      "fr": "porte japonaise",
+      "en": "Japanese style door"
+    }
+  },
+  {
+    "id": 119,
+    "kanji": "村",
+    "kana": "むら",
+    "romaji": "mura",
+    "translations": {
+      "fr": "village",
+      "en": "village"
+    }
+  },
+  {
+    "id": 120,
+    "kanji": "午前",
+    "kana": "ごぜん",
+    "romaji": "gozen",
+    "translations": {
+      "fr": "matin",
+      "en": "morning"
+    }
+  },
+  {
+    "id": 121,
+    "kanji": "",
+    "kana": "ネクタイ",
+    "romaji": "nekutai",
+    "translations": {
+      "fr": "cravate",
+      "en": "tie,necktie"
+    }
+  },
+  {
+    "id": 122,
+    "kanji": "",
+    "kana": "かける",
+    "romaji": "kakeru",
+    "translations": {
+      "fr": "appeler",
+      "en": "to call by phone"
+    }
+  },
+  {
+    "id": 123,
+    "kanji": "前",
+    "kana": "まえ",
+    "romaji": "mae",
+    "translations": {
+      "fr": "avant",
+      "en": "before"
+    }
+  },
+  {
+    "id": 124,
+    "kanji": "姉",
+    "kana": "あね",
+    "romaji": "ane",
+    "translations": {
+      "fr": "sœur",
+      "en": "(humble) older sister"
+    }
+  },
+  {
+    "id": 125,
+    "kanji": "閉める",
+    "kana": "しめる",
+    "romaji": "shimeru",
+    "translations": {
+      "fr": "fermer",
+      "en": "to close something"
+    }
+  },
+  {
+    "id": 126,
+    "kanji": "大人",
+    "kana": "おとな",
+    "romaji": "otona",
+    "translations": {
+      "fr": "adulte",
+      "en": "Adult"
+    }
+  },
+  {
+    "id": 127,
+    "kanji": "お金",
+    "kana": "おかね",
+    "romaji": "okane",
+    "translations": {
+      "fr": "argent",
+      "en": "money"
+    }
+  },
+  {
+    "id": 128,
+    "kanji": "一月",
+    "kana": "ひとつき",
+    "romaji": "hitotsuki",
+    "translations": {
+      "fr": "mois",
+      "en": "one month"
+    }
+  },
+  {
+    "id": 129,
+    "kanji": "自動車",
+    "kana": "じどうしゃ",
+    "romaji": "jidoushya",
+    "translations": {
+      "fr": "automobile",
+      "en": "Automobile"
+    }
+  },
+  {
+    "id": 130,
+    "kanji": "切手",
+    "kana": "きって",
+    "romaji": "kitte",
+    "translations": {
+      "fr": "timbre",
+      "en": "postage stamp"
+    }
+  },
+  {
+    "id": 131,
+    "kanji": "晴れ",
+    "kana": "はれ",
+    "romaji": "hare",
+    "translations": {
+      "fr": "ensoleillé",
+      "en": "clear weather"
+    }
+  },
+  {
+    "id": 132,
+    "kanji": "",
+    "kana": "ズボン",
+    "romaji": "zubon",
+    "translations": {
+      "fr": "pantalon",
+      "en": "Trousers"
+    }
+  },
+  {
+    "id": 133,
+    "kanji": "",
+    "kana": "あびる",
+    "romaji": "abiru",
+    "translations": {
+      "fr": "se baigner",
+      "en": "to bathe, to shower"
+    }
+  },
+  {
+    "id": 134,
+    "kanji": "",
+    "kana": "そうして",
+    "romaji": "soushite",
+    "translations": {
+      "fr": "et",
+      "en": "And"
+    }
+  },
+  {
+    "id": 135,
+    "kanji": "",
+    "kana": "ストーブ",
+    "romaji": "sutoobu",
+    "translations": {
+      "fr": "radiateur",
+      "en": "Heater"
+    }
+  },
+  {
+    "id": 136,
+    "kanji": "洋服",
+    "kana": "ようふく",
+    "romaji": "youfuku",
+    "translations": {
+      "fr": "vêtements",
+      "en": "western-style clothes"
+    }
+  },
+  {
+    "id": 137,
+    "kanji": "木",
+    "kana": "き",
+    "romaji": "ki",
+    "translations": {
+      "fr": "arbre",
+      "en": "tree, wood"
+    }
+  },
+  {
+    "id": 138,
+    "kanji": "名前",
+    "kana": "なまえ",
+    "romaji": "namae",
+    "translations": {
+      "fr": "nom",
+      "en": "name"
+    }
+  },
+  {
+    "id": 139,
+    "kanji": "",
+    "kana": "まだ",
+    "romaji": "mada",
+    "translations": {
+      "fr": "encore",
+      "en": "yet,still"
+    }
+  },
+  {
+    "id": 140,
+    "kanji": "書く",
+    "kana": "かく",
+    "romaji": "kaku",
+    "translations": {
+      "fr": "écrire",
+      "en": "to write"
+    }
+  },
+  {
+    "id": 141,
+    "kanji": "",
+    "kana": "どうも",
+    "romaji": "doumo",
+    "translations": {
+      "fr": "merci",
+      "en": "thanks"
+    }
+  },
+  {
+    "id": 142,
+    "kanji": "友達",
+    "kana": "ともだち",
+    "romaji": "tomodachi",
+    "translations": {
+      "fr": "ami",
+      "en": "friend"
+    }
+  },
+  {
+    "id": 143,
+    "kanji": "一日",
+    "kana": "ついたち",
+    "romaji": "tsuitachi",
+    "translations": {
+      "fr": "1er du mois",
+      "en": "first of month"
+    }
+  },
+  {
+    "id": 144,
+    "kanji": "切符",
+    "kana": "きっぷ",
+    "romaji": "kippu",
+    "translations": {
+      "fr": "billet",
+      "en": "Ticket"
+    }
+  },
+  {
+    "id": 145,
+    "kanji": "一つ",
+    "kana": "ひとつ",
+    "romaji": "hitotsu",
+    "translations": {
+      "fr": "un",
+      "en": "one"
+    }
+  },
+  {
+    "id": 146,
+    "kanji": "八日",
+    "kana": "ようか",
+    "romaji": "youka",
+    "translations": {
+      "fr": "8ème jour du mois",
+      "en": "eight days, eighth day of the month"
+    }
+  },
+  {
+    "id": 147,
+    "kanji": "一人",
+    "kana": "ひとり",
+    "romaji": "hitori",
+    "translations": {
+      "fr": "une personne",
+      "en": "one person"
+    }
+  },
+  {
+    "id": 148,
+    "kanji": "",
+    "kana": "しかし",
+    "romaji": "shikashi",
+    "translations": {
+      "fr": "mais",
+      "en": "However"
+    }
+  },
+  {
+    "id": 149,
+    "kanji": "",
+    "kana": "メートル",
+    "romaji": "meetoru",
+    "translations": {
+      "fr": "mètre",
+      "en": "metre"
+    }
+  },
+  {
+    "id": 150,
+    "kanji": "食べ物",
+    "kana": "たべもの",
+    "romaji": "tabemono",
+    "translations": {
+      "fr": "nourriture",
+      "en": "food"
+    }
+  },
+  {
+    "id": 151,
+    "kanji": "磨く",
+    "kana": "みがく",
+    "romaji": "migaku",
+    "translations": {
+      "fr": "brosser",
+      "en": "to brush teeth, to polish"
+    }
+  },
+  {
+    "id": 152,
+    "kanji": "自分",
+    "kana": "じぶん",
+    "romaji": "jibun",
+    "translations": {
+      "fr": "soi-même",
+      "en": "Oneself"
+    }
+  },
+  {
+    "id": 153,
+    "kanji": "魚",
+    "kana": "さかな",
+    "romaji": "sakana",
+    "translations": {
+      "fr": "poisson",
+      "en": "Fish"
+    }
+  },
+  {
+    "id": 154,
+    "kanji": "",
+    "kana": "テスト",
+    "romaji": "tesuto",
+    "translations": {
+      "fr": "test",
+      "en": "test"
+    }
+  },
+  {
+    "id": 155,
+    "kanji": "出口",
+    "kana": "でぐち",
+    "romaji": "deguchi",
+    "translations": {
+      "fr": "sortie",
+      "en": "exit"
+    }
+  },
+  {
+    "id": 156,
+    "kanji": "",
+    "kana": "つける",
+    "romaji": "tsukeru",
+    "translations": {
+      "fr": "allumer",
+      "en": "to turn on"
+    }
+  },
+  {
+    "id": 157,
+    "kanji": "英語",
+    "kana": "えいご",
+    "romaji": "eigo",
+    "translations": {
+      "fr": "anglais",
+      "en": "English language"
+    }
+  },
+  {
+    "id": 158,
+    "kanji": "暑い",
+    "kana": "あつい",
+    "romaji": "atsui",
+    "translations": {
+      "fr": "chaud",
+      "en": "hot"
+    }
+  },
+  {
+    "id": 159,
+    "kanji": "",
+    "kana": "いい",
+    "romaji": "ii",
+    "translations": {
+      "fr": "bon",
+      "en": "good"
+    }
+  },
+  {
+    "id": 160,
+    "kanji": "少ない",
+    "kana": "すくない",
+    "romaji": "sukunai",
+    "translations": {
+      "fr": "peu",
+      "en": "a few"
+    }
+  },
+  {
+    "id": 161,
+    "kanji": "葉書",
+    "kana": "はがき",
+    "romaji": "hagaki",
+    "translations": {
+      "fr": "carte postale",
+      "en": "postcard"
+    }
+  },
+  {
+    "id": 162,
+    "kanji": "",
+    "kana": "ギター",
+    "romaji": "gitaa",
+    "translations": {
+      "fr": "guitare",
+      "en": "Guitar"
+    }
+  },
+  {
+    "id": 163,
+    "kanji": "朝",
+    "kana": "あさ",
+    "romaji": "asa",
+    "translations": {
+      "fr": "matin",
+      "en": "morning"
+    }
+  },
+  {
+    "id": 164,
+    "kanji": "近く",
+    "kana": "ちかく",
+    "romaji": "chikaku",
+    "translations": {
+      "fr": "proximité",
+      "en": "near"
+    }
+  },
+  {
+    "id": 165,
+    "kanji": "東",
+    "kana": "ひがし",
+    "romaji": "higashi",
+    "translations": {
+      "fr": "est",
+      "en": "east"
+    }
+  },
+  {
+    "id": 166,
+    "kanji": "中",
+    "kana": "なか",
+    "romaji": "naka",
+    "translations": {
+      "fr": "milieu",
+      "en": "middle"
+    }
+  },
+  {
+    "id": 167,
+    "kanji": "欲しい",
+    "kana": "ほしい",
+    "romaji": "hoshii",
+    "translations": {
+      "fr": "désirer",
+      "en": "want"
+    }
+  },
+  {
+    "id": 168,
+    "kanji": "誕生日",
+    "kana": "たんじょうび",
+    "romaji": "tanjyoubi",
+    "translations": {
+      "fr": "anniversaire",
+      "en": "birthday"
+    }
+  },
+  {
+    "id": 169,
+    "kanji": "細い",
+    "kana": "ほそい",
+    "romaji": "hosoi",
+    "translations": {
+      "fr": "mince",
+      "en": "thin"
+    }
+  },
+  {
+    "id": 170,
+    "kanji": "無くす",
+    "kana": "なくす",
+    "romaji": "nakusu",
+    "translations": {
+      "fr": "perdre",
+      "en": "to lose something"
+    }
+  },
+  {
+    "id": 171,
+    "kanji": "時計",
+    "kana": "とけい",
+    "romaji": "tokei",
+    "translations": {
+      "fr": "montre",
+      "en": "watch,clock"
+    }
+  },
+  {
+    "id": 172,
+    "kanji": "行く",
+    "kana": "ゆく",
+    "romaji": "yuku",
+    "translations": {
+      "fr": "aller",
+      "en": "to go"
+    }
+  },
+  {
+    "id": 173,
+    "kanji": "鳥",
+    "kana": "とり",
+    "romaji": "tori",
+    "translations": {
+      "fr": "oiseau",
+      "en": "bird"
+    }
+  },
+  {
+    "id": 174,
+    "kanji": "開ける",
+    "kana": "あける",
+    "romaji": "akeru",
+    "translations": {
+      "fr": "ouvrir",
+      "en": "to open"
+    }
+  },
+  {
+    "id": 175,
+    "kanji": "春",
+    "kana": "はる",
+    "romaji": "haru",
+    "translations": {
+      "fr": "printemps",
+      "en": "spring"
+    }
+  },
+  {
+    "id": 176,
+    "kanji": "咲く",
+    "kana": "さく",
+    "romaji": "saku",
+    "translations": {
+      "fr": "fleurir",
+      "en": "to bloom"
+    }
+  },
+  {
+    "id": 177,
+    "kanji": "日曜日",
+    "kana": "にちようび",
+    "romaji": "nichiyoubi",
+    "translations": {
+      "fr": "dimanche",
+      "en": "Sunday"
+    }
+  },
+  {
+    "id": 178,
+    "kanji": "女",
+    "kana": "おんな",
+    "romaji": "onna",
+    "translations": {
+      "fr": "femme",
+      "en": "Woman"
+    }
+  },
+  {
+    "id": 179,
+    "kanji": "閉まる",
+    "kana": "しまる",
+    "romaji": "shimaru",
+    "translations": {
+      "fr": "fermer",
+      "en": "to close, to be closed"
+    }
+  },
+  {
+    "id": 180,
+    "kanji": "",
+    "kana": "あそこ",
+    "romaji": "asoko",
+    "translations": {
+      "fr": "par là-bas",
+      "en": "over there"
+    }
+  },
+  {
+    "id": 181,
+    "kanji": "言う",
+    "kana": "いう",
+    "romaji": "iu",
+    "translations": {
+      "fr": "dire",
+      "en": "to say"
+    }
+  },
+  {
+    "id": 182,
+    "kanji": "風",
+    "kana": "かぜ",
+    "romaji": "kaze",
+    "translations": {
+      "fr": "vent",
+      "en": "Wind"
+    }
+  },
+  {
+    "id": 183,
+    "kanji": "女の子",
+    "kana": "おんなのこ",
+    "romaji": "onnanoko",
+    "translations": {
+      "fr": "fille",
+      "en": "Girl"
+    }
+  },
+  {
+    "id": 184,
+    "kanji": "",
+    "kana": "あっち",
+    "romaji": "acchi",
+    "translations": {
+      "fr": "par là-bas",
+      "en": "over there"
+    }
+  },
+  {
+    "id": 185,
+    "kanji": "今朝",
+    "kana": "けさ",
+    "romaji": "kesa",
+    "translations": {
+      "fr": "matin",
+      "en": "this morning"
+    }
+  },
+  {
+    "id": 186,
+    "kanji": "夏",
+    "kana": "なつ",
+    "romaji": "natsu",
+    "translations": {
+      "fr": "été",
+      "en": "summer"
+    }
+  },
+  {
+    "id": 187,
+    "kanji": "",
+    "kana": "あまり",
+    "romaji": "amari",
+    "translations": {
+      "fr": "peu",
+      "en": "not very"
+    }
+  },
+  {
+    "id": 188,
+    "kanji": "",
+    "kana": "かぎ",
+    "romaji": "kagi",
+    "translations": {
+      "fr": "clé",
+      "en": "Key"
+    }
+  },
+  {
+    "id": 189,
+    "kanji": "着る",
+    "kana": "きる",
+    "romaji": "kiru",
+    "translations": {
+      "fr": "revêtir",
+      "en": "to put on from the shoulders down"
+    }
+  },
+  {
+    "id": 190,
+    "kanji": "授業",
+    "kana": "じゅぎょう",
+    "romaji": "jyugyou",
+    "translations": {
+      "fr": "leçon",
+      "en": "lesson, class work"
+    }
+  },
+  {
+    "id": 191,
+    "kanji": "空",
+    "kana": "そら",
+    "romaji": "sora",
+    "translations": {
+      "fr": "ciel",
+      "en": "Sky"
+    }
+  },
+  {
+    "id": 192,
+    "kanji": "働く",
+    "kana": "はたらく",
+    "romaji": "hataraku",
+    "translations": {
+      "fr": "travailler",
+      "en": "to work"
+    }
+  },
+  {
+    "id": 193,
+    "kanji": "次",
+    "kana": "つぎ",
+    "romaji": "tsugi",
+    "translations": {
+      "fr": "prochain",
+      "en": "next"
+    }
+  },
+  {
+    "id": 194,
+    "kanji": "横",
+    "kana": "よこ",
+    "romaji": "yoko",
+    "translations": {
+      "fr": "côté",
+      "en": "beside,side,width"
+    }
+  },
+  {
+    "id": 195,
+    "kanji": "声",
+    "kana": "こえ",
+    "romaji": "koe",
+    "translations": {
+      "fr": "voix",
+      "en": "Voice"
+    }
+  },
+  {
+    "id": 196,
+    "kanji": "人",
+    "kana": "ひと",
+    "romaji": "hito",
+    "translations": {
+      "fr": "personne",
+      "en": "person"
+    }
+  },
+  {
+    "id": 197,
+    "kanji": "食堂",
+    "kana": "しょくどう",
+    "romaji": "shyokudou",
+    "translations": {
+      "fr": "cantine",
+      "en": "dining hall"
+    }
+  },
+  {
+    "id": 198,
+    "kanji": "",
+    "kana": "もう",
+    "romaji": "mou",
+    "translations": {
+      "fr": "déjà",
+      "en": "already"
+    }
+  },
+  {
+    "id": 199,
+    "kanji": "毎年",
+    "kana": "まいねん",
+    "romaji": "mainen",
+    "translations": {
+      "fr": "chaque année",
+      "en": "every year"
+    }
+  },
+  {
+    "id": 200,
+    "kanji": "四つ",
+    "kana": "よっつ",
+    "romaji": "yottsu",
+    "translations": {
+      "fr": "quatre (obj)",
+      "en": "four"
+    }
+  },
+  {
+    "id": 201,
+    "kanji": "池",
+    "kana": "いけ",
+    "romaji": "ike",
+    "translations": {
+      "fr": "étang",
+      "en": "pond"
+    }
+  },
+  {
+    "id": 202,
+    "kanji": "貸す",
+    "kana": "かす",
+    "romaji": "kasu",
+    "translations": {
+      "fr": "prêter",
+      "en": "to lend"
+    }
+  },
+  {
+    "id": 203,
+    "kanji": "",
+    "kana": "どちら",
+    "romaji": "dochira",
+    "translations": {
+      "fr": "lequel des deux",
+      "en": "which of two"
+    }
+  },
+  {
+    "id": 204,
+    "kanji": "",
+    "kana": "ノート",
+    "romaji": "nooto",
+    "translations": {
+      "fr": "cahier",
+      "en": "notebook,exercise book"
+    }
+  },
+  {
+    "id": 205,
+    "kanji": "半",
+    "kana": "はん",
+    "romaji": "han",
+    "translations": {
+      "fr": "demi",
+      "en": "half"
+    }
+  },
+  {
+    "id": 206,
+    "kanji": "電話",
+    "kana": "でんわ",
+    "romaji": "denwa",
+    "translations": {
+      "fr": "téléphone",
+      "en": "telephone"
+    }
+  },
+  {
+    "id": 207,
+    "kanji": "入口",
+    "kana": "いりぐち",
+    "romaji": "iriguchi",
+    "translations": {
+      "fr": "entrée",
+      "en": "entrance"
+    }
+  },
+  {
+    "id": 208,
+    "kanji": "色",
+    "kana": "いろ",
+    "romaji": "iro",
+    "translations": {
+      "fr": "couleur",
+      "en": "colour"
+    }
+  },
+  {
+    "id": 209,
+    "kanji": "",
+    "kana": "いつ",
+    "romaji": "itsu",
+    "translations": {
+      "fr": "quand",
+      "en": "when"
+    }
+  },
+  {
+    "id": 210,
+    "kanji": "三つ",
+    "kana": "みっつ",
+    "romaji": "mittsu",
+    "translations": {
+      "fr": "trois",
+      "en": "three"
+    }
+  },
+  {
+    "id": 211,
+    "kanji": "",
+    "kana": "やる",
+    "romaji": "yaru",
+    "translations": {
+      "fr": "faire",
+      "en": "to do"
+    }
+  },
+  {
+    "id": 212,
+    "kanji": "今晩",
+    "kana": "こんばん",
+    "romaji": "konban",
+    "translations": {
+      "fr": "ce soir",
+      "en": "this evening"
+    }
+  },
+  {
+    "id": 213,
+    "kanji": "さ来年",
+    "kana": "さらいねん",
+    "romaji": "sarainen",
+    "translations": {
+      "fr": "dans deux ans",
+      "en": "year after next"
+    }
+  },
+  {
+    "id": 214,
+    "kanji": "二十歳",
+    "kana": "はたち",
+    "romaji": "hatachi",
+    "translations": {
+      "fr": "20 ans",
+      "en": "20 years old,20th year"
+    }
+  },
+  {
+    "id": 215,
+    "kanji": "入る",
+    "kana": "はいる",
+    "romaji": "hairu",
+    "translations": {
+      "fr": "entrer",
+      "en": "to enter,to contain"
+    }
+  },
+  {
+    "id": 216,
+    "kanji": "",
+    "kana": "おいしい",
+    "romaji": "oishii",
+    "translations": {
+      "fr": "délicieux",
+      "en": "delicious"
+    }
+  },
+  {
+    "id": 217,
+    "kanji": "",
+    "kana": "どうぞ",
+    "romaji": "douzo",
+    "translations": {
+      "fr": "s'il vous plaît",
+      "en": "please"
+    }
+  },
+  {
+    "id": 218,
+    "kanji": "熱い",
+    "kana": "あつい",
+    "romaji": "atsui",
+    "translations": {
+      "fr": "chaud au toucher",
+      "en": "hot to the touch"
+    }
+  },
+  {
+    "id": 219,
+    "kanji": "黒い",
+    "kana": "くろい",
+    "romaji": "kuroi",
+    "translations": {
+      "fr": "noir",
+      "en": "black"
+    }
+  },
+  {
+    "id": 220,
+    "kanji": "",
+    "kana": "はく",
+    "romaji": "haku",
+    "translations": {
+      "fr": "porter",
+      "en": "to wear,to put on trousers"
+    }
+  },
+  {
+    "id": 221,
+    "kanji": "静か",
+    "kana": "しずか",
+    "romaji": "shizuka",
+    "translations": {
+      "fr": "calme",
+      "en": "Quiet"
+    }
+  },
+  {
+    "id": 222,
+    "kanji": "泳ぐ",
+    "kana": "およぐ",
+    "romaji": "oyogu",
+    "translations": {
+      "fr": "nager",
+      "en": "to swim"
+    }
+  },
+  {
+    "id": 223,
+    "kanji": "",
+    "kana": "ちゃわん",
+    "romaji": "chyawan",
+    "translations": {
+      "fr": "bol à riz",
+      "en": "rice bowl"
+    }
+  },
+  {
+    "id": 224,
+    "kanji": "",
+    "kana": "どうして",
+    "romaji": "doushite",
+    "translations": {
+      "fr": "pourquoi",
+      "en": "for what reason"
+    }
+  },
+  {
+    "id": 225,
+    "kanji": "辛い",
+    "kana": "からい",
+    "romaji": "karai",
+    "translations": {
+      "fr": "épicé",
+      "en": "Spicy"
+    }
+  },
+  {
+    "id": 226,
+    "kanji": "練習",
+    "kana": "れんしゅうする",
+    "romaji": "renshyuusuru",
+    "translations": {
+      "fr": "s'entraîner",
+      "en": "to practice"
+    }
+  },
+  {
+    "id": 227,
+    "kanji": "牛乳",
+    "kana": "ぎゅうにゅう",
+    "romaji": "gyuunyuu",
+    "translations": {
+      "fr": "lait",
+      "en": "Milk"
+    }
+  },
+  {
+    "id": 228,
+    "kanji": "歌う",
+    "kana": "うたう",
+    "romaji": "utau",
+    "translations": {
+      "fr": "chanter",
+      "en": "to sing"
+    }
+  },
+  {
+    "id": 229,
+    "kanji": "",
+    "kana": "でも",
+    "romaji": "demo",
+    "translations": {
+      "fr": "mais",
+      "en": "but"
+    }
+  },
+  {
+    "id": 230,
+    "kanji": "一昨年",
+    "kana": "おととし",
+    "romaji": "ototoshi",
+    "translations": {
+      "fr": "il y a deux ans",
+      "en": "year before last"
+    }
+  },
+  {
+    "id": 231,
+    "kanji": "箱",
+    "kana": "はこ",
+    "romaji": "hako",
+    "translations": {
+      "fr": "boîte",
+      "en": "box"
+    }
+  },
+  {
+    "id": 232,
+    "kanji": "同じ",
+    "kana": "おなじ",
+    "romaji": "onaji",
+    "translations": {
+      "fr": "même",
+      "en": "same"
+    }
+  },
+  {
+    "id": 233,
+    "kanji": "困る",
+    "kana": "こまる",
+    "romaji": "komaru",
+    "translations": {
+      "fr": "s'inquiéter",
+      "en": "to be worried"
+    }
+  },
+  {
+    "id": 234,
+    "kanji": "封筒",
+    "kana": "ふうとう",
+    "romaji": "fuutou",
+    "translations": {
+      "fr": "enveloppe",
+      "en": "envelope"
+    }
+  },
+  {
+    "id": 235,
+    "kanji": "",
+    "kana": "はい",
+    "romaji": "hai",
+    "translations": {
+      "fr": "oui",
+      "en": "yes"
+    }
+  },
+  {
+    "id": 236,
+    "kanji": "",
+    "kana": "あの",
+    "romaji": "ano",
+    "translations": {
+      "fr": "celui-là",
+      "en": "that over there"
+    }
+  },
+  {
+    "id": 237,
+    "kanji": "歌",
+    "kana": "うた",
+    "romaji": "uta",
+    "translations": {
+      "fr": "chanson",
+      "en": "song"
+    }
+  },
+  {
+    "id": 238,
+    "kanji": "",
+    "kana": "あちら",
+    "romaji": "achira",
+    "translations": {
+      "fr": "là",
+      "en": "there"
+    }
+  },
+  {
+    "id": 239,
+    "kanji": "",
+    "kana": "どこ",
+    "romaji": "doko",
+    "translations": {
+      "fr": "où",
+      "en": "where"
+    }
+  },
+  {
+    "id": 240,
+    "kanji": "大好き",
+    "kana": "だいすき",
+    "romaji": "daisuki",
+    "translations": {
+      "fr": "être très aimable",
+      "en": "to be very likeable"
+    }
+  },
+  {
+    "id": 241,
+    "kanji": "",
+    "kana": "スプーン",
+    "romaji": "supuun",
+    "translations": {
+      "fr": "cuillère",
+      "en": "Spoon"
+    }
+  },
+  {
+    "id": 242,
+    "kanji": "お母さん",
+    "kana": "おかあさん",
+    "romaji": "okaasan",
+    "translations": {
+      "fr": "mère",
+      "en": "(honorable) mother"
+    }
+  },
+  {
+    "id": 243,
+    "kanji": "誰",
+    "kana": "だれ",
+    "romaji": "dare",
+    "translations": {
+      "fr": "qui (poli)",
+      "en": "who"
+    }
+  },
+  {
+    "id": 244,
+    "kanji": "",
+    "kana": "カメラ",
+    "romaji": "kamera",
+    "translations": {
+      "fr": "appareil photo",
+      "en": "camera"
+    }
+  },
+  {
+    "id": 245,
+    "kanji": "七つ",
+    "kana": "ななつ",
+    "romaji": "nanatsu",
+    "translations": {
+      "fr": "sept",
+      "en": "seven"
+    }
+  },
+  {
+    "id": 246,
+    "kanji": "方",
+    "kana": "かた",
+    "romaji": "kata",
+    "translations": {
+      "fr": "personne",
+      "en": "person, way of doing"
+    }
+  },
+  {
+    "id": 247,
+    "kanji": "先生",
+    "kana": "せんせい",
+    "romaji": "sensei",
+    "translations": {
+      "fr": "professeur",
+      "en": "teacher, doctor"
+    }
+  },
+  {
+    "id": 248,
+    "kanji": "新聞",
+    "kana": "しんぶん",
+    "romaji": "shinbun",
+    "translations": {
+      "fr": "journal",
+      "en": "newspaper"
+    }
+  },
+  {
+    "id": 249,
+    "kanji": "",
+    "kana": "どなた",
+    "romaji": "donata",
+    "translations": {
+      "fr": "qui (poli)",
+      "en": "who"
+    }
+  },
+  {
+    "id": 250,
+    "kanji": "靴",
+    "kana": "くつ",
+    "romaji": "kutsu",
+    "translations": {
+      "fr": "chaussures",
+      "en": "Shoes"
+    }
+  },
+  {
+    "id": 251,
+    "kanji": "玄関",
+    "kana": "げんかん",
+    "romaji": "genkan",
+    "translations": {
+      "fr": "entrée",
+      "en": "entry hall"
+    }
+  },
+  {
+    "id": 252,
+    "kanji": "お父さん",
+    "kana": "おとうさん",
+    "romaji": "otousan",
+    "translations": {
+      "fr": "père",
+      "en": "(honorable) father"
+    }
+  },
+  {
+    "id": 253,
+    "kanji": "",
+    "kana": "フォーク",
+    "romaji": "fooku",
+    "translations": {
+      "fr": "fourchette",
+      "en": "fork"
+    }
+  },
+  {
+    "id": 254,
+    "kanji": "午後",
+    "kana": "ごご",
+    "romaji": "gogo",
+    "translations": {
+      "fr": "après-midi",
+      "en": "afternoon"
+    }
+  },
+  {
+    "id": 255,
+    "kanji": "走る",
+    "kana": "はしる",
+    "romaji": "hashiru",
+    "translations": {
+      "fr": "courir",
+      "en": "to run"
+    }
+  },
+  {
+    "id": 256,
+    "kanji": "",
+    "kana": "この",
+    "romaji": "kono",
+    "translations": {
+      "fr": "ceci (obj)",
+      "en": "This"
+    }
+  },
+  {
+    "id": 257,
+    "kanji": "黄色い",
+    "kana": "きいろい",
+    "romaji": "kiiroi",
+    "translations": {
+      "fr": "jaune (obj)",
+      "en": "yellow"
+    }
+  },
+  {
+    "id": 258,
+    "kanji": "お手洗い",
+    "kana": "おてあらい",
+    "romaji": "otearai",
+    "translations": {
+      "fr": "salle de bain",
+      "en": "bathroom"
+    }
+  },
+  {
+    "id": 259,
+    "kanji": "今週",
+    "kana": "こんしゅう",
+    "romaji": "konshyuu",
+    "translations": {
+      "fr": "cette semaine",
+      "en": "this week"
+    }
+  },
+  {
+    "id": 260,
+    "kanji": "物",
+    "kana": "もの",
+    "romaji": "mono",
+    "translations": {
+      "fr": "chose",
+      "en": "thing"
+    }
+  },
+  {
+    "id": 261,
+    "kanji": "弾く",
+    "kana": "ひく",
+    "romaji": "hiku",
+    "translations": {
+      "fr": "jouer d'un instrument à cordes",
+      "en": "to play an instrument with strings, including piano"
+    }
+  },
+  {
+    "id": 262,
+    "kanji": "図書館",
+    "kana": "としょかん",
+    "romaji": "toshyokan",
+    "translations": {
+      "fr": "bibliothèque",
+      "en": "library"
+    }
+  },
+  {
+    "id": 263,
+    "kanji": "外国人",
+    "kana": "がいこくじん",
+    "romaji": "gaikokujin",
+    "translations": {
+      "fr": "étranger",
+      "en": "Foreigner"
+    }
+  },
+  {
+    "id": 264,
+    "kanji": "時々",
+    "kana": "ときどき",
+    "romaji": "tokidoki",
+    "translations": {
+      "fr": "parfois",
+      "en": "sometimes"
+    }
+  },
+  {
+    "id": 265,
+    "kanji": "冬",
+    "kana": "ふゆ",
+    "romaji": "fuyu",
+    "translations": {
+      "fr": "hiver",
+      "en": "winter"
+    }
+  },
+  {
+    "id": 266,
+    "kanji": "",
+    "kana": "ホテル",
+    "romaji": "oteru",
+    "translations": {
+      "fr": "hôtel",
+      "en": "hotel"
+    }
+  },
+  {
+    "id": 267,
+    "kanji": "洗濯",
+    "kana": "せんたく",
+    "romaji": "sentaku",
+    "translations": {
+      "fr": "lessive",
+      "en": "Washing"
+    }
+  },
+  {
+    "id": 268,
+    "kanji": "早い",
+    "kana": "はやい",
+    "romaji": "hayai",
+    "translations": {
+      "fr": "tôt",
+      "en": "early"
+    }
+  },
+  {
+    "id": 269,
+    "kanji": "",
+    "kana": "かばん",
+    "romaji": "kaban",
+    "translations": {
+      "fr": "sac",
+      "en": "bag, basket"
+    }
+  },
+  {
+    "id": 270,
+    "kanji": "楽しい",
+    "kana": "たのしい",
+    "romaji": "tanoshii",
+    "translations": {
+      "fr": "agréable",
+      "en": "enjoyable"
+    }
+  },
+  {
+    "id": 271,
+    "kanji": "音楽",
+    "kana": "おんがく",
+    "romaji": "ongaku",
+    "translations": {
+      "fr": "musique",
+      "en": "Music"
+    }
+  },
+  {
+    "id": 272,
+    "kanji": "長い",
+    "kana": "ながい",
+    "romaji": "nagai",
+    "translations": {
+      "fr": "long",
+      "en": "long"
+    }
+  },
+  {
+    "id": 273,
+    "kanji": "",
+    "kana": "より、ほう",
+    "romaji": "yori,hou",
+    "translations": {
+      "fr": "utilisé pour la comparaison",
+      "en": "Used for comparison."
+    }
+  },
+  {
+    "id": 274,
+    "kanji": "",
+    "kana": "テレビ",
+    "romaji": "terebi",
+    "translations": {
+      "fr": "télévision",
+      "en": "television"
+    }
+  },
+  {
+    "id": 275,
+    "kanji": "鼻",
+    "kana": "はな",
+    "romaji": "hana",
+    "translations": {
+      "fr": "nez",
+      "en": "nose"
+    }
+  },
+  {
+    "id": 276,
+    "kanji": "六つ",
+    "kana": "むっつ",
+    "romaji": "muttsu",
+    "translations": {
+      "fr": "six (adj)",
+      "en": "six"
+    }
+  },
+  {
+    "id": 277,
+    "kanji": "曲る",
+    "kana": "まがる",
+    "romaji": "magaru",
+    "translations": {
+      "fr": "tourner",
+      "en": "to turn,to bend"
+    }
+  },
+  {
+    "id": 278,
+    "kanji": "花",
+    "kana": "はな",
+    "romaji": "hana",
+    "translations": {
+      "fr": "fleur",
+      "en": "flower"
+    }
+  },
+  {
+    "id": 279,
+    "kanji": "犬",
+    "kana": "いぬ",
+    "romaji": "inu",
+    "translations": {
+      "fr": "chien",
+      "en": "dog"
+    }
+  },
+  {
+    "id": 280,
+    "kanji": "着く",
+    "kana": "つく",
+    "romaji": "tsuku",
+    "translations": {
+      "fr": "arriver",
+      "en": "to arrive at"
+    }
+  },
+  {
+    "id": 281,
+    "kanji": "",
+    "kana": "その",
+    "romaji": "sono",
+    "translations": {
+      "fr": "cela",
+      "en": "That"
+    }
+  },
+  {
+    "id": 282,
+    "kanji": "橋",
+    "kana": "はし",
+    "romaji": "hashi",
+    "translations": {
+      "fr": "pont",
+      "en": "bridge"
+    }
+  },
+  {
+    "id": 283,
+    "kanji": "階段",
+    "kana": "かいだん",
+    "romaji": "kaidan",
+    "translations": {
+      "fr": "escaliers",
+      "en": "Stairs"
+    }
+  },
+  {
+    "id": 284,
+    "kanji": "来週",
+    "kana": "らいしゅう",
+    "romaji": "raishyuu",
+    "translations": {
+      "fr": "la semaine prochaine",
+      "en": "next week"
+    }
+  },
+  {
+    "id": 285,
+    "kanji": "大丈夫",
+    "kana": "だいじょうぶ",
+    "romaji": "daijyoubu",
+    "translations": {
+      "fr": "d'accord",
+      "en": "all right"
+    }
+  },
+  {
+    "id": 286,
+    "kanji": "取る",
+    "kana": "とる",
+    "romaji": "toru",
+    "translations": {
+      "fr": "prendre",
+      "en": "to take something"
+    }
+  },
+  {
+    "id": 287,
+    "kanji": "警官",
+    "kana": "けいかん",
+    "romaji": "keikan",
+    "translations": {
+      "fr": "policier",
+      "en": "policeman"
+    }
+  },
+  {
+    "id": 288,
+    "kanji": "大学",
+    "kana": "だいがく",
+    "romaji": "daigaku",
+    "translations": {
+      "fr": "université",
+      "en": "university"
+    }
+  },
+  {
+    "id": 289,
+    "kanji": "晩",
+    "kana": "ばん",
+    "romaji": "ban",
+    "translations": {
+      "fr": "soirée",
+      "en": "evening"
+    }
+  },
+  {
+    "id": 290,
+    "kanji": "",
+    "kana": "エレベーター",
+    "romaji": "erebeetaa",
+    "translations": {
+      "fr": "ascenseur",
+      "en": "elevator"
+    }
+  },
+  {
+    "id": 291,
+    "kanji": "居る",
+    "kana": "いる",
+    "romaji": "iru",
+    "translations": {
+      "fr": "être, avoir",
+      "en": "to be, to have (used for people and animals)"
+    }
+  },
+  {
+    "id": 292,
+    "kanji": "家",
+    "kana": "いえ",
+    "romaji": "ie",
+    "translations": {
+      "fr": "maison",
+      "en": "house"
+    }
+  },
+  {
+    "id": 293,
+    "kanji": "",
+    "kana": "たて",
+    "romaji": "tate",
+    "translations": {
+      "fr": "longueur",
+      "en": "length,height"
+    }
+  },
+  {
+    "id": 294,
+    "kanji": "遅い",
+    "kana": "おそい",
+    "romaji": "osoi",
+    "translations": {
+      "fr": "tard, lent",
+      "en": "late, slow"
+    }
+  },
+  {
+    "id": 295,
+    "kanji": "猫",
+    "kana": "ねこ",
+    "romaji": "neko",
+    "translations": {
+      "fr": "chat",
+      "en": "cat"
+    }
+  },
+  {
+    "id": 296,
+    "kanji": "帰る",
+    "kana": "かえる",
+    "romaji": "kaeru",
+    "translations": {
+      "fr": "retourner",
+      "en": "to go back"
+    }
+  },
+  {
+    "id": 297,
+    "kanji": "今",
+    "kana": "いま",
+    "romaji": "ima",
+    "translations": {
+      "fr": "maintenant",
+      "en": "now"
+    }
+  },
+  {
+    "id": 298,
+    "kanji": "待つ",
+    "kana": "まつ",
+    "romaji": "matsu",
+    "translations": {
+      "fr": "attendre",
+      "en": "to wait"
+    }
+  },
+  {
+    "id": 299,
+    "kanji": "",
+    "kana": "グラム",
+    "romaji": "garamu",
+    "translations": {
+      "fr": "gramme",
+      "en": "Gram"
+    }
+  },
+  {
+    "id": 300,
+    "kanji": "意味",
+    "kana": "いみ",
+    "romaji": "imi",
+    "translations": {
+      "fr": "sens",
+      "en": "meaning"
+    }
+  },
+  {
+    "id": 301,
+    "kanji": "全部",
+    "kana": "ぜんぶ",
+    "romaji": "zenbu",
+    "translations": {
+      "fr": "tout",
+      "en": "All"
+    }
+  },
+  {
+    "id": 302,
+    "kanji": "電車",
+    "kana": "でんしゃ",
+    "romaji": "denshya",
+    "translations": {
+      "fr": "train électrique",
+      "en": "electric train"
+    }
+  },
+  {
+    "id": 303,
+    "kanji": "",
+    "kana": "かわいい",
+    "romaji": "kawaii",
+    "translations": {
+      "fr": "mignon",
+      "en": "Cute"
+    }
+  },
+  {
+    "id": 304,
+    "kanji": "",
+    "kana": "きれい",
+    "romaji": "kirei",
+    "translations": {
+      "fr": "joli, propre",
+      "en": "pretty, clean"
+    }
+  },
+  {
+    "id": 305,
+    "kanji": "買い物",
+    "kana": "かいもの",
+    "romaji": "kaimono",
+    "translations": {
+      "fr": "shopping",
+      "en": "Shopping"
+    }
+  },
+  {
+    "id": 306,
+    "kanji": "大きい",
+    "kana": "おおきい",
+    "romaji": "ookii",
+    "translations": {
+      "fr": "grand",
+      "en": "big"
+    }
+  },
+  {
+    "id": 307,
+    "kanji": "緑",
+    "kana": "みどり",
+    "romaji": "midori",
+    "translations": {
+      "fr": "vert",
+      "en": "green"
+    }
+  },
+  {
+    "id": 308,
+    "kanji": "",
+    "kana": "ラジカセ ",
+    "romaji": "rajikase ",
+    "translations": {
+      "fr": "radio-cassette",
+      "en": "radio cassette player"
+    }
+  },
+  {
+    "id": 309,
+    "kanji": "買う",
+    "kana": "かう",
+    "romaji": "kau",
+    "translations": {
+      "fr": "acheter",
+      "en": "to buy"
+    }
+  },
+  {
+    "id": 310,
+    "kanji": "生まれる",
+    "kana": "うまれる",
+    "romaji": "umareru",
+    "translations": {
+      "fr": "naître",
+      "en": "to be born"
+    }
+  },
+  {
+    "id": 311,
+    "kanji": "足",
+    "kana": "あし",
+    "romaji": "ashi",
+    "translations": {
+      "fr": "pied, jambe",
+      "en": "foot, leg"
+    }
+  },
+  {
+    "id": 312,
+    "kanji": "零",
+    "kana": "れい",
+    "romaji": "rei",
+    "translations": {
+      "fr": "zéro",
+      "en": "zero"
+    }
+  },
+  {
+    "id": 313,
+    "kanji": "",
+    "kana": "りっぱ",
+    "romaji": "rippa",
+    "translations": {
+      "fr": "splendide",
+      "en": "splendid"
+    }
+  },
+  {
+    "id": 314,
+    "kanji": "",
+    "kana": "ペット",
+    "romaji": "petto",
+    "translations": {
+      "fr": "animal de compagnie",
+      "en": "pet"
+    }
+  },
+  {
+    "id": 315,
+    "kanji": "暗い",
+    "kana": "くらい",
+    "romaji": "kurai",
+    "translations": {
+      "fr": "sombre",
+      "en": "Gloomy"
+    }
+  },
+  {
+    "id": 316,
+    "kanji": "奥さん",
+    "kana": "おくさん",
+    "romaji": "okusan",
+    "translations": {
+      "fr": "épouse",
+      "en": "(honorable) wife"
+    }
+  },
+  {
+    "id": 317,
+    "kanji": "黄色",
+    "kana": "きいろ",
+    "romaji": "kiiro",
+    "translations": {
+      "fr": "jaune (obj)",
+      "en": "yellow"
+    }
+  },
+  {
+    "id": 318,
+    "kanji": "乗る",
+    "kana": "のる",
+    "romaji": "noru",
+    "translations": {
+      "fr": "monter",
+      "en": "to get on,to ride"
+    }
+  },
+  {
+    "id": 319,
+    "kanji": "今月",
+    "kana": "こんげつ",
+    "romaji": "kongetsu",
+    "translations": {
+      "fr": "ce mois",
+      "en": "this month"
+    }
+  },
+  {
+    "id": 320,
+    "kanji": "高い",
+    "kana": "たかい",
+    "romaji": "takai",
+    "translations": {
+      "fr": "grand, cher",
+      "en": "tall, expensive"
+    }
+  },
+  {
+    "id": 321,
+    "kanji": "開く",
+    "kana": "あく",
+    "romaji": "aku",
+    "translations": {
+      "fr": "ouvrir",
+      "en": "to open, to become open"
+    }
+  },
+  {
+    "id": 322,
+    "kanji": "財布",
+    "kana": "さいふ",
+    "romaji": "saifu",
+    "translations": {
+      "fr": "portefeuille",
+      "en": "Wallet"
+    }
+  },
+  {
+    "id": 323,
+    "kanji": "押す",
+    "kana": "おす",
+    "romaji": "osu",
+    "translations": {
+      "fr": "pousser",
+      "en": "to push, to stamp something"
+    }
+  },
+  {
+    "id": 324,
+    "kanji": "軽い",
+    "kana": "かるい",
+    "romaji": "karui",
+    "translations": {
+      "fr": "léger",
+      "en": "Light"
+    }
+  },
+  {
+    "id": 325,
+    "kanji": "医者",
+    "kana": "いしゃ",
+    "romaji": "ishya",
+    "translations": {
+      "fr": "médecin",
+      "en": "medical doctor"
+    }
+  },
+  {
+    "id": 326,
+    "kanji": "下手",
+    "kana": "へた",
+    "romaji": "heta",
+    "translations": {
+      "fr": "maladroit",
+      "en": "unskillful"
+    }
+  },
+  {
+    "id": 327,
+    "kanji": "赤い",
+    "kana": "あかい",
+    "romaji": "akai",
+    "translations": {
+      "fr": "rouge",
+      "en": "red"
+    }
+  },
+  {
+    "id": 328,
+    "kanji": "",
+    "kana": "こちら",
+    "romaji": "kochira",
+    "translations": {
+      "fr": "celui-ci (obj)",
+      "en": "this person or way"
+    }
+  },
+  {
+    "id": 329,
+    "kanji": "",
+    "kana": "ここ",
+    "romaji": "koko",
+    "translations": {
+      "fr": "ici",
+      "en": "Here"
+    }
+  },
+  {
+    "id": 330,
+    "kanji": "短い",
+    "kana": "みじかい",
+    "romaji": "mijikai",
+    "translations": {
+      "fr": "court",
+      "en": "short"
+    }
+  },
+  {
+    "id": 331,
+    "kanji": "家庭",
+    "kana": "かてい",
+    "romaji": "katei",
+    "translations": {
+      "fr": "ménage",
+      "en": "Household"
+    }
+  },
+  {
+    "id": 332,
+    "kanji": "",
+    "kana": "そっち",
+    "romaji": "socchi",
+    "translations": {
+      "fr": "par là-bas",
+      "en": "over there"
+    }
+  },
+  {
+    "id": 333,
+    "kanji": "",
+    "kana": "だんだん",
+    "romaji": "dandan",
+    "translations": {
+      "fr": "progressivement",
+      "en": "gradually"
+    }
+  },
+  {
+    "id": 334,
+    "kanji": "後ろ",
+    "kana": "うしろ",
+    "romaji": "ushiro",
+    "translations": {
+      "fr": "derrière",
+      "en": "behind"
+    }
+  },
+  {
+    "id": 335,
+    "kanji": "安い",
+    "kana": "やすい",
+    "romaji": "yasui",
+    "translations": {
+      "fr": "bon marché",
+      "en": "cheap"
+    }
+  },
+  {
+    "id": 336,
+    "kanji": "",
+    "kana": "ゆっくりと",
+    "romaji": "yukkurito",
+    "translations": {
+      "fr": "lentement",
+      "en": "slowly"
+    }
+  },
+  {
+    "id": 337,
+    "kanji": "妹",
+    "kana": "いもうと",
+    "romaji": "imouto",
+    "translations": {
+      "fr": "sœur cadette",
+      "en": "(humble) younger sister"
+    }
+  },
+  {
+    "id": 338,
+    "kanji": "頼む",
+    "kana": "たのむ",
+    "romaji": "tanomu",
+    "translations": {
+      "fr": "demander",
+      "en": "to ask"
+    }
+  },
+  {
+    "id": 339,
+    "kanji": "料理",
+    "kana": "りょうり",
+    "romaji": "ryouri",
+    "translations": {
+      "fr": "cuisine",
+      "en": "cuisine"
+    }
+  },
+  {
+    "id": 340,
+    "kanji": "",
+    "kana": "スポーツ",
+    "romaji": "supootsu",
+    "translations": {
+      "fr": "sport",
+      "en": "Sport"
+    }
+  },
+  {
+    "id": 341,
+    "kanji": "食べる",
+    "kana": "たべる",
+    "romaji": "taberu",
+    "translations": {
+      "fr": "manger",
+      "en": "to eat"
+    }
+  },
+  {
+    "id": 342,
+    "kanji": "賑やか",
+    "kana": "にぎやか",
+    "romaji": "nigiyaka",
+    "translations": {
+      "fr": "animé",
+      "en": "bustling,busy"
+    }
+  },
+  {
+    "id": 343,
+    "kanji": "",
+    "kana": "また",
+    "romaji": "mata",
+    "translations": {
+      "fr": "encore",
+      "en": "again,and"
+    }
+  },
+  {
+    "id": 344,
+    "kanji": "背広",
+    "kana": "せびろ",
+    "romaji": "sebiro",
+    "translations": {
+      "fr": "costume",
+      "en": "business suit"
+    }
+  },
+  {
+    "id": 345,
+    "kanji": "",
+    "kana": "クラス",
+    "romaji": "kurasu",
+    "translations": {
+      "fr": "classe",
+      "en": "Class"
+    }
+  },
+  {
+    "id": 346,
+    "kanji": "",
+    "kana": "ゼロ",
+    "romaji": "zero",
+    "translations": {
+      "fr": "zéro",
+      "en": "Zero"
+    }
+  },
+  {
+    "id": 347,
+    "kanji": "上手",
+    "kana": "じょうず",
+    "romaji": "jyouzu",
+    "translations": {
+      "fr": "adroit",
+      "en": "Skillful"
+    }
+  },
+  {
+    "id": 348,
+    "kanji": "",
+    "kana": "ページ",
+    "romaji": "peeji",
+    "translations": {
+      "fr": "page",
+      "en": "page"
+    }
+  },
+  {
+    "id": 349,
+    "kanji": "国",
+    "kana": "くに",
+    "romaji": "kuni",
+    "translations": {
+      "fr": "pays",
+      "en": "Country"
+    }
+  },
+  {
+    "id": 350,
+    "kanji": "手紙",
+    "kana": "てがみ",
+    "romaji": "tegami",
+    "translations": {
+      "fr": "lettre",
+      "en": "letter"
+    }
+  },
+  {
+    "id": 351,
+    "kanji": "",
+    "kana": "タクシー",
+    "romaji": "takushii",
+    "translations": {
+      "fr": "taxi",
+      "en": "taxi"
+    }
+  },
+  {
+    "id": 352,
+    "kanji": "茶色",
+    "kana": "ちゃいろ",
+    "romaji": "chyairo",
+    "translations": {
+      "fr": "marron",
+      "en": "brown"
+    }
+  },
+  {
+    "id": 353,
+    "kanji": "飲む",
+    "kana": "のむ",
+    "romaji": "nomu",
+    "translations": {
+      "fr": "boire",
+      "en": "to drink"
+    }
+  },
+  {
+    "id": 354,
+    "kanji": "上げる",
+    "kana": "あげる",
+    "romaji": "ageru",
+    "translations": {
+      "fr": "donner",
+      "en": "to give"
+    }
+  },
+  {
+    "id": 355,
+    "kanji": "傘",
+    "kana": "かさ",
+    "romaji": "kasa",
+    "translations": {
+      "fr": "parapluie",
+      "en": "Umbrella"
+    }
+  },
+  {
+    "id": 356,
+    "kanji": "所",
+    "kana": "ところ",
+    "romaji": "tokoro",
+    "translations": {
+      "fr": "endroit",
+      "en": "place"
+    }
+  },
+  {
+    "id": 357,
+    "kanji": "銀行",
+    "kana": "ぎんこう",
+    "romaji": "ginkou",
+    "translations": {
+      "fr": "banque",
+      "en": "Bank"
+    }
+  },
+  {
+    "id": 358,
+    "kanji": "",
+    "kana": "どっち",
+    "romaji": "docchi",
+    "translations": {
+      "fr": "quel",
+      "en": "which"
+    }
+  },
+  {
+    "id": 359,
+    "kanji": "手",
+    "kana": "て",
+    "romaji": "te",
+    "translations": {
+      "fr": "main",
+      "en": "hand"
+    }
+  },
+  {
+    "id": 360,
+    "kanji": "",
+    "kana": "いいえ",
+    "romaji": "iie",
+    "translations": {
+      "fr": "non",
+      "en": "no"
+    }
+  },
+  {
+    "id": 361,
+    "kanji": "",
+    "kana": "いつも",
+    "romaji": "itsumo",
+    "translations": {
+      "fr": "toujours",
+      "en": "always"
+    }
+  },
+  {
+    "id": 362,
+    "kanji": "六",
+    "kana": "ろく",
+    "romaji": "roku",
+    "translations": {
+      "fr": "six (adj)",
+      "en": "six"
+    }
+  },
+  {
+    "id": 363,
+    "kanji": "夕方",
+    "kana": "ゆうがた",
+    "romaji": "yuugata",
+    "translations": {
+      "fr": "soirée",
+      "en": "evening"
+    }
+  },
+  {
+    "id": 364,
+    "kanji": "若い",
+    "kana": "わかい",
+    "romaji": "wakai",
+    "translations": {
+      "fr": "jeune",
+      "en": "young"
+    }
+  },
+  {
+    "id": 365,
+    "kanji": "明い",
+    "kana": "あかるい",
+    "romaji": "akarui",
+    "translations": {
+      "fr": "lumineux",
+      "en": "bright"
+    }
+  },
+  {
+    "id": 366,
+    "kanji": "吹く",
+    "kana": "ふく",
+    "romaji": "fuku",
+    "translations": {
+      "fr": "souffler",
+      "en": "to blow"
+    }
+  },
+  {
+    "id": 367,
+    "kanji": "",
+    "kana": "こんな",
+    "romaji": "konna",
+    "translations": {
+      "fr": "tel",
+      "en": "Such"
+    }
+  },
+  {
+    "id": 368,
+    "kanji": "",
+    "kana": "ほか",
+    "romaji": "hoka",
+    "translations": {
+      "fr": "autre",
+      "en": "other, the rest"
+    }
+  },
+  {
+    "id": 369,
+    "kanji": "夕飯",
+    "kana": "ゆうはん",
+    "romaji": "yuuhan",
+    "translations": {
+      "fr": "dîner",
+      "en": "dinner"
+    }
+  },
+  {
+    "id": 370,
+    "kanji": "",
+    "kana": "どの",
+    "romaji": "dono",
+    "translations": {
+      "fr": "quel",
+      "en": "which"
+    }
+  },
+  {
+    "id": 371,
+    "kanji": "百",
+    "kana": "ひゃく",
+    "romaji": "hyaku",
+    "translations": {
+      "fr": "cent",
+      "en": "hundred"
+    }
+  },
+  {
+    "id": 372,
+    "kanji": "",
+    "kana": "キロ",
+    "romaji": "kiro",
+    "translations": {
+      "fr": "kilogramme",
+      "en": "Kilogram"
+    }
+  },
+  {
+    "id": 373,
+    "kanji": "",
+    "kana": "できる",
+    "romaji": "dekiru",
+    "translations": {
+      "fr": "pouvoir",
+      "en": "to be able to"
+    }
+  },
+  {
+    "id": 374,
+    "kanji": "遠い",
+    "kana": "とおい",
+    "romaji": "tooi",
+    "translations": {
+      "fr": "loin",
+      "en": "far"
+    }
+  },
+  {
+    "id": 375,
+    "kanji": "薬",
+    "kana": "くすり",
+    "romaji": "kusuri",
+    "translations": {
+      "fr": "médicament",
+      "en": "medicine"
+    }
+  },
+  {
+    "id": 376,
+    "kanji": "",
+    "kana": "コーヒー",
+    "romaji": "koohii",
+    "translations": {
+      "fr": "café",
+      "en": "Coffee"
+    }
+  },
+  {
+    "id": 377,
+    "kanji": "出かける",
+    "kana": "でかける",
+    "romaji": "dekakeru",
+    "translations": {
+      "fr": "sortir",
+      "en": "to go out"
+    }
+  },
+  {
+    "id": 378,
+    "kanji": "天気",
+    "kana": "てんき",
+    "romaji": "tenki",
+    "translations": {
+      "fr": "météo",
+      "en": "weather"
+    }
+  },
+  {
+    "id": 379,
+    "kanji": "自転車",
+    "kana": "じてんしゃ",
+    "romaji": "jitenshya",
+    "translations": {
+      "fr": "vélo",
+      "en": "Bicycle"
+    }
+  },
+  {
+    "id": 380,
+    "kanji": "",
+    "kana": "ボールペン",
+    "romaji": "boorupen",
+    "translations": {
+      "fr": "stylo-bille",
+      "en": "ball-point pen"
+    }
+  },
+  {
+    "id": 381,
+    "kanji": "",
+    "kana": "レストラン",
+    "romaji": "resutoran",
+    "translations": {
+      "fr": "restaurant",
+      "en": "restaurant"
+    }
+  },
+  {
+    "id": 382,
+    "kanji": "撮る",
+    "kana": "とる",
+    "romaji": "toru",
+    "translations": {
+      "fr": "prendre une photo",
+      "en": "to take a photo or record a film"
+    }
+  },
+  {
+    "id": 383,
+    "kanji": "消す",
+    "kana": "けす",
+    "romaji": "kesu",
+    "translations": {
+      "fr": "effacer",
+      "en": "to erase, to turn off power"
+    }
+  },
+  {
+    "id": 384,
+    "kanji": "",
+    "kana": "マッチ",
+    "romaji": "macchi",
+    "translations": {
+      "fr": "allumette",
+      "en": "match"
+    }
+  },
+  {
+    "id": 385,
+    "kanji": "明日",
+    "kana": "あした",
+    "romaji": "ashita",
+    "translations": {
+      "fr": "demain",
+      "en": "tomorrow"
+    }
+  },
+  {
+    "id": 386,
+    "kanji": "嫌",
+    "kana": "いや",
+    "romaji": "iya",
+    "translations": {
+      "fr": "mauvais",
+      "en": "unpleasant"
+    }
+  },
+  {
+    "id": 387,
+    "kanji": "嫌い",
+    "kana": "きらい",
+    "romaji": "kirai",
+    "translations": {
+      "fr": "détester",
+      "en": "Hate"
+    }
+  },
+  {
+    "id": 388,
+    "kanji": "来る",
+    "kana": "くる",
+    "romaji": "kuru",
+    "translations": {
+      "fr": "venir",
+      "en": "to come"
+    }
+  },
+  {
+    "id": 389,
+    "kanji": "留学生",
+    "kana": "りゅうがくせい",
+    "romaji": "ryuugakusei",
+    "translations": {
+      "fr": "étudiant étranger",
+      "en": "overseas student"
+    }
+  },
+  {
+    "id": 390,
+    "kanji": "",
+    "kana": "シャツ",
+    "romaji": "shatsu",
+    "translations": {
+      "fr": "chemise",
+      "en": "Shirt"
+    }
+  },
+  {
+    "id": 391,
+    "kanji": "借りる",
+    "kana": "かりる",
+    "romaji": "kariru",
+    "translations": {
+      "fr": "emprunter",
+      "en": "to borrow"
+    }
+  },
+  {
+    "id": 392,
+    "kanji": "散歩",
+    "kana": "さんぽする",
+    "romaji": "sanposuru",
+    "translations": {
+      "fr": "se promener",
+      "en": "to stroll"
+    }
+  },
+  {
+    "id": 393,
+    "kanji": "結婚",
+    "kana": "けっこん",
+    "romaji": "kekkon",
+    "translations": {
+      "fr": "mariage",
+      "en": "Marriage"
+    }
+  },
+  {
+    "id": 394,
+    "kanji": "夏休み",
+    "kana": "なつやすみ",
+    "romaji": "natsuyasumi",
+    "translations": {
+      "fr": "vacances d'été",
+      "en": "summer holiday"
+    }
+  },
+  {
+    "id": 395,
+    "kanji": "病院",
+    "kana": "びょういん",
+    "romaji": "byouin",
+    "translations": {
+      "fr": "hôpital",
+      "en": "hospital"
+    }
+  },
+  {
+    "id": 396,
+    "kanji": "",
+    "kana": "トイレ",
+    "romaji": "toire",
+    "translations": {
+      "fr": "toilettes",
+      "en": "toilet"
+    }
+  },
+  {
+    "id": 397,
+    "kanji": "果物",
+    "kana": "くだもの",
+    "romaji": "kudamono",
+    "translations": {
+      "fr": "fruits",
+      "en": "Fruit"
+    }
+  },
+  {
+    "id": 398,
+    "kanji": "私",
+    "kana": "わたくし",
+    "romaji": "watakushi",
+    "translations": {
+      "fr": "moi-même (humble)",
+      "en": "(humble) I,myself"
+    }
+  },
+  {
+    "id": 399,
+    "kanji": "一昨日",
+    "kana": "おととい",
+    "romaji": "ototoi",
+    "translations": {
+      "fr": "avant-hier",
+      "en": "day before yesterday"
+    }
+  },
+  {
+    "id": 400,
+    "kanji": "",
+    "kana": "いす",
+    "romaji": "isu",
+    "translations": {
+      "fr": "chaise",
+      "en": "chair"
+    }
+  },
+  {
+    "id": 401,
+    "kanji": "初め/始め",
+    "kana": "はじめ",
+    "romaji": "hajime",
+    "translations": {
+      "fr": "début",
+      "en": "beginning"
+    }
+  },
+  {
+    "id": 402,
+    "kanji": "",
+    "kana": "これ",
+    "romaji": "kore",
+    "translations": {
+      "fr": "ceci (obj)",
+      "en": "This"
+    }
+  },
+  {
+    "id": 403,
+    "kanji": "",
+    "kana": "キロ",
+    "romaji": "kiro",
+    "translations": {
+      "fr": "kilomètre",
+      "en": "Kilometer"
+    }
+  },
+  {
+    "id": 404,
+    "kanji": "",
+    "kana": "そば",
+    "romaji": "soba",
+    "translations": {
+      "fr": "près de",
+      "en": "near, beside"
+    }
+  },
+  {
+    "id": 405,
+    "kanji": "木曜日",
+    "kana": "もくようび",
+    "romaji": "mokuyoubi",
+    "translations": {
+      "fr": "jeudi",
+      "en": "Thursday"
+    }
+  },
+  {
+    "id": 406,
+    "kanji": "黒",
+    "kana": "くろ",
+    "romaji": "kuro",
+    "translations": {
+      "fr": "noir",
+      "en": "Black"
+    }
+  },
+  {
+    "id": 407,
+    "kanji": "海",
+    "kana": "うみ",
+    "romaji": "umi",
+    "translations": {
+      "fr": "mer",
+      "en": "sea"
+    }
+  },
+  {
+    "id": 408,
+    "kanji": "お酒",
+    "kana": "おさけ",
+    "romaji": "osake",
+    "translations": {
+      "fr": "alcool",
+      "en": "alcohol, rice wine"
+    }
+  },
+  {
+    "id": 409,
+    "kanji": "",
+    "kana": "シャワー",
+    "romaji": "shawaa",
+    "translations": {
+      "fr": "douche",
+      "en": "Shower"
+    }
+  },
+  {
+    "id": 410,
+    "kanji": "昼",
+    "kana": "ひる",
+    "romaji": "hiru",
+    "translations": {
+      "fr": "midi",
+      "en": "noon, daytime"
+    }
+  },
+  {
+    "id": 411,
+    "kanji": "",
+    "kana": "どれ",
+    "romaji": "dore",
+    "translations": {
+      "fr": "lequel",
+      "en": "which (of three or more)"
+    }
+  },
+  {
+    "id": 412,
+    "kanji": "小さな",
+    "kana": "ちいさな",
+    "romaji": "chiisana",
+    "translations": {
+      "fr": "petit",
+      "en": "little"
+    }
+  },
+  {
+    "id": 413,
+    "kanji": "作る",
+    "kana": "つくる",
+    "romaji": "tsukuru",
+    "translations": {
+      "fr": "faire",
+      "en": "to make"
+    }
+  },
+  {
+    "id": 414,
+    "kanji": "三",
+    "kana": "さん",
+    "romaji": "san",
+    "translations": {
+      "fr": "trois (adj)",
+      "en": "Three"
+    }
+  },
+  {
+    "id": 415,
+    "kanji": "もう一度",
+    "kana": "もういちど",
+    "romaji": "mouichido",
+    "translations": {
+      "fr": "encore une fois",
+      "en": "again"
+    }
+  },
+  {
+    "id": 416,
+    "kanji": "差す",
+    "kana": "さす",
+    "romaji": "sasu",
+    "translations": {
+      "fr": "étendre les bras",
+      "en": "to stretch out hands, to raise an umbrella"
+    }
+  },
+  {
+    "id": 417,
+    "kanji": "耳",
+    "kana": "みみ",
+    "romaji": "mimi",
+    "translations": {
+      "fr": "oreille",
+      "en": "ear"
+    }
+  },
+  {
+    "id": 418,
+    "kanji": "消える",
+    "kana": "きえる",
+    "romaji": "kieru",
+    "translations": {
+      "fr": "disparaître",
+      "en": "to disappear"
+    }
+  },
+  {
+    "id": 419,
+    "kanji": "建物",
+    "kana": "たてもの",
+    "romaji": "tatemono",
+    "translations": {
+      "fr": "bâtiment",
+      "en": "building"
+    }
+  },
+  {
+    "id": 420,
+    "kanji": "出す",
+    "kana": "だす",
+    "romaji": "dasu",
+    "translations": {
+      "fr": "sortir",
+      "en": "to put out"
+    }
+  },
+  {
+    "id": 421,
+    "kanji": "四日",
+    "kana": "よっか",
+    "romaji": "yokka",
+    "translations": {
+      "fr": "4ème jour du mois",
+      "en": "four days, fouth day of the month"
+    }
+  },
+  {
+    "id": 422,
+    "kanji": "窓",
+    "kana": "まど",
+    "romaji": "mado",
+    "translations": {
+      "fr": "fenêtre",
+      "en": "window"
+    }
+  },
+  {
+    "id": 423,
+    "kanji": "",
+    "kana": "しょうゆ",
+    "romaji": "shyouyu",
+    "translations": {
+      "fr": "sauce soja",
+      "en": "soy sauce"
+    }
+  },
+  {
+    "id": 424,
+    "kanji": "七日",
+    "kana": "なのか",
+    "romaji": "nanoka",
+    "translations": {
+      "fr": "7ème jour du mois",
+      "en": "seven days,the seventh day"
+    }
+  },
+  {
+    "id": 425,
+    "kanji": "立つ",
+    "kana": "たつ",
+    "romaji": "tatsu",
+    "translations": {
+      "fr": "se tenir debout",
+      "en": "to stand"
+    }
+  },
+  {
+    "id": 426,
+    "kanji": "",
+    "kana": "テーブル",
+    "romaji": "teeburu",
+    "translations": {
+      "fr": "table",
+      "en": "table"
+    }
+  },
+  {
+    "id": 427,
+    "kanji": "本",
+    "kana": "ほん",
+    "romaji": "hon",
+    "translations": {
+      "fr": "livre",
+      "en": "book"
+    }
+  },
+  {
+    "id": 428,
+    "kanji": "",
+    "kana": "カレー",
+    "romaji": "karee",
+    "translations": {
+      "fr": "curry",
+      "en": "Curry"
+    }
+  },
+  {
+    "id": 429,
+    "kanji": "砂糖",
+    "kana": "さとう",
+    "romaji": "satou",
+    "translations": {
+      "fr": "sucre",
+      "en": "Sugar"
+    }
+  },
+  {
+    "id": 430,
+    "kanji": "塩",
+    "kana": "しお",
+    "romaji": "shio",
+    "translations": {
+      "fr": "sel",
+      "en": "Salt"
+    }
+  },
+  {
+    "id": 431,
+    "kanji": "",
+    "kana": "いろいろ",
+    "romaji": "iroiro",
+    "translations": {
+      "fr": "varié",
+      "en": "various"
+    }
+  },
+  {
+    "id": 432,
+    "kanji": "見せる",
+    "kana": "みせる",
+    "romaji": "miseru",
+    "translations": {
+      "fr": "montrer",
+      "en": "to show"
+    }
+  },
+  {
+    "id": 433,
+    "kanji": "",
+    "kana": "スカート",
+    "romaji": "sukaato",
+    "translations": {
+      "fr": "jupe",
+      "en": "Skirt"
+    }
+  },
+  {
+    "id": 434,
+    "kanji": "見る 観る",
+    "kana": "みる",
+    "romaji": "miru",
+    "translations": {
+      "fr": "voir",
+      "en": "to see, to watch"
+    }
+  },
+  {
+    "id": 435,
+    "kanji": "毎朝",
+    "kana": "まいあさ",
+    "romaji": "maiasa",
+    "translations": {
+      "fr": "chaque matin",
+      "en": "every morning"
+    }
+  },
+  {
+    "id": 436,
+    "kanji": "知る",
+    "kana": "しる",
+    "romaji": "shiru",
+    "translations": {
+      "fr": "savoir",
+      "en": "to know"
+    }
+  },
+  {
+    "id": 437,
+    "kanji": "強い",
+    "kana": "つよい",
+    "romaji": "tsuyoi",
+    "translations": {
+      "fr": "puissant",
+      "en": "powerful"
+    }
+  },
+  {
+    "id": 438,
+    "kanji": "郵便局",
+    "kana": "ゆうびんきょく",
+    "romaji": "yuubinkyoku",
+    "translations": {
+      "fr": "bureau de poste",
+      "en": "post office"
+    }
+  },
+  {
+    "id": 439,
+    "kanji": "寝る",
+    "kana": "ねる",
+    "romaji": "neru",
+    "translations": {
+      "fr": "aller dormir",
+      "en": "to go to bed,to sleep"
+    }
+  },
+  {
+    "id": 440,
+    "kanji": "今日",
+    "kana": "きょう",
+    "romaji": "kyou",
+    "translations": {
+      "fr": "aujourd'hui",
+      "en": "Today"
+    }
+  },
+  {
+    "id": 441,
+    "kanji": "伯母さん/叔母さん",
+    "kana": "おばさん",
+    "romaji": "obasan",
+    "translations": {
+      "fr": "tante",
+      "en": "Aunt"
+    }
+  },
+  {
+    "id": 442,
+    "kanji": "毎日",
+    "kana": "まいにち",
+    "romaji": "mainichi",
+    "translations": {
+      "fr": "chaque jour",
+      "en": "every day"
+    }
+  },
+  {
+    "id": 443,
+    "kanji": "金曜日",
+    "kana": "きんようび",
+    "romaji": "kinyoubi",
+    "translations": {
+      "fr": "vendredi",
+      "en": "Friday"
+    }
+  },
+  {
+    "id": 444,
+    "kanji": "",
+    "kana": "ハンカチ",
+    "romaji": "hankachi",
+    "translations": {
+      "fr": "mouchoir",
+      "en": "handkerchief"
+    }
+  },
+  {
+    "id": 445,
+    "kanji": "",
+    "kana": "あれ",
+    "romaji": "are",
+    "translations": {
+      "fr": "cela",
+      "en": "that"
+    }
+  },
+  {
+    "id": 446,
+    "kanji": "伯父/叔父",
+    "kana": "おじいさん",
+    "romaji": "ojiisan",
+    "translations": {
+      "fr": "grand-père",
+      "en": "grandfather, male senior citizen"
+    }
+  },
+  {
+    "id": 447,
+    "kanji": "八百屋",
+    "kana": "やおや",
+    "romaji": "yaoya",
+    "translations": {
+      "fr": "marchand de légumes",
+      "en": "greengrocer"
+    }
+  },
+  {
+    "id": 448,
+    "kanji": "土曜日",
+    "kana": "どようび",
+    "romaji": "doyoubi",
+    "translations": {
+      "fr": "samedi",
+      "en": "Saturday"
+    }
+  },
+  {
+    "id": 449,
+    "kanji": "",
+    "kana": "はし",
+    "romaji": "hashi",
+    "translations": {
+      "fr": "baguettes",
+      "en": "chopsticks"
+    }
+  },
+  {
+    "id": 450,
+    "kanji": "町",
+    "kana": "まち",
+    "romaji": "machi",
+    "translations": {
+      "fr": "ville",
+      "en": "town,city"
+    }
+  },
+  {
+    "id": 451,
+    "kanji": "体",
+    "kana": "からだ",
+    "romaji": "karada",
+    "translations": {
+      "fr": "corps",
+      "en": "Body"
+    }
+  },
+  {
+    "id": 452,
+    "kanji": "降りる",
+    "kana": "おりる",
+    "romaji": "oriru",
+    "translations": {
+      "fr": "descendre",
+      "en": "to get off, to descend"
+    }
+  },
+  {
+    "id": 453,
+    "kanji": "",
+    "kana": "とても",
+    "romaji": "totemo",
+    "translations": {
+      "fr": "très",
+      "en": "very"
+    }
+  },
+  {
+    "id": 454,
+    "kanji": "元気",
+    "kana": "げんき",
+    "romaji": "genki",
+    "translations": {
+      "fr": "santé",
+      "en": "health, vitality"
+    }
+  },
+  {
+    "id": 455,
+    "kanji": "夜",
+    "kana": "よる",
+    "romaji": "yoru",
+    "translations": {
+      "fr": "soir",
+      "en": "evening,night"
+    }
+  },
+  {
+    "id": 456,
+    "kanji": "並ぶ",
+    "kana": "ならぶ",
+    "romaji": "narabu",
+    "translations": {
+      "fr": "faire la queue",
+      "en": "to line up,to stand in a line"
+    }
+  },
+  {
+    "id": 457,
+    "kanji": "牛肉",
+    "kana": "ぎゅうにく",
+    "romaji": "gyuuniku",
+    "translations": {
+      "fr": "bœuf",
+      "en": "Beef"
+    }
+  },
+  {
+    "id": 458,
+    "kanji": "とり肉",
+    "kana": "とりにく",
+    "romaji": "toriniku",
+    "translations": {
+      "fr": "poulet",
+      "en": "chicken meat"
+    }
+  },
+  {
+    "id": 459,
+    "kanji": "",
+    "kana": "レコード",
+    "romaji": "rekooda",
+    "translations": {
+      "fr": "disque",
+      "en": "record"
+    }
+  },
+  {
+    "id": 460,
+    "kanji": "月曜日",
+    "kana": "げつようび",
+    "romaji": "getsuyoubi",
+    "translations": {
+      "fr": "lundi",
+      "en": "Monday"
+    }
+  },
+  {
+    "id": 461,
+    "kanji": "左",
+    "kana": "ひだり",
+    "romaji": "hidari",
+    "translations": {
+      "fr": "côté gauche",
+      "en": "left hand side"
+    }
+  },
+  {
+    "id": 462,
+    "kanji": "切る",
+    "kana": "きる",
+    "romaji": "kiru",
+    "translations": {
+      "fr": "couper",
+      "en": "to cut"
+    }
+  },
+  {
+    "id": 463,
+    "kanji": "習う",
+    "kana": "ならう",
+    "romaji": "narau",
+    "translations": {
+      "fr": "apprendre",
+      "en": "to learn"
+    }
+  },
+  {
+    "id": 464,
+    "kanji": "皆さん",
+    "kana": "みなさん",
+    "romaji": "minasan",
+    "translations": {
+      "fr": "tout le monde",
+      "en": "everyone"
+    }
+  },
+  {
+    "id": 465,
+    "kanji": "角",
+    "kana": "かど",
+    "romaji": "kado",
+    "translations": {
+      "fr": "un coin",
+      "en": "a corner"
+    }
+  },
+  {
+    "id": 466,
+    "kanji": "十",
+    "kana": "じゅう とお",
+    "romaji": "jyuu too",
+    "translations": {
+      "fr": "dix",
+      "en": "Ten"
+    }
+  },
+  {
+    "id": 467,
+    "kanji": "遊ぶ",
+    "kana": "あそぶ",
+    "romaji": "asobu",
+    "translations": {
+      "fr": "jouer",
+      "en": "to play, to make a visit"
+    }
+  },
+  {
+    "id": 468,
+    "kanji": "去年",
+    "kana": "きょねん",
+    "romaji": "kyonen",
+    "translations": {
+      "fr": "l'année dernière",
+      "en": "last year"
+    }
+  },
+  {
+    "id": 469,
+    "kanji": "先",
+    "kana": "さき",
+    "romaji": "saki",
+    "translations": {
+      "fr": "l'avenir",
+      "en": "the future, previous"
+    }
+  },
+  {
+    "id": 470,
+    "kanji": "休む",
+    "kana": "やすむ",
+    "romaji": "yasumu",
+    "translations": {
+      "fr": "se reposer",
+      "en": "to rest"
+    }
+  },
+  {
+    "id": 471,
+    "kanji": "",
+    "kana": "ラジオ",
+    "romaji": "rajio",
+    "translations": {
+      "fr": "radio",
+      "en": "radio"
+    }
+  },
+  {
+    "id": 472,
+    "kanji": "年",
+    "kana": "とし",
+    "romaji": "toshi",
+    "translations": {
+      "fr": "année",
+      "en": "year"
+    }
+  },
+  {
+    "id": 473,
+    "kanji": "",
+    "kana": "いかが",
+    "romaji": "ikaga",
+    "translations": {
+      "fr": "comment",
+      "en": "how"
+    }
+  },
+  {
+    "id": 474,
+    "kanji": "渡る",
+    "kana": "わたる",
+    "romaji": "wataru",
+    "translations": {
+      "fr": "traverser",
+      "en": "to go across"
+    }
+  },
+  {
+    "id": 475,
+    "kanji": "涼しい",
+    "kana": "すずしい",
+    "romaji": "suzushii",
+    "translations": {
+      "fr": "rafraîchissant",
+      "en": "Refreshing"
+    }
+  },
+  {
+    "id": 476,
+    "kanji": "",
+    "kana": "おまわりさん",
+    "romaji": "omawarisan",
+    "translations": {
+      "fr": "agent",
+      "en": "friendly term for policeman"
+    }
+  },
+  {
+    "id": 477,
+    "kanji": "頭",
+    "kana": "あたま",
+    "romaji": "atama",
+    "translations": {
+      "fr": "tête",
+      "en": "head"
+    }
+  },
+  {
+    "id": 478,
+    "kanji": "",
+    "kana": "おばあさん",
+    "romaji": "obaasan",
+    "translations": {
+      "fr": "grand-mère",
+      "en": "grandmother, female senior-citizen"
+    }
+  },
+  {
+    "id": 479,
+    "kanji": "男",
+    "kana": "おとこ",
+    "romaji": "otoko",
+    "translations": {
+      "fr": "homme",
+      "en": "Man"
+    }
+  },
+  {
+    "id": 480,
+    "kanji": "",
+    "kana": "アパート",
+    "romaji": "apaato",
+    "translations": {
+      "fr": "appartement",
+      "en": "apartment"
+    }
+  },
+  {
+    "id": 481,
+    "kanji": "大切",
+    "kana": "たいせつ",
+    "romaji": "taisetsu",
+    "translations": {
+      "fr": "important",
+      "en": "important"
+    }
+  },
+  {
+    "id": 482,
+    "kanji": "教える",
+    "kana": "おしえる",
+    "romaji": "oshieru",
+    "translations": {
+      "fr": "enseigner",
+      "en": "to teach, to tell"
+    }
+  },
+  {
+    "id": 483,
+    "kanji": "始まる",
+    "kana": "はじまる",
+    "romaji": "hajimaru",
+    "translations": {
+      "fr": "commencer",
+      "en": "to begin"
+    }
+  },
+  {
+    "id": 484,
+    "kanji": "白",
+    "kana": "しろ",
+    "romaji": "shiro",
+    "translations": {
+      "fr": "blanc (adj)",
+      "en": "White"
+    }
+  },
+  {
+    "id": 485,
+    "kanji": "九",
+    "kana": "きゅう ",
+    "romaji": "kyuu ",
+    "translations": {
+      "fr": "neuf (adj)",
+      "en": "Nine"
+    }
+  },
+  {
+    "id": 486,
+    "kanji": "下",
+    "kana": "した",
+    "romaji": "shita",
+    "translations": {
+      "fr": "en bas",
+      "en": "Below"
+    }
+  },
+  {
+    "id": 487,
+    "kanji": "痛い",
+    "kana": "いたい",
+    "romaji": "itai",
+    "translations": {
+      "fr": "douloureux",
+      "en": "painful"
+    }
+  },
+  {
+    "id": 488,
+    "kanji": "部屋",
+    "kana": "へや",
+    "romaji": "heya",
+    "translations": {
+      "fr": "chambre",
+      "en": "room"
+    }
+  },
+  {
+    "id": 489,
+    "kanji": "水曜日",
+    "kana": "すいようび",
+    "romaji": "suiyoubi",
+    "translations": {
+      "fr": "mercredi",
+      "en": "Wednesday"
+    }
+  },
+  {
+    "id": 490,
+    "kanji": "秋",
+    "kana": "あき",
+    "romaji": "aki",
+    "translations": {
+      "fr": "automne",
+      "en": "autumn"
+    }
+  },
+  {
+    "id": 491,
+    "kanji": "厚い",
+    "kana": "あつい",
+    "romaji": "atsui",
+    "translations": {
+      "fr": "épais",
+      "en": "kind, deep, thick"
+    }
+  },
+  {
+    "id": 492,
+    "kanji": "少し",
+    "kana": "すこし",
+    "romaji": "sukoshi",
+    "translations": {
+      "fr": "peu",
+      "en": "Few"
+    }
+  },
+  {
+    "id": 493,
+    "kanji": "",
+    "kana": "など",
+    "romaji": "nado",
+    "translations": {
+      "fr": "et cetera",
+      "en": "et cetera"
+    }
+  },
+  {
+    "id": 494,
+    "kanji": "野菜",
+    "kana": "やさい",
+    "romaji": "yasai",
+    "translations": {
+      "fr": "légume",
+      "en": "vegetable"
+    }
+  },
+  {
+    "id": 495,
+    "kanji": "何",
+    "kana": "なん",
+    "romaji": "nan",
+    "translations": {
+      "fr": "quoi",
+      "en": "what"
+    }
+  },
+  {
+    "id": 496,
+    "kanji": "",
+    "kana": "さあ",
+    "romaji": "saa",
+    "translations": {
+      "fr": "bien…",
+      "en": "well…"
+    }
+  },
+  {
+    "id": 497,
+    "kanji": "",
+    "kana": "よく",
+    "romaji": "yoku",
+    "translations": {
+      "fr": "souvent",
+      "en": "often, well"
+    }
+  },
+  {
+    "id": 498,
+    "kanji": "花瓶",
+    "kana": "かびん",
+    "romaji": "kabin",
+    "translations": {
+      "fr": "un vase",
+      "en": "a vase"
+    }
+  },
+  {
+    "id": 499,
+    "kanji": "貼る",
+    "kana": "はる",
+    "romaji": "haru",
+    "translations": {
+      "fr": "coller",
+      "en": "to stick"
+    }
+  },
+  {
+    "id": 500,
+    "kanji": "",
+    "kana": "では",
+    "romaji": "deha",
+    "translations": {
+      "fr": "avec cela",
+      "en": "with that..."
+    }
+  },
+  {
+    "id": 501,
+    "kanji": "お風呂",
+    "kana": "おふろ",
+    "romaji": "ofuro",
+    "translations": {
+      "fr": "bain",
+      "en": "Bath"
+    }
+  },
+  {
+    "id": 502,
+    "kanji": "疲れる",
+    "kana": "つかれる",
+    "romaji": "tsukareru",
+    "translations": {
+      "fr": "se fatiguer",
+      "en": "to get tired"
+    }
+  },
+  {
+    "id": 503,
+    "kanji": "悪い",
+    "kana": "わるい",
+    "romaji": "warui",
+    "translations": {
+      "fr": "mauvais",
+      "en": "bad"
+    }
+  },
+  {
+    "id": 504,
+    "kanji": "紙",
+    "kana": "かみ",
+    "romaji": "kami",
+    "translations": {
+      "fr": "papier",
+      "en": "paper"
+    }
+  },
+  {
+    "id": 505,
+    "kanji": "",
+    "kana": "おもしろい",
+    "romaji": "omoshiroi",
+    "translations": {
+      "fr": "intéressant",
+      "en": "Interesting"
+    }
+  },
+  {
+    "id": 506,
+    "kanji": "紅茶",
+    "kana": "こうちゃ",
+    "romaji": "kouchya",
+    "translations": {
+      "fr": "thé noir",
+      "en": "black tea"
+    }
+  },
+  {
+    "id": 507,
+    "kanji": "風邪",
+    "kana": "かぜ",
+    "romaji": "kaze",
+    "translations": {
+      "fr": "un rhume",
+      "en": "a cold"
+    }
+  },
+  {
+    "id": 508,
+    "kanji": "眼鏡",
+    "kana": "めがね",
+    "romaji": "megane",
+    "translations": {
+      "fr": "lunettes",
+      "en": "glasses"
+    }
+  },
+  {
+    "id": 509,
+    "kanji": "",
+    "kana": "そこ",
+    "romaji": "soko",
+    "translations": {
+      "fr": "cet endroit",
+      "en": "that place"
+    }
+  },
+  {
+    "id": 510,
+    "kanji": "好き",
+    "kana": "すき",
+    "romaji": "suki",
+    "translations": {
+      "fr": "aimable",
+      "en": "Likeable"
+    }
+  },
+  {
+    "id": 511,
+    "kanji": "男の子",
+    "kana": "おとこのこ",
+    "romaji": "otokonoko",
+    "translations": {
+      "fr": "garçon",
+      "en": "Boy"
+    }
+  },
+  {
+    "id": 512,
+    "kanji": "忙しい",
+    "kana": "いそがしい",
+    "romaji": "isogashii",
+    "translations": {
+      "fr": "occupé",
+      "en": "busy, irritated"
+    }
+  },
+  {
+    "id": 513,
+    "kanji": "売る",
+    "kana": "うる",
+    "romaji": "uru",
+    "translations": {
+      "fr": "vendre",
+      "en": "to sell"
+    }
+  },
+  {
+    "id": 514,
+    "kanji": "要る",
+    "kana": "いる",
+    "romaji": "iru",
+    "translations": {
+      "fr": "avoir besoin",
+      "en": "to need"
+    }
+  },
+  {
+    "id": 515,
+    "kanji": "豚肉",
+    "kana": "ぶたにく",
+    "romaji": "butaniku",
+    "translations": {
+      "fr": "porc",
+      "en": "pork"
+    }
+  },
+  {
+    "id": 516,
+    "kanji": "",
+    "kana": "コピーする",
+    "romaji": "kopiisuru",
+    "translations": {
+      "fr": "copier",
+      "en": "to copy"
+    }
+  },
+  {
+    "id": 517,
+    "kanji": "歩く",
+    "kana": "あるく",
+    "romaji": "aruku",
+    "translations": {
+      "fr": "marcher",
+      "en": "to walk"
+    }
+  },
+  {
+    "id": 518,
+    "kanji": "お茶",
+    "kana": "おちゃ",
+    "romaji": "ochya",
+    "translations": {
+      "fr": "thé vert",
+      "en": "green tea"
+    }
+  },
+  {
+    "id": 519,
+    "kanji": "荷物",
+    "kana": "にもつ",
+    "romaji": "nimotsu",
+    "translations": {
+      "fr": "bagages",
+      "en": "luggage"
+    }
+  },
+  {
+    "id": 520,
+    "kanji": "返す",
+    "kana": "かえす",
+    "romaji": "kaesu",
+    "translations": {
+      "fr": "retourner quelque chose",
+      "en": "to return something"
+    }
+  },
+  {
+    "id": 521,
+    "kanji": "脱ぐ",
+    "kana": "ぬぐ",
+    "romaji": "nugu",
+    "translations": {
+      "fr": "enlever",
+      "en": "to take off clothes"
+    }
+  },
+  {
+    "id": 522,
+    "kanji": "廊下",
+    "kana": "ろうか",
+    "romaji": "rouka",
+    "translations": {
+      "fr": "couloir",
+      "en": "corridor"
+    }
+  },
+  {
+    "id": 523,
+    "kanji": "鉛筆",
+    "kana": "えんぴつ",
+    "romaji": "enpitsu",
+    "translations": {
+      "fr": "crayon",
+      "en": "pencil"
+    }
+  },
+  {
+    "id": 524,
+    "kanji": "公園",
+    "kana": "こうえん",
+    "romaji": "kouen",
+    "translations": {
+      "fr": "parc",
+      "en": "Park"
+    }
+  },
+  {
+    "id": 525,
+    "kanji": "五",
+    "kana": "ご",
+    "romaji": "go",
+    "translations": {
+      "fr": "cinq",
+      "en": "Five"
+    }
+  },
+  {
+    "id": 526,
+    "kanji": "六日",
+    "kana": "むいか",
+    "romaji": "muika",
+    "translations": {
+      "fr": "6ème jour du mois",
+      "en": "six days, sixth day of the month"
+    }
+  },
+  {
+    "id": 527,
+    "kanji": "",
+    "kana": "ちょっと",
+    "romaji": "chyotto",
+    "translations": {
+      "fr": "un peu",
+      "en": "somewhat"
+    }
+  },
+  {
+    "id": 528,
+    "kanji": "映画",
+    "kana": "えいが",
+    "romaji": "eiga",
+    "translations": {
+      "fr": "film",
+      "en": "movie"
+    }
+  },
+  {
+    "id": 529,
+    "kanji": "お姉さん",
+    "kana": "おねえさん",
+    "romaji": "oneesan",
+    "translations": {
+      "fr": "sœur aînée",
+      "en": "(honorable) older sister"
+    }
+  },
+  {
+    "id": 530,
+    "kanji": "机",
+    "kana": "つくえ",
+    "romaji": "tsukue",
+    "translations": {
+      "fr": "bureau",
+      "en": "desk"
+    }
+  },
+  {
+    "id": 531,
+    "kanji": "",
+    "kana": "それでは",
+    "romaji": "soredeha",
+    "translations": {
+      "fr": "dans cette situation",
+      "en": "in that situation"
+    }
+  },
+  {
+    "id": 532,
+    "kanji": "",
+    "kana": "デパート",
+    "romaji": "depaato",
+    "translations": {
+      "fr": "grand magasin",
+      "en": "department store"
+    }
+  },
+  {
+    "id": 533,
+    "kanji": "絵",
+    "kana": "え",
+    "romaji": "e",
+    "translations": {
+      "fr": "image",
+      "en": "picture"
+    }
+  },
+  {
+    "id": 534,
+    "kanji": "暖かい",
+    "kana": "あたたかい",
+    "romaji": "atatakai",
+    "translations": {
+      "fr": "chaud",
+      "en": "warm"
+    }
+  },
+  {
+    "id": 535,
+    "kanji": "",
+    "kana": "バター",
+    "romaji": "bataa",
+    "translations": {
+      "fr": "beurre",
+      "en": "butter"
+    }
+  },
+  {
+    "id": 536,
+    "kanji": "締める",
+    "kana": "しめる",
+    "romaji": "shimeru",
+    "translations": {
+      "fr": "attacher",
+      "en": "to tie"
+    }
+  },
+  {
+    "id": 537,
+    "kanji": "休み",
+    "kana": "やすみ",
+    "romaji": "yasumi",
+    "translations": {
+      "fr": "repos",
+      "en": "rest,holiday"
+    }
+  },
+  {
+    "id": 538,
+    "kanji": "甘い",
+    "kana": "あまい",
+    "romaji": "amai",
+    "translations": {
+      "fr": "sucré",
+      "en": "sweet"
+    }
+  },
+  {
+    "id": 539,
+    "kanji": "台所",
+    "kana": "だいどころ",
+    "romaji": "daidokoro",
+    "translations": {
+      "fr": "cuisine",
+      "en": "kitchen"
+    }
+  },
+  {
+    "id": 540,
+    "kanji": "多い",
+    "kana": "おおい",
+    "romaji": "ooi",
+    "translations": {
+      "fr": "beaucoup",
+      "en": "many"
+    }
+  },
+  {
+    "id": 541,
+    "kanji": "曇る",
+    "kana": "くもる",
+    "romaji": "kumoru",
+    "translations": {
+      "fr": "devenir nuageux",
+      "en": "to become cloudy, to become dim"
+    }
+  },
+  {
+    "id": 542,
+    "kanji": "半分",
+    "kana": "はんぶん",
+    "romaji": "hanbun",
+    "translations": {
+      "fr": "demi-minute",
+      "en": "half minute"
+    }
+  },
+  {
+    "id": 543,
+    "kanji": "本棚",
+    "kana": "ほんだな",
+    "romaji": "hondana",
+    "translations": {
+      "fr": "étagères",
+      "en": "bookshelves"
+    }
+  },
+  {
+    "id": 544,
+    "kanji": "五つ",
+    "kana": "いつつ",
+    "romaji": "itsutsu",
+    "translations": {
+      "fr": "cinq",
+      "en": "five"
+    }
+  },
+  {
+    "id": 545,
+    "kanji": "",
+    "kana": "まずい",
+    "romaji": "mazui",
+    "translations": {
+      "fr": "mauvais",
+      "en": "unpleasant"
+    }
+  },
+  {
+    "id": 546,
+    "kanji": "",
+    "kana": "ある",
+    "romaji": "aru",
+    "translations": {
+      "fr": "être",
+      "en": "to be,to have (used for inanimate objects)"
+    }
+  },
+  {
+    "id": 547,
+    "kanji": "新しい",
+    "kana": "あたらしい",
+    "romaji": "atarashii",
+    "translations": {
+      "fr": "nouveau",
+      "en": "new"
+    }
+  },
+  {
+    "id": 548,
+    "kanji": "",
+    "kana": "いくつ",
+    "romaji": "ikutsu",
+    "translations": {
+      "fr": "combien",
+      "en": "how many?,how old?"
+    }
+  },
+  {
+    "id": 549,
+    "kanji": "雑誌",
+    "kana": "ざっし",
+    "romaji": "zasshi",
+    "translations": {
+      "fr": "magazine",
+      "en": "Magazine"
+    }
+  },
+  {
+    "id": 550,
+    "kanji": "",
+    "kana": "あなた",
+    "romaji": "anata",
+    "translations": {
+      "fr": "tu",
+      "en": "you"
+    }
+  },
+  {
+    "id": 551,
+    "kanji": "番号",
+    "kana": "ばんごう",
+    "romaji": "bangou",
+    "translations": {
+      "fr": "numéro",
+      "en": "number"
+    }
+  },
+  {
+    "id": 552,
+    "kanji": "千",
+    "kana": "せん",
+    "romaji": "sen",
+    "translations": {
+      "fr": "mille",
+      "en": "Thousand"
+    }
+  },
+  {
+    "id": 553,
+    "kanji": "昨夜",
+    "kana": "ゆうべ",
+    "romaji": "yuube",
+    "translations": {
+      "fr": "hier soir",
+      "en": "last night"
+    }
+  },
+  {
+    "id": 554,
+    "kanji": "九日",
+    "kana": "ここのか",
+    "romaji": "kokonoka",
+    "translations": {
+      "fr": "9ème jour du mois",
+      "en": "nine days, ninth day"
+    }
+  },
+  {
+    "id": 555,
+    "kanji": "動物",
+    "kana": "どうぶつ",
+    "romaji": "doubutsu",
+    "translations": {
+      "fr": "animal",
+      "en": "animal"
+    }
+  },
+  {
+    "id": 556,
+    "kanji": "",
+    "kana": "コート",
+    "romaji": "kooto",
+    "translations": {
+      "fr": "manteau",
+      "en": "coat, tennis court"
+    }
+  },
+  {
+    "id": 557,
+    "kanji": "",
+    "kana": "する",
+    "romaji": "suru",
+    "translations": {
+      "fr": "faire",
+      "en": "to do"
+    }
+  },
+  {
+    "id": 558,
+    "kanji": "兄弟",
+    "kana": "きょうだい",
+    "romaji": "kyoudai",
+    "translations": {
+      "fr": "frères et sœurs",
+      "en": "(humble) siblings"
+    }
+  },
+  {
+    "id": 559,
+    "kanji": "北",
+    "kana": "きた",
+    "romaji": "kita",
+    "translations": {
+      "fr": "nord",
+      "en": "North"
+    }
+  },
+  {
+    "id": 560,
+    "kanji": "問題",
+    "kana": "もんだい",
+    "romaji": "mondai",
+    "translations": {
+      "fr": "problème",
+      "en": "problem"
+    }
+  },
+  {
+    "id": 561,
+    "kanji": "",
+    "kana": "ベッド",
+    "romaji": "beddo",
+    "translations": {
+      "fr": "lit",
+      "en": "bed"
+    }
+  },
+  {
+    "id": 562,
+    "kanji": "弱い",
+    "kana": "よわい",
+    "romaji": "yowai",
+    "translations": {
+      "fr": "faible",
+      "en": "weak"
+    }
+  },
+  {
+    "id": 563,
+    "kanji": "",
+    "kana": "いちばん",
+    "romaji": "ichiban",
+    "translations": {
+      "fr": "meilleur",
+      "en": "best, first"
+    }
+  },
+  {
+    "id": 564,
+    "kanji": "分かる",
+    "kana": "わかる",
+    "romaji": "wakaru",
+    "translations": {
+      "fr": "être compris",
+      "en": "to be understood"
+    }
+  },
+  {
+    "id": 565,
+    "kanji": "住む",
+    "kana": "すむ",
+    "romaji": "sumu",
+    "translations": {
+      "fr": "vivre",
+      "en": "to live in"
+    }
+  },
+  {
+    "id": 566,
+    "kanji": "仕事",
+    "kana": "しごと",
+    "romaji": "shigoto",
+    "translations": {
+      "fr": "travail",
+      "en": "Job"
+    }
+  },
+  {
+    "id": 567,
+    "kanji": "兄",
+    "kana": "あに",
+    "romaji": "ani",
+    "translations": {
+      "fr": "frère aîné",
+      "en": "(humble) older brother"
+    }
+  },
+  {
+    "id": 568,
+    "kanji": "重い",
+    "kana": "おもい",
+    "romaji": "omoi",
+    "translations": {
+      "fr": "lourd",
+      "en": "Heavy"
+    }
+  },
+  {
+    "id": 569,
+    "kanji": "",
+    "kana": "つまらない",
+    "romaji": "tsumaranai",
+    "translations": {
+      "fr": "ennuyeux",
+      "en": "boring"
+    }
+  },
+  {
+    "id": 570,
+    "kanji": "来月",
+    "kana": "らいげつ",
+    "romaji": "raigetsu",
+    "translations": {
+      "fr": "le mois prochain",
+      "en": "next month"
+    }
+  },
+  {
+    "id": 571,
+    "kanji": "",
+    "kana": "それ",
+    "romaji": "sore",
+    "translations": {
+      "fr": "cela",
+      "en": "that"
+    }
+  },
+  {
+    "id": 572,
+    "kanji": "お菓子",
+    "kana": "おかし",
+    "romaji": "okashi",
+    "translations": {
+      "fr": "bonbons",
+      "en": "sweets, candy"
+    }
+  },
+  {
+    "id": 573,
+    "kanji": "使う",
+    "kana": "つかう",
+    "romaji": "tsukau",
+    "translations": {
+      "fr": "utiliser",
+      "en": "to use"
+    }
+  },
+  {
+    "id": 574,
+    "kanji": "一",
+    "kana": "いち",
+    "romaji": "ichi",
+    "translations": {
+      "fr": "un",
+      "en": "one"
+    }
+  },
+  {
+    "id": 575,
+    "kanji": "",
+    "kana": "あの",
+    "romaji": "ano",
+    "translations": {
+      "fr": "euh…",
+      "en": "um..."
+    }
+  },
+  {
+    "id": 576,
+    "kanji": "丸い/円い",
+    "kana": "まるい",
+    "romaji": "marui",
+    "translations": {
+      "fr": "rond",
+      "en": "round,circular"
+    }
+  },
+  {
+    "id": 577,
+    "kanji": "危ない",
+    "kana": "あぶない",
+    "romaji": "abunai",
+    "translations": {
+      "fr": "dangereux",
+      "en": "dangerous"
+    }
+  },
+  {
+    "id": 578,
+    "kanji": "口",
+    "kana": "くち",
+    "romaji": "kuchi",
+    "translations": {
+      "fr": "bouche",
+      "en": "mouth, opening"
+    }
+  },
+  {
+    "id": 579,
+    "kanji": "答える",
+    "kana": "こたえる",
+    "romaji": "kotaeru",
+    "translations": {
+      "fr": "répondre",
+      "en": "to answer"
+    }
+  },
+  {
+    "id": 580,
+    "kanji": "万年筆",
+    "kana": "まんねんひつ",
+    "romaji": "mannenhitsu",
+    "translations": {
+      "fr": "stylo-plume",
+      "en": "fountain pen"
+    }
+  },
+  {
+    "id": 581,
+    "kanji": "辺",
+    "kana": "へん",
+    "romaji": "hen",
+    "translations": {
+      "fr": "zone",
+      "en": "area"
+    }
+  },
+  {
+    "id": 582,
+    "kanji": "今年",
+    "kana": "ことし",
+    "romaji": "kotoshi",
+    "translations": {
+      "fr": "cette année",
+      "en": "this year"
+    }
+  },
+  {
+    "id": 583,
+    "kanji": "十日",
+    "kana": "とおか",
+    "romaji": "tooka",
+    "translations": {
+      "fr": "10ème jour du mois",
+      "en": "ten days,the tenth day"
+    }
+  },
+  {
+    "id": 584,
+    "kanji": "",
+    "kana": "コップ",
+    "romaji": "koppu",
+    "translations": {
+      "fr": "un verre",
+      "en": "a glass"
+    }
+  },
+  {
+    "id": 585,
+    "kanji": "毎週",
+    "kana": "まいしゅう",
+    "romaji": "maishyuu",
+    "translations": {
+      "fr": "chaque semaine",
+      "en": "every week"
+    }
+  },
+  {
+    "id": 586,
+    "kanji": "赤",
+    "kana": "あか",
+    "romaji": "aka",
+    "translations": {
+      "fr": "rouge",
+      "en": "red"
+    }
+  },
+  {
+    "id": 587,
+    "kanji": "",
+    "kana": "たくさん",
+    "romaji": "takusan",
+    "translations": {
+      "fr": "beaucoup",
+      "en": "many"
+    }
+  },
+  {
+    "id": 588,
+    "kanji": "お皿",
+    "kana": "おさら",
+    "romaji": "osara",
+    "translations": {
+      "fr": "assiette",
+      "en": "plate, dish"
+    }
+  },
+  {
+    "id": 589,
+    "kanji": "大勢",
+    "kana": "おおぜい",
+    "romaji": "oozei",
+    "translations": {
+      "fr": "grand nombre de personnes",
+      "en": "great number of people"
+    }
+  },
+  {
+    "id": 590,
+    "kanji": "鳴く",
+    "kana": "なく",
+    "romaji": "naku",
+    "translations": {
+      "fr": "bruit d'animal",
+      "en": "animal noise. to chirp, roar or croak etc."
+    }
+  },
+  {
+    "id": 591,
+    "kanji": "死ぬ",
+    "kana": "しぬ",
+    "romaji": "shinu",
+    "translations": {
+      "fr": "mourir",
+      "en": "to die"
+    }
+  },
+  {
+    "id": 592,
+    "kanji": "一日",
+    "kana": "いちにち",
+    "romaji": "ichinichi",
+    "translations": {
+      "fr": "1er du mois",
+      "en": "first of the month"
+    }
+  },
+  {
+    "id": 593,
+    "kanji": "先月",
+    "kana": "せんげつ",
+    "romaji": "sengetsu",
+    "translations": {
+      "fr": "le mois dernier",
+      "en": "last month"
+    }
+  },
+  {
+    "id": 594,
+    "kanji": "交番",
+    "kana": "こうばん",
+    "romaji": "kouban",
+    "translations": {
+      "fr": "poste de police",
+      "en": "police box"
+    }
+  },
+  {
+    "id": 595,
+    "kanji": "",
+    "kana": "カレンダー",
+    "romaji": "karendaa",
+    "translations": {
+      "fr": "calendrier",
+      "en": "calendar"
+    }
+  },
+  {
+    "id": 596,
+    "kanji": "初めて",
+    "kana": "はじめて",
+    "romaji": "hajimete",
+    "translations": {
+      "fr": "pour la première fois",
+      "en": "for the first time"
+    }
+  },
+  {
+    "id": 597,
+    "kanji": "山",
+    "kana": "やま",
+    "romaji": "yama",
+    "translations": {
+      "fr": "montagne",
+      "en": "mountain"
+    }
+  },
+  {
+    "id": 598,
+    "kanji": "車",
+    "kana": "くるま",
+    "romaji": "kuruma",
+    "translations": {
+      "fr": "voiture",
+      "en": "car, vehicle"
+    }
+  },
+  {
+    "id": 599,
+    "kanji": "",
+    "kana": "ポスト",
+    "romaji": "posuto",
+    "translations": {
+      "fr": "poste",
+      "en": "post"
+    }
+  },
+  {
+    "id": 600,
+    "kanji": "吸う",
+    "kana": "すう",
+    "romaji": "suu",
+    "translations": {
+      "fr": "fumer",
+      "en": "to smoke, to suck"
+    }
+  },
+  {
+    "id": 601,
+    "kanji": "病気",
+    "kana": "びょうき",
+    "romaji": "byouki",
+    "translations": {
+      "fr": "maladie",
+      "en": "illness"
+    }
+  },
+  {
+    "id": 602,
+    "kanji": "お弁当",
+    "kana": "おべんとう",
+    "romaji": "obentou",
+    "translations": {
+      "fr": "bento",
+      "en": "boxed lunch"
+    }
+  },
+  {
+    "id": 603,
+    "kanji": "聞く",
+    "kana": "きく",
+    "romaji": "kiku",
+    "translations": {
+      "fr": "écouter",
+      "en": "to hear, to listen to, to ask"
+    }
+  },
+  {
+    "id": 604,
+    "kanji": "",
+    "kana": "ポケット",
+    "romaji": "poketto",
+    "translations": {
+      "fr": "poche",
+      "en": "pocket"
+    }
+  },
+  {
+    "id": 605,
+    "kanji": "七",
+    "kana": "しち ",
+    "romaji": "shichi ",
+    "translations": {
+      "fr": "sept (adj)",
+      "en": "Seven"
+    }
+  },
+  {
+    "id": 606,
+    "kanji": "右",
+    "kana": "みぎ",
+    "romaji": "migi",
+    "translations": {
+      "fr": "côté droit",
+      "en": "right side"
+    }
+  },
+  {
+    "id": 607,
+    "kanji": "弟",
+    "kana": "おとうと",
+    "romaji": "otouto",
+    "translations": {
+      "fr": "frère cadet",
+      "en": "younger brother"
+    }
+  },
+  {
+    "id": 608,
+    "kanji": "歯",
+    "kana": "は",
+    "romaji": "ha",
+    "translations": {
+      "fr": "dent",
+      "en": "tooth"
+    }
+  },
+  {
+    "id": 609,
+    "kanji": "",
+    "kana": "たぶん",
+    "romaji": "tabun",
+    "translations": {
+      "fr": "probablement",
+      "en": "probably"
+    }
+  },
+  {
+    "id": 610,
+    "kanji": "",
+    "kana": "まっすぐ",
+    "romaji": "massugu",
+    "translations": {
+      "fr": "tout droit",
+      "en": "straight ahead,direct"
+    }
+  },
+  {
+    "id": 611,
+    "kanji": "飛行機",
+    "kana": "ひこうき",
+    "romaji": "hikouki",
+    "translations": {
+      "fr": "avion",
+      "en": "aeroplane"
+    }
+  },
+  {
+    "id": 612,
+    "kanji": "南",
+    "kana": "みなみ",
+    "romaji": "minami",
+    "translations": {
+      "fr": "sud",
+      "en": "south"
+    }
+  },
+  {
+    "id": 613,
+    "kanji": "",
+    "kana": "いくら",
+    "romaji": "ikura",
+    "translations": {
+      "fr": "combien",
+      "en": "how much?"
+    }
+  },
+  {
+    "id": 614,
+    "kanji": "",
+    "kana": "ください",
+    "romaji": "kudasai",
+    "translations": {
+      "fr": "s'il vous plaît",
+      "en": "Please"
+    }
+  },
+  {
+    "id": 615,
+    "kanji": "行く",
+    "kana": "いく",
+    "romaji": "iku",
+    "translations": {
+      "fr": "aller",
+      "en": "to go"
+    }
+  },
+  {
+    "id": 616,
+    "kanji": "川/河",
+    "kana": "かわ",
+    "romaji": "kawa",
+    "translations": {
+      "fr": "rivière",
+      "en": "River"
+    }
+  },
+  {
+    "id": 617,
+    "kanji": "薄い",
+    "kana": "うすい",
+    "romaji": "usui",
+    "translations": {
+      "fr": "fin",
+      "en": "thin,weak"
+    }
+  },
+  {
+    "id": 618,
+    "kanji": "登る",
+    "kana": "のぼる",
+    "romaji": "noboru",
+    "translations": {
+      "fr": "grimper",
+      "en": "to climb"
+    }
+  },
+  {
+    "id": 619,
+    "kanji": "結構",
+    "kana": "けっこう",
+    "romaji": "kekkou",
+    "translations": {
+      "fr": "suffisant",
+      "en": "splendid, enough"
+    }
+  },
+  {
+    "id": 620,
+    "kanji": "教室",
+    "kana": "きょうしつ",
+    "romaji": "kyoushitsu",
+    "translations": {
+      "fr": "classe",
+      "en": "Classroom"
+    }
+  },
+  {
+    "id": 621,
+    "kanji": "小さい",
+    "kana": "ちいさい",
+    "romaji": "chiisai",
+    "translations": {
+      "fr": "petit",
+      "en": "little"
+    }
+  },
+  {
+    "id": 622,
+    "kanji": "辞書",
+    "kana": "じしょ",
+    "romaji": "jishyo",
+    "translations": {
+      "fr": "dictionnaire",
+      "en": "Dictionary"
+    }
+  },
+  {
+    "id": 623,
+    "kanji": "子供",
+    "kana": "こども",
+    "romaji": "kodomo",
+    "translations": {
+      "fr": "enfant",
+      "en": "Child"
+    }
+  },
+  {
+    "id": 624,
+    "kanji": "",
+    "kana": "たばこ",
+    "romaji": "tabako",
+    "translations": {
+      "fr": "tabac",
+      "en": "tobacco,cigarettes"
+    }
+  },
+  {
+    "id": 625,
+    "kanji": "会社",
+    "kana": "かいしゃ",
+    "romaji": "kaishya",
+    "translations": {
+      "fr": "entreprise",
+      "en": "Company"
+    }
+  },
+  {
+    "id": 626,
+    "kanji": "晴れる",
+    "kana": "はれる",
+    "romaji": "hareru",
+    "translations": {
+      "fr": "être ensoleillé",
+      "en": "to be sunny"
+    }
+  },
+  {
+    "id": 627,
+    "kanji": "肉",
+    "kana": "にく",
+    "romaji": "niku",
+    "translations": {
+      "fr": "viande",
+      "en": "meat"
+    }
+  },
+  {
+    "id": 628,
+    "kanji": "汚い",
+    "kana": "きたない",
+    "romaji": "kitanai",
+    "translations": {
+      "fr": "sale",
+      "en": "Dirty"
+    }
+  },
+  {
+    "id": 629,
+    "kanji": "忘れる",
+    "kana": "わすれる",
+    "romaji": "wasureru",
+    "translations": {
+      "fr": "oublier",
+      "en": "to forget"
+    }
+  },
+  {
+    "id": 630,
+    "kanji": "難しい",
+    "kana": "むずかしい",
+    "romaji": "muzukashii",
+    "translations": {
+      "fr": "difficile",
+      "en": "difficult"
+    }
+  },
+  {
+    "id": 631,
+    "kanji": "引く",
+    "kana": "ひく",
+    "romaji": "hiku",
+    "translations": {
+      "fr": "tirer",
+      "en": "to pull"
+    }
+  },
+  {
+    "id": 632,
+    "kanji": "外",
+    "kana": "そと",
+    "romaji": "soto",
+    "translations": {
+      "fr": "dehors",
+      "en": "Outside"
+    }
+  },
+  {
+    "id": 633,
+    "kanji": "両親",
+    "kana": "りょうしん",
+    "romaji": "ryoushin",
+    "translations": {
+      "fr": "parents",
+      "en": "both parents"
+    }
+  },
+  {
+    "id": 634,
+    "kanji": "背",
+    "kana": "せ",
+    "romaji": "se",
+    "translations": {
+      "fr": "taille",
+      "en": "height, stature"
+    }
+  },
+  {
+    "id": 635,
+    "kanji": "勤める",
+    "kana": "つとめる",
+    "romaji": "tsutomeru",
+    "translations": {
+      "fr": "travailler pour quelqu'un",
+      "en": "to work for someone"
+    }
+  },
+  {
+    "id": 636,
+    "kanji": "服",
+    "kana": "ふく",
+    "romaji": "fuku",
+    "translations": {
+      "fr": "vêtements",
+      "en": "clothes"
+    }
+  },
+  {
+    "id": 637,
+    "kanji": "二十日",
+    "kana": "はつか",
+    "romaji": "hatsuka",
+    "translations": {
+      "fr": "20ème jour du mois",
+      "en": "twenty days,twentieth"
+    }
+  },
+  {
+    "id": 638,
+    "kanji": "寒い",
+    "kana": "さむい",
+    "romaji": "samui",
+    "translations": {
+      "fr": "froid",
+      "en": "Cold"
+    }
+  },
+  {
+    "id": 639,
+    "kanji": "字引",
+    "kana": "じびき",
+    "romaji": "jibiki",
+    "translations": {
+      "fr": "dictionnaire",
+      "en": "Dictionary"
+    }
+  },
+  {
+    "id": 640,
+    "kanji": "雨",
+    "kana": "あめ",
+    "romaji": "ame",
+    "translations": {
+      "fr": "pluie",
+      "en": "rain"
+    }
+  },
+  {
+    "id": 641,
+    "kanji": "晩御飯",
+    "kana": "ばんごはん",
+    "romaji": "bangohan",
+    "translations": {
+      "fr": "repas du soir",
+      "en": "evening meal"
+    }
+  },
+  {
+    "id": 642,
+    "kanji": "話す",
+    "kana": "はなす",
+    "romaji": "hanasu",
+    "translations": {
+      "fr": "parler",
+      "en": "to speak"
+    }
+  },
+  {
+    "id": 643,
+    "kanji": "",
+    "kana": "ふろ",
+    "romaji": "furo",
+    "translations": {
+      "fr": "bain",
+      "en": "bath"
+    }
+  },
+  {
+    "id": 644,
+    "kanji": "生徒",
+    "kana": "せいと",
+    "romaji": "seito",
+    "translations": {
+      "fr": "élève",
+      "en": "Pupil"
+    }
+  },
+  {
+    "id": 645,
+    "kanji": "雪",
+    "kana": "ゆき",
+    "romaji": "yuki",
+    "translations": {
+      "fr": "neige",
+      "en": "snow"
+    }
+  },
+  {
+    "id": 646,
+    "kanji": "伯父/叔父",
+    "kana": "おじさん",
+    "romaji": "ojisan",
+    "translations": {
+      "fr": "oncle",
+      "en": "uncle, middle aged gentleman"
+    }
+  },
+  {
+    "id": 647,
+    "kanji": "靴下",
+    "kana": "くつした",
+    "romaji": "kutsushita",
+    "translations": {
+      "fr": "chaussettes",
+      "en": "Socks"
+    }
+  },
+  {
+    "id": 648,
+    "kanji": "勉強",
+    "kana": "べんきょうする",
+    "romaji": "benkyousuru",
+    "translations": {
+      "fr": "étudier",
+      "en": "to study"
+    }
+  },
+  {
+    "id": 649,
+    "kanji": "旅行",
+    "kana": "りょこう",
+    "romaji": "ryokou",
+    "translations": {
+      "fr": "voyage",
+      "en": "travel"
+    }
+  },
+  {
+    "id": 650,
+    "kanji": "",
+    "kana": "すぐに",
+    "romaji": "suguni",
+    "translations": {
+      "fr": "instantanément",
+      "en": "Instantly"
+    }
+  },
+  {
+    "id": 651,
+    "kanji": "並べる",
+    "kana": "ならべる",
+    "romaji": "naraberu",
+    "translations": {
+      "fr": "aligner",
+      "en": "to line up,to set up"
+    }
+  },
+  {
+    "id": 652,
+    "kanji": "家族",
+    "kana": "かぞく",
+    "romaji": "kazoku",
+    "translations": {
+      "fr": "famille",
+      "en": "Family"
+    }
+  },
+  {
+    "id": 653,
+    "kanji": "隣",
+    "kana": "となり",
+    "romaji": "tonari",
+    "translations": {
+      "fr": "à côté de",
+      "en": "next door to"
+    }
+  },
+  {
+    "id": 654,
+    "kanji": "",
+    "kana": "せっけん",
+    "romaji": "sekken",
+    "translations": {
+      "fr": "économie",
+      "en": "Economy"
+    }
+  },
+  {
+    "id": 655,
+    "kanji": "止まる",
+    "kana": "とまる",
+    "romaji": "tomaru",
+    "translations": {
+      "fr": "s'arrêter",
+      "en": "to come to a halt"
+    }
+  },
+  {
+    "id": 656,
+    "kanji": "便利",
+    "kana": "べんり",
+    "romaji": "benri",
+    "translations": {
+      "fr": "utile",
+      "en": "useful, convenient"
+    }
+  },
+  {
+    "id": 657,
+    "kanji": "冷蔵庫",
+    "kana": "れいぞうこ",
+    "romaji": "reizouko",
+    "translations": {
+      "fr": "réfrigérateur",
+      "en": "refrigerator"
+    }
+  },
+  {
+    "id": 658,
+    "kanji": "向こう",
+    "kana": "むこう",
+    "romaji": "mukou",
+    "translations": {
+      "fr": "par là-bas",
+      "en": "over there"
+    }
+  },
+  {
+    "id": 659,
+    "kanji": "",
+    "kana": "そちら",
+    "romaji": "sochira",
+    "translations": {
+      "fr": "par là-bas",
+      "en": "over there"
+    }
+  },
+  {
+    "id": 660,
+    "kanji": "質問",
+    "kana": "しつもん",
+    "romaji": "shitsumon",
+    "translations": {
+      "fr": "question",
+      "en": "Question"
+    }
+  },
+  {
+    "id": 661,
+    "kanji": "易しい",
+    "kana": "やさしい",
+    "romaji": "yasashii",
+    "translations": {
+      "fr": "facile",
+      "en": "easy, simple"
+    }
+  },
+  {
+    "id": 662,
+    "kanji": "呼ぶ",
+    "kana": "よぶ",
+    "romaji": "yobu",
+    "translations": {
+      "fr": "appeler",
+      "en": "to call out,to invite"
+    }
+  },
+  {
+    "id": 663,
+    "kanji": "速い",
+    "kana": "はやい",
+    "romaji": "hayai",
+    "translations": {
+      "fr": "rapide",
+      "en": "quick"
+    }
+  },
+  {
+    "id": 664,
+    "kanji": "",
+    "kana": "パン",
+    "romaji": "pan",
+    "translations": {
+      "fr": "pain",
+      "en": "bread"
+    }
+  },
+  {
+    "id": 665,
+    "kanji": "上",
+    "kana": "うえ",
+    "romaji": "ue",
+    "translations": {
+      "fr": "sur",
+      "en": "on top of"
+    }
+  },
+  {
+    "id": 666,
+    "kanji": "八つ",
+    "kana": "やっつ",
+    "romaji": "yattsu",
+    "translations": {
+      "fr": "huit",
+      "en": "eight"
+    }
+  },
+  {
+    "id": 667,
+    "kanji": "二",
+    "kana": "に",
+    "romaji": "ni",
+    "translations": {
+      "fr": "deux",
+      "en": "two"
+    }
+  },
+  {
+    "id": 668,
+    "kanji": "",
+    "kana": "ボタン",
+    "romaji": "botan",
+    "translations": {
+      "fr": "bouton",
+      "en": "button"
+    }
+  },
+  {
+    "id": 669,
+    "kanji": "",
+    "kana": "おなか",
+    "romaji": "onaka",
+    "translations": {
+      "fr": "estomac",
+      "en": "stomach"
+    }
+  }
+]
 }

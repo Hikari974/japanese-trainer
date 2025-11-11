@@ -1,15 +1,20 @@
 import { useState, useEffect } from 'react';
-import { YStack, XStack, Text, Slider, ScrollView } from 'tamagui';
+import { YStack, XStack, Text, Slider, ScrollView, Button, Sheet } from 'tamagui';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AppHeader } from './components/AppHeader';
 import { usePreferences } from './hooks/usePreferences';
+import { useStatistics } from './hooks/useStatistics';
 
 export default function SettingsScreen() {
   const insets = useSafeAreaInsets();
   const { preferences, isLoading, updatePreferences } = usePreferences();
+  const { resetStats } = useStatistics();
 
   // Local state for slider (5-30, step 5)
   const [wordsPerSession, setWordsPerSession] = useState(10);
+
+  // Confirmation dialog state
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 
   // Initialize slider value from preferences
   useEffect(() => {
@@ -28,6 +33,12 @@ export default function SettingsScreen() {
     const newValue = value[0];
     setWordsPerSession(newValue);
     updatePreferences({ wordsPerSession: newValue });
+  };
+
+  // Handle reset statistics confirmation
+  const handleResetConfirm = async () => {
+    await resetStats();
+    setIsConfirmOpen(false);
   };
 
   if (isLoading) {
@@ -182,8 +193,111 @@ export default function SettingsScreen() {
               </XStack>
             </YStack>
           </YStack>
+
+          {/* Section: Data Management */}
+          <YStack gap="$3">
+            <Text fontSize={18} fontWeight="600" color="$color">
+              {preferences?.translationLanguage === 'fr' ? 'Gestion des données' : 'Data management'}
+            </Text>
+
+            {/* Reset statistics button */}
+            <YStack
+              backgroundColor="$backgroundHover"
+              padding="$3"
+              borderRadius="$3"
+              gap="$2"
+            >
+              <Text fontSize={15} color="$color" marginBottom="$1">
+                {preferences?.translationLanguage === 'fr'
+                  ? 'Réinitialiser les statistiques'
+                  : 'Reset statistics'}
+              </Text>
+
+              <Text fontSize={13} color="$gray11" marginBottom="$2">
+                {preferences?.translationLanguage === 'fr'
+                  ? 'Efface tous vos points et historique d\'entraînement. Cette action est irréversible.'
+                  : 'Delete all your points and training history. This action cannot be undone.'}
+              </Text>
+
+              <Button
+                backgroundColor="$red10"
+                color="white"
+                pressStyle={{ opacity: 0.8, scale: 0.98 }}
+                animation="quick"
+                onPress={() => setIsConfirmOpen(true)}
+              >
+                <Text fontSize={14} fontWeight="600" color="white">
+                  {preferences?.translationLanguage === 'fr' ? 'Réinitialiser' : 'Reset'}
+                </Text>
+              </Button>
+            </YStack>
+          </YStack>
         </YStack>
       </ScrollView>
+
+      {/* Confirmation Dialog */}
+      <Sheet
+        modal
+        open={isConfirmOpen}
+        onOpenChange={setIsConfirmOpen}
+        snapPoints={[40]}
+        dismissOnSnapToBottom
+        animation="quick"
+      >
+        <Sheet.Overlay
+          backgroundColor="rgba(0, 0, 0, 0.6)"
+          animation="quick"
+          enterStyle={{ opacity: 0 }}
+          exitStyle={{ opacity: 0 }}
+        />
+
+        <Sheet.Frame
+          backgroundColor="$background"
+          borderTopLeftRadius="$6"
+          borderTopRightRadius="$6"
+          padding="$6"
+        >
+          <YStack gap="$4">
+            <Text fontSize={20} fontWeight="700" textAlign="center">
+              {preferences?.translationLanguage === 'fr'
+                ? 'Confirmer la réinitialisation'
+                : 'Confirm reset'}
+            </Text>
+
+            <Text fontSize={16} color="$gray11" textAlign="center">
+              {preferences?.translationLanguage === 'fr'
+                ? 'Êtes-vous sûr de vouloir effacer toutes vos statistiques ? Cette action est irréversible.'
+                : 'Are you sure you want to delete all your statistics? This action cannot be undone.'}
+            </Text>
+
+            <XStack gap="$3" marginTop="$2">
+              <Button
+                flex={1}
+                backgroundColor="$gray5"
+                pressStyle={{ opacity: 0.8, scale: 0.98 }}
+                animation="quick"
+                onPress={() => setIsConfirmOpen(false)}
+              >
+                <Text fontSize={16} fontWeight="600" color="$gray12">
+                  {preferences?.translationLanguage === 'fr' ? 'Annuler' : 'Cancel'}
+                </Text>
+              </Button>
+
+              <Button
+                flex={1}
+                backgroundColor="$red10"
+                pressStyle={{ opacity: 0.8, scale: 0.98 }}
+                animation="quick"
+                onPress={handleResetConfirm}
+              >
+                <Text fontSize={16} fontWeight="600" color="white">
+                  {preferences?.translationLanguage === 'fr' ? 'Confirmer' : 'Confirm'}
+                </Text>
+              </Button>
+            </XStack>
+          </YStack>
+        </Sheet.Frame>
+      </Sheet>
     </YStack>
   );
 }

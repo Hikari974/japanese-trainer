@@ -147,6 +147,7 @@ function toDisplayWord(
   switch (displayMode) {
     case 'kana-only':
       return {
+        id: word.id,
         kanji: '',
         kana: word.kana,
         romaji: word.romaji,
@@ -157,6 +158,7 @@ function toDisplayWord(
 
     case 'kanji-with-furigana':
       return {
+        id: word.id,
         kanji: word.kanji || word.kana,
         kana: word.kana,
         romaji: word.romaji,
@@ -167,6 +169,7 @@ function toDisplayWord(
 
     case 'kanji-without-furigana':
       return {
+        id: word.id,
         kanji: word.kanji || word.kana,
         kana: word.kana,
         romaji: word.romaji,

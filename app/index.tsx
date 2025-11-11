@@ -8,6 +8,16 @@ import { usePreferences } from './hooks/usePreferences';
 
 const levels: Level[] = ['Kana', 'N5', 'N4', 'N3', 'N2', 'N1'];
 
+// Level colors matching LevelButton
+const levelColors: Record<Level, string> = {
+  Kana: '$levelKana',
+  N5: '$levelN5',
+  N4: '$levelN4',
+  N3: '$levelN3',
+  N2: '$levelN2',
+  N1: '$levelN1',
+};
+
 export default function HomeScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
@@ -117,7 +127,7 @@ export default function HomeScreen() {
       <YStack paddingHorizontal="$4" paddingBottom={insets.bottom + 16}>
         <Button
           size="$5"
-          backgroundColor={selectedLevel ? '$levelN3' : '$backgroundHover'}
+          backgroundColor={selectedLevel ? levelColors[selectedLevel] : '$backgroundHover'}
           disabled={!selectedLevel}
           onPress={handleStartSession}
           pressStyle={{ opacity: 0.8, scale: 0.98 }}

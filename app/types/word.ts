@@ -47,6 +47,7 @@ export type DisplayMode =
  * Word prepared for display in training session
  */
 export interface DisplayWord {
+  id: number;             // Unique word ID (from WordEntry)
   kanji: string;          // Kanji to display (empty if kana-only mode)
   kana: string;           // Kana reading
   romaji: string;         // For validation

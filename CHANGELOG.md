@@ -59,6 +59,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - "Next →" button for manual progression control
   - Instant modal appearance (animations disabled for maximum responsiveness)
   - Training page: 329 → 410 lines
+- **Complete Statistics System with AsyncStorage** (Session 4)
+  - Service layer `app/services/statistics.ts` for statistics tracking (178 lines)
+  - React hook `app/hooks/useStatistics.ts` for UI integration (53 lines)
+  - TypeScript interfaces in `app/types/statistics.ts` (52 lines)
+  - Composite keys `"${wordId}-${level}-${difficulty}"` for per-word-level-difficulty tracking
+  - Simplified scoring: 1 point per perfect attempt (correct + 1 reading + translation not viewed)
+  - Global statistics aggregated from word stats (single source of truth)
+  - Statistics by level (Kana, N5, N4, N3, N2, N1)
+  - Offline-first: 100% AsyncStorage local persistence
+  - Comprehensive tests: 49 tests (35 service + 14 hook), 94-100% coverage
+- **MVP Statistics Page** (Session 4)
+  - Complete rewrite of `app/stats.tsx` (26 → 187 lines)
+  - Global statistics section: total points, attempts, success rate, perfect count, unique words
+  - Level breakdown section: 6 cards with colored indicators, points and attempts per level
+  - Success rate color-coded: green (≥70%) or orange
+  - Loading spinner and empty state handling
+  - Clean MVP design without charts (per user preference)
+- **Reset Statistics with Confirmation** (Session 4)
+  - Settings page extended with "Data Management" section (114 lines added)
+  - Red reset button with warning icon
+  - Tamagui Sheet confirmation modal with Cancel/Confirm buttons
+  - Warning text: "irréversible / cannot be undone"
+  - Bilingual support (FR/EN) based on user preferences
+  - Safety: backdrop does not dismiss, explicit choice required
+- **Statistics Integration in Training Flow** (Session 4)
+  - Training page extended to record statistics (48 lines added)
+  - Automatic recording after each validation
+  - Modal feedback shows "+1" when point earned
+  - Translation always visible in modal (success and failure)
+  - State capture timing fixed to prevent race conditions
 
 ### Fixed
 - Memory leak: setTimeout cleanup on component unmount (training.tsx)
@@ -67,12 +97,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Red flash on modal close** (Session 3): Fixed modalColor state persistence
 - **Button delay/double-click issue** (Session 3): Disabled animations, immediate state resets
 - **modalColor null regression** (Session 3): Removed problematic setTimeout
+- **Start button color bug** (Session 4): Fixed hardcoded `$levelN3`, now uses dynamic `levelColors[selectedLevel]`
 
 ### Changed
 - Home screen (`app/index.tsx`) now loads and saves user preferences automatically
 - "Start Session" button now saves preferences before navigation (async operation)
 - Test suite expanded from 15 to 36 tests (all passing)
 - Training page validation changed from auto-progression to manual modal-based flow
+- Training modal feedback now shows points earned ("+1" or "Correct!")
+- Translation display always visible in modal (both success and failure states)
+- DisplayWord interface extended with `id: number` field for statistics tracking
 
 ### ⚠️ Technical Debt
 - training.tsx: Tests pending (manual validation only, 410 lines)
@@ -86,6 +120,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Jest memory leak in preferences tests (2/5 test suites crash with heap out of memory)
   - Priority: P0
   - Estimation: 1-2h (investigate AsyncStorage mocks or refactor tests)
+- Jest mock contamination in statistics tests (4/49 tests fail together, pass individually)
+  - Priority: Low (non-blocking, code functions correctly)
+  - Issue: AsyncStorage mock state leaking between tests
+  - Estimation: 1-2h (improve mock isolation)
 
 ### Technical Details
 - Added dependency: `@react-native-async-storage/async-storage` v2.1.0

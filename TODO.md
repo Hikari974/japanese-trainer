@@ -28,20 +28,24 @@
   - Risque: Medium (tests fonctionnent mais infrastructure Jest instable)
   - Estimation: 1-2h (investiguer mocks AsyncStorage ou refactor tests)
 
+- [ ] **Jest mock contamination dans statistics tests**
+  - 4/49 tests fail ensemble, passent individuellement
+  - Problème: AsyncStorage mock state leaking entre tests
+  - Code fonctionne correctement (non-blocking)
+  - Risque: Low (infrastructure issue, pas de bug code)
+  - Estimation: 1-2h (améliorer isolation mocks)
+
 ## Prochaine tâche immédiate
 
 - [ ] Définir les Epic et User Stories pour l'apprentissage du japonais (via Epic Manager Agent)
 
 ## Court terme
 
-- [ ] Développer la page statistiques (app/stats.tsx actuellement placeholder)
-- [ ] Développer la page paramètres (app/settings.tsx actuellement placeholder)
-- [ ] Étendre système préférences avec statistiques persistantes (sessions complétées, scores, progression)
-- [ ] Ajouter tests pour pages placeholder (stats.tsx, settings.tsx, poc-scroll.tsx)
+- [ ] Ajouter tests pour pages placeholder (poc-scroll.tsx)
 
 ## Moyen terme
 
-- [ ] Implémenter le système de statistiques complet
+- [ ] Améliorer système statistiques (difficulty breakdown, trends, export/import)
 - [ ] Configurer CI/CD avec DevOps Expert
 - [ ] Setup Expo EAS pour déploiement iOS/Android
 - [ ] Augmenter couverture de tests à 80%+
@@ -107,6 +111,32 @@
   - Flash rouge lors fermeture modal (persistence modalColor corrigée)
   - Délai/double-clic bouton (animations désactivées, reset état immédiat)
   - Régression modalColor null (setTimeout supprimé)
+- [x] Système statistiques complet avec AsyncStorage (2025-11-11, Session 4)
+  - Service statistics.ts + hook useStatistics.ts (231 lignes)
+  - Types TypeScript complets (WordStatistic, GlobalStatistics, AttemptData)
+  - Tracking par mot-level-difficulté avec composite keys
+  - Scoring simplifié: 1 point par tentative parfaite
+  - AsyncStorage persistence 100% local (offline-first)
+  - 49 tests (35 service + 14 hook), 94-100% coverage
+- [x] Page stats.tsx MVP complète (2025-11-11, Session 4)
+  - Statistiques globales (points, tentatives, taux réussite, perfect count, mots uniques)
+  - Breakdown par niveau (6 cards avec barres colorées)
+  - Loading spinner + empty state
+  - 187 lignes (était 26 lignes placeholder)
+- [x] Reset statistiques dans settings.tsx (2025-11-11, Session 4)
+  - Section "Gestion des données / Data management"
+  - Modal confirmation (Cancel / Confirm) bilingue FR/EN
+  - Warning "irréversible / cannot be undone"
+  - 114 lignes ajoutées
+- [x] Intégration statistiques dans training.tsx (2025-11-11, Session 4)
+  - Enregistrement automatique chaque validation
+  - Modal affiche "+1" si point gagné
+  - Traduction toujours visible dans modal
+  - Capture état AVANT recordAttempt (évite race condition)
+- [x] Fix bug couleur bouton "Commencer" (2025-11-11, Session 4)
+  - Bouton utilisait $levelN3 hardcodé
+  - Ajout constant levelColors + backgroundColor dynamique
+  - Couleur maintenant reflète niveau sélectionné
 
 ---
 

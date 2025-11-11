@@ -8,6 +8,7 @@ import { Furigana } from './components/Furigana';
 import { RomajiKeyboard } from './components/RomajiKeyboard';
 import { useWords } from './hooks/useWords';
 import { usePreferences } from './hooks/usePreferences';
+import { useStatistics } from './hooks/useStatistics';
 import type { Level } from './components/LevelButton';
 import type { Difficulty } from './components/DifficultySelector';
 import type { JLPTLevel } from './types/word';
@@ -72,6 +73,9 @@ export default function TrainingScreen() {
   const { preferences } = usePreferences();
   const wordsPerSession = preferences?.wordsPerSession ?? 10;
 
+  // Load user statistics
+  const { recordAttempt } = useStatistics();
+
   // Load words for training
   const { words, isLoading } = useWords({
     level,
@@ -112,16 +116,36 @@ export default function TrainingScreen() {
     setValidationFeedback(null);
   };
 
-  const handleValidate = () => {
+  const handleValidate = async () => {
     if (!currentWord) return;
 
     const normalized = normalizeRomaji(inputText);
     const expected = normalizeRomaji(currentWord.romaji);
+    const isCorrect = normalized === expected;
 
-    if (normalized === expected) {
+    // Capture state BEFORE recording attempt (these values will be reset on next word)
+    const attemptStartCount = startClickCount;
+    const attemptTranslationViewed = showTranslation;
+
+    // Record attempt and get points earned
+    const pointsEarned = await recordAttempt({
+      wordId: currentWord.id,
+      romaji: currentWord.romaji,
+      level,
+      difficulty,
+      isCorrect,
+      startCount: attemptStartCount,
+      translationViewed: attemptTranslationViewed,
+    });
+
+    if (isCorrect) {
       // CORRECT
       setValidationFeedback('correct');
-      setFeedbackMessage('Correct ! Bien joué !');
+      // Show +1 if points earned, otherwise just success message
+      const message = pointsEarned === 1
+        ? 'Correct ! Bien joué ! +1'
+        : 'Correct ! Bien joué !';
+      setFeedbackMessage(message);
       setCorrectAnswer('');
       setShowNextButton(true);
       // Set modal state
@@ -401,6 +425,18 @@ export default function TrainingScreen() {
                 textAlign="center"
               >
                 {correctAnswer}
+              </Text>
+            )}
+
+            {/* Translation (always shown) */}
+            {currentWord && (
+              <Text
+                fontSize={18}
+                color="white"
+                opacity={0.9}
+                textAlign="center"
+              >
+                {currentWord.translations[preferences?.translationLanguage || 'fr']}
               </Text>
             )}
 
