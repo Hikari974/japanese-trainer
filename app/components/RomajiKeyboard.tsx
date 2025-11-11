@@ -7,33 +7,29 @@ interface RomajiKeyboardProps {
 }
 
 // Types
-type KeyboardMode = 'base' | 'dakuten' | 'handakuten' | 'yoon';
+type KeyboardMode = 'base' | 'dakuten-handakuten' | 'yoon' | 'foreign';
 
-// Data: Base syllables (46 total)
+// Data: Base syllables with double consonants in first column (50 total)
 const baseSyllables = [
-  ['a', 'i', 'u', 'e', 'o'],
-  ['ka', 'ki', 'ku', 'ke', 'ko'],
-  ['sa', 'shi', 'su', 'se', 'so'],
-  ['ta', 'chi', 'tsu', 'te', 'to'],
-  ['na', 'ni', 'nu', 'ne', 'no'],
-  ['ha', 'hi', 'fu', 'he', 'ho'],
-  ['ma', 'mi', 'mu', 'me', 'mo'],
-  ['ya', 'yu', 'yo', '', ''],
-  ['ra', 'ri', 'ru', 're', 'ro'],
-  ['wa', 'wo', 'n', '', ''],
+  ['', 'a', 'i', 'u', 'e', 'o'],
+  ['k', 'ka', 'ki', 'ku', 'ke', 'ko'],
+  ['s', 'sa', 'shi', 'su', 'se', 'so'],
+  ['t', 'ta', 'chi', 'tsu', 'te', 'to'],
+  ['', 'na', 'ni', 'nu', 'ne', 'no'],
+  ['', 'ha', 'hi', 'fu', 'he', 'ho'],
+  ['m', 'ma', 'mi', 'mu', 'me', 'mo'],
+  ['', 'ya', 'yu', 'yo', '', ''],
+  ['', 'ra', 'ri', 'ru', 're', 'ro'],
+  ['', 'wa', 'wo', 'n', '', ''],
 ];
 
-// Data: Dakuten syllables (20 total) - voiced consonants
-const dakutenSyllables = [
-  ['ga', 'gi', 'gu', 'ge', 'go'],
-  ['za', 'ji', 'zu', 'ze', 'zo'],
-  ['da', 'di', 'du', 'de', 'do'],
-  ['ba', 'bi', 'bu', 'be', 'bo'],
-];
-
-// Data: Handakuten syllables (5 total) - p-sound
-const handakutenSyllables = [
-  ['pa', 'pi', 'pu', 'pe', 'po'],
+// Data: Dakuten + Handakuten combined with double consonants (30 total) - voiced consonants + p-sound
+const dakutenHandakutenSyllables = [
+  ['g', 'ga', 'gi', 'gu', 'ge', 'go'],
+  ['z', 'za', 'ji', 'zu', 'ze', 'zo'],
+  ['d', 'da', 'di', 'du', 'de', 'do'],
+  ['b', 'ba', 'bi', 'bu', 'be', 'bo'],
+  ['p', 'pa', 'pi', 'pu', 'pe', 'po'],
 ];
 
 // Data: Yōon syllables (33 total) - palatalized sounds
@@ -51,20 +47,29 @@ const yoonSyllables = [
   ['pya', 'pyu', 'pyo'],
 ];
 
+// Data: Foreign katakana syllables (22 total) - modern loanword sounds
+const foreignSyllables = [
+  ['fa', 'fi', 'fe', 'fo'],      // F-sounds
+  ['wi', 'we', 'wo'],            // W-sounds
+  ['va', 'vi', 'vu', 've', 'vo'], // V-sounds
+  ['ti', 'di', 'tu', 'du'],      // T/D-sounds
+  ['she', 'tsa', 'dyu', 'je'],   // Other foreign sounds
+];
+
 // Mode configuration
 const modeConfig = {
-  base: { data: baseSyllables, columns: 5, buttonWidth: 42 },
-  dakuten: { data: dakutenSyllables, columns: 5, buttonWidth: 42 },
-  handakuten: { data: handakutenSyllables, columns: 5, buttonWidth: 42 },
+  base: { data: baseSyllables, columns: 6, buttonWidth: 42 },
+  'dakuten-handakuten': { data: dakutenHandakutenSyllables, columns: 6, buttonWidth: 42 },
   yoon: { data: yoonSyllables, columns: 3, buttonWidth: 64 },
+  foreign: { data: foreignSyllables, columns: 5, buttonWidth: 48 },
 };
 
 // Mode labels for selector buttons
 const modeLabels: Record<KeyboardMode, string> = {
   base: 'Base',
-  dakuten: '゛',
-  handakuten: '゜',
+  'dakuten-handakuten': '゛゜',
   yoon: 'ゃ',
+  foreign: '外',
 };
 
 export const RomajiKeyboard = memo(function RomajiKeyboard({

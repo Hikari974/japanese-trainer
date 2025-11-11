@@ -35,6 +35,28 @@
   - Risque: Low (infrastructure issue, pas de bug code)
   - Estimation: 1-2h (améliorer isolation mocks)
 
+## 🔴 P1 - Data Quality Issues (CRITICAL)
+
+- [ ] **Corriger 142 mots avec romaji invalides** (hiragana/katakana dans champ romaji)
+  - Fichiers affectés: principalement n4.json, n5.json
+  - Exemples: "kaijiょu" → "kaijou", "ガソリン" → "gasorin", "keっshite" → "kesshite"
+  - Impact: HIGH (11% du vocabulaire non utilisable)
+  - Décision à prendre: Correction manuelle vs script automatisé
+  - Estimation: 2-3h (manuel) ou 1-2h (script + validation)
+  - Référence: RAPPORT_PROBLEMES_DONNEES.md
+
+- [ ] **Décider stratégie variantes romaji** (~70 mots avec jy/chy)
+  - Exemples: "jyoubu" vs "joubu", "chyawan" vs "chawan"
+  - Options: A) Normaliser dans code (actuel), B) Standardiser données, C) Les deux valides
+  - Impact: MEDIUM (normalisé actuellement, fonctionnel)
+  - Estimation: 1h (décision) + 1-2h (correction si standardisation choisie)
+
+- [ ] **Décider pattern っち** (cchi vs tchi)
+  - Question: User tape "t"+"chi" OU accepter "cchi" comme valide ?
+  - Options: A) tchi uniquement (actuel), B) cchi uniquement, C) Les deux
+  - Impact: MEDIUM (affecte ~10 mots)
+  - Estimation: 30min (décision) + 30min (implementation si changement)
+
 ## Prochaine tâche immédiate
 
 - [ ] Définir les Epic et User Stories pour l'apprentissage du japonais (via Epic Manager Agent)
@@ -137,6 +159,32 @@
   - Bouton utilisait $levelN3 hardcodé
   - Ajout constant levelColors + backgroundColor dynamique
   - Couleur maintenant reflète niveau sélectionné
+- [x] Extension RomajiKeyboard avec double consonants et syllabes foreign (2025-11-11, Session 5)
+  - Fusion modes Dakuten + Handakuten → mode "゛゜" unique (30 syllabes)
+  - Double consonants ajoutés: k,s,t,m (Base), g,z,d,b,p (゛゜) - 9 boutons pour っ
+  - Nouveau mode Foreign "外": 22 syllabes katakana modernes (fa,fi,va,vi,vu,etc)
+  - Total: 130 syllabes (Base: 50, ゛゜: 30, Yōon: 33, Foreign: 22)
+  - RomajiKeyboard.tsx: 120 lignes modifiées (+55/-29 = 26 net)
+- [x] Extension normalisation romaji dans training.tsx (2025-11-11, Session 5)
+  - Normalisation jy→j (jyoubu → joubu)
+  - Normalisation chy→ch (chyawan → chawan)
+  - Pattern cchi→tchi (kocchi → kotchi pour っち)
+  - Protection "chu" dans normalisation hu→fu
+  - Support double consonants validation
+  - training.tsx: 30 lignes modifiées (+31/-2 = 29 net)
+- [x] Test couverture clavier complet (2025-11-11, Session 5)
+  - RomajiKeyboard.coverage.test.ts créé (292 lignes)
+  - Test data-driven: vérifie 1309 mots des données JSON
+  - Résultat: 100% couverture (1167/1167 mots valides)
+  - Détecté: 142 mots avec romaji invalides (filtrés)
+  - Helper extractKeyboardSyllables(): extrait 130 syllabes
+  - Helper decomposeRomaji(): algorithme greedy matching
+- [x] Rapport qualité données créé (2025-11-11, Session 5)
+  - RAPPORT_PROBLEMES_DONNEES.md (255 lignes)
+  - Documentation exhaustive: 142 erreurs critiques + ~70 variantes
+  - Catégorisation: TYPE A-F avec exemples
+  - Décisions à prendre documentées
+  - Stratégies correction proposées
 
 ---
 

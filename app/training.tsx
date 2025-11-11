@@ -55,10 +55,31 @@ const normalizeRomaji = (text: string): string => {
   return text
     .toLowerCase()
     .trim()
+    // Remove spaces and punctuation that might appear
+    .replace(/[\s,]/g, '')
+    // Handle "jy" → "j" variants (joubu, ja, ju, jo)
+    .replace(/jy([auo])/g, 'j$1')  // jya→ja, jyu→ju, jyo→jo
+    .replace(/jy/g, 'j')            // jy→j (standalone)
+    // Handle "chy" → "ch" variants (cha, chu, cho)
+    .replace(/chy([auo])/g, 'ch$1') // chya→cha, chyu→chu, chyo→cho
+    // Handle っち pattern: "cchi" → "tchi" (small tsu + chi)
+    .replace(/cchi/g, 'tchi')
+    .replace(/ccha/g, 'tcha')
+    .replace(/ccho/g, 'tcho')
+    .replace(/cchu/g, 'tchu')
+    // Handle standard variants
     .replace(/si/g, 'shi')
     .replace(/ti/g, 'chi')
     .replace(/tu/g, 'tsu')
-    .replace(/hu/g, 'fu');
+    // Handle "hu" → "fu" BUT NOT inside "chu" pattern
+    // We do this by first protecting "chu" temporarily
+    .replace(/chu/g, '\x00CHU\x00')   // Temporarily mark "chu"
+    .replace(/hu/g, 'fu')              // Replace hu → fu
+    .replace(/\x00CHU\x00/g, 'chu')   // Restore "chu"
+    // Handle double consonants (single letter → double)
+    // User can type 'k' for 'kk', 's' for 'ss', etc.
+    .replace(/([kstm])(?=[aiueo])/g, '$1$1')  // k/s/t/m before vowel → kk/ss/tt/mm
+    .replace(/([gzdbp])(?=[aiueo])/g, '$1$1'); // g/z/d/b/p before vowel → gg/zz/dd/bb/pp
 };
 
 export default function TrainingScreen() {

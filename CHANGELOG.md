@@ -89,6 +89,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Modal feedback shows "+1" when point earned
   - Translation always visible in modal (success and failure)
   - State capture timing fixed to prevent race conditions
+- **Extended RomajiKeyboard with Double Consonants and Foreign Syllables** (Session 5)
+  - Mode reorganization: Dakuten (゛) + Handakuten (゜) merged into single "゛゜" mode (30 syllables)
+  - Double consonants added: k,s,t,m in Base mode, g,z,d,b,p in ゛゜ mode (9 buttons for small tsu っ support)
+  - New Foreign mode "外": 22 modern katakana syllables (fa, fi, fe, fo, wi, we, wo, va, vi, vu, ve, vo, ti, di, tu, du, she, tsa, dyu, je)
+  - Total syllable coverage: 130 (Base: 50, ゛゜: 30, Yōon: 33, Foreign: 22)
+  - Component size: 120 lines modified (+55/-29 = 26 net)
+- **Extended Romaji Normalization** (Session 5)
+  - Normalization jy→j (e.g., "jyoubu" → "joubu")
+  - Normalization chy→ch (e.g., "chyawan" → "chawan")
+  - Pattern cchi→tchi (e.g., "kocchi" → "kotchi" for っち)
+  - Protection for "chu" in hu→fu normalization (prevents "chu" → "cfu")
+  - Double consonant validation support (k,s,t,m,g,z,d,b,p before vowels)
+  - Training.tsx: 30 lines modified (+31/-2 = 29 net)
+- **Comprehensive Keyboard Coverage Test** (Session 5)
+  - Data-driven test: RomajiKeyboard.coverage.test.ts (292 lines)
+  - Tests all 1309 words from JLPT database
+  - Result: 100% coverage on valid data (1167/1167 words)
+  - Filters 142 words with invalid romaji (hiragana/katakana in romaji field)
+  - Helper extractKeyboardSyllables(): extracts 130 syllables from keyboard
+  - Helper decomposeRomaji(): greedy matching algorithm with normalization
+- **Data Quality Report** (Session 5)
+  - RAPPORT_PROBLEMES_DONNEES.md created (255 lines)
+  - Comprehensive documentation: 142 critical errors + ~70 variant issues
+  - Categorization: TYPE A-F with examples and proposed solutions
+  - Pending decisions documented (data correction strategy, variant handling, っち pattern)
+  - Statistics: 1309 total words, 1167 valid (89%), 142 invalid (11%)
 
 ### Fixed
 - Memory leak: setTimeout cleanup on component unmount (training.tsx)
@@ -109,20 +135,40 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - DisplayWord interface extended with `id: number` field for statistics tracking
 
 ### ⚠️ Technical Debt
+
+**P0 - MUST complete before new features:**
 - training.tsx: Tests pending (manual validation only, 410 lines)
-  - Priority: P0 (MUST complete before new features)
   - Validation: Code Review approved, manual testing passed
   - Estimation: 2-3h (modal state machine, validation logic, state resets)
 - RomajiKeyboard.tsx: Tests pending (157 lines)
-  - Priority: P0 (MUST complete before new features)
   - Validation: Code Review approved
   - Estimation: 1.5-2h (mode switching, button callbacks, disabled state, grid rendering)
 - Jest memory leak in preferences tests (2/5 test suites crash with heap out of memory)
-  - Priority: P0
   - Estimation: 1-2h (investigate AsyncStorage mocks or refactor tests)
+
+**P1 - Data Quality Issues (CRITICAL):**
+- 142 words with invalid romaji (hiragana/katakana in romaji field) - Session 5 discovery
+  - Files affected: Primarily n4.json, n5.json
+  - Examples: "kaijiょu" → "kaijou", "ガソリン" → "gasorin", "keっshite" → "kesshite"
+  - Impact: HIGH (11% of vocabulary unusable)
+  - Decision pending: Manual correction vs automated script
+  - Estimation: 2-3h (manual) or 1-2h (script + validation)
+  - Reference: RAPPORT_PROBLEMES_DONNEES.md
+- ~70 words with variant romanization (jy/chy patterns) - Session 5 discovery
+  - Examples: "jyoubu" vs "joubu", "chyawan" vs "chawan"
+  - Impact: MEDIUM (currently normalized in code, functional)
+  - Decision pending: A) Keep normalization, B) Standardize data, C) Accept both
+  - Estimation: 1h (decision) + 1-2h (correction if standardization chosen)
+- っち pattern handling strategy - Session 5 discovery
+  - Question: User types "t"+"chi" OR accept "cchi" as valid?
+  - Options: A) tchi only (current), B) cchi only, C) Both
+  - Impact: MEDIUM (affects ~10 words)
+  - Estimation: 30min (decision) + 30min (implementation if change)
+
+**Low Priority:**
 - Jest mock contamination in statistics tests (4/49 tests fail together, pass individually)
-  - Priority: Low (non-blocking, code functions correctly)
   - Issue: AsyncStorage mock state leaking between tests
+  - Impact: Non-blocking (code functions correctly)
   - Estimation: 1-2h (improve mock isolation)
 
 ### Technical Details

@@ -702,3 +702,123 @@ const pointsEarned = await recordAttempt({
 - **Architecture scalable** : Composite keys permettent expansion future (difficulty breakdown, trends)
 - **MVP scope respected** : User a demandé "Simple (MVP)", pas de charts/graphs/complexity
 - **Offline-first** : 100% AsyncStorage local, pas de backend requis
+---
+
+## Session 5 : Extension Clavier Romaji + Test Couverture (2025-11-11)
+
+### Demande utilisateur
+- Ajouter double consonants au clavier (ex: "poketto" avec っ)
+- Ajouter syllabes katakana modernes pour mots étrangers
+
+### Décisions Techniques
+
+**1. Réorganisation modes clavier**
+- Fusion modes Dakuten (゛) + Handakuten (゜) en un seul mode "゛゜"
+- Nouveau mode "外" (Foreign) pour 22 syllabes katakana modernes
+- Total : 4 modes (Base / ゛゜ / Yōon / Foreign)
+
+**2. Double consonants**
+- Ajout boutons k, s, t, m dans Base mode (première colonne)
+- Ajout boutons g, z, d, b, p dans ゛゜ mode (première colonne)
+- Organisation logique : consonant dans même rangée que ses syllabes
+
+**3. Syllabes foreign katakana (22 total)**
+- F-sounds: fa, fi, fe, fo
+- W-sounds: wi, we, wo
+- V-sounds: va, vi, vu, ve, vo
+- T/D-sounds: ti, di, tu, du
+- Other: she, tsa, dyu, je
+
+### Implémentation
+
+**Fichiers modifiés :**
+1. `app/components/RomajiKeyboard.tsx` (120 lignes)
+   - Mode type: 'base' | 'dakuten-handakuten' | 'yoon' | 'foreign'
+   - baseSyllables: 50 syllabes (avec double consonants k,s,t,m)
+   - dakutenHandakutenSyllables: 30 syllabes (avec double consonants g,z,d,b,p)
+   - foreignSyllables: 22 syllabes
+   - Total: 130 syllabes uniques disponibles
+
+2. `app/training.tsx` (30 lignes)
+   - Normalisation romaji étendue:
+     - jy → j (jyoubu → joubu)
+     - chy → ch (chyawan → chawan)
+     - cchi → tchi (っち pattern)
+     - Protection "chu" dans normalisation hu→fu
+   - Support double consonants: k/s/t/m/g/z/d/b/p avant voyelle
+
+**Nouveaux fichiers créés :**
+3. `app/components/__tests__/RomajiKeyboard.coverage.test.ts` (292 lignes)
+   - Test de couverture : vérifie que TOUS les mots des données JSON peuvent être tapés
+   - Helper extractKeyboardSyllables() : extrait 130 syllabes du clavier
+   - Helper loadAllWords() : charge 1309 mots depuis n5/n4/n3/n2/n1.json
+   - Helper decomposeRomaji() : algorithme greedy matching avec normalisation
+   - Filtre 142 mots avec romaji invalides (contenant hiragana/katakana)
+   - Résultat : **100% de couverture** (1167/1167 mots valides)
+
+4. `RAPPORT_PROBLEMES_DONNEES.md`
+   - Documentation exhaustive des problèmes trouvés dans les données
+   - 142 mots avec romaji invalides (hiragana/katakana dans champ romaji)
+   - ~50 mots avec variante "jy" au lieu de "j"
+   - ~20 mots avec variante "chy" au lieu de "ch"
+   - Décisions à prendre sur normalisation vs correction données
+
+### Résultats Tests
+
+**Coverage par niveau JLPT (mots valides uniquement) :**
+- N5: 100% (669/669)
+- N4: 100% (492/492)
+- N3: 100% (2/2)
+- N2: 100% (2/2)
+- N1: 100% (2/2)
+
+**Statistiques :**
+- Clavier: 130 syllabes uniques
+- Total mots dans données: 1309
+- Mots valides: 1167 (89%)
+- Mots ignorés: 142 (11% - romaji invalides)
+- Couverture: 100% des mots valides
+
+### Points d'Attention
+
+**Qualité des données :**
+- 142 mots contiennent caractères non-ASCII dans romaji (っ, ょ, ゅ, katakana complet)
+- Nécessite nettoyage données OU normalisation code
+- User veut revoir ça dans session future
+
+**Normalisation complexe :**
+- training.tsx contient normalisations pour masquer erreurs données
+- À revoir selon décision user : corriger données vs normaliser code
+- Option hybride possible : normaliser variantes standard + corriger erreurs graves
+
+**Pattern っち (petit tsu + chi) :**
+- Actuellement normalisé "cchi" → "tchi"
+- Question : user veut taper "t"+"chi" séparément OU accepter "cchi" ?
+- Décision pending
+
+### État Actuel Projet
+
+**RomajiKeyboard :**
+- ✅ 4 modes fonctionnels (Base, ゛゜, Yōon, Foreign)
+- ✅ 130 syllabes disponibles
+- ✅ Double consonants intégrés
+- ✅ Foreign katakana ajoutés
+- ✅ Test couverture 100%
+
+**À décider session future :**
+- Corriger 142 mots avec romaji invalides dans JSON
+- Stratégie normalisation finale (code vs données vs hybride)
+- Pattern っち : "cchi" vs "t"+"chi"
+
+**Lignes changées :** 84 lignes (55 insertions, 29 deletions)
+- app/components/RomajiKeyboard.tsx: restructuration modes
+- app/training.tsx: normalisation étendue
+
+**Prochaine action :** Commit en cours (procédure stricte)
+- ✅ CHECKPOINTS.md lu
+- ✅ Lines changed calculées (84 lignes)
+- ✅ Context mise à jour
+- ⏳ Test Engineer à invoquer (>50 lignes + tests créés)
+- ⏳ Documentation Maintainer à invoquer (fin de tâche)
+- ⏳ Orchestrator Agent à invoquer (commit validation)
+
