@@ -1,0 +1,26 @@
+{
+  "level": "N2",
+  "version": "1.0.0",
+  "words": [
+    {
+      "id": 1,
+      "kanji": "実践",
+      "kana": "じっせん",
+      "romaji": "jissen",
+      "translations": {
+        "fr": "pratique",
+        "en": "practice"
+      }
+    },
+    {
+      "id": 2,
+      "kanji": "抽象",
+      "kana": "ちゅうしょう",
+      "romaji": "chuushou",
+      "translations": {
+        "fr": "abstraction",
+        "en": "abstraction"
+      }
+    }
+  ]
+}

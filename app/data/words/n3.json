@@ -1,0 +1,26 @@
+{
+  "level": "N3",
+  "version": "1.0.0",
+  "words": [
+    {
+      "id": 1,
+      "kanji": "議論",
+      "kana": "ぎろん",
+      "romaji": "giron",
+      "translations": {
+        "fr": "discussion",
+        "en": "discussion"
+      }
+    },
+    {
+      "id": 2,
+      "kanji": "現象",
+      "kana": "げんしょう",
+      "romaji": "genshou",
+      "translations": {
+        "fr": "phénomène",
+        "en": "phenomenon"
+      }
+    }
+  ]
+}

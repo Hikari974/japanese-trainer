@@ -1,0 +1,86 @@
+{
+  "level": "N5",
+  "version": "1.0.0",
+  "words": [
+    {
+      "id": 1,
+      "kanji": "～駅",
+      "kana": "～えき",
+      "romaji": "eki",
+      "translations": {
+        "fr": "gare",
+        "en": "station"
+      }
+    },
+    {
+      "id": 2,
+      "kanji": "～円",
+      "kana": "～えん",
+      "romaji": "en",
+      "translations": {
+        "fr": "yen",
+        "en": "yen"
+      }
+    },
+    {
+      "id": 3,
+      "kanji": "～階",
+      "kana": "～かい",
+      "romaji": "kai",
+      "translations": {
+        "fr": "étage",
+        "en": "floor"
+      }
+    },
+    {
+      "id": 4,
+      "kanji": "～回",
+      "kana": "～かい",
+      "romaji": "kai",
+      "translations": {
+        "fr": "fois",
+        "en": "times"
+      }
+    },
+    {
+      "id": 5,
+      "kanji": "～日間",
+      "kana": "～かかん",
+      "romaji": "kakan",
+      "translations": {
+        "fr": "jours",
+        "en": "for days"
+      }
+    },
+    {
+      "id": 6,
+      "kanji": "～カ月",
+      "kana": "～かげつ",
+      "romaji": "kagetsu",
+      "translations": {
+        "fr": "mois",
+        "en": "months"
+      }
+    },
+    {
+      "id": 7,
+      "kanji": "～方",
+      "kana": "～かた",
+      "romaji": "kata",
+      "translations": {
+        "fr": "manière",
+        "en": "how to"
+      }
+    },
+    {
+      "id": 8,
+      "kanji": "～月",
+      "kana": "～がつ",
+      "romaji": "gatsu",
+      "translations": {
+        "fr": "mois",
+        "en": "month"
+      }
+    }
+  ]
+}

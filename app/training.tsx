@@ -4,17 +4,16 @@ import { useLocalSearchParams } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AppHeader } from './components/AppHeader';
 import { ScrollingText } from './components/ScrollingText';
+import { Furigana } from './components/Furigana';
+import { useWords } from './hooks/useWords';
+import { usePreferences } from './hooks/usePreferences';
 import type { Level } from './components/LevelButton';
 import type { Difficulty } from './components/DifficultySelector';
+import type { JLPTLevel } from './types/word';
 
 // Types
 type ScrollingState = 'idle' | 'running';
 type ValidationFeedback = 'correct' | 'incorrect' | null;
-
-interface Word {
-  japanese: string;
-  romaji: string;
-}
 
 interface DifficultyParams {
   speed: number;
@@ -29,13 +28,6 @@ const difficultyConfig: Record<Difficulty, DifficultyParams> = {
   Difficile: { speed: 220, windowWidth: 150, fontSize: 32 },
   Extrême: { speed: 300, windowWidth: 150, fontSize: 32 },
 };
-
-// Mock words temporaires (à remplacer par les 5 listes)
-const mockWords: Word[] = [
-  { japanese: 'にほんご', romaji: 'nihongo' },
-  { japanese: 'こんにちは', romaji: 'konnichiha' },
-  { japanese: 'ありがとう', romaji: 'arigatou' },
-];
 
 // Grid romaji (5x10)
 const romajiSyllables = [
@@ -84,9 +76,20 @@ export default function TrainingScreen() {
   const insets = useSafeAreaInsets();
   const params = useLocalSearchParams<{ level: string; difficulty: string }>();
 
-  const level = (params.level || 'Kana') as Level;
+  const level = (params.level || 'Kana') as JLPTLevel;
   const difficulty = (params.difficulty || 'Normal') as Difficulty;
   const config = difficultyConfig[difficulty];
+
+  // Load user preferences
+  const { preferences } = usePreferences();
+  const wordsPerSession = preferences?.wordsPerSession ?? 10;
+
+  // Load words for training
+  const { words, isLoading } = useWords({
+    level,
+    difficulty,
+    count: wordsPerSession,
+  });
 
   // États
   const [inputText, setInputText] = useState<string>('');
@@ -95,7 +98,7 @@ export default function TrainingScreen() {
   const [validationFeedback, setValidationFeedback] = useState<ValidationFeedback>(null);
   const [pendingTimeout, setPendingTimeout] = useState<NodeJS.Timeout | null>(null);
 
-  const currentWord = mockWords[currentWordIndex];
+  const currentWord = words[currentWordIndex];
 
   // Cleanup timeout on unmount
   useEffect(() => {
@@ -115,6 +118,8 @@ export default function TrainingScreen() {
   };
 
   const handleValidate = () => {
+    if (!currentWord) return;
+
     // Clear any pending timeout
     if (pendingTimeout) clearTimeout(pendingTimeout);
 
@@ -124,8 +129,15 @@ export default function TrainingScreen() {
     if (normalized === expected) {
       setValidationFeedback('correct');
       const timeout = setTimeout(() => {
-        // Passer au mot suivant
-        setCurrentWordIndex(prev => (prev + 1) % mockWords.length);
+        // Passer au mot suivant (ou revenir au début si fin de session)
+        setCurrentWordIndex(prev => {
+          const next = prev + 1;
+          if (next >= words.length) {
+            // Fin de session - revenir au début
+            return 0;
+          }
+          return next;
+        });
         setInputText('');
         setValidationFeedback(null);
       }, 1000);
@@ -149,6 +161,20 @@ export default function TrainingScreen() {
     return '$borderColor';
   };
 
+  // Loading state
+  if (isLoading || !currentWord) {
+    return (
+      <YStack flex={1} backgroundColor="$background">
+        <AppHeader title="Session d'entraînement" showBackButton />
+        <YStack flex={1} justifyContent="center" alignItems="center">
+          <Text fontSize={16} color="$color">
+            Chargement des mots...
+          </Text>
+        </YStack>
+      </YStack>
+    );
+  }
+
   return (
     <YStack flex={1} backgroundColor="$background">
       <AppHeader title="Session d'entraînement" showBackButton />
@@ -167,14 +193,20 @@ export default function TrainingScreen() {
             </Text>
           </XStack>
 
-          {/* Zone 2: ScrollingText */}
+          {/* Zone 2: ScrollingText (simplified for now) */}
           <YStack alignItems="center" paddingVertical="$1">
             <ScrollingText
-              text={currentWord.japanese}
+              text={currentWord.kanji || currentWord.kana}
               speed={scrollingState === 'running' ? config.speed : 0}
               windowWidth={config.windowWidth}
               fontSize={config.fontSize}
             />
+            {/* Display furigana below when stopped */}
+            {scrollingState === 'idle' && currentWord.showFurigana && currentWord.kanji && (
+              <Text fontSize={12} color="$color" opacity={0.7} marginTop="$1">
+                {currentWord.kana}
+              </Text>
+            )}
           </YStack>
 
           {/* Zone 3: RomajiKeyboard Grid */}

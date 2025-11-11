@@ -5,12 +5,16 @@ import type { Difficulty } from '../components/DifficultySelector';
 export interface UserPreferences {
   lastLevel: Level | null;
   lastDifficulty: Difficulty;
+  wordsPerSession: number;           // Number of words per training session
+  translationLanguage: 'fr' | 'en';  // Preferred translation language
 }
 
 const STORAGE_KEY = '@japanese_trainer:user_preferences';
 const DEFAULT_PREFERENCES: UserPreferences = {
   lastLevel: null,
   lastDifficulty: 'Normal',
+  wordsPerSession: 10,
+  translationLanguage: 'fr',
 };
 
 /**
@@ -32,6 +36,8 @@ export async function loadPreferences(): Promise<UserPreferences> {
       return {
         lastLevel: parsed.lastLevel ?? DEFAULT_PREFERENCES.lastLevel,
         lastDifficulty: parsed.lastDifficulty ?? DEFAULT_PREFERENCES.lastDifficulty,
+        wordsPerSession: parsed.wordsPerSession ?? DEFAULT_PREFERENCES.wordsPerSession,
+        translationLanguage: parsed.translationLanguage ?? DEFAULT_PREFERENCES.translationLanguage,
       };
     }
 

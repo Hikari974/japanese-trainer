@@ -1,0 +1,26 @@
+{
+  "level": "N4",
+  "version": "1.0.0",
+  "words": [
+    {
+      "id": 1,
+      "kanji": "温泉",
+      "kana": "おんせん",
+      "romaji": "onsen",
+      "translations": {
+        "fr": "source chaude",
+        "en": "hot spring"
+      }
+    },
+    {
+      "id": 2,
+      "kanji": "試験",
+      "kana": "しけん",
+      "romaji": "shiken",
+      "translations": {
+        "fr": "examen",
+        "en": "exam"
+      }
+    }
+  ]
+}
