@@ -8,6 +8,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Complete training session page with 5 UI zones (239 lines)
+  - Compact session info (level + difficulty)
+  - ScrollingText integration with difficulty-based parameters
+  - Romaji keyboard grid (46 buttons, 5x10 layout)
+  - Input field with visual validation feedback
+  - Start/Stop controls with state machine
+- Flexible romaji validation (shi/si, tsu/tu, chi/ti, fu/hu)
+- Mock words system (temporary: にほんご, こんにちは, ありがとう)
+- Auto-progression on correct answer (1s delay)
+- Compact UI optimized for single-screen fit (Android safe area)
 - User preferences management with AsyncStorage for persistent level and difficulty selection
 - Service layer `app/services/preferences.ts` for local storage operations (loadPreferences, savePreferences)
 - React hook `app/hooks/usePreferences.ts` for UI integration with optimistic updates
@@ -17,10 +27,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Pre-selection of last used level and difficulty on app launch
 - Offline-first architecture (100% local storage, no server required)
 
+### Fixed
+- Memory leak: setTimeout cleanup on component unmount (training.tsx)
+- Closure bug: setState functional form for currentWordIndex (training.tsx)
+
 ### Changed
 - Home screen (`app/index.tsx`) now loads and saves user preferences automatically
 - "Start Session" button now saves preferences before navigation (async operation)
 - Test suite expanded from 15 to 36 tests (all passing)
+
+### ⚠️ Technical Debt
+- training.tsx: Tests pending (manual validation only, 239 lines)
+  - Priority: P0 (MUST complete before new features)
+  - Validation: Code Review approved, manual testing passed
 
 ### Technical Details
 - Added dependency: `@react-native-async-storage/async-storage` v2.1.0

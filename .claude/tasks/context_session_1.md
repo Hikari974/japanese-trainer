@@ -144,8 +144,16 @@ japanese-trainer/
     - Couverture: 100% statements/functions/lines, 81.25% branches
     - 21 tests préférences + 15 tests existants = 36 tests total, tous passants
 
+- [x] Implémentation complète page training.tsx (Session 2 continuation)
+  - 5 zones UI : SessionInfo compact, ScrollingText, Grid romaji (5x10), Input/Actions, Controls
+  - 46 boutons syllables romaji (a-n, ka-ko, sa-so, ta-to, na-no, ha-ho, ma-mo, ya-yo, ra-ro, wa-wo-n)
+  - Configuration difficultés : Facile 70px/s, Normal 140px/s, Difficile 220px/s, Extrême 300px/s
+  - Validation flexible romaji (shi/si, tsu/tu, hu/fu)
+  - Mock words temporaires (にほんご, こんにちは, ありがとう)
+  - Interface compacte tenant sur un écran complet (optimisée pour Android safe area)
+
 ### Ce qui reste à faire
-- [ ] Implémenter la logique d'entraînement dans training.tsx (scrolling text avec input)
+- [ ] Intégrer les 5 listes de mots pour l'entraînement
 - [ ] Définir les Epic et User Stories pour l'apprentissage du japonais
 - [ ] Créer les pages settings et stats (actuellement placeholders)
 - [ ] Ajouter tests pour training.tsx, ScrollingText, poc-scroll
