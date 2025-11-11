@@ -141,7 +141,8 @@ function buildWordPools(level: JLPTLevel): WordPool[] {
  */
 function toDisplayWord(
   word: WordEntry,
-  displayMode: DisplayMode
+  displayMode: DisplayMode,
+  sourceLevel: DataLevel
 ): DisplayWord {
   switch (displayMode) {
     case 'kana-only':
@@ -150,7 +151,8 @@ function toDisplayWord(
         kana: word.kana,
         romaji: word.romaji,
         showFurigana: false,
-        sourceLevel: word.level || 'N5',
+        sourceLevel,
+        translations: word.translations,
       };
 
     case 'kanji-with-furigana':
@@ -159,7 +161,8 @@ function toDisplayWord(
         kana: word.kana,
         romaji: word.romaji,
         showFurigana: true,
-        sourceLevel: word.level || 'N5',
+        sourceLevel,
+        translations: word.translations,
       };
 
     case 'kanji-without-furigana':
@@ -168,7 +171,8 @@ function toDisplayWord(
         kana: word.kana,
         romaji: word.romaji,
         showFurigana: false,
-        sourceLevel: word.level || 'N5',
+        sourceLevel,
+        translations: word.translations,
       };
   }
 }
@@ -204,7 +208,7 @@ export function getWordsForTraining(
 
   // Flatten all pools into one array
   const allWords: DisplayWord[] = pools.flatMap(pool =>
-    pool.words.map(word => toDisplayWord(word, pool.displayMode))
+    pool.words.map(word => toDisplayWord(word, pool.displayMode, pool.level))
   );
 
   // Shuffle and take requested count

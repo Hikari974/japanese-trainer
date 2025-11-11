@@ -52,10 +52,87 @@ export default function SettingsScreen() {
           paddingBottom={insets.bottom + 16}
           gap="$4"
         >
+          {/* Section: Language Settings */}
+          <YStack gap="$3">
+            <Text fontSize={18} fontWeight="600" color="$color">
+              Langue / Language
+            </Text>
+
+            {/* Language selector */}
+            <YStack
+              backgroundColor="$backgroundHover"
+              padding="$3"
+              borderRadius="$3"
+              gap="$2"
+            >
+              <Text fontSize={15} color="$color" marginBottom="$1">
+                {preferences?.translationLanguage === 'fr' ? 'Langue des traductions' : 'Translation language'}
+              </Text>
+
+              <XStack gap="$2">
+                <YStack
+                  flex={1}
+                  padding="$3"
+                  borderRadius="$2"
+                  backgroundColor={
+                    preferences?.translationLanguage === 'fr'
+                      ? '$difficultyEasy'
+                      : '$backgroundPress'
+                  }
+                  onPress={() => updatePreferences({ translationLanguage: 'fr' })}
+                  cursor="pointer"
+                  pressStyle={{ opacity: 0.8, scale: 0.98 }}
+                  animation="quick"
+                >
+                  <Text
+                    fontSize={14}
+                    fontWeight="600"
+                    color={
+                      preferences?.translationLanguage === 'fr'
+                        ? '$darkBackground'
+                        : '$color'
+                    }
+                    textAlign="center"
+                  >
+                    Français
+                  </Text>
+                </YStack>
+
+                <YStack
+                  flex={1}
+                  padding="$3"
+                  borderRadius="$2"
+                  backgroundColor={
+                    preferences?.translationLanguage === 'en'
+                      ? '$difficultyEasy'
+                      : '$backgroundPress'
+                  }
+                  onPress={() => updatePreferences({ translationLanguage: 'en' })}
+                  cursor="pointer"
+                  pressStyle={{ opacity: 0.8, scale: 0.98 }}
+                  animation="quick"
+                >
+                  <Text
+                    fontSize={14}
+                    fontWeight="600"
+                    color={
+                      preferences?.translationLanguage === 'en'
+                        ? '$darkBackground'
+                        : '$color'
+                    }
+                    textAlign="center"
+                  >
+                    English
+                  </Text>
+                </YStack>
+              </XStack>
+            </YStack>
+          </YStack>
+
           {/* Section: Training Settings */}
           <YStack gap="$3">
             <Text fontSize={18} fontWeight="600" color="$color">
-              Entraînement
+              {preferences?.translationLanguage === 'fr' ? 'Entraînement' : 'Training'}
             </Text>
 
             {/* Words per session */}
@@ -67,7 +144,7 @@ export default function SettingsScreen() {
             >
               <XStack justifyContent="space-between" alignItems="center">
                 <Text fontSize={15} color="$color">
-                  Mots par session
+                  {preferences?.translationLanguage === 'fr' ? 'Mots par session' : 'Words per session'}
                 </Text>
                 <Text fontSize={15} fontWeight="600" color="$difficultyEasy">
                   {wordsPerSession}

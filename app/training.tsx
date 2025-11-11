@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
-import { YStack, XStack, Button, Text, Input, ScrollView } from 'tamagui';
+import { useState, useEffect, useCallback, useMemo } from 'react';
+import { YStack, XStack, Button, Text, Input } from 'tamagui';
 import { useLocalSearchParams } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AppHeader } from './components/AppHeader';
-import { ScrollingText } from './components/ScrollingText';
+import { ScrollingTextContainer } from './components/ScrollingTextContainer';
 import { Furigana } from './components/Furigana';
+import { RomajiKeyboard } from './components/RomajiKeyboard';
 import { useWords } from './hooks/useWords';
 import { usePreferences } from './hooks/usePreferences';
 import type { Level } from './components/LevelButton';
@@ -28,20 +29,6 @@ const difficultyConfig: Record<Difficulty, DifficultyParams> = {
   Difficile: { speed: 220, windowWidth: 150, fontSize: 32 },
   Extrême: { speed: 300, windowWidth: 150, fontSize: 32 },
 };
-
-// Grid romaji (5x10)
-const romajiSyllables = [
-  ['a', 'i', 'u', 'e', 'o'],
-  ['ka', 'ki', 'ku', 'ke', 'ko'],
-  ['sa', 'shi', 'su', 'se', 'so'],
-  ['ta', 'chi', 'tsu', 'te', 'to'],
-  ['na', 'ni', 'nu', 'ne', 'no'],
-  ['ha', 'hi', 'fu', 'he', 'ho'],
-  ['ma', 'mi', 'mu', 'me', 'mo'],
-  ['ya', 'yu', 'yo', '', ''],
-  ['ra', 'ri', 'ru', 're', 'ro'],
-  ['wa', 'wo', 'n', '', ''],
-];
 
 // Couleurs niveaux
 const levelColors: Record<Level, string> = {
@@ -97,8 +84,16 @@ export default function TrainingScreen() {
   const [currentWordIndex, setCurrentWordIndex] = useState<number>(0);
   const [validationFeedback, setValidationFeedback] = useState<ValidationFeedback>(null);
   const [pendingTimeout, setPendingTimeout] = useState<NodeJS.Timeout | null>(null);
+  const [startClickCount, setStartClickCount] = useState<number>(0);
+  const [showTranslation, setShowTranslation] = useState<boolean>(false);
 
   const currentWord = words[currentWordIndex];
+
+  // Reset counters when moving to next word
+  useEffect(() => {
+    setStartClickCount(0);
+    setShowTranslation(false);
+  }, [currentWordIndex]);
 
   // Cleanup timeout on unmount
   useEffect(() => {
@@ -108,9 +103,9 @@ export default function TrainingScreen() {
   }, [pendingTimeout]);
 
   // Handlers
-  const handleSyllablePress = (syllable: string) => {
+  const handleSyllablePress = useCallback((syllable: string) => {
     setInputText(prev => prev + syllable);
-  };
+  }, []);
 
   const handleClear = () => {
     setInputText('');
@@ -151,9 +146,29 @@ export default function TrainingScreen() {
     }
   };
 
-  const handleStartStop = () => {
-    setScrollingState(prev => prev === 'idle' ? 'running' : 'idle');
+  const handleStart = () => {
+    if (scrollingState === 'idle') {
+      setStartClickCount(prev => prev + 1);
+      setScrollingState('running');
+    }
   };
+
+  const handleScrollComplete = useCallback(() => {
+    setScrollingState('idle');
+  }, []);
+
+  const handleToggleTranslation = () => {
+    setShowTranslation(prev => !prev);
+  };
+
+  // Memoize values to prevent unnecessary re-renders of ScrollingText
+  const scrollSpeed = useMemo(
+    () => (scrollingState === 'running' ? config.speed : 0),
+    [scrollingState, config.speed]
+  );
+
+  const windowWidth = useMemo(() => config.windowWidth, [config.windowWidth]);
+  const fontSize = useMemo(() => config.fontSize, [config.fontSize]);
 
   const getBorderColor = () => {
     if (validationFeedback === 'correct') return '$difficultyEasy';
@@ -179,10 +194,19 @@ export default function TrainingScreen() {
     <YStack flex={1} backgroundColor="$background">
       <AppHeader title="Session d'entraînement" showBackButton />
 
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <YStack padding="$2" gap="$1.5" paddingBottom={insets.bottom + 8}>
+      <YStack flex={1} padding="$2" gap="$1.5" paddingBottom={insets.bottom + 8}>
 
-          {/* Zone 1: SessionInfo */}
+          {/* Zone 1: Top Bar - Counters */}
+          <XStack justifyContent="space-between" paddingHorizontal="$2" marginTop="$1">
+            <Text fontSize={13} fontWeight="600" color="$color">
+              {currentWordIndex + 1}/{words.length}
+            </Text>
+            <Text fontSize={13} fontWeight="600" color="$difficultyEasy">
+              {preferences?.translationLanguage === 'fr' ? 'Démarrages' : 'Starts'}: {startClickCount}
+            </Text>
+          </XStack>
+
+          {/* Session Info: Level + Difficulty */}
           <XStack gap="$2" justifyContent="center" marginTop="$1">
             <Text fontSize={11} fontWeight="600" color={levelColors[level]}>
               {level}
@@ -193,51 +217,54 @@ export default function TrainingScreen() {
             </Text>
           </XStack>
 
-          {/* Zone 2: ScrollingText (simplified for now) */}
-          <YStack alignItems="center" paddingVertical="$1">
-            <ScrollingText
-              text={currentWord.kanji || currentWord.kana}
-              speed={scrollingState === 'running' ? config.speed : 0}
-              windowWidth={config.windowWidth}
-              fontSize={config.fontSize}
-            />
-            {/* Display furigana below when stopped */}
-            {scrollingState === 'idle' && currentWord.showFurigana && currentWord.kanji && (
-              <Text fontSize={12} color="$color" opacity={0.7} marginTop="$1">
-                {currentWord.kana}
+          {/* Zone 2: ScrollingText + Start Button */}
+          <XStack justifyContent="center" paddingVertical="$1">
+            <XStack alignItems="center" gap="$2" marginRight={-34}>
+              <ScrollingTextContainer
+                currentWord={currentWord}
+                speed={scrollSpeed}
+                windowWidth={windowWidth}
+                fontSize={fontSize}
+                onScrollComplete={handleScrollComplete}
+              />
+              <Button
+                size="$2.5"
+                minWidth={50}
+                onPress={handleStart}
+                backgroundColor="$difficultyEasy"
+                disabled={scrollingState === 'running'}
+                pressStyle={{ opacity: 0.8, scale: 0.98 }}
+                animation="quick"
+              >
+                <Text fontSize={14} fontWeight="600" color="$darkBackground">▶</Text>
+              </Button>
+            </XStack>
+          </XStack>
+
+          {/* Zone 2.5: Translation Toggle */}
+          <XStack alignItems="center" justifyContent="center" gap="$2" paddingVertical="$1">
+            <Button
+              size="$2"
+              circular
+              onPress={handleToggleTranslation}
+              backgroundColor="$backgroundHover"
+              pressStyle={{ opacity: 0.8, scale: 0.95 }}
+              animation="quick"
+            >
+              <Text fontSize={18}>👁️</Text>
+            </Button>
+            {showTranslation && currentWord && (
+              <Text fontSize={14} color="$color" maxWidth="70%">
+                {currentWord.translations?.[preferences?.translationLanguage || 'fr'] || 'No translation'}
               </Text>
             )}
-          </YStack>
+          </XStack>
 
           {/* Zone 3: RomajiKeyboard Grid */}
-          <YStack gap="$1">
-            {romajiSyllables.map((row, rowIndex) => (
-              <XStack key={rowIndex} gap="$1.5" justifyContent="center">
-                {row.map((syllable, colIndex) =>
-                  syllable ? (
-                    <Button
-                      key={colIndex}
-                      size="$2"
-                      minWidth={42}
-                      minHeight={36}
-                      onPress={() => handleSyllablePress(syllable)}
-                      backgroundColor="$backgroundHover"
-                      borderRadius="$2"
-                      pressStyle={{ scale: 0.95, backgroundColor: '$backgroundPress' }}
-                      animation="quick"
-                      disabled={scrollingState !== 'running'}
-                    >
-                      <Text fontSize={14} color="$color">
-                        {syllable}
-                      </Text>
-                    </Button>
-                  ) : (
-                    <XStack key={colIndex} width={42} />
-                  )
-                )}
-              </XStack>
-            ))}
-          </YStack>
+          <RomajiKeyboard
+            onSyllablePress={handleSyllablePress}
+            disabled={scrollingState !== 'running'}
+          />
 
           {/* Zone 4: Input + Actions */}
           <YStack gap="$2">
@@ -291,20 +318,7 @@ export default function TrainingScreen() {
               </Button>
             </XStack>
           </YStack>
-
-          {/* Zone 5: Controls */}
-          <Button
-            size="$4"
-            backgroundColor={scrollingState === 'running' ? '$difficultyExtreme' : '$difficultyEasy'}
-            onPress={handleStartStop}
-            pressStyle={{ opacity: 0.8, scale: 0.98 }}
-          >
-            <Text fontSize={16} fontWeight="bold" color="$darkBackground">
-              {scrollingState === 'running' ? 'Stop' : 'Start'}
-            </Text>
-          </Button>
-        </YStack>
-      </ScrollView>
+      </YStack>
     </YStack>
   );
 }

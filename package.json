@@ -17,6 +17,7 @@
     "expo": "~54.0.23",
     "expo-constants": "~18.0.10",
     "expo-linking": "~8.0.8",
+    "expo-localization": "^17.0.7",
     "expo-router": "~6.0.14",
     "expo-status-bar": "~3.0.8",
     "react": "19.1.0",
@@ -30,7 +31,7 @@
     "tamagui": "^1.136.9"
   },
   "devDependencies": {
-    "@tamagui/babel-plugin": "^1.136.9",
+    "@tamagui/babel-plugin": "^1.137.0",
     "@testing-library/jest-native": "^5.4.3",
     "@testing-library/react-native": "^13.3.3",
     "@types/jest": "^30.0.0",

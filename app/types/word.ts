@@ -52,4 +52,8 @@ export interface DisplayWord {
   romaji: string;         // For validation
   showFurigana: boolean;  // Whether to show furigana above kanji
   sourceLevel: DataLevel; // Original level (for stats/debugging)
+  translations: {         // Translations in multiple languages
+    fr: string;           // French translation
+    en: string;           // English translation
+  };
 }

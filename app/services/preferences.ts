@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import type { Level } from '../components/LevelButton';
 import type { Difficulty } from '../components/DifficultySelector';
+import { detectLanguage } from '../utils/detectLanguage';
 
 export interface UserPreferences {
   lastLevel: Level | null;
@@ -14,19 +15,27 @@ const DEFAULT_PREFERENCES: UserPreferences = {
   lastLevel: null,
   lastDifficulty: 'Normal',
   wordsPerSession: 10,
-  translationLanguage: 'fr',
+  translationLanguage: 'fr',  // Will be overridden by detectLanguage() on first use
 };
 
 /**
  * Load user preferences from local storage
  * Returns default preferences on first use or if data is corrupted
+ * Auto-detects device language on first use
  */
 export async function loadPreferences(): Promise<UserPreferences> {
   try {
     const stored = await AsyncStorage.getItem(STORAGE_KEY);
     if (stored === null) {
-      // First use - return defaults
-      return DEFAULT_PREFERENCES;
+      // First use - detect device language and save preferences
+      const detectedLanguage = detectLanguage();
+      const firstTimePreferences = {
+        ...DEFAULT_PREFERENCES,
+        translationLanguage: detectedLanguage,
+      };
+      // Save detected preferences for future use
+      await savePreferences(firstTimePreferences);
+      return firstTimePreferences;
     }
 
     const parsed = JSON.parse(stored);

@@ -1,41 +1,72 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, memo } from 'react';
 import { Text, YStack } from 'tamagui';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
-  withRepeat,
   withTiming,
   Easing,
+  runOnJS,
+  cancelAnimation,
 } from 'react-native-reanimated';
 
 interface ScrollingTextProps {
   text: string;
-  speed: number; // pixels per second
+  speed: number; // pixels per second (0 = stopped)
   windowWidth: number;
   fontSize: number;
+  onScrollComplete?: () => void; // Callback when scroll animation completes
 }
 
-export function ScrollingText({ text, speed, windowWidth, fontSize }: ScrollingTextProps) {
+export const ScrollingText = memo(function ScrollingText({
+  text,
+  speed,
+  windowWidth,
+  fontSize,
+  onScrollComplete
+}: ScrollingTextProps) {
   const translateX = useSharedValue(windowWidth);
+  const opacity = useSharedValue(1);
 
   useEffect(() => {
+    if (speed === 0) {
+      // Reset position and show text when stopped
+      cancelAnimation(translateX);
+      translateX.value = windowWidth;
+      opacity.value = 1;
+      return;
+    }
+
+    // Speed > 0: start scrolling animation
+    opacity.value = 1;
+
     // Estimate text width (rough approximation for Japanese characters)
     const estimatedTextWidth = fontSize * text.length * 0.9;
     const totalDistance = windowWidth + estimatedTextWidth;
     const duration = (totalDistance / speed) * 1000; // convert to milliseconds
 
-    translateX.value = withRepeat(
-      withTiming(-estimatedTextWidth, {
+    // Single scroll animation with callback
+    translateX.value = withTiming(
+      -estimatedTextWidth,
+      {
         duration,
         easing: Easing.linear,
-      }),
-      -1, // infinite loop
-      false
+      },
+      (finished) => {
+        if (finished) {
+          // Hide text after animation completes
+          opacity.value = 0;
+          // Notify parent
+          if (onScrollComplete) {
+            runOnJS(onScrollComplete)();
+          }
+        }
+      }
     );
   }, [text, speed, windowWidth, fontSize]);
 
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [{ translateX: translateX.value }],
+    opacity: opacity.value,
   }));
 
   return (
@@ -55,4 +86,4 @@ export function ScrollingText({ text, speed, windowWidth, fontSize }: ScrollingT
       </Animated.View>
     </YStack>
   );
-}
+});
