@@ -5,11 +5,20 @@
 
 ## 🔴 P0 - Technical Debt (AVANT toute nouvelle feature)
 
-- [ ] **Tests training.tsx** (239 lignes)
-  - State machine (scrolling state, validation feedback)
-  - Timer management (cleanup on unmount)
-  - Validation logic (normalizeRomaji + handleValidate)
-  - Risque: High (complex state, async timers)
+- [ ] **Tests RomajiKeyboard.tsx** (157 lignes)
+  - Mode switching (4 modes: base, dakuten, handakuten, yōon)
+  - Syllable press callbacks (104 buttons total)
+  - Disabled state propagation
+  - Grid rendering with empty cells
+  - Risque: Medium (UI component, parent callback dependency)
+  - Estimation: 1.5-2h
+
+- [ ] **Tests training.tsx** (410 lignes, +81 Session 3)
+  - Session 3: Modal state machine (open/close/color persistence)
+  - Session 3: Validation logic (normalizeRomaji + handleValidate)
+  - Session 3: State reset on handleNext, keyboard disable during feedback
+  - Session 2: ScrollingText state machine, timer management, cleanup on unmount
+  - Risque: Medium-High (complex state machine, animation timing, async timers)
   - Estimation: 2-3h
 
 - [ ] **Jest memory leak dans preferences/usePreferences tests**
@@ -81,6 +90,23 @@
   - Mise à jour tous les tests avec nouveaux champs UserPreferences
   - 3/5 test suites passent (15 tests)
   - 2/5 suites avec memory leak Jest (tracké en P0)
+- [x] Clavier romaji multi-mode (2025-11-11, Session 3)
+  - 4 modes à bascule: Base (46), Dakuten ゛ (20), Handakuten ゜ (5), Yōon ゃ (33)
+  - Couverture totale: 104 syllabes romaji
+  - Sélecteur de mode avec feedback visuel (boutons mode actifs/inactifs)
+  - Grille adaptative (3 ou 5 colonnes selon le mode)
+  - Composant RomajiKeyboard.tsx: 57 → 157 lignes
+- [x] Flux validation manuelle avec modal (2025-11-11, Session 3)
+  - Modal Sheet (Tamagui) pour feedback immédiat
+  - Modal vert si correct + icône ✓
+  - Modal rouge si incorrect + icône ✗ + affichage réponse correcte
+  - Bouton "Suivant →" pour progression manuelle
+  - Modal instantané (animations désactivées) pour réactivité maximale
+  - Page training.tsx: 329 → 410 lignes
+- [x] Corrections bugs validation (2025-11-11, Session 3)
+  - Flash rouge lors fermeture modal (persistence modalColor corrigée)
+  - Délai/double-clic bouton (animations désactivées, reset état immédiat)
+  - Régression modalColor null (setTimeout supprimé)
 
 ---
 

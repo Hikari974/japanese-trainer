@@ -26,24 +26,72 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Automatic preferences saving before training session start
 - Pre-selection of last used level and difficulty on app launch
 - Offline-first architecture (100% local storage, no server required)
+- Complete JLPT words database (726 words: Kana 137, N5 134, N4 121, N3 113, N2 118, N1 103)
+  - Format: kanji, kana, romaji, French and English translations
+  - Service `app/services/wordSelection.ts` for random word selection (10 words per session)
+- Bilingual support (French/English) with auto-detection
+  - `expo-localization` for device language detection
+  - Language selector in settings page (FR/EN toggle)
+  - Preferences extended with `language` field ('fr' | 'en')
+  - Bilingual labels in training page (counters, translations)
+- Restructured training UI for better usability
+  - Counter bar: "Words: 1/10" + "Starts: 3" (bilingual)
+  - Translation toggle with eye icon
+  - Horizontal layout: Start button + ScrollingText window
+  - AppHeader reduced to 60px for better screen usage
+  - RomajiKeyboard extracted as separate component (56 lines)
+- ScrollingText performance optimizations
+  - ScrollView removed (eliminated JS/UI thread conflict)
+  - Removed animation="quick" from 50 buttons (50 AnimatedViews → 0)
+  - ScrollingTextContainer with custom memoization
+  - Single-pass animation (infinite loop → once then hide)
+  - Result: Smooth ScrollingText, zero stuttering
+- **Multi-mode Romaji Keyboard** (Session 3)
+  - 4 toggle modes: Base (46 syllables), Dakuten ゛ (20), Handakuten ゜ (5), Yōon ゃ (33)
+  - Total coverage: 104 romaji syllables
+  - Mode selector with visual feedback (active/inactive button states)
+  - Adaptive grid layout (3 or 5 columns depending on mode)
+  - Component size: 57 → 157 lines
+- **Manual Validation Flow with Modal Feedback** (Session 3)
+  - Tamagui Sheet modal for instant user feedback
+  - Green modal on correct answer with ✓ icon
+  - Red modal on incorrect answer with ✗ icon + correct answer display
+  - "Next →" button for manual progression control
+  - Instant modal appearance (animations disabled for maximum responsiveness)
+  - Training page: 329 → 410 lines
 
 ### Fixed
 - Memory leak: setTimeout cleanup on component unmount (training.tsx)
 - Closure bug: setState functional form for currentWordIndex (training.tsx)
+- Broken tests after expo-localization addition (jest.setup.js mocks updated)
+- **Red flash on modal close** (Session 3): Fixed modalColor state persistence
+- **Button delay/double-click issue** (Session 3): Disabled animations, immediate state resets
+- **modalColor null regression** (Session 3): Removed problematic setTimeout
 
 ### Changed
 - Home screen (`app/index.tsx`) now loads and saves user preferences automatically
 - "Start Session" button now saves preferences before navigation (async operation)
 - Test suite expanded from 15 to 36 tests (all passing)
+- Training page validation changed from auto-progression to manual modal-based flow
 
 ### ⚠️ Technical Debt
-- training.tsx: Tests pending (manual validation only, 239 lines)
+- training.tsx: Tests pending (manual validation only, 410 lines)
   - Priority: P0 (MUST complete before new features)
   - Validation: Code Review approved, manual testing passed
+  - Estimation: 2-3h (modal state machine, validation logic, state resets)
+- RomajiKeyboard.tsx: Tests pending (157 lines)
+  - Priority: P0 (MUST complete before new features)
+  - Validation: Code Review approved
+  - Estimation: 1.5-2h (mode switching, button callbacks, disabled state, grid rendering)
+- Jest memory leak in preferences tests (2/5 test suites crash with heap out of memory)
+  - Priority: P0
+  - Estimation: 1-2h (investigate AsyncStorage mocks or refactor tests)
 
 ### Technical Details
 - Added dependency: `@react-native-async-storage/async-storage` v2.1.0
+- Added dependency: `expo-localization` v16.0.0
 - AsyncStorage mock added to `jest.setup.js` for testing
+- expo-localization mock added to `jest.setup.js` for testing
 - Error handling with graceful fallback to defaults on all storage errors
 - Extensible architecture ready for statistics persistence
 

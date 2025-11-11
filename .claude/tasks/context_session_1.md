@@ -368,3 +368,92 @@ L'application tourne sur Android via Expo Go (port 8081).
   - Validation romaji flexible testée
   - Compteurs mots/départs fonctionnels
   - Système langue FR/EN validé
+
+---
+
+## 🔄 Session 3 - Améliorations Validation et Clavier (2025-11-11)
+
+### Fonctionnalités Ajoutées
+
+- [x] **Clavier Romaji modes multiples** (RomajiKeyboard.tsx: 57 → 157 lignes)
+  - 4 modes à bascule : Base (46 syllabes), Dakuten ゛ (20 syllabes), Handakuten ゜ (5 syllabes), Yōon ゃ (33 syllabes)
+  - Sélecteur de mode en haut du clavier (4 boutons)
+  - Mode actif visuellement distinct (fond bleu + bordure)
+  - Grid adaptative : mode Yōon utilise 3 colonnes (64px) au lieu de 5 (42px)
+  - Total : 104 syllabes romaji couvertes
+  - Performance : React.memo + useCallback + useMemo
+
+- [x] **Flux de validation manuel avec modal** (training.tsx refactoré)
+  - Suppression timeouts automatiques (1 seconde après validation)
+  - Modal Sheet Tamagui pour feedback utilisateur
+  - Fond vert si correct ("Correct ! Bien joué !") + ✓
+  - Fond rouge si incorrect ("Incorrect. La bonne réponse était : [romaji]") + ✗
+  - Bouton "Suivant →" pour progression manuelle
+  - Clavier et Clear button désactivés pendant affichage feedback
+  - Bouton Validate remplacé par Suivant après validation
+
+### Décisions Techniques
+
+**Clavier Romaji :**
+- **Approche toggle** retenue (vs transformation post-frappe)
+  - Cliquer [゛] → Clavier affiche ga, gi, gu, ge, go / za, ji, zu...
+  - Cliquer [゜] → Clavier affiche pa, pi, pu, pe, po
+  - Cliquer [ゃ] → Clavier affiche kya, kyu, kyo / sha, shu, sho...
+- État `currentMode` contrôle la grille affichée
+- Config par mode : data (syllabes), columns (3 ou 5), buttonWidth (42px ou 64px)
+
+**Modal Feedback :**
+- **Sheet Tamagui** choisi (vs Dialog)
+  - Pattern mobile natif (bottom sheet)
+  - Backdrop semi-transparent intégré
+  - Animations gérées par composant
+- **États séparés pour stabilité couleur :**
+  - `isModalOpen: boolean` - Contrôle ouverture/fermeture
+  - `modalColor: 'green' | 'red' | null` - **Persiste** pendant fermeture (évite flash rouge)
+  - `validationFeedback` conservé pour compatibilité bordure input
+- **Réactivité immédiate :**
+  - Animations désactivées (instant pop au lieu de slide)
+  - Reset états immédiat au clic Suivant (pas de setTimeout)
+  - `modalColor` ne reset jamais → écrasé par prochaine validation
+
+### Problèmes Résolus
+
+**Bug 1 - Flash rouge pendant fermeture modal :**
+- **Cause :** `modalColor` resetté à `null` → ternaire évalue `false` → couleur rouge par défaut
+- **Solution :** Ne jamais resetter `modalColor`, seulement l'écraser à la prochaine validation
+
+**Bug 2 - Délai/double-clic bouton Suivant :**
+- **Tentative 1 :** Flag `isModalClosing` → ÉCHEC (bloquait tous les clics pendant 350ms)
+- **Tentative 2 :** Bouton disabled state → ÉCHEC (bouton désactivé à l'ouverture)
+- **Tentative 3 :** Réduction timeout 350ms → 50ms → ÉCHEC (délai encore perceptible)
+- **Solution finale :** Suppression complète animations Sheet + reset états immédiat
+  - `animation={false}` sur Sheet et Overlay
+  - Pas de setTimeout dans `handleNext()`
+  - Modal "pop" instantané (trade-off : moins poli visuellement, 100% réactif)
+
+**Bug 3 - État `modalColor` null causait régression :**
+- **Cause :** Ancien setTimeout resetait `modalColor` après 50ms
+- **Solution :** Supprimé setTimeout, `modalColor` persiste entre validations
+
+### Fichiers Modifiés
+
+1. **app/components/RomajiKeyboard.tsx** (57 → 157 lignes, +100 lignes)
+   - Ajout 4 modes clavier avec données syllabes complètes
+   - Sélecteur de mode avec feedback visuel
+   - Grid adaptative (3/5 colonnes selon mode)
+
+2. **app/training.tsx** (329 → 410 lignes, +81 lignes)
+   - Nouveaux états : `isModalOpen`, `modalColor`
+   - Suppression `pendingTimeout` et cleanup timeout
+   - `handleValidate()` refactoré : set modal states au lieu de setTimeout
+   - `handleNext()` créé : fermeture modal + reset immédiat
+   - Sheet modal ajouté (lignes 345-406) : overlay + frame + contenu feedback
+   - Zone 3.5 feedback inline supprimée (remplacée par modal)
+
+**Total changements :** 393 lignes (301 insertions + 92 suppressions)
+
+### Points d'Attention
+
+- **Debt technique :** Tests manquants pour RomajiKeyboard (modes) et training.tsx (modal)
+- **UX trade-off :** Modal sans animation (pop instantané) pour réactivité maximale
+- **Performance :** Memoization importante pour éviter re-renders inutiles avec 104 boutons total

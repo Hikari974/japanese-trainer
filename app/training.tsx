@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { YStack, XStack, Button, Text, Input } from 'tamagui';
+import { YStack, XStack, Button, Text, Input, Sheet } from 'tamagui';
 import { useLocalSearchParams } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AppHeader } from './components/AppHeader';
@@ -15,6 +15,7 @@ import type { JLPTLevel } from './types/word';
 // Types
 type ScrollingState = 'idle' | 'running';
 type ValidationFeedback = 'correct' | 'incorrect' | null;
+type ModalColor = 'green' | 'red' | null;
 
 interface DifficultyParams {
   speed: number;
@@ -83,9 +84,15 @@ export default function TrainingScreen() {
   const [scrollingState, setScrollingState] = useState<ScrollingState>('idle');
   const [currentWordIndex, setCurrentWordIndex] = useState<number>(0);
   const [validationFeedback, setValidationFeedback] = useState<ValidationFeedback>(null);
-  const [pendingTimeout, setPendingTimeout] = useState<NodeJS.Timeout | null>(null);
   const [startClickCount, setStartClickCount] = useState<number>(0);
   const [showTranslation, setShowTranslation] = useState<boolean>(false);
+  const [showNextButton, setShowNextButton] = useState<boolean>(false);
+  const [feedbackMessage, setFeedbackMessage] = useState<string>('');
+  const [correctAnswer, setCorrectAnswer] = useState<string>('');
+
+  // Separate state for modal visibility and color to prevent red flash during closing animation
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [modalColor, setModalColor] = useState<ModalColor>(null);
 
   const currentWord = words[currentWordIndex];
 
@@ -94,13 +101,6 @@ export default function TrainingScreen() {
     setStartClickCount(0);
     setShowTranslation(false);
   }, [currentWordIndex]);
-
-  // Cleanup timeout on unmount
-  useEffect(() => {
-    return () => {
-      if (pendingTimeout) clearTimeout(pendingTimeout);
-    };
-  }, [pendingTimeout]);
 
   // Handlers
   const handleSyllablePress = useCallback((syllable: string) => {
@@ -115,35 +115,52 @@ export default function TrainingScreen() {
   const handleValidate = () => {
     if (!currentWord) return;
 
-    // Clear any pending timeout
-    if (pendingTimeout) clearTimeout(pendingTimeout);
-
     const normalized = normalizeRomaji(inputText);
     const expected = normalizeRomaji(currentWord.romaji);
 
     if (normalized === expected) {
+      // CORRECT
       setValidationFeedback('correct');
-      const timeout = setTimeout(() => {
-        // Passer au mot suivant (ou revenir au début si fin de session)
-        setCurrentWordIndex(prev => {
-          const next = prev + 1;
-          if (next >= words.length) {
-            // Fin de session - revenir au début
-            return 0;
-          }
-          return next;
-        });
-        setInputText('');
-        setValidationFeedback(null);
-      }, 1000);
-      setPendingTimeout(timeout);
+      setFeedbackMessage('Correct ! Bien joué !');
+      setCorrectAnswer('');
+      setShowNextButton(true);
+      // Set modal state
+      setModalColor('green');
+      setIsModalOpen(true);
     } else {
+      // INCORRECT
       setValidationFeedback('incorrect');
-      const timeout = setTimeout(() => {
-        setValidationFeedback(null);
-      }, 1000);
-      setPendingTimeout(timeout);
+      setFeedbackMessage('Incorrect. La bonne réponse était :');
+      setCorrectAnswer(currentWord.romaji);
+      setShowNextButton(true);
+      // Set modal state
+      setModalColor('red');
+      setIsModalOpen(true);
     }
+  };
+
+  const handleNext = () => {
+    // Close the modal immediately
+    setIsModalOpen(false);
+
+    // Move to next word IMMEDIATELY - no delay for user interaction
+    setCurrentWordIndex(prev => {
+      const next = prev + 1;
+      if (next >= words.length) {
+        return 0; // Loop to start
+      }
+      return next;
+    });
+
+    // Reset input immediately so user can start typing right away
+    setInputText('');
+    setShowNextButton(false);
+    setFeedbackMessage('');
+    setCorrectAnswer('');
+    setValidationFeedback(null);
+
+    // DO NOT reset modalColor here - it causes color flash during close animation
+    // modalColor will be set by the next handleValidate call
   };
 
   const handleStart = () => {
@@ -263,62 +280,154 @@ export default function TrainingScreen() {
           {/* Zone 3: RomajiKeyboard Grid */}
           <RomajiKeyboard
             onSyllablePress={handleSyllablePress}
-            disabled={scrollingState !== 'running'}
+            disabled={showNextButton}
           />
 
-          {/* Zone 4: Input + Actions */}
-          <YStack gap="$2">
-            {/* Input field */}
+          {/* Zone 4: Input + Actions - INLINE LAYOUT */}
+          <XStack gap="$2" alignItems="center">
+            {/* Clear button - LEFT */}
+            <Button
+              size="$3"
+              minWidth={44}
+              minHeight={44}
+              onPress={handleClear}
+              backgroundColor="$backgroundHover"
+              disabled={inputText.length === 0 || showNextButton}
+              pressStyle={{ opacity: 0.8, scale: 0.95 }}
+              animation="quick"
+              accessibilityLabel="Effacer le texte"
+            >
+              <Text fontSize={20}>🗑️</Text>
+            </Button>
+
+            {/* Input field - CENTER */}
             <XStack
+              flex={1}
               padding="$2.5"
               paddingHorizontal="$3"
               backgroundColor="$backgroundHover"
               borderRadius="$3"
               borderWidth={2}
               borderColor={getBorderColor()}
-              minHeight={48}
+              minHeight={44}
               alignItems="center"
+              justifyContent="center"
             >
               {inputText ? (
-                <Text fontSize={18} color="$color" flex={1}>
+                <Text fontSize={20} fontWeight="600" color="$color" textAlign="center">
                   {inputText}
                 </Text>
               ) : (
-                <Text fontSize={16} color="$darkTextTertiary" flex={1}>
-                  Tapez avec le clavier ci-dessus
+                <Text fontSize={14} color="$darkTextTertiary" textAlign="center">
+                  Tapez avec le clavier
                 </Text>
               )}
             </XStack>
 
-            {/* Actions */}
-            <XStack gap="$2">
-              <Button
-                flex={1}
-                size="$3"
-                onPress={handleClear}
-                backgroundColor="$backgroundHover"
-                disabled={inputText.length === 0 || scrollingState !== 'running'}
-                pressStyle={{ opacity: 0.8, scale: 0.98 }}
-              >
-                <Text color="$difficultyExtreme" fontWeight="600">
-                  Effacer
-                </Text>
-              </Button>
-              <Button
-                flex={1}
-                size="$3"
-                onPress={handleValidate}
-                backgroundColor="$difficultyEasy"
-                disabled={inputText.length === 0 || scrollingState !== 'running'}
-                pressStyle={{ opacity: 0.8, scale: 0.98 }}
-              >
-                <Text color="$darkBackground" fontWeight="600">
-                  Valider
-                </Text>
-              </Button>
-            </XStack>
-          </YStack>
+            {/* Validate button - RIGHT */}
+            <Button
+              size="$3"
+              minWidth={44}
+              minHeight={44}
+              onPress={handleValidate}
+              backgroundColor="$difficultyEasy"
+              disabled={inputText.length === 0}
+              pressStyle={{ opacity: 0.8, scale: 0.95 }}
+              animation="quick"
+              accessibilityLabel="Valider la réponse"
+            >
+              <Text fontSize={20}>✓</Text>
+            </Button>
+          </XStack>
       </YStack>
+
+      {/* Feedback Modal */}
+      <Sheet
+        modal
+        open={isModalOpen}
+        onOpenChange={() => {
+          // Force user to click "Suivant" button - don't allow closing by backdrop
+        }}
+        snapPoints={[45]}
+        dismissOnSnapToBottom={false}
+        animation="quick"
+        animationConfig={{
+          type: 'timing',
+          duration: 150,
+        }}
+      >
+        <Sheet.Overlay
+          backgroundColor="rgba(0, 0, 0, 0.6)"
+          animation="quick"
+          enterStyle={{ opacity: 0 }}
+          exitStyle={{ opacity: 0 }}
+        />
+
+        <Sheet.Frame
+          backgroundColor={
+            modalColor === 'green'
+              ? 'rgba(76, 175, 80, 0.98)'
+              : 'rgba(244, 67, 54, 0.98)'
+          }
+          borderTopLeftRadius="$6"
+          borderTopRightRadius="$6"
+          padding="$6"
+          animation="quick"
+          enterStyle={{ y: 100, opacity: 0 }}
+          exitStyle={{ y: 100, opacity: 0 }}
+        >
+          <YStack gap="$4" alignItems="center" justifyContent="center">
+            {/* Icon */}
+            <Text fontSize={48} color="white">
+              {validationFeedback === 'correct' ? '✓' : '✗'}
+            </Text>
+
+            {/* Feedback Message */}
+            <Text
+              fontSize={20}
+              fontWeight="700"
+              color="white"
+              textAlign="center"
+            >
+              {feedbackMessage}
+            </Text>
+
+            {/* Correct Answer (only if incorrect) */}
+            {correctAnswer && (
+              <Text
+                fontSize={32}
+                fontWeight="800"
+                color="white"
+                textAlign="center"
+              >
+                {correctAnswer}
+              </Text>
+            )}
+
+            {/* Next Button */}
+            <Button
+              size="$5"
+              width="100%"
+              onPress={handleNext}
+              backgroundColor="white"
+              pressStyle={{ opacity: 0.8, scale: 0.98 }}
+              animation="quick"
+            >
+              <Text
+                fontSize={16}
+                fontWeight="700"
+                color={
+                  validationFeedback === 'correct'
+                    ? '$difficultyEasy'
+                    : '$difficultyExtreme'
+                }
+              >
+                Suivant →
+              </Text>
+            </Button>
+          </YStack>
+        </Sheet.Frame>
+      </Sheet>
     </YStack>
   );
 }
