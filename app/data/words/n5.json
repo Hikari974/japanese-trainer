@@ -226,7 +226,7 @@
     "id": 23,
     "kanji": "丈夫",
     "kana": "じょうぶ",
-    "romaji": "jyoubu",
+    "romaji": "joubu",
     "translations": {
       "fr": "robuste",
       "en": "strong, durable"
@@ -806,7 +806,7 @@
     "id": 81,
     "kanji": "",
     "kana": "じゃ",
-    "romaji": "jya",
+    "romaji": "ja",
     "translations": {
       "fr": "alors",
       "en": "well then…"
@@ -1146,7 +1146,7 @@
     "id": 115,
     "kanji": "",
     "kana": "ちょうど",
-    "romaji": "chyoudo",
+    "romaji": "choudo",
     "translations": {
       "fr": "exactement",
       "en": "exactly"
@@ -1676,7 +1676,7 @@
     "id": 168,
     "kanji": "誕生日",
     "kana": "たんじょうび",
-    "romaji": "tanjyoubi",
+    "romaji": "tanjoubi",
     "translations": {
       "fr": "anniversaire",
       "en": "birthday"
@@ -1896,7 +1896,7 @@
     "id": 190,
     "kanji": "授業",
     "kana": "じゅぎょう",
-    "romaji": "jyugyou",
+    "romaji": "jugyou",
     "translations": {
       "fr": "leçon",
       "en": "lesson, class work"
@@ -2226,7 +2226,7 @@
     "id": 223,
     "kanji": "",
     "kana": "ちゃわん",
-    "romaji": "chyawan",
+    "romaji": "chawan",
     "translations": {
       "fr": "bol à riz",
       "en": "rice bowl"
@@ -2846,7 +2846,7 @@
     "id": 285,
     "kanji": "大丈夫",
     "kana": "だいじょうぶ",
-    "romaji": "daijyoubu",
+    "romaji": "daijoubu",
     "translations": {
       "fr": "d'accord",
       "en": "all right"
@@ -3466,7 +3466,7 @@
     "id": 347,
     "kanji": "上手",
     "kana": "じょうず",
-    "romaji": "jyouzu",
+    "romaji": "jouzu",
     "translations": {
       "fr": "adroit",
       "en": "Skillful"
@@ -3516,7 +3516,7 @@
     "id": 352,
     "kanji": "茶色",
     "kana": "ちゃいろ",
-    "romaji": "chyairo",
+    "romaji": "chairo",
     "translations": {
       "fr": "marron",
       "en": "brown"
@@ -4655,8 +4655,8 @@
   {
     "id": 466,
     "kanji": "十",
-    "kana": "じゅう とお",
-    "romaji": "jyuu too",
+    "kana": "じゅう、とお",
+    "romaji": "juu,too",
     "translations": {
       "fr": "dix",
       "en": "Ten"
@@ -5056,7 +5056,7 @@
     "id": 506,
     "kanji": "紅茶",
     "kana": "こうちゃ",
-    "romaji": "kouchya",
+    "romaji": "koucha",
     "translations": {
       "fr": "thé noir",
       "en": "black tea"
@@ -5176,7 +5176,7 @@
     "id": 518,
     "kanji": "お茶",
     "kana": "おちゃ",
-    "romaji": "ochya",
+    "romaji": "ocha",
     "translations": {
       "fr": "thé vert",
       "en": "green tea"
@@ -5266,7 +5266,7 @@
     "id": 527,
     "kanji": "",
     "kana": "ちょっと",
-    "romaji": "chyotto",
+    "romaji": "chotto",
     "translations": {
       "fr": "un peu",
       "en": "somewhat"

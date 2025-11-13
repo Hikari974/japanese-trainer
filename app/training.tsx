@@ -62,11 +62,6 @@ const normalizeRomaji = (text: string): string => {
     .replace(/jy/g, 'j')            // jy→j (standalone)
     // Handle "chy" → "ch" variants (cha, chu, cho)
     .replace(/chy([auo])/g, 'ch$1') // chya→cha, chyu→chu, chyo→cho
-    // Handle っち pattern: "cchi" → "tchi" (small tsu + chi)
-    .replace(/cchi/g, 'tchi')
-    .replace(/ccha/g, 'tcha')
-    .replace(/ccho/g, 'tcho')
-    .replace(/cchu/g, 'tchu')
     // Handle standard variants
     .replace(/si/g, 'shi')
     .replace(/ti/g, 'chi')

@@ -11,12 +11,12 @@ function extractKeyboardSyllables(): string[] {
     ['k', 'ka', 'ki', 'ku', 'ke', 'ko'],
     ['s', 'sa', 'shi', 'su', 'se', 'so'],
     ['t', 'ta', 'chi', 'tsu', 'te', 'to'],
-    ['', 'na', 'ni', 'nu', 'ne', 'no'],
+    ['c', 'na', 'ni', 'nu', 'ne', 'no'],
     ['', 'ha', 'hi', 'fu', 'he', 'ho'],
     ['m', 'ma', 'mi', 'mu', 'me', 'mo'],
     ['', 'ya', 'yu', 'yo', '', ''],
     ['', 'ra', 'ri', 'ru', 're', 'ro'],
-    ['', 'wa', 'wo', 'n', '', ''],
+    ['', 'wa', 'wo', 'n', ',', ''],
   ];
 
   // Dakuten + Handakuten combined (30 total)
@@ -43,13 +43,13 @@ function extractKeyboardSyllables(): string[] {
     ['pya', 'pyu', 'pyo'],
   ];
 
-  // Foreign katakana syllables (22 total)
+  // Foreign katakana syllables (23 total)
   const foreignSyllables = [
     ['fa', 'fi', 'fe', 'fo'],
     ['wi', 'we', 'wo'],
     ['va', 'vi', 'vu', 've', 'vo'],
     ['ti', 'di', 'tu', 'du'],
-    ['she', 'tsa', 'dyu', 'je'],
+    ['che', 'she', 'tsa', 'dyu', 'je'],
   ];
 
   // Flatten all arrays and filter out empty strings
@@ -151,11 +151,6 @@ function normalizeRomaji(text: string): string {
     .replace(/jy/g, 'j')            // jy→j (standalone)
     // Handle "chy" → "ch" variants (cha, chu, cho)
     .replace(/chy([auo])/g, 'ch$1') // chya→cha, chyu→chu, chyo→cho
-    // Handle っち pattern: "cchi" → "tchi" (small tsu + chi)
-    .replace(/cchi/g, 'tchi')
-    .replace(/ccha/g, 'tcha')
-    .replace(/ccho/g, 'tcho')
-    .replace(/cchu/g, 'tchu')
     // Handle standard variants
     .replace(/si/g, 'shi')
     .replace(/ti/g, 'chi')

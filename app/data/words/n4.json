@@ -6,7 +6,7 @@
     "id": 1,
     "kanji": "会場",
     "kana": "かいじょう",
-    "romaji": "kaijiょu",
+    "romaji": "kaijou",
     "translations": {
       "fr": "salle de réunion, lieu de rassemblement",
       "en": "assembly hall or meeting place"
@@ -66,7 +66,7 @@
     "id": 7,
     "kanji": "ガソリン",
     "kana": "ガソリン",
-    "romaji": "ガソリン",
+    "romaji": "gasorin",
     "translations": {
       "fr": "essence",
       "en": "petrol"
@@ -106,7 +106,7 @@
     "id": 11,
     "kanji": "決して",
     "kana": "けっして",
-    "romaji": "keっshite",
+    "romaji": "kesshite",
     "translations": {
       "fr": "jamais",
       "en": "never"
@@ -116,7 +116,7 @@
     "id": 12,
     "kanji": "きっと",
     "kana": "きっと",
-    "romaji": "kiっto",
+    "romaji": "kitto",
     "translations": {
       "fr": "certainement",
       "en": "surely"
@@ -146,7 +146,7 @@
     "id": 15,
     "kanji": "コンピュータ",
     "kana": "コンピュータ",
-    "romaji": "コンピュ-タ",
+    "romaji": "konpyuuta",
     "translations": {
       "fr": "ordinateur",
       "en": "computer"
@@ -226,7 +226,7 @@
     "id": 23,
     "kanji": "卒業",
     "kana": "そつぎょう",
-    "romaji": "sotsugiょu",
+    "romaji": "sotsugyou",
     "translations": {
       "fr": "graduation",
       "en": "graduation"
@@ -276,7 +276,7 @@
     "id": 28,
     "kanji": "近所",
     "kana": "きんじょ",
-    "romaji": "kinjiょ",
+    "romaji": "kinjo",
     "translations": {
       "fr": "quartier",
       "en": "neighbourhood"
@@ -396,7 +396,7 @@
     "id": 40,
     "kanji": "技術",
     "kana": "ぎじゅつ",
-    "romaji": "gijiゅtsu",
+    "romaji": "gijutsu",
     "translations": {
       "fr": "art, technologie, compétence",
       "en": "art,technology,skill"
@@ -416,7 +416,7 @@
     "id": 42,
     "kanji": "非常に",
     "kana": "ひじょうに",
-    "romaji": "hijiょuni",
+    "romaji": "hijouni",
     "translations": {
       "fr": "extrêmement",
       "en": "extremely"
@@ -426,7 +426,7 @@
     "id": 43,
     "kanji": "ハンドバッグ",
     "kana": "ハンドバッグ",
-    "romaji": "ハンドバッグ",
+    "romaji": "handobaggu",
     "translations": {
       "fr": "sac à main",
       "en": "handbag"
@@ -446,7 +446,7 @@
     "id": 45,
     "kanji": "急行",
     "kana": "きゅうこう",
-    "romaji": "kiゅukou",
+    "romaji": "kyuukou",
     "translations": {
       "fr": "rapide, express",
       "en": "speedy, express"
@@ -456,7 +456,7 @@
     "id": 46,
     "kanji": "中学校",
     "kana": "ちゅうがっこう",
-    "romaji": "chiゅugaっkou",
+    "romaji": "chuugakkou",
     "translations": {
       "fr": "collège",
       "en": "junior high school,middle school"
@@ -466,7 +466,7 @@
     "id": 47,
     "kanji": "ジャム",
     "kana": "ジャム",
-    "romaji": "ジャム",
+    "romaji": "jamu",
     "translations": {
       "fr": "confiture",
       "en": "jam"
@@ -476,7 +476,7 @@
     "id": 48,
     "kanji": "アルコール",
     "kana": "アルコール",
-    "romaji": "アルコ-ル",
+    "romaji": "arukooru",
     "translations": {
       "fr": "alcool",
       "en": "alcohol"
@@ -506,7 +506,7 @@
     "id": 51,
     "kanji": "故障",
     "kana": "こしょう",
-    "romaji": "koshiょu",
+    "romaji": "koshou",
     "translations": {
       "fr": "tomber en panne",
       "en": "to break-down"
@@ -516,7 +516,7 @@
     "id": 52,
     "kanji": "新聞社",
     "kana": "しんぶんしゃ",
-    "romaji": "shinbunshiゃ",
+    "romaji": "shinbunsha",
     "translations": {
       "fr": "journal",
       "en": "newspaper company"
@@ -546,7 +546,7 @@
     "id": 55,
     "kanji": "はっきり",
     "kana": "はっきり",
-    "romaji": "haっkiri",
+    "romaji": "hakkiri",
     "translations": {
       "fr": "clairement",
       "en": "clearly"
@@ -626,7 +626,7 @@
     "id": 63,
     "kanji": "十分",
     "kana": "じゅうぶん",
-    "romaji": "jiゅubun",
+    "romaji": "juubun",
     "translations": {
       "fr": "assez",
       "en": "enough"
@@ -636,7 +636,7 @@
     "id": 64,
     "kanji": "場所",
     "kana": "ばしょ",
-    "romaji": "bashiょ",
+    "romaji": "basho",
     "translations": {
       "fr": "lieu",
       "en": "location"
@@ -646,7 +646,7 @@
     "id": 65,
     "kanji": "部長",
     "kana": "ぶちょう",
-    "romaji": "buchiょu",
+    "romaji": "buchou",
     "translations": {
       "fr": "chef de section",
       "en": "head of a section"
@@ -676,7 +676,7 @@
     "id": 68,
     "kanji": "エスカレーター",
     "kana": "エスカレーター",
-    "romaji": "エスカレ-タ-",
+    "romaji": "esukareetaa",
     "translations": {
       "fr": "escalator",
       "en": "escalator"
@@ -696,7 +696,7 @@
     "id": 70,
     "kanji": "以上",
     "kana": "いじょう",
-    "romaji": "ijiょu",
+    "romaji": "ijou",
     "translations": {
       "fr": "plus que, c'est tout",
       "en": "more than,this is all"
@@ -716,7 +716,7 @@
     "id": 72,
     "kanji": "夫",
     "kana": "おっと",
-    "romaji": "oっto",
+    "romaji": "otto",
     "translations": {
       "fr": "mari",
       "en": "husband"
@@ -736,7 +736,7 @@
     "id": 74,
     "kanji": "サンダル",
     "kana": "サンダル",
-    "romaji": "サンダル",
+    "romaji": "sendaru",
     "translations": {
       "fr": "sandale",
       "en": "sandal"
@@ -816,7 +816,7 @@
     "id": 82,
     "kanji": "研究室",
     "kana": "けんきゅうしつ",
-    "romaji": "kenkiゅushitsu",
+    "romaji": "kenkyuushitsu",
     "translations": {
       "fr": "salle d'étude, laboratoire",
       "en": "study room,laboratory"
@@ -826,7 +826,7 @@
     "id": 83,
     "kanji": "サラダ",
     "kana": "サラダ",
-    "romaji": "サラダ",
+    "romaji": "sarada",
     "translations": {
       "fr": "salade",
       "en": "salad"
@@ -836,7 +836,7 @@
     "id": 84,
     "kanji": "パソコン",
     "kana": "パソコン",
-    "romaji": "パソコン",
+    "romaji": "pasokon",
     "translations": {
       "fr": "ordinateur personnel",
       "en": "personal computer"
@@ -856,7 +856,7 @@
     "id": 86,
     "kanji": "スーツ",
     "kana": "スーツ",
-    "romaji": "ス-ツ",
+    "romaji": "suutsu",
     "translations": {
       "fr": "costume",
       "en": "suit"
@@ -866,7 +866,7 @@
     "id": 87,
     "kanji": "いらっしゃる",
     "kana": "いらっしゃる",
-    "romaji": "iraっshiゃru",
+    "romaji": "irassharu",
     "translations": {
       "fr": "être, venir ou aller (respectueux)",
       "en": "(respectful) to be,to come or to go"
@@ -906,7 +906,7 @@
     "id": 91,
     "kanji": "教育",
     "kana": "きょういく",
-    "romaji": "kiょuiku",
+    "romaji": "kyouiku",
     "translations": {
       "fr": "éducation",
       "en": "education"
@@ -916,7 +916,7 @@
     "id": 92,
     "kanji": "びっくり",
     "kana": "びっくり",
-    "romaji": "biっkuri",
+    "romaji": "bikkuri",
     "translations": {
       "fr": "être surpris",
       "en": "to be surprised"
@@ -936,7 +936,7 @@
     "id": 94,
     "kanji": "日記",
     "kana": "にっき",
-    "romaji": "niっki",
+    "romaji": "nikki",
     "translations": {
       "fr": "journal",
       "en": "journal"
@@ -996,7 +996,7 @@
     "id": 100,
     "kanji": "校長",
     "kana": "こうちょう",
-    "romaji": "kouchiょu",
+    "romaji": "kouchou",
     "translations": {
       "fr": "directeur",
       "en": "headmaster"
@@ -1006,7 +1006,7 @@
     "id": 101,
     "kanji": "オートバイ",
     "kana": "オートバイ",
-    "romaji": "オ-トバイ",
+    "romaji": "ootobai",
     "translations": {
       "fr": "motocyclette",
       "en": "motorcycle"
@@ -1016,7 +1016,7 @@
     "id": 102,
     "kanji": "もっとも",
     "kana": "もっとも",
-    "romaji": "moっtomo",
+    "romaji": "mottomo",
     "translations": {
       "fr": "extrêmement",
       "en": "extremely"
@@ -1146,7 +1146,7 @@
     "id": 115,
     "kanji": "スーツケース",
     "kana": "スーツケース",
-    "romaji": "ス-ツケ-ス",
+    "romaji": "suutsukeesu",
     "translations": {
       "fr": "valise",
       "en": "suitcase"
@@ -1176,7 +1176,7 @@
     "id": 118,
     "kanji": "競争",
     "kana": "きょうそう",
-    "romaji": "kiょusou",
+    "romaji": "kyousou",
     "translations": {
       "fr": "compétition",
       "en": "competition"
@@ -1396,7 +1396,7 @@
     "id": 140,
     "kanji": "教会",
     "kana": "きょうかい",
-    "romaji": "kiょukai",
+    "romaji": "kyoukai",
     "translations": {
       "fr": "église",
       "en": "church"
@@ -1406,7 +1406,7 @@
     "id": 141,
     "kanji": "旅館",
     "kana": "りょかん",
-    "romaji": "riょkan",
+    "romaji": "ryokan",
     "translations": {
       "fr": "hôtel japonais",
       "en": "Japanese hotel"
@@ -1456,7 +1456,7 @@
     "id": 146,
     "kanji": "おもちゃ",
     "kana": "おもちゃ",
-    "romaji": "omochiゃ",
+    "romaji": "omocha",
     "translations": {
       "fr": "jouet",
       "en": "toy"
@@ -1476,7 +1476,7 @@
     "id": 148,
     "kanji": "やっと",
     "kana": "やっと",
-    "romaji": "yaっto",
+    "romaji": "yatto",
     "translations": {
       "fr": "enfin",
       "en": "at last"
@@ -1556,7 +1556,7 @@
     "id": 156,
     "kanji": "サンドイッチ",
     "kana": "サンドイッチ",
-    "romaji": "サンドイッチ",
+    "romaji": "sandoicchi",
     "translations": {
       "fr": "sandwich",
       "en": "sandwich"
@@ -1586,7 +1586,7 @@
     "id": 159,
     "kanji": "ベル",
     "kana": "ベル",
-    "romaji": "ベル",
+    "romaji": "beru",
     "translations": {
       "fr": "cloche",
       "en": "bell"
@@ -1636,7 +1636,7 @@
     "id": 164,
     "kanji": "消しゴム",
     "kana": "けしゴム",
-    "romaji": "keshiゴム",
+    "romaji": "keshigomu",
     "translations": {
       "fr": "gomme",
       "en": "eraser"
@@ -1656,7 +1656,7 @@
     "id": 166,
     "kanji": "御主人",
     "kana": "ごしゅじん",
-    "romaji": "goshiゅjin",
+    "romaji": "goshujin",
     "translations": {
       "fr": "votre mari (honorable)",
       "en": "(honorable) your husband"
@@ -1696,7 +1696,7 @@
     "id": 170,
     "kanji": "彼女",
     "kana": "かのじょ",
-    "romaji": "kanojiょ",
+    "romaji": "kanojo",
     "translations": {
       "fr": "elle, petite amie",
       "en": "she,girlfriend"
@@ -1706,7 +1706,7 @@
     "id": 171,
     "kanji": "運転手",
     "kana": "うんてんしゅ",
-    "romaji": "untenshiゅ",
+    "romaji": "untenshu",
     "translations": {
       "fr": "chauffeur",
       "en": "driver"
@@ -1726,7 +1726,7 @@
     "id": 173,
     "kanji": "入院",
     "kana": "にゅういん",
-    "romaji": "niゅuin",
+    "romaji": "nyuuin",
     "translations": {
       "fr": "hospitaliser",
       "en": "to hospitalise"
@@ -1736,7 +1736,7 @@
     "id": 174,
     "kanji": "遠慮",
     "kana": "えんりょ",
-    "romaji": "enriょ",
+    "romaji": "enryo",
     "translations": {
       "fr": "être réservé, être retenu",
       "en": "to be reserved, to be restrained"
@@ -1746,7 +1746,7 @@
     "id": 175,
     "kanji": "ビル",
     "kana": "ビル",
-    "romaji": "ビル",
+    "romaji": "biru",
     "translations": {
       "fr": "bâtiment ou facture",
       "en": "building or bill"
@@ -1816,7 +1816,7 @@
     "id": 182,
     "kanji": "神社",
     "kana": "じんじゃ",
-    "romaji": "jinjiゃ",
+    "romaji": "jinja",
     "translations": {
       "fr": "sanctuaire shinto",
       "en": "Shinto shrine"
@@ -1886,7 +1886,7 @@
     "id": 189,
     "kanji": "産業",
     "kana": "さんぎょう",
-    "romaji": "sangiょu",
+    "romaji": "sangyou",
     "translations": {
       "fr": "industrie",
       "en": "industry"
@@ -1896,7 +1896,7 @@
     "id": 190,
     "kanji": "工業",
     "kana": "こうぎょう",
-    "romaji": "kougiょu",
+    "romaji": "kougyou",
     "translations": {
       "fr": "l'industrie manufacturière",
       "en": "the manufacturing industry"
@@ -1936,7 +1936,7 @@
     "id": 194,
     "kanji": "屋上",
     "kana": "おくじょう",
-    "romaji": "okujiょu",
+    "romaji": "okujou",
     "translations": {
       "fr": "toit",
       "en": "rooftop"
@@ -1946,7 +1946,7 @@
     "id": 195,
     "kanji": "輸入",
     "kana": "ゆにゅう",
-    "romaji": "yuniゅu",
+    "romaji": "yunyou",
     "translations": {
       "fr": "importer",
       "en": "to import"
@@ -2086,7 +2086,7 @@
     "id": 209,
     "kanji": "注射",
     "kana": "ちゅうしゃ",
-    "romaji": "chiゅushiゃ",
+    "romaji": "chuusha",
     "translations": {
       "fr": "injection",
       "en": "injection"
@@ -2156,7 +2156,7 @@
     "id": 216,
     "kanji": "アクセサリー",
     "kana": "アクセサリー",
-    "romaji": "アクセサリ-",
+    "romaji": "akusesarii",
     "translations": {
       "fr": "accessoire",
       "en": "accessory"
@@ -2186,7 +2186,7 @@
     "id": 219,
     "kanji": "研究",
     "kana": "けんきゅう",
-    "romaji": "kenkiゅu",
+    "romaji": "kenkyuu",
     "translations": {
       "fr": "recherche",
       "en": "research"
@@ -2216,7 +2216,7 @@
     "id": 222,
     "kanji": "美術館",
     "kana": "びじゅつかん",
-    "romaji": "bijiゅtsukan",
+    "romaji": "bijutsukan",
     "translations": {
       "fr": "galerie d'art",
       "en": "art gallery"
@@ -2256,7 +2256,7 @@
     "id": 226,
     "kanji": "注意",
     "kana": "ちゅうい",
-    "romaji": "chiゅui",
+    "romaji": "chuui",
     "translations": {
       "fr": "prudence",
       "en": "caution"
@@ -2296,7 +2296,7 @@
     "id": 230,
     "kanji": "ピアノ",
     "kana": "ピアノ",
-    "romaji": "ピアノ",
+    "romaji": "piano",
     "translations": {
       "fr": "piano",
       "en": "piano"
@@ -2356,7 +2356,7 @@
     "id": 236,
     "kanji": "ねっしん",
     "kana": "ねっしん",
-    "romaji": "neっshin",
+    "romaji": "nesshin",
     "translations": {
       "fr": "enthousiasme",
       "en": "enthusiasm"
@@ -2366,7 +2366,7 @@
     "id": 237,
     "kanji": "コンサート",
     "kana": "コンサート",
-    "romaji": "コンサ-ト",
+    "romaji": "konsaato",
     "translations": {
       "fr": "concert",
       "en": "concert"
@@ -2446,7 +2446,7 @@
     "id": 245,
     "kanji": "社会",
     "kana": "しゃかい",
-    "romaji": "shiゃkai",
+    "romaji": "shakai",
     "translations": {
       "fr": "société, public",
       "en": "society,public"
@@ -2536,7 +2536,7 @@
     "id": 254,
     "kanji": "小説",
     "kana": "しょうせつ",
-    "romaji": "shiょusetsu",
+    "romaji": "shousetsu",
     "translations": {
       "fr": "roman",
       "en": "novel"
@@ -2556,7 +2556,7 @@
     "id": 256,
     "kanji": "ステーキ",
     "kana": "ステーキ",
-    "romaji": "ステ-キ",
+    "romaji": "suteeki",
     "translations": {
       "fr": "steak",
       "en": "steak"
@@ -2656,7 +2656,7 @@
     "id": 266,
     "kanji": "かっこう",
     "kana": "かっこう",
-    "romaji": "kaっkou",
+    "romaji": "kakkou",
     "translations": {
       "fr": "apparence",
       "en": "appearance"
@@ -2716,7 +2716,7 @@
     "id": 272,
     "kanji": "輸出",
     "kana": "ゆしゅつ",
-    "romaji": "yushiゅtsu",
+    "romaji": "yushutsu",
     "translations": {
       "fr": "exporter",
       "en": "to export"
@@ -2736,7 +2736,7 @@
     "id": 274,
     "kanji": "興味",
     "kana": "きょうみ",
-    "romaji": "kiょumi",
+    "romaji": "kyoumi",
     "translations": {
       "fr": "un intérêt",
       "en": "an interest"
@@ -2746,7 +2746,7 @@
     "id": 275,
     "kanji": "テキスト",
     "kana": "テキスト",
-    "romaji": "テキスト",
+    "romaji": "tekisuto",
     "translations": {
       "fr": "texte, manuel scolaire",
       "en": "text,text book"
@@ -2776,7 +2776,7 @@
     "id": 278,
     "kanji": "カーテン",
     "kana": "カーテン",
-    "romaji": "カ-テン",
+    "romaji": "kaaten",
     "translations": {
       "fr": "rideau",
       "en": "curtain"
@@ -2816,7 +2816,7 @@
     "id": 282,
     "kanji": "いっぱい",
     "kana": "いっぱい",
-    "romaji": "iっpai",
+    "romaji": "ippai",
     "translations": {
       "fr": "plein",
       "en": "full"
@@ -2826,7 +2826,7 @@
     "id": 283,
     "kanji": "社長",
     "kana": "しゃちょう",
-    "romaji": "shiゃchiょu",
+    "romaji": "shachou",
     "translations": {
       "fr": "président de la société",
       "en": "company president"
@@ -2886,7 +2886,7 @@
     "id": 289,
     "kanji": "駐車場",
     "kana": "ちゅうしゃじょう",
-    "romaji": "chiゅushiゃjiょu",
+    "romaji": "chuushajyou",
     "translations": {
       "fr": "parking",
       "en": "parking lot"
@@ -2896,7 +2896,7 @@
     "id": 290,
     "kanji": "プレゼント",
     "kana": "プレゼント",
-    "romaji": "プレゼント",
+    "romaji": "purezento",
     "translations": {
       "fr": "cadeau",
       "en": "present"
@@ -2946,7 +2946,7 @@
     "id": 295,
     "kanji": "人形",
     "kana": "にんぎょう",
-    "romaji": "ningiょu",
+    "romaji": "ningyou",
     "translations": {
       "fr": "poupée, figurine",
       "en": "doll, figure"
@@ -3016,7 +3016,7 @@
     "id": 302,
     "kanji": "チェック",
     "kana": "チェック",
-    "romaji": "チェック",
+    "romaji": "chekku",
     "translations": {
       "fr": "vérifier",
       "en": "to check"
@@ -3096,7 +3096,7 @@
     "id": 310,
     "kanji": "飛行場",
     "kana": "ひこうじょう",
-    "romaji": "hikoujiょu",
+    "romaji": "hikoujyou",
     "translations": {
       "fr": "aéroport",
       "en": "airport"
@@ -3106,7 +3106,7 @@
     "id": 311,
     "kanji": "工場",
     "kana": "こうじょう",
-    "romaji": "koujiょu",
+    "romaji": "koujyou",
     "translations": {
       "fr": "usine",
       "en": "factory"
@@ -3176,7 +3176,7 @@
     "id": 318,
     "kanji": "歯医者",
     "kana": "はいしゃ",
-    "romaji": "haishiゃ",
+    "romaji": "haisha",
     "translations": {
       "fr": "dentiste",
       "en": "dentist"
@@ -3206,7 +3206,7 @@
     "id": 321,
     "kanji": "あかちゃん",
     "kana": "あかちゃん",
-    "romaji": "akachiゃn",
+    "romaji": "akachan",
     "translations": {
       "fr": "nourrisson",
       "en": "infant"
@@ -3216,7 +3216,7 @@
     "id": 322,
     "kanji": "予習",
     "kana": "よしゅう",
-    "romaji": "yoshiゅu",
+    "romaji": "yoshuu",
     "translations": {
       "fr": "préparation d'une leçon",
       "en": "preparation for a lesson"
@@ -3276,7 +3276,7 @@
     "id": 328,
     "kanji": "さっき",
     "kana": "さっき",
-    "romaji": "saっki",
+    "romaji": "sakki",
     "translations": {
       "fr": "il y a quelque temps",
       "en": "some time ago"
@@ -3436,7 +3436,7 @@
     "id": 344,
     "kanji": "お嬢さん",
     "kana": "おじょうさん",
-    "romaji": "ojiょusan",
+    "romaji": "ojyousan",
     "translations": {
       "fr": "jeune fille",
       "en": "young lady"
@@ -3476,7 +3476,7 @@
     "id": 348,
     "kanji": "準備",
     "kana": "じゅんび",
-    "romaji": "jiゅnbi",
+    "romaji": "junbi",
     "translations": {
       "fr": "préparer",
       "en": "to prepare"
@@ -3486,7 +3486,7 @@
     "id": 349,
     "kanji": "招待",
     "kana": "しょうたい",
-    "romaji": "shiょutai",
+    "romaji": "shoutai",
     "translations": {
       "fr": "inviter",
       "en": "to invite"
@@ -3516,7 +3516,7 @@
     "id": 352,
     "kanji": "すっと",
     "kana": "すっと",
-    "romaji": "suっto",
+    "romaji": "sutto",
     "translations": {
       "fr": "droit, tout à coup",
       "en": "straight,all of a sudden"
@@ -3586,7 +3586,7 @@
     "id": 359,
     "kanji": "ケーキ",
     "kana": "ケーキ",
-    "romaji": "ケ-キ",
+    "romaji": "keeki",
     "translations": {
       "fr": "gâteau",
       "en": "cake"
@@ -3626,7 +3626,7 @@
     "id": 363,
     "kanji": "事務所",
     "kana": "じむしょ",
-    "romaji": "jimushiょ",
+    "romaji": "jimusho",
     "translations": {
       "fr": "bureau",
       "en": "office"
@@ -3636,7 +3636,7 @@
     "id": 364,
     "kanji": "食料品",
     "kana": "しょくりょうひん",
-    "romaji": "shiょkuriょuhin",
+    "romaji": "shokuryouhin",
     "translations": {
       "fr": "épicerie",
       "en": "groceries"
@@ -3676,7 +3676,7 @@
     "id": 368,
     "kanji": "出発",
     "kana": "しゅっぱつ",
-    "romaji": "shiゅっpatsu",
+    "romaji": "shuppatsu",
     "translations": {
       "fr": "partir",
       "en": "to depart"
@@ -3686,7 +3686,7 @@
     "id": 369,
     "kanji": "アフリカ",
     "kana": "アフリカ",
-    "romaji": "アフリカ",
+    "romaji": "afurika",
     "translations": {
       "fr": "Afrique",
       "en": "Africa"
@@ -3776,7 +3776,7 @@
     "id": 378,
     "kanji": "ちっとも",
     "kana": "ちっとも",
-    "romaji": "chiっtomo",
+    "romaji": "chittomo",
     "translations": {
       "fr": "pas du tout",
       "en": "not at all (used with a negative verb)"
@@ -3796,7 +3796,7 @@
     "id": 380,
     "kanji": "女性",
     "kana": "じょせい",
-    "romaji": "jiょsei",
+    "romaji": "jyosei",
     "translations": {
       "fr": "femme",
       "en": "woman"
@@ -3846,7 +3846,7 @@
     "id": 385,
     "kanji": "ソフト",
     "kana": "ソフト",
-    "romaji": "ソフト",
+    "romaji": "sofuto",
     "translations": {
       "fr": "doux",
       "en": "soft"
@@ -3876,7 +3876,7 @@
     "id": 388,
     "kanji": "失敗",
     "kana": "しっぱい",
-    "romaji": "shiっpai",
+    "romaji": "shippai",
     "translations": {
       "fr": "échec, erreur",
       "en": "failure,mistake"
@@ -4006,7 +4006,7 @@
     "id": 401,
     "kanji": "両方",
     "kana": "りょうほう",
-    "romaji": "riょuhou",
+    "romaji": "ryouhou",
     "translations": {
       "fr": "les deux côtés",
       "en": "both sides"
@@ -4096,7 +4096,7 @@
     "id": 410,
     "kanji": "将来",
     "kana": "しょうらい",
-    "romaji": "shiょurai",
+    "romaji": "shyourai",
     "translations": {
       "fr": "avenir, perspectives",
       "en": "future,prospects"
@@ -4186,7 +4186,7 @@
     "id": 419,
     "kanji": "テニス",
     "kana": "テニス",
-    "romaji": "テニス",
+    "romaji": "tenisu",
     "translations": {
       "fr": "tennis",
       "en": "tennis"
@@ -4326,7 +4326,7 @@
     "id": 433,
     "kanji": "ステレオ",
     "kana": "ステレオ",
-    "romaji": "ステレオ",
+    "romaji": "sutereo",
     "translations": {
       "fr": "stéréo",
       "en": "stereo"
@@ -4426,7 +4426,7 @@
     "id": 443,
     "kanji": "ガス",
     "kana": "ガス",
-    "romaji": "ガス",
+    "romaji": "gasu",
     "translations": {
       "fr": "essence",
       "en": "petrol"
@@ -4466,7 +4466,7 @@
     "id": 447,
     "kanji": "客",
     "kana": "きゃく",
-    "romaji": "kiゃku",
+    "romaji": "kyaku",
     "translations": {
       "fr": "client, invité",
       "en": "guest,customer"
@@ -4486,7 +4486,7 @@
     "id": 449,
     "kanji": "高等学校",
     "kana": "こうとうがっこう",
-    "romaji": "koutougaっkou",
+    "romaji": "koutougakkou",
     "translations": {
       "fr": "lycée",
       "en": "high school"
@@ -4516,7 +4516,7 @@
     "id": 452,
     "kanji": "しっかり",
     "kana": "しっかり",
-    "romaji": "shiっkari",
+    "romaji": "shikkari",
     "translations": {
       "fr": "fermement, régulièrement",
       "en": "firmly,steadily"
@@ -4536,7 +4536,7 @@
     "id": 454,
     "kanji": "途中",
     "kana": "とちゅう",
-    "romaji": "tochiゅu",
+    "romaji": "tochuu",
     "translations": {
       "fr": "en chemin",
       "en": "on the way"
@@ -4596,7 +4596,7 @@
     "id": 460,
     "kanji": "ファックス",
     "kana": "ファックス",
-    "romaji": "ファックス",
+    "romaji": "fakkusu",
     "translations": {
       "fr": "fax",
       "en": "fax"
@@ -4656,7 +4656,7 @@
     "id": 466,
     "kanji": "下宿",
     "kana": "げしゅく",
-    "romaji": "geshiゅku",
+    "romaji": "geshuku",
     "translations": {
       "fr": "logement",
       "en": "lodging"
@@ -4666,7 +4666,7 @@
     "id": 467,
     "kanji": "おっしゃる",
     "kana": "おっしゃる",
-    "romaji": "oっshiゃru",
+    "romaji": "ossharu",
     "translations": {
       "fr": "dire (respectueux)",
       "en": "(respectful) to say"
@@ -4696,7 +4696,7 @@
     "id": 470,
     "kanji": "レポート",
     "kana": "レポート",
-    "romaji": "レポ-ト",
+    "romaji": "repooto",
     "translations": {
       "fr": "rapport",
       "en": "report"
@@ -4706,7 +4706,7 @@
     "id": 471,
     "kanji": "住所",
     "kana": "じゅうしょ",
-    "romaji": "jiゅushiょ",
+    "romaji": "juusho",
     "translations": {
       "fr": "une adresse, une résidence",
       "en": "an address,a residence"
@@ -4726,7 +4726,7 @@
     "id": 473,
     "kanji": "承知",
     "kana": "しょうち",
-    "romaji": "shiょuchi",
+    "romaji": "shouchi",
     "translations": {
       "fr": "consentir",
       "en": "to consent"
@@ -4746,7 +4746,7 @@
     "id": 475,
     "kanji": "アナウンサー",
     "kana": "アナウンサー",
-    "romaji": "アナウンサ-",
+    "romaji": "anaunsaa",
     "translations": {
       "fr": "annonceur",
       "en": "announcer"
@@ -4946,7 +4946,7 @@
     "id": 495,
     "kanji": "アルバイト",
     "kana": "アルバイト",
-    "romaji": "アルバイト",
+    "romaji": "arubaito",
     "translations": {
       "fr": "travail à temps partiel",
       "en": "part-time job"
@@ -4956,7 +4956,7 @@
     "id": 496,
     "kanji": "課長",
     "kana": "かちょう",
-    "romaji": "kachiょu",
+    "romaji": "kachou",
     "translations": {
       "fr": "chef de section",
       "en": "section manager"
@@ -4976,7 +4976,7 @@
     "id": 498,
     "kanji": "ちゃん",
     "kana": "ちゃん",
-    "romaji": "chiゃn",
+    "romaji": "chan",
     "translations": {
       "fr": "suffixe pour femme familière",
       "en": "suffix for familiar female person"
@@ -5016,7 +5016,7 @@
     "id": 502,
     "kanji": "すっかり",
     "kana": "すっかり",
-    "romaji": "suっkari",
+    "romaji": "sukkari",
     "translations": {
       "fr": "complètement",
       "en": "completely"
@@ -5066,7 +5066,7 @@
     "id": 507,
     "kanji": "ガラス",
     "kana": "ガラス",
-    "romaji": "ガラス",
+    "romaji": "garasu",
     "translations": {
       "fr": "une vitre",
       "en": "a glass pane"
@@ -5236,7 +5236,7 @@
     "id": 524,
     "kanji": "柔道",
     "kana": "じゅうどう",
-    "romaji": "jiゅudou",
+    "romaji": "juudou",
     "translations": {
       "fr": "judo",
       "en": "judo"
@@ -5246,7 +5246,7 @@
     "id": 525,
     "kanji": "じゃま",
     "kana": "じゃま",
-    "romaji": "jiゃma",
+    "romaji": "jama",
     "translations": {
       "fr": "obstacle, intrusion",
       "en": "hindrance,intrusion"
@@ -5256,7 +5256,7 @@
     "id": 526,
     "kanji": "復習",
     "kana": "ふくしゅう",
-    "romaji": "fukushiゅu",
+    "romaji": "fukushuu",
     "translations": {
       "fr": "révision",
       "en": "revision"
@@ -5316,7 +5316,7 @@
     "id": 532,
     "kanji": "さ来週",
     "kana": "さらいしゅう",
-    "romaji": "saraishiゅu",
+    "romaji": "saraishuu",
     "translations": {
       "fr": "la semaine qui suit la semaine prochaine",
       "en": "the week after next"
@@ -5346,7 +5346,7 @@
     "id": 535,
     "kanji": "趣味",
     "kana": "しゅみ",
-    "romaji": "shiゅmi",
+    "romaji": "shumi",
     "translations": {
       "fr": "loisir",
       "en": "hobby"
@@ -5366,7 +5366,7 @@
     "id": 537,
     "kanji": "引っ越す",
     "kana": "ひっこす",
-    "romaji": "hiっkosu",
+    "romaji": "hikkosu",
     "translations": {
       "fr": "déménager",
       "en": "to move house"
@@ -5386,7 +5386,7 @@
     "id": 539,
     "kanji": "習慣",
     "kana": "しゅうかん",
-    "romaji": "shiゅukan",
+    "romaji": "shuukan",
     "translations": {
       "fr": "coutume, manières",
       "en": "custom,manners"
@@ -5456,7 +5456,7 @@
     "id": 546,
     "kanji": "レジ",
     "kana": "レジ",
-    "romaji": "レジ",
+    "romaji": "reji",
     "translations": {
       "fr": "registre",
       "en": "register"
@@ -5576,7 +5576,7 @@
     "id": 558,
     "kanji": "アジア",
     "kana": "アジア",
-    "romaji": "アジア",
+    "romaji": "ajia",
     "translations": {
       "fr": "Asie",
       "en": "Asia"
@@ -5646,7 +5646,7 @@
     "id": 565,
     "kanji": "ガソリンスタンド",
     "kana": "ガソリンスタンド",
-    "romaji": "ガソリンスタンド",
+    "romaji": "gasorinsutando",
     "translations": {
       "fr": "station-service",
       "en": "petrol station"
@@ -5686,7 +5686,7 @@
     "id": 569,
     "kanji": "入学",
     "kana": "にゅうがく",
-    "romaji": "niゅugaku",
+    "romaji": "nyuugaku",
     "translations": {
       "fr": "entrer à l'école ou l'université",
       "en": "to enter school or university"
@@ -5696,7 +5696,7 @@
     "id": 570,
     "kanji": "汽車",
     "kana": "きしゃ",
-    "romaji": "kishiゃ",
+    "romaji": "kisha",
     "translations": {
       "fr": "train à vapeur",
       "en": "steam train"
@@ -5716,7 +5716,7 @@
     "id": 572,
     "kanji": "パート",
     "kana": "パート",
-    "romaji": "パ-ト",
+    "romaji": "paato",
     "translations": {
       "fr": "à temps partiel",
       "en": "part time"
@@ -5816,7 +5816,7 @@
     "id": 582,
     "kanji": "一生懸命",
     "kana": "いっしょうけんめい",
-    "romaji": "iっshiょukenmei",
+    "romaji": "isshoukenmei",
     "translations": {
       "fr": "avec les efforts maximaux",
       "en": "with utmost effort"
@@ -5866,7 +5866,7 @@
     "id": 587,
     "kanji": "スクリーン",
     "kana": "スクリーン",
-    "romaji": "スクリ-ン",
+    "romaji": "sukuriin",
     "translations": {
       "fr": "écran",
       "en": "screen"
@@ -5966,7 +5966,7 @@
     "id": 597,
     "kanji": "タイプ",
     "kana": "タイプ",
-    "romaji": "タイプ",
+    "romaji": "taipu",
     "translations": {
       "fr": "type, style",
       "en": "type,style"
@@ -6016,7 +6016,7 @@
     "id": 602,
     "kanji": "最初",
     "kana": "さいしょ",
-    "romaji": "saishiょ",
+    "romaji": "saisho",
     "translations": {
       "fr": "début, premier",
       "en": "beginning,first"
@@ -6056,7 +6056,7 @@
     "id": 606,
     "kanji": "小学校",
     "kana": "しょうがっこう",
-    "romaji": "shiょugaっkou",
+    "romaji": "shougakkou",
     "translations": {
       "fr": "école primaire",
       "en": "elementary school"
@@ -6066,7 +6066,7 @@
     "id": 607,
     "kanji": "食事",
     "kana": "しょくじ",
-    "romaji": "shiょkuji",
+    "romaji": "shokuji",
     "translations": {
       "fr": "prendre un repas",
       "en": "to have a meal"
@@ -6116,7 +6116,7 @@
     "id": 612,
     "kanji": "特急",
     "kana": "とっきゅう",
-    "romaji": "toっkiゅu",
+    "romaji": "tokkyuu",
     "translations": {
       "fr": "train express limité",
       "en": "limited express train (faster than an express train)"
@@ -6166,7 +6166,7 @@
     "id": 617,
     "kanji": "出席",
     "kana": "しゅっせき",
-    "romaji": "shiゅっseki",
+    "romaji": "shusseki",
     "translations": {
       "fr": "assister",
       "en": "to attend"
@@ -6176,7 +6176,7 @@
     "id": 618,
     "kanji": "紹介",
     "kana": "しょうかい",
-    "romaji": "shiょukai",
+    "romaji": "shoukai",
     "translations": {
       "fr": "introduction",
       "en": "introduction"
@@ -6186,7 +6186,7 @@
     "id": 619,
     "kanji": "急",
     "kana": "きゅう",
-    "romaji": "kiゅu",
+    "romaji": "kyuu",
     "translations": {
       "fr": "urgent, abrupt",
       "en": "urgent, steep"
@@ -6216,7 +6216,7 @@
     "id": 622,
     "kanji": "ワープロ",
     "kana": "ワープロ",
-    "romaji": "ワ-プロ",
+    "romaji": "waapuro",
     "translations": {
       "fr": "traitement de texte",
       "en": "word processor"
@@ -6296,7 +6296,7 @@
     "id": 630,
     "kanji": "アメリカ",
     "kana": "アメリカ",
-    "romaji": "アメリカ",
+    "romaji": "amerika",
     "translations": {
       "fr": "Amérique",
       "en": "America"

@@ -15,12 +15,12 @@ const baseSyllables = [
   ['k', 'ka', 'ki', 'ku', 'ke', 'ko'],
   ['s', 'sa', 'shi', 'su', 'se', 'so'],
   ['t', 'ta', 'chi', 'tsu', 'te', 'to'],
-  ['', 'na', 'ni', 'nu', 'ne', 'no'],
+  ['c', 'na', 'ni', 'nu', 'ne', 'no'],
   ['', 'ha', 'hi', 'fu', 'he', 'ho'],
   ['m', 'ma', 'mi', 'mu', 'me', 'mo'],
   ['', 'ya', 'yu', 'yo', '', ''],
   ['', 'ra', 'ri', 'ru', 're', 'ro'],
-  ['', 'wa', 'wo', 'n', '', ''],
+  ['', 'wa', 'wo', 'n', ',', ''],
 ];
 
 // Data: Dakuten + Handakuten combined with double consonants (30 total) - voiced consonants + p-sound
@@ -47,13 +47,13 @@ const yoonSyllables = [
   ['pya', 'pyu', 'pyo'],
 ];
 
-// Data: Foreign katakana syllables (22 total) - modern loanword sounds
+// Data: Foreign katakana syllables (23 total) - modern loanword sounds
 const foreignSyllables = [
   ['fa', 'fi', 'fe', 'fo'],      // F-sounds
   ['wi', 'we', 'wo'],            // W-sounds
   ['va', 'vi', 'vu', 've', 'vo'], // V-sounds
   ['ti', 'di', 'tu', 'du'],      // T/D-sounds
-  ['she', 'tsa', 'dyu', 'je'],   // Other foreign sounds
+  ['che', 'she', 'tsa', 'dyu', 'je'],   // Other foreign sounds
 ];
 
 // Mode configuration
