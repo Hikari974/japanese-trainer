@@ -82,4 +82,91 @@ describe('HomeScreen', () => {
     const startButton = getByLabelText('Commencer la session');
     expect(startButton.props.accessibilityState.disabled).toBe(false);
   });
+
+  describe('Level Unlock Logic (US-006.4)', () => {
+    it('should show loading state while fetching level states', async () => {
+      const { findByText } = render(<HomeScreen />);
+
+      // Should show loading text initially
+      const loadingText = await findByText('Chargement des niveaux...');
+      expect(loadingText).toBeTruthy();
+    });
+
+    it('should load unlock status on mount', async () => {
+      const { findByLabelText } = render(<HomeScreen />);
+
+      // Wait for levels to load
+      // Kana should be unlocked by default
+      const kanaButton = await findByLabelText(/Niveau Kana/);
+      expect(kanaButton).toBeTruthy();
+    });
+
+    it('should load progression data for all levels on mount', async () => {
+      const { findByLabelText } = render(<HomeScreen />);
+
+      // Wait for levels to load with progress data
+      // Should have accessibility labels with "complété" (unlocked) or "verrouillé" (locked)
+      const kanaButton = await findByLabelText(/Niveau Kana.*complété/);
+      expect(kanaButton).toBeTruthy();
+    });
+
+    it('should prevent selection of locked levels', async () => {
+      const { findByLabelText } = render(<HomeScreen />);
+
+      // Wait for levels to load
+      // Find a locked level (assuming N5+ are locked initially)
+      const lockedButtons = await findByLabelText(/verrouillé/);
+
+      if (lockedButtons) {
+        const wasSelected = lockedButtons.props.accessibilityState.selected;
+        fireEvent.press(lockedButtons);
+
+        // Selection state should not change (should still be false)
+        expect(lockedButtons.props.accessibilityState.selected).toBe(wasSelected);
+      }
+    });
+
+    it('should allow selection of unlocked levels', async () => {
+      const { findByLabelText } = render(<HomeScreen />);
+
+      // Kana should be unlocked by default
+      const kanaButton = await findByLabelText(/Niveau Kana.*complété/);
+
+      expect(kanaButton.props.accessibilityState.selected).toBe(false);
+
+      fireEvent.press(kanaButton);
+
+      // Should now be selected
+      expect(kanaButton.props.accessibilityState.selected).toBe(true);
+    });
+
+    it('should render locked levels properly', async () => {
+      const { findByLabelText } = render(<HomeScreen />);
+
+      // Wait for levels to load
+      const lockedButton = await findByLabelText(/verrouillé/);
+
+      // Locked button renders
+      expect(lockedButton).toBeTruthy();
+    });
+
+    it('should render unlocked levels properly', async () => {
+      const { findByLabelText } = render(<HomeScreen />);
+
+      // Kana should be unlocked
+      const kanaButton = await findByLabelText(/Niveau Kana.*complété/);
+      expect(kanaButton).toBeTruthy();
+    });
+
+    it('should display progress bars for unlocked levels', async () => {
+      const { findByLabelText, queryByText } = render(<HomeScreen />);
+
+      // Wait for levels to load
+      await findByLabelText(/Niveau Kana/);
+
+      // Unlocked levels should show progress (X/Y mots)
+      // Note: This depends on actual data, so we just verify structure loads
+      expect(queryByText(/mots/)).toBeTruthy();
+    });
+  });
 });

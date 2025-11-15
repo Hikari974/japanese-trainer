@@ -5,6 +5,8 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { DifficultySelector, type Difficulty } from './components/DifficultySelector';
 import { LevelButton, type Level } from './components/LevelButton';
 import { usePreferences } from './hooks/usePreferences';
+import { useStatistics } from './hooks/useStatistics';
+import type { LevelProgress } from './types/statistics';
 
 const levels: Level[] = ['Kana', 'N5', 'N4', 'N3', 'N2', 'N1'];
 
@@ -22,8 +24,71 @@ export default function HomeScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const { preferences, isLoading, updatePreferences } = usePreferences();
+  const { calculateProgress, getUnlockedLevels, registerUnlockCallback } = useStatistics();
   const [difficulty, setDifficulty] = useState<Difficulty>('Normal');
   const [selectedLevel, setSelectedLevel] = useState<Level | null>(null);
+  const [unlockedLevels, setUnlockedLevels] = useState<Level[]>(['Kana']);
+  const [levelsProgress, setLevelsProgress] = useState<Map<Level, LevelProgress>>(new Map());
+  const [isLoadingLevels, setIsLoadingLevels] = useState(true);
+
+  // Load level states (unlock status + progression) on mount
+  useEffect(() => {
+    async function loadLevelStates() {
+      setIsLoadingLevels(true);
+      try {
+        // Get unlock status
+        const unlocked = await getUnlockedLevels();
+        setUnlockedLevels(unlocked);
+
+        // Get progression for all levels
+        const progressMap = new Map<Level, LevelProgress>();
+        for (const level of levels) {
+          const progress = await calculateProgress(level);
+          progressMap.set(level, progress);
+        }
+        setLevelsProgress(progressMap);
+
+        if (__DEV__) {
+          console.log('Levels loaded:', { unlocked, progressMap });
+        }
+      } catch (error) {
+        if (__DEV__) {
+          console.error('Failed to load level states:', error);
+        }
+      } finally {
+        setIsLoadingLevels(false);
+      }
+    }
+
+    loadLevelStates();
+  }, [calculateProgress, getUnlockedLevels]);
+
+  // Register event listener for auto-unlock events (from US-006.3)
+  useEffect(() => {
+    const unregister = registerUnlockCallback((event) => {
+      if (__DEV__) {
+        console.log(`🎉 Level ${event.level} unlocked!`);
+      }
+
+      // Refresh level states when a new level is unlocked
+      async function refreshLevels() {
+        const unlocked = await getUnlockedLevels();
+        setUnlockedLevels(unlocked);
+
+        // Also refresh progression for all levels
+        const progressMap = new Map<Level, LevelProgress>();
+        for (const level of levels) {
+          const progress = await calculateProgress(level);
+          progressMap.set(level, progress);
+        }
+        setLevelsProgress(progressMap);
+      }
+
+      refreshLevels();
+    });
+
+    return unregister; // Cleanup on unmount
+  }, [registerUnlockCallback, getUnlockedLevels, calculateProgress]);
 
   // Load saved preferences on mount
   useEffect(() => {
@@ -37,6 +102,15 @@ export default function HomeScreen() {
   }, [preferences, isLoading]);
 
   const handleLevelPress = (level: Level) => {
+    // Check if level is locked
+    const isLocked = !unlockedLevels.includes(level);
+    if (isLocked) {
+      if (__DEV__) {
+        console.log(`Cannot select locked level: ${level}`);
+      }
+      return; // Don't allow selection of locked levels
+    }
+
     setSelectedLevel(level);
     // Save preference immediately
     updatePreferences({ lastLevel: level });
@@ -113,14 +187,27 @@ export default function HomeScreen() {
 
       {/* Level List */}
       <YStack flex={1} paddingHorizontal="$4" paddingTop="$4" gap="$2.5">
-        {levels.map((level) => (
-          <LevelButton
-            key={level}
-            level={level}
-            isSelected={selectedLevel === level}
-            onPress={() => handleLevelPress(level)}
-          />
-        ))}
+        {isLoadingLevels ? (
+          <Text textAlign="center" color="$gray11" paddingTop="$8">
+            Chargement des niveaux...
+          </Text>
+        ) : (
+          levels.map((level) => {
+            const isLocked = !unlockedLevels.includes(level);
+            const progress = levelsProgress.get(level);
+
+            return (
+              <LevelButton
+                key={level}
+                level={level}
+                isSelected={selectedLevel === level}
+                isLocked={isLocked}
+                progress={progress}
+                onPress={() => handleLevelPress(level)}
+              />
+            );
+          })
+        )}
       </YStack>
 
       {/* Start Session Button */}

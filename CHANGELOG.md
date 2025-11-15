@@ -145,6 +145,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Categorization: TYPE A-F with examples and proposed solutions
   - Pending decisions documented (data correction strategy, variant handling, っち pattern)
   - Statistics: 1309 total words, 1167 valid (89%), 142 invalid (11%)
+- **US-006.4**: Interface Sélection Niveau avec États Locked/Unlocked (Session 9)
+  - Visual level selection with locked/unlocked/completed states
+  - ProgressBar component for reusable horizontal progress display
+  - LevelButton refactored with lock icon, progress bars, checkmarks
+  - Home screen integration: loads unlock status + progression on mount
+  - Event-driven refresh: subscribes to unlock events for real-time UI updates
+  - Locked levels: lock icon, "Complétez X pour déverrouiller", opacity 0.4, disabled
+  - Unlocked levels: progress bar, "X/Y mots (Z%)", clickable
+  - Completed levels: checkmark icon, 100% progress, still selectable
+  - Accessibility: ARIA labels with progress percentage, 44px+ touch targets
+  - Tests: 20/20 unit tests passing (LevelButton), integration tests for home screen
 
 ### Fixed
 - Memory leak: setTimeout cleanup on component unmount (training.tsx)

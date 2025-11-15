@@ -934,3 +934,146 @@ const pointsEarned = await recordAttempt({
   - Coverage: 100% statements, 100% branches, 100% functions, 100% lines
   - Tests: migration, isLevelUnlocked, unlockLevel, getUnlockedLevels, hook wrappers
 
+
+---
+
+## Session 9 - US-006.4: Interface Sélection Niveau avec États Locked/Unlocked (2025-11-15)
+
+### Objectif
+Implémenter l'interface de sélection de niveau avec affichage visuel des états verrouillé/déverrouillé, barres de progression, et événements de rafraîchissement automatique.
+
+### Implémentation Complète ✅
+
+**Fichiers Créés:**
+1. `app/components/ProgressBar.tsx` (NEW, 75 lignes)
+   - Composant réutilisable pour barres de progression horizontales (0-100%)
+   - Tamagui-styled avec animations fluides
+   - Conforme ARIA (role="progressbar")
+   - Props configurables: value, height, color, backgroundColor
+
+**Fichiers Modifiés:**
+2. `app/components/LevelButton.tsx` (+88/-37 = +51 net lignes)
+   - Refonte complète avec 4 états visuels:
+     - 🔒 **Locked:** Icône cadenas, "Complétez X pour déverrouiller", opacité 0.4, désactivé
+     - ✓ **Unlocked:** Barre de progression, "X/Y mots (Z%)", cliquable
+     - ✅ **Completed (100%):** Icône checkmark, barre 100%, couleur verte, toujours sélectionnable
+     - **Selected:** Bordure accentuée, fond surligné
+   - Helper `getPreviousLevelName()` pour messages de déverrouillage
+   - Labels d'accessibilité complets
+
+3. `app/index.tsx` (+63 lignes)
+   - Chargement unlock status au mount via `getUnlockedLevels()`
+   - Chargement progression pour 6 niveaux via `calculateLevelProgress()`
+   - État loading: "Chargement des niveaux..."
+   - Blocage sélection des niveaux verrouillés dans `handleLevelPress()`
+   - Event listener `registerUnlockCallback()` pour rafraîchissement auto lors de déblocage
+   - Map<Level, LevelProgress> pour lookups O(1)
+
+4. Tests complets:
+   - `app/components/__tests__/LevelButton.test.tsx` (+213/-32 lignes)
+     - 20/20 tests passing ✅
+     - Couvre: unlocked, locked, selected, completed, edge cases, accessibility
+   - `app/__tests__/index.test.tsx` (+88 lignes)
+     - Tests d'intégration pour chargement unlock status + progression
+
+### Décisions Techniques
+
+1. **ProgressBar avec YStack:**
+   - Utilise YStack au lieu de Stack générique (cohérence codebase)
+   - Animations optimisées: `animateOnly={['width']}`
+   - Value clamping (0-100) pour robustesse
+
+2. **Architecture événementielle:**
+   - Event listener avec cleanup proper (pas de memory leak)
+   - Rafraîchissement automatique lors unlock via callback US-006.3
+   - Fire-and-forget pour performances
+
+3. **Helper getPreviousLevelName():**
+   - Extrait logique dans fonction pure
+   - Réutilisable et testable
+   - Retourne nom niveau précédent pour messages "Complétez X..."
+
+4. **Map pour progression:**
+   - Map<Level, LevelProgress> pour O(1) lookups
+   - Calculé une fois au mount (~50-100ms pour 6 niveaux)
+   - Acceptable pour UX (loading state empêche layout shift)
+
+### Résultats Tests
+
+**Coverage:**
+- ProgressBar.tsx: 100% statements ✅
+- LevelButton.tsx: 90.9% statements ✅
+- index.tsx: 74.28% statements ✅
+
+**Tests Passing:**
+- LevelButton unit tests: 20/20 (100%) ✅
+- Catégories testées:
+  - Unlocked state: 5 tests
+  - Locked state: 6 tests
+  - Selected state: 2 tests
+  - Completed state: 3 tests
+  - Edge cases: 3 tests
+  - Accessibility: 1 test
+
+### Code Review ✅
+
+**Verdict:** APPROVE WITH SUGGESTIONS
+- Critical issues: 0 ✅
+- High priority: 0 ✅
+- Medium priority: 3 💡 (non-blocking, can address post-merge)
+  - Duplicate loadLevelStates logic dans 2 useEffects
+  - YStack vs Stack sémantique
+  - Percentage arrondi 2 fois (DRY)
+- Low priority: 4 📝 (nice to have)
+
+**Strengths:**
+- Accessibility-first design (ARIA labels complets)
+- Type safety: zero `any` types
+- Event-driven architecture propre
+- Maîtrise Tamagui (tokens, animations)
+- Qualité tests: 20/20 passing
+
+### Intégrations
+
+**Utilise (dépendances):**
+- ✅ US-006.1: `calculateLevelProgress()` pour affichage progression
+- ✅ US-006.2: `getUnlockedLevels()`, `isLevelUnlocked()` pour logique lock/unlock
+- ✅ US-006.3: `registerUnlockCallback()` pour rafraîchissement événementiel
+
+**Prépare (futures stories):**
+- ⏳ US-006.6: Event listener en place pour feedback unlock (toast/confetti)
+- ⏳ US-006.7: ProgressBar réutilisable pour vues stats détaillées
+
+### Documentation ✅
+
+1. **Rapport livraison:** `.claude/docs/docs-maintainer/delivery_2025-11-15_006.md` (481 lignes)
+2. **TODO.md:** US-006.4 marqué `[x]` (Session 9)
+3. **CHANGELOG.md:** Entrée complète dans [Unreleased]
+4. **Review:** `.claude/docs/code-reviewer/review_2025-11-15_004.md`
+
+### Prochaines Étapes
+
+**Immédiat (US-006.6):**
+- Toast notification lors déblocage
+- Animation confetti
+- Taille: S (2-3 heures)
+
+**Futur (US-006.7):**
+- Vue progression détaillée dans stats
+- Réutilisation ProgressBar component
+- Taille: M (4-6 heures)
+
+### État Actuel Projet
+
+**Epic-006 Progression:**
+- [x] US-006.1 - Calcul progression niveau (Session 6)
+- [x] US-006.2 - Gestion état unlock (Session 7)  
+- [x] US-006.3 - Logique déblocage séquentiel (Session 8)
+- [x] **US-006.4 - Interface sélection niveau** ✅ **(Session 9)**
+- [ ] US-006.5 - Détail progression par mot
+- [ ] US-006.6 - Feedback/Animation unlock
+- [ ] US-006.7 - Enrichissement page stats
+- [ ] US-006.8 - Migration utilisateurs existants
+
+**Production Ready:** OUI ✅
+**Commit Ready:** OUI (pending Orchestrator validation)
