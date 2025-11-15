@@ -193,6 +193,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Dependencies added: expo-haptics
   - Tests: 13/13 unit tests passing (100% coverage), manual test plan documented
   - Performance: Smooth 60fps confetti animation, no UI blocking
+- **US-006.7**: Page Statistiques Enrichie avec Vue Progression JLPT (Session 11 continuation)
+  - JLPT Progression Section added at top of stats page (192 net lines)
+    - Global progress header with current level, mastered words count, and global percentage
+    - 6 visual level cards (Kana → N5 → N4 → N3 → N2 → N1) with state indicators
+    - Progress bars per level showing mastery percentage
+    - Navigation to level detail page on tap (unlocked levels only)
+  - State Management:
+    - levelsProgress Map<JLPTLevel, LevelProgress> for storing progress data
+    - unlockedLevels array for tracking unlock status
+    - isLoadingProgress state with spinner during data fetch
+  - Computed Values (useMemo):
+    - globalProgress: aggregates totalWords, masteredWords, percentage across all levels
+    - currentLevel: identifies highest unlocked level from JLPT_LEVELS order
+    - statsByLevel: groups points/attempts by level for breakdown section
+    - successRate: calculates global success percentage from word statistics
+  - Navigation Handler (useCallback):
+    - handleLevelTap with lock state validation
+    - Routes to /(tabs)/level-progress/[level] with lowercase param
+    - Prevents navigation for locked levels with dev logging
+  - Error Handling:
+    - try/catch in async loadProgressionData
+    - DEV-only error logging (no production console spam)
+    - Loading state cleanup in finally block
+  - Integration:
+    - Uses calculateProgress() from useStatistics hook
+    - Uses getUnlockedLevels() from useStatistics hook
+    - Parallel loading with Promise.all (6 levels + unlock status)
+  - Testing:
+    - 16/16 unit tests passing (100%)
+    - 90.66% statement coverage (exceeds 80% target)
+    - Tests cover: global progress calculation, current level logic, navigation handler, success rate, stats aggregation, error handling
+    - Manual testing checklist documented for visual/UX validation
+  - Code Review: APPROVED with 4 non-blocking minor improvement suggestions
 
 ### Fixed
 - Memory leak: setTimeout cleanup on component unmount (training.tsx)

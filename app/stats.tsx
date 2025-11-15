@@ -1,10 +1,13 @@
-import { useMemo } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { YStack, XStack, H2, H3, Text, Card, Spinner } from 'tamagui';
-import { ScrollView } from 'react-native';
+import { ScrollView, Pressable } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useRouter } from 'expo-router';
 import { AppHeader } from './components/AppHeader';
+import { ProgressBar } from './components/ProgressBar';
 import { useStatistics } from './hooks/useStatistics';
 import type { JLPTLevel } from './types/word';
+import type { LevelProgress } from './types/statistics';
 
 // Level colors matching training page
 const levelColors: Record<JLPTLevel, string> = {
@@ -16,9 +19,87 @@ const levelColors: Record<JLPTLevel, string> = {
   N1: '$levelN1',
 };
 
+// JLPT level order for progression
+const JLPT_LEVELS: JLPTLevel[] = ['Kana', 'N5', 'N4', 'N3', 'N2', 'N1'];
+
 export default function StatsScreen() {
   const insets = useSafeAreaInsets();
-  const { statistics, isLoading } = useStatistics();
+  const router = useRouter();
+  const { statistics, isLoading, calculateProgress, getUnlockedLevels } = useStatistics();
+
+  // State for progression data
+  const [levelsProgress, setLevelsProgress] = useState<Map<JLPTLevel, LevelProgress>>(new Map());
+  const [unlockedLevels, setUnlockedLevels] = useState<JLPTLevel[]>([]);
+  const [isLoadingProgress, setIsLoadingProgress] = useState(true);
+
+  // Load progression data on mount
+  useEffect(() => {
+    async function loadProgressionData() {
+      try {
+        const [progressResults, unlockedResults] = await Promise.all([
+          Promise.all(JLPT_LEVELS.map(level => calculateProgress(level))),
+          getUnlockedLevels()
+        ]);
+
+        const progressMap = new Map<JLPTLevel, LevelProgress>();
+        JLPT_LEVELS.forEach((level, index) => {
+          progressMap.set(level, progressResults[index]);
+        });
+
+        setLevelsProgress(progressMap);
+        setUnlockedLevels(unlockedResults);
+      } catch (error) {
+        if (__DEV__) {
+          console.error('Failed to load progression data:', error);
+        }
+      } finally {
+        setIsLoadingProgress(false);
+      }
+    }
+
+    loadProgressionData();
+  }, [calculateProgress, getUnlockedLevels]);
+
+  // Calculate global progression across all levels
+  const globalProgress = useMemo(() => {
+    let totalWords = 0;
+    let totalMastered = 0;
+
+    levelsProgress.forEach(progress => {
+      totalWords += progress.totalWords;
+      totalMastered += progress.masteredWords;
+    });
+
+    const percentage = totalWords > 0 ? Math.round((totalMastered / totalWords) * 100) : 0;
+
+    return { totalWords, totalMastered, percentage };
+  }, [levelsProgress]);
+
+  // Find current level (highest unlocked)
+  const currentLevel = useMemo(() => {
+    if (unlockedLevels.length === 0) return 'Kana';
+
+    // Return the highest level in the unlocked list
+    const orderedUnlocked = JLPT_LEVELS.filter(level => unlockedLevels.includes(level));
+    return orderedUnlocked[orderedUnlocked.length - 1] || 'Kana';
+  }, [unlockedLevels]);
+
+  // Handle level card tap
+  const handleLevelTap = useCallback((level: JLPTLevel) => {
+    const isLocked = !unlockedLevels.includes(level);
+
+    if (isLocked) {
+      if (__DEV__) {
+        console.log(`Cannot navigate to locked level: ${level}`);
+      }
+      return;
+    }
+
+    router.push({
+      pathname: '/(tabs)/level-progress/[level]',
+      params: { level: level.toLowerCase() }
+    });
+  }, [unlockedLevels, router]);
 
   // Calculate stats by level
   const statsByLevel = useMemo(() => {
@@ -79,6 +160,117 @@ export default function StatsScreen() {
 
       <ScrollView contentContainerStyle={{ paddingBottom: insets.bottom + 16 }}>
         <YStack padding="$4" gap="$4">
+          {/* Progression JLPT Section */}
+          {isLoadingProgress ? (
+            <Card padding="$4" borderRadius="$4" backgroundColor="$gray2">
+              <YStack alignItems="center" gap="$2">
+                <Spinner size="small" color="$blue10" />
+                <Text fontSize={14} color="$gray11">Chargement progression...</Text>
+              </YStack>
+            </Card>
+          ) : (
+            <Card padding="$4" borderRadius="$4" backgroundColor="$gray2">
+              <H2 marginBottom="$3">Progression JLPT</H2>
+
+              {/* Global Progress Header */}
+              <YStack gap="$3" marginBottom="$4" padding="$3" borderRadius="$3" backgroundColor="$gray3">
+                <XStack justifyContent="space-between" alignItems="center">
+                  <Text fontSize={14} color="$gray11">Niveau actuel</Text>
+                  <Text fontSize={18} fontWeight="bold" color={levelColors[currentLevel]}>
+                    {currentLevel}
+                  </Text>
+                </XStack>
+
+                <XStack justifyContent="space-between" alignItems="center">
+                  <Text fontSize={14} color="$gray11">Mots maîtrisés</Text>
+                  <Text fontSize={18} fontWeight="600">
+                    {globalProgress.totalMastered} / {globalProgress.totalWords}
+                  </Text>
+                </XStack>
+
+                <YStack gap="$2">
+                  <XStack justifyContent="space-between" alignItems="center">
+                    <Text fontSize={14} color="$gray11">Progression globale</Text>
+                    <Text fontSize={18} fontWeight="bold" color="$blue10">
+                      {globalProgress.percentage}%
+                    </Text>
+                  </XStack>
+                  <ProgressBar
+                    value={globalProgress.percentage}
+                    height={8}
+                    color="$blue10"
+                    backgroundColor="$gray5"
+                  />
+                </YStack>
+              </YStack>
+
+              {/* Level Cards */}
+              <YStack gap="$2">
+                {JLPT_LEVELS.map(level => {
+                  const progress = levelsProgress.get(level);
+                  const isLocked = !unlockedLevels.includes(level);
+                  const isCompleted = progress && progress.percentage >= 100;
+
+                  if (!progress) return null;
+
+                  return (
+                    <Pressable
+                      key={level}
+                      onPress={() => handleLevelTap(level)}
+                      disabled={isLocked}
+                    >
+                      <XStack
+                        padding="$3"
+                        borderRadius="$3"
+                        backgroundColor={isLocked ? '$gray1' : '$gray3'}
+                        opacity={isLocked ? 0.4 : 1}
+                        gap="$3"
+                        alignItems="center"
+                      >
+                        {/* Level indicator bar */}
+                        <YStack
+                          width={8}
+                          height={48}
+                          borderRadius="$2"
+                          backgroundColor={isCompleted ? '$green10' : levelColors[level]}
+                        />
+
+                        {/* Level content */}
+                        <YStack flex={1} gap="$2">
+                          <XStack justifyContent="space-between" alignItems="center">
+                            <XStack alignItems="center" gap="$2">
+                              <Text fontSize={18} fontWeight="bold">
+                                {level}
+                              </Text>
+                              {isLocked && <Text fontSize={16}>🔒</Text>}
+                              {isCompleted && <Text fontSize={16}>✅</Text>}
+                              {!isLocked && !isCompleted && <Text fontSize={16}>🔄</Text>}
+                            </XStack>
+                            <Text fontSize={16} fontWeight="600" color={isCompleted ? '$green10' : '$color'}>
+                              {progress.masteredWords}/{progress.totalWords}
+                            </Text>
+                          </XStack>
+
+                          <YStack gap="$1">
+                            <ProgressBar
+                              value={progress.percentage}
+                              height={6}
+                              color={isCompleted ? '$green10' : levelColors[level]}
+                              backgroundColor="$gray5"
+                            />
+                            <Text fontSize={12} color="$gray11">
+                              {progress.percentage.toFixed(1)}% maîtrisé
+                            </Text>
+                          </YStack>
+                        </YStack>
+                      </XStack>
+                    </Pressable>
+                  );
+                })}
+              </YStack>
+            </Card>
+          )}
+
           {!hasStats ? (
             <Card padding="$4" borderRadius="$4" backgroundColor="$gray2">
               <YStack alignItems="center" gap="$2">

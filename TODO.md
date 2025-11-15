@@ -65,7 +65,7 @@
 - [x] US-006.4 - UI Sélection Niveau avec États Locked/Unlocked (P1, L) - Session 9
 - [x] US-006.5 - Affichage Progression Détaillée par Mot (P1, M) - Session 10 + Hotfix Session 11
 - [x] US-006.6 - Feedback Visuel Déblocage Niveau (P2, S) - Session 11
-- [ ] US-006.7 - Page Statistiques Enrichie avec Vue Progression Globale (P2, M)
+- [x] US-006.7 - Page Statistiques Enrichie avec Vue Progression Globale (P2, M) - Session 11
 - [ ] US-006.8 - Migration État Initial pour Utilisateurs Existants (P1, S)
 
 ## Prochaine tâche immédiate

@@ -82,8 +82,11 @@ jest.mock('tamagui', () => {
     Text: ({ children, ...props }) => React.createElement('Text', props, children),
     H1: ({ children, ...props }) => React.createElement('Text', props, children),
     H2: ({ children, ...props }) => React.createElement('Text', props, children),
+    H3: ({ children, ...props }) => React.createElement('Text', props, children),
     Paragraph: ({ children, ...props }) => React.createElement('Text', props, children),
     Circle: ({ ...props }) => React.createElement('View', props),
+    Card: ({ children, ...props }) => React.createElement('View', props, children),
+    Spinner: ({ ...props }) => React.createElement('View', { ...props, testID: 'spinner' }),
     createTamagui: () => ({}),
     createTokens: (tokens) => tokens,
   };
