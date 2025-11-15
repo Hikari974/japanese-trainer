@@ -822,3 +822,27 @@ const pointsEarned = await recordAttempt({
 - ⏳ Documentation Maintainer à invoquer (fin de tâche)
 - ⏳ Orchestrator Agent à invoquer (commit validation)
 
+---
+
+## Session 6 : Epic-006 US-006.1 - Système de Progression (2025-11-15)
+
+### Fonctionnalités Ajoutées
+- [x] US-006.1: Calcul Automatique de Progression par Niveau
+  - Interface LevelProgress (totalWords, masteredWords, percentage)
+  - Fonction calculateLevelProgress(level) dans statistics.ts
+  - Règles pioche cumulative (Kana → N5 → N4 → N3 → N2 → N1)
+  - Mot maîtrisé si somme points >= 5 (toutes difficultés)
+  - Hook useStatistics exposant calculateProgress()
+  - 23 tests unitaires avec 97% coverage
+
+### Décisions Techniques
+- Règles pioche: pattern cumulatif (chaque niveau inclut kanji niveaux précédents)
+- Maîtrise mot: agrégation points Facile+Normal+Difficile+Extrême >= 5
+- Tests: fichier séparé statistics.levelProgress.test.ts (865 lignes)
+
+### Fichiers Modifiés
+- app/types/statistics.ts (+10 lignes)
+- app/services/statistics.ts (+142 lignes)
+- app/hooks/useStatistics.ts (+12 lignes)
+- app/services/__tests__/statistics.levelProgress.test.ts (NEW, 865 lignes)
+

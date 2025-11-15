@@ -50,3 +50,14 @@ export interface AttemptData {
   startCount: number;           // Number of times "Start" button was clicked
   translationViewed: boolean;   // Whether translation toggle was clicked
 }
+
+/**
+ * Progress tracking for a specific JLPT level
+ * Tracks how many words are mastered (>= 5 points total across all difficulties)
+ */
+export interface LevelProgress {
+  level: JLPTLevel;             // 'Kana' | 'N5' | 'N4' | 'N3' | 'N2' | 'N1'
+  totalWords: number;           // Total words available in this level
+  masteredWords: number;        // Words with sum(points all difficulties) >= 5
+  percentage: number;           // (masteredWords / totalWords) * 100, rounded to 2 decimals
+}

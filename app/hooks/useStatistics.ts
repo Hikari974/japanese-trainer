@@ -1,11 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import {
   loadStatistics,
   recordAttempt,
   resetStatistics,
+  calculateLevelProgress,
   type UserStatistics,
 } from '../services/statistics';
-import type { AttemptData } from '../types/statistics';
+import type { AttemptData, LevelProgress } from '../types/statistics';
+import type { JLPTLevel } from '../types/word';
 
 /**
  * React hook for managing user statistics
@@ -48,10 +50,22 @@ export function useStatistics() {
     setStatistics(updatedStats);
   };
 
+  /**
+   * Calculate progression for a specific JLPT level
+   * Returns statistics on mastered words (>= 5 points total)
+   */
+  const calculateProgress = useCallback(
+    async (level: JLPTLevel): Promise<LevelProgress> => {
+      return await calculateLevelProgress(level);
+    },
+    []
+  );
+
   return {
     statistics,
     isLoading,
     recordAttempt: recordAttemptHook,
     resetStats: resetStatsHook,
+    calculateProgress,
   };
 }

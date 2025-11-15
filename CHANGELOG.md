@@ -8,6 +8,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Epic-006: Système de progression et déblocage séquentiel des niveaux JLPT
+  - 8 User Stories créées (US-006.1 à US-006.8)
+  - Epic document avec contexte technique, architecture et plan de tests
+  - Ordre séquentiel: Kana → N5 → N4 → N3 → N2 → N1
+  - Critère de maîtrise: minimum 5 points sur chaque mot du niveau
+  - Effort total estimé: 6-8 jours
+- US-006.1: Calcul automatique progression par niveau (Epic-006)
+  - Interface LevelProgress pour tracking progression
+  - Fonction calculateLevelProgress() avec règles pioche cumulative
+  - Hook useStatistics.calculateProgress() pour UI
+  - 23 tests unitaires (coverage 97%)
 - Complete training session page with 5 UI zones (239 lines)
   - Compact session info (level + difficulty)
   - ScrollingText integration with difficulty-based parameters
