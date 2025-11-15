@@ -29,6 +29,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - In-memory cache avec TTL 5 secondes pour isLevelUnlocked() (performance optimization)
   - Invalidation automatique après unlockLevel() pour cohérence données
   - 15 tests unitaires (100% passing, 100% coverage)
+- US-006.3: Logique de déblocage séquentiel automatique avec critères 100% mastery (Epic-006)
+  - Auto-trigger: recordAttempt() déclenche checkAndUnlockNextLevel() automatiquement (fire-and-forget)
+  - Critère déblocage: 100% maîtrise niveau précédent (tous mots ≥5 points totaux)
+  - Ordre séquentiel strict: Kana → N5 → N4 → N3 → N2 → N1 (JLPT_LEVEL_ORDER constant)
+  - Event system: registerUnlockCallback() pour notifications UI (animations, toasts)
+  - Pattern non-bloquant: unlock ne modifie pas valeur retour recordAttempt()
+  - Functions pures: getPreviousLevel(), getNextLevelToUnlock() pour logique réutilisable
+  - Performance validée: checkAndUnlockNextLevel < 100ms, recordAttempt < 200ms
+  - 26 tests unitaires (100% coverage nouvelles fonctions, 64/64 tests passants total)
 - Complete training session page with 5 UI zones (239 lines)
   - Compact session info (level + difficulty)
   - ScrollingText integration with difficulty-based parameters

@@ -61,7 +61,7 @@
 
 - [x] US-006.1 - Calcul Automatique de Progression par Niveau (P0, M)
 - [x] US-006.2 - Gestion de l'État de Déblocage des Niveaux (P0, S)
-- [ ] US-006.3 - Logique de Déblocage Séquentiel (P0, M)
+- [x] US-006.3 - Logique de Déblocage Séquentiel (P0, M)
 - [ ] US-006.4 - UI Sélection Niveau avec États Locked/Unlocked (P1, L)
 - [ ] US-006.5 - Affichage Progression Détaillée par Mot (P1, M)
 - [ ] US-006.6 - Feedback Visuel Déblocage Niveau (P2, S)

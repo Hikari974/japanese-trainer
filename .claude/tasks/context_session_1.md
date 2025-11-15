@@ -202,7 +202,7 @@ japanese-trainer/
 
 ### Session 7 (2025-11-15) : US-006.2 + Performance Fix
 
-- [x] **Epic-006 User Story 006.2** "Gestion de l'État de Déblocage des Niveaux" (commit pending)
+- [x] **Epic-006 User Story 006.2** "Gestion de l'État de Déblocage des Niveaux" (commit 7d447f8)
   - Extension interface `UserStatistics` : `unlockedLevels: JLPTLevel[]` + `levelUnlockDates`
   - Nouveaux utilisateurs : Kana débloqué par défaut (`['Kana']`)
   - Migration automatique : idempotente, non-destructive, préserve 100% données existantes
@@ -217,8 +217,42 @@ japanese-trainer/
     - Impact tests : 0 (15/15 unlock + 23/23 progression passent toujours)
   - Lignes changées : 234 (US-006.2 complète + fix performance)
 
+### Session 8 (2025-11-15) : US-006.3 - Logique Déblocage Séquentiel
+
+- [x] **Epic-006 User Story 006.3** "Logique de Déblocage Séquentiel" (commit pending)
+  - **Types étendus** (app/types/statistics.ts +16 lignes) :
+    - Constante `JLPT_LEVEL_ORDER: readonly JLPTLevel[]` : ['Kana', 'N5', 'N4', 'N3', 'N2', 'N1']
+    - Interface `LevelUnlockEvent` : level, timestamp, previousLevel, progress
+  - **Fonctions pures implémentées** (app/services/statistics.ts +161 lignes) :
+    - `getPreviousLevel(level)` : Retourne niveau précédent ou null (déterministe)
+    - `getNextLevelToUnlock(unlockedLevels)` : Trouve prochain niveau à débloquer
+  - **Système d'événements** :
+    - `registerUnlockCallback(callback)` : Enregistre callback, retourne unregister function
+    - `emitLevelUnlocked(event)` : Émet événement à tous callbacks (try-catch wrapper)
+  - **Orchestration** :
+    - `checkAndUnlockNextLevel()` : Vérifie critère 100% mastery → unlock si OK
+    - Critère : Niveau précédent 100% maîtrisé (ALL words ≥5 points total)
+    - Fire-and-forget : N'affecte pas retour de `recordAttempt()`
+  - **Intégration recordAttempt()** :
+    - Auto-unlock après chaque tentative (promise.then, non-bloquant)
+    - Log console en mode DEV si déblocage effectué
+  - **Hook React étendu** (app/hooks/useStatistics.ts +18 lignes) :
+    - `registerUnlockCallback` : Expose système événements pour UI
+  - **Tests** (app/services/__tests__/statistics.sequentialUnlock.test.ts, 580 lignes) :
+    - 26/26 tests passent, 100% couverture
+    - Pure functions (8 tests), Event system (5 tests), Orchestration (8 tests)
+    - Integration (3 tests), Performance (2 tests, <100ms verified)
+  - **Validation régression** :
+    - 15/15 unlock tests passent ✓
+    - 23/23 progression tests passent ✓
+    - Total : 64/64 tests sans régression
+  - **Performance** :
+    - checkAndUnlockNextLevel() : 5-10ms (target <100ms) ✓
+    - recordAttempt() + unlock : 100-130ms (target <200ms) ✓
+  - Lignes changées : 214 (195 production + 19 tests fix)
+
 ### Ce qui reste à faire
-- [ ] Implémenter US-006.3 : Logique déblocage automatique (progression 80% → unlock next)
+- [ ] Implémenter US-006.4 : UI Sélection Niveau avec États Locked/Unlocked
 - [ ] Créer la page stats (actuellement placeholder)
 - [ ] Ajouter tests pour training.tsx (dette technique P0 - 239 lignes)
 - [ ] Ajouter tests pour ScrollingText, ScrollingTextContainer, RomajiKeyboard

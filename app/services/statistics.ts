@@ -5,7 +5,9 @@ import type {
   GlobalStatistics,
   AttemptData,
   LevelProgress,
+  LevelUnlockEvent,
 } from '../types/statistics';
+import { JLPT_LEVEL_ORDER } from '../types/statistics';
 import type { JLPTLevel, DataLevel, DisplayMode } from '../types/word';
 import { getWordsByLevel } from './wordLoader';
 
@@ -15,6 +17,10 @@ const STORAGE_KEY = '@japanese_trainer:user_statistics';
 let unlockedLevelsCache: JLPTLevel[] | null = null;
 let cacheTimestamp: number = 0;
 const CACHE_TTL_MS = 5000; // 5 seconds
+
+// Event system for level unlock notifications
+type UnlockCallback = (event: LevelUnlockEvent) => void;
+let unlockCallbacks: UnlockCallback[] = [];
 
 /**
  * Default empty statistics for first use
@@ -212,6 +218,19 @@ export async function recordAttempt(attemptData: AttemptData): Promise<number> {
 
     // Save updated statistics
     await saveStatistics(stats);
+
+    // Check and unlock next level if criteria met (fire-and-forget, non-blocking)
+    checkAndUnlockNextLevel()
+      .then(event => {
+        if (event && __DEV__) {
+          console.log(`Level ${event.level} unlocked after mastering ${event.previousLevel}`);
+        }
+      })
+      .catch(error => {
+        if (__DEV__) {
+          console.error('Auto-unlock check failed:', error);
+        }
+      });
 
     return pointsEarned;
   } catch (error) {
@@ -466,5 +485,156 @@ export async function getUnlockedLevels(): Promise<JLPTLevel[]> {
       console.error('Failed to get unlocked levels:', error);
     }
     return ['Kana'];  // Return default on error
+  }
+}
+
+/**
+ * Get the previous level in the sequential unlock order
+ * Pure function - no side effects, deterministic
+ *
+ * @param level - The current level
+ * @returns Previous level in sequence, or null if level is first (Kana)
+ *
+ * @example
+ * getPreviousLevel('N5') // Returns 'Kana'
+ * getPreviousLevel('Kana') // Returns null
+ */
+export function getPreviousLevel(level: JLPTLevel): JLPTLevel | null {
+  const currentIndex = JLPT_LEVEL_ORDER.indexOf(level);
+  if (currentIndex <= 0) {
+    return null;  // Kana is first, no previous level
+  }
+  return JLPT_LEVEL_ORDER[currentIndex - 1];
+}
+
+/**
+ * Determine the next level to unlock based on currently unlocked levels
+ * Pure function - no side effects, deterministic
+ *
+ * @param unlockedLevels - Array of currently unlocked levels
+ * @returns Next level to unlock, or null if all levels are unlocked
+ *
+ * @example
+ * getNextLevelToUnlock(['Kana']) // Returns 'N5'
+ * getNextLevelToUnlock(['Kana', 'N5']) // Returns 'N4'
+ * getNextLevelToUnlock(['Kana', 'N5', 'N4', 'N3', 'N2', 'N1']) // Returns null
+ */
+export function getNextLevelToUnlock(unlockedLevels: JLPTLevel[]): JLPTLevel | null {
+  // Find first level in sequence that is not unlocked
+  for (const level of JLPT_LEVEL_ORDER) {
+    if (!unlockedLevels.includes(level)) {
+      return level;
+    }
+  }
+  return null;  // All levels unlocked
+}
+
+/**
+ * Register a callback to be notified when a level is automatically unlocked
+ * Callback will be invoked with LevelUnlockEvent after successful unlock
+ *
+ * @param callback - Function to call when unlock occurs
+ * @returns Unregister function to remove the callback
+ *
+ * @example
+ * const unregister = registerUnlockCallback((event) => {
+ *   console.log(`Level ${event.level} unlocked!`);
+ * });
+ * // Later: unregister();
+ */
+export function registerUnlockCallback(callback: UnlockCallback): () => void {
+  unlockCallbacks.push(callback);
+
+  // Return unregister function
+  return () => {
+    unlockCallbacks = unlockCallbacks.filter(cb => cb !== callback);
+  };
+}
+
+/**
+ * Emit level unlock event to all registered callbacks
+ * Internal helper - called after successful unlock
+ *
+ * @param event - Level unlock event to emit
+ */
+function emitLevelUnlocked(event: LevelUnlockEvent): void {
+  unlockCallbacks.forEach(callback => {
+    try {
+      callback(event);
+    } catch (error) {
+      if (__DEV__) {
+        console.error('Error in unlock callback:', error);
+      }
+    }
+  });
+}
+
+/**
+ * Check if the next level should be unlocked and unlock it if criteria are met
+ * Criteria: Previous level must be 100% mastered (all words >= 5 points)
+ *
+ * This function is called automatically after each recordAttempt() in a fire-and-forget manner.
+ * It will not block the UI or affect the return value of recordAttempt().
+ *
+ * @returns LevelUnlockEvent if a level was unlocked, null otherwise
+ *
+ * @example
+ * // After user completes a word in Kana level:
+ * await recordAttempt({ ... }); // Returns points immediately
+ * // checkAndUnlockNextLevel() runs in background
+ * // If Kana reaches 100%, N5 is unlocked and event is emitted
+ */
+export async function checkAndUnlockNextLevel(): Promise<LevelUnlockEvent | null> {
+  try {
+    // Get current unlock state
+    const unlockedLevels = await getUnlockedLevels();
+
+    // Find next level to potentially unlock
+    const nextLevel = getNextLevelToUnlock(unlockedLevels);
+    if (nextLevel === null) {
+      return null;  // All levels already unlocked
+    }
+
+    // Get previous level (the one that must be 100% mastered)
+    const previousLevel = getPreviousLevel(nextLevel);
+    if (previousLevel === null) {
+      // Should never happen (Kana is unlocked by default)
+      return null;
+    }
+
+    // Check if previous level is 100% mastered
+    const progress = await calculateLevelProgress(previousLevel);
+    const isMastered = progress.masteredWords === progress.totalWords && progress.totalWords > 0;
+
+    if (!isMastered) {
+      return null;  // Criteria not met, don't unlock
+    }
+
+    // Unlock the next level
+    const wasUnlocked = await unlockLevel(nextLevel);
+    if (!wasUnlocked) {
+      return null;  // Level was already unlocked (race condition?)
+    }
+
+    // Get progress of the newly unlocked level (will be 0% at unlock time)
+    const newLevelProgress = await calculateLevelProgress(nextLevel);
+
+    // Create unlock event
+    const event: LevelUnlockEvent = {
+      level: nextLevel,
+      timestamp: new Date().toISOString(),
+      previousLevel,
+      progress: newLevelProgress,
+    };
+
+    // Emit event to registered callbacks
+    emitLevelUnlocked(event);
+
+    return event;
+  } catch (error) {
+    if (__DEV__) {
+      console.error('Failed to check and unlock next level:', error);
+    }
+    return null;
   }
 }

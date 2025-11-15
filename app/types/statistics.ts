@@ -2,6 +2,12 @@ import type { JLPTLevel } from './word';
 import type { Difficulty } from '../components/DifficultySelector';
 
 /**
+ * Sequential unlock order for JLPT levels
+ * Used by auto-unlock logic to determine next level to unlock
+ */
+export const JLPT_LEVEL_ORDER: readonly JLPTLevel[] = ['Kana', 'N5', 'N4', 'N3', 'N2', 'N1'] as const;
+
+/**
  * Statistics for a specific word at a specific level/difficulty combination
  * Each word can have different stats for different level/difficulty pairs
  * Example: Word ID 42 can have separate stats for N5-Normal and N5-Difficile
@@ -62,4 +68,15 @@ export interface LevelProgress {
   totalWords: number;           // Total words available in this level
   masteredWords: number;        // Words with sum(points all difficulties) >= 5
   percentage: number;           // (masteredWords / totalWords) * 100, rounded to 2 decimals
+}
+
+/**
+ * Event emitted when a level is automatically unlocked
+ * Used by UI components to show unlock feedback (toasts, animations)
+ */
+export interface LevelUnlockEvent {
+  level: JLPTLevel;             // Level that was unlocked
+  timestamp: string;            // ISO 8601 timestamp when unlock occurred
+  previousLevel: JLPTLevel;     // Level that triggered the unlock (100% mastered)
+  progress: LevelProgress;      // Progress stats of the unlocked level (0% at unlock time)
 }

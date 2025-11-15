@@ -46,6 +46,10 @@ describe('useStatistics hook', () => {
         perfectCount: 10,
         lastSessionDate: '2025-11-11T00:00:00.000Z',
       },
+      unlockedLevels: ['Kana'],
+      levelUnlockDates: {
+        Kana: '2025-11-11T00:00:00.000Z',
+      },
     };
     mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify(storedStats));
 
@@ -75,6 +79,10 @@ describe('useStatistics hook', () => {
         totalWords: 0,
         perfectCount: 0,
         lastSessionDate: expect.any(String),
+      },
+      unlockedLevels: ['Kana'],
+      levelUnlockDates: {
+        Kana: expect.any(String),
       },
     });
   });
@@ -113,6 +121,10 @@ describe('useStatistics hook', () => {
         totalWords: 1,
         perfectCount: 1,
         lastSessionDate: '2025-11-11T10:00:00.000Z',
+      },
+      unlockedLevels: ['Kana'],
+      levelUnlockDates: {
+        Kana: '2025-11-11T10:00:00.000Z',
       },
     };
 
@@ -173,6 +185,10 @@ describe('useStatistics hook', () => {
         perfectCount: 0,
         lastSessionDate: '2025-11-11T10:00:00.000Z',
       },
+      unlockedLevels: ['Kana'],
+      levelUnlockDates: {
+        Kana: '2025-11-11T10:00:00.000Z',
+      },
     };
 
     mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify(updatedStats));
@@ -227,6 +243,10 @@ describe('useStatistics hook', () => {
         totalWords: 1,
         perfectCount: 0,
         lastSessionDate: '2025-11-11T10:00:00.000Z',
+      },
+      unlockedLevels: ['Kana'],
+      levelUnlockDates: {
+        Kana: '2025-11-11T10:00:00.000Z',
       },
     };
 
@@ -283,6 +303,10 @@ describe('useStatistics hook', () => {
         perfectCount: 0,
         lastSessionDate: '2025-11-11T10:00:00.000Z',
       },
+      unlockedLevels: ['Kana'],
+      levelUnlockDates: {
+        Kana: '2025-11-11T10:00:00.000Z',
+      },
     };
 
     mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify(updatedStats));
@@ -329,6 +353,10 @@ describe('useStatistics hook', () => {
         perfectCount: 10,
         lastSessionDate: '2025-11-11T00:00:00.000Z',
       },
+      unlockedLevels: ['Kana'],
+      levelUnlockDates: {
+        Kana: '2025-11-11T00:00:00.000Z',
+      },
     };
     mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify(initialStats));
     mockAsyncStorage.setItem.mockResolvedValue();
@@ -351,6 +379,10 @@ describe('useStatistics hook', () => {
         totalWords: 0,
         perfectCount: 0,
         lastSessionDate: '2025-11-11T10:00:00.000Z',
+      },
+      unlockedLevels: ['Kana'],
+      levelUnlockDates: {
+        Kana: '2025-11-11T10:00:00.000Z',
       },
     };
     mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify(defaultStats));
@@ -383,6 +415,10 @@ describe('useStatistics hook', () => {
         totalWords: 0,
         perfectCount: 0,
         lastSessionDate: expect.any(String),
+      },
+      unlockedLevels: ['Kana'],
+      levelUnlockDates: {
+        Kana: expect.any(String),
       },
     });
 
@@ -428,6 +464,10 @@ describe('useStatistics hook', () => {
         totalWords: 0,
         perfectCount: 0,
         lastSessionDate: '2025-11-11T00:00:00.000Z',
+      },
+      unlockedLevels: ['Kana'],
+      levelUnlockDates: {
+        Kana: '2025-11-11T00:00:00.000Z',
       },
     };
     mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify(initialStats));
@@ -490,6 +530,10 @@ describe('useStatistics hook', () => {
         perfectCount: 1,
         lastSessionDate: '2025-11-11T10:00:00.000Z',
       },
+      unlockedLevels: ['Kana'],
+      levelUnlockDates: {
+        Kana: '2025-11-11T10:00:00.000Z',
+      },
     };
     mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify(firstStats));
 
@@ -521,6 +565,10 @@ describe('useStatistics hook', () => {
         totalWords: 1, // Still 1 word
         perfectCount: 2,
         lastSessionDate: '2025-11-11T10:01:00.000Z',
+      },
+      unlockedLevels: ['Kana'],
+      levelUnlockDates: {
+        Kana: '2025-11-11T10:01:00.000Z',
       },
     };
     mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify(secondStats));
@@ -575,6 +623,10 @@ describe('useStatistics hook', () => {
         totalWords: 1,
         perfectCount: 1,
         lastSessionDate: '2025-11-11T10:00:00.000Z',
+      },
+      unlockedLevels: ['Kana'],
+      levelUnlockDates: {
+        Kana: '2025-11-11T10:00:00.000Z',
       },
     };
     mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify(updatedStats));

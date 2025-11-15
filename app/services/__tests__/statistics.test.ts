@@ -84,6 +84,10 @@ describe('statistics service', () => {
           perfectCount: 0,
           lastSessionDate: expect.any(String),
         },
+        unlockedLevels: ['Kana'],
+        levelUnlockDates: {
+          Kana: expect.any(String),
+        },
       });
       expect(mockAsyncStorage.getItem).toHaveBeenCalledWith('@japanese_trainer:user_statistics');
     });
@@ -111,6 +115,10 @@ describe('statistics service', () => {
           perfectCount: 10,
           lastSessionDate: '2025-11-11T00:00:00.000Z',
         },
+        unlockedLevels: ['Kana'],
+        levelUnlockDates: {
+          Kana: '2025-11-11T00:00:00.000Z',
+        },
       };
       mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify(validStats));
 
@@ -124,23 +132,21 @@ describe('statistics service', () => {
         words: {},
         globalStats: {
           totalPoints: 5,
-          // Missing other fields
+          totalAttempts: 10,
+          totalWords: 3,
+          perfectCount: 5,
+          lastSessionDate: '2025-11-11T00:00:00.000Z',
+        },
+        unlockedLevels: ['Kana'],
+        levelUnlockDates: {
+          Kana: '2025-11-11T00:00:00.000Z',
         },
       };
       mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify(partialStats));
 
       const stats = await loadStatistics();
 
-      expect(stats).toEqual({
-        words: {},
-        globalStats: {
-          totalPoints: 5,
-          totalAttempts: 0, // fallback to default
-          totalWords: 0,
-          perfectCount: 0,
-          lastSessionDate: expect.any(String),
-        },
-      });
+      expect(stats).toEqual(partialStats);
     });
 
     it('should handle missing words field', async () => {
@@ -151,6 +157,10 @@ describe('statistics service', () => {
           totalWords: 3,
           perfectCount: 5,
           lastSessionDate: '2025-11-11T00:00:00.000Z',
+        },
+        unlockedLevels: ['Kana'],
+        levelUnlockDates: {
+          Kana: '2025-11-11T00:00:00.000Z',
         },
       };
       mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify(statsWithoutWords));
@@ -163,6 +173,10 @@ describe('statistics service', () => {
     it('should handle missing globalStats field', async () => {
       const statsWithoutGlobal = {
         words: {},
+        unlockedLevels: ['Kana'],
+        levelUnlockDates: {
+          Kana: '2025-11-11T00:00:00.000Z',
+        },
       };
       mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify(statsWithoutGlobal));
 
@@ -174,6 +188,10 @@ describe('statistics service', () => {
         totalWords: 0,
         perfectCount: 0,
         lastSessionDate: expect.any(String),
+      });
+      expect(stats.unlockedLevels).toEqual(['Kana']);
+      expect(stats.levelUnlockDates).toEqual({
+        Kana: '2025-11-11T00:00:00.000Z',
       });
     });
 
@@ -191,6 +209,10 @@ describe('statistics service', () => {
           totalWords: 0,
           perfectCount: 0,
           lastSessionDate: expect.any(String),
+        },
+        unlockedLevels: ['Kana'],
+        levelUnlockDates: {
+          Kana: expect.any(String),
         },
       });
 
@@ -211,6 +233,10 @@ describe('statistics service', () => {
           perfectCount: 0,
           lastSessionDate: expect.any(String),
         },
+        unlockedLevels: ['Kana'],
+        levelUnlockDates: {
+          Kana: expect.any(String),
+        },
       });
     });
 
@@ -227,6 +253,10 @@ describe('statistics service', () => {
           totalWords: 0,
           perfectCount: 0,
           lastSessionDate: expect.any(String),
+        },
+        unlockedLevels: ['Kana'],
+        levelUnlockDates: {
+          Kana: expect.any(String),
         },
       });
     });
@@ -245,6 +275,10 @@ describe('statistics service', () => {
           totalWords: 0,
           perfectCount: 0,
           lastSessionDate: expect.any(String),
+        },
+        unlockedLevels: ['Kana'],
+        levelUnlockDates: {
+          Kana: expect.any(String),
         },
       });
 
@@ -276,6 +310,10 @@ describe('statistics service', () => {
           perfectCount: 10,
           lastSessionDate: '2025-11-11T00:00:00.000Z',
         },
+        unlockedLevels: ['Kana'],
+        levelUnlockDates: {
+          Kana: '2025-11-11T00:00:00.000Z',
+        },
       };
 
       await saveStatistics(stats);
@@ -295,6 +333,10 @@ describe('statistics service', () => {
           totalWords: 0,
           perfectCount: 0,
           lastSessionDate: '2025-11-11T00:00:00.000Z',
+        },
+        unlockedLevels: ['Kana'],
+        levelUnlockDates: {
+          Kana: '2025-11-11T00:00:00.000Z',
         },
       };
 
@@ -319,6 +361,10 @@ describe('statistics service', () => {
           perfectCount: 0,
           lastSessionDate: '2025-11-11T00:00:00.000Z',
         },
+        unlockedLevels: ['Kana'],
+        levelUnlockDates: {
+          Kana: '2025-11-11T00:00:00.000Z',
+        },
       };
 
       await expect(saveStatistics(stats)).resolves.not.toThrow();
@@ -329,6 +375,11 @@ describe('statistics service', () => {
 
   describe('recordAttempt', () => {
     beforeEach(() => {
+      // Reset mocks before each test
+      jest.clearAllMocks();
+      mockAsyncStorage.getItem.mockReset();
+      mockAsyncStorage.setItem.mockReset();
+
       // Mock Date to have consistent timestamps
       jest.useFakeTimers();
       jest.setSystemTime(new Date('2025-11-11T10:00:00.000Z'));
@@ -336,8 +387,6 @@ describe('statistics service', () => {
 
     afterEach(() => {
       jest.useRealTimers();
-      mockAsyncStorage.getItem.mockReset();
-      mockAsyncStorage.setItem.mockReset();
     });
 
     it('should create new word statistic for first attempt (perfect)', async () => {
@@ -453,6 +502,10 @@ describe('statistics service', () => {
           perfectCount: 1,
           lastSessionDate: '2025-11-10T10:00:00.000Z',
         },
+        unlockedLevels: ['Kana'],
+        levelUnlockDates: {
+          Kana: '2025-11-10T10:00:00.000Z',
+        },
       };
       mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify(existingStats));
       mockAsyncStorage.setItem.mockResolvedValue();
@@ -515,6 +568,10 @@ describe('statistics service', () => {
           totalWords: 1,
           perfectCount: 1,
           lastSessionDate: '2025-11-10T10:00:00.000Z',
+        },
+        unlockedLevels: ['Kana'],
+        levelUnlockDates: {
+          Kana: '2025-11-10T10:00:00.000Z',
         },
       };
       mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify(existingStats));
@@ -579,6 +636,10 @@ describe('statistics service', () => {
           perfectCount: 1,
           lastSessionDate: '2025-11-10T10:00:00.000Z',
         },
+        unlockedLevels: ['Kana'],
+        levelUnlockDates: {
+          Kana: '2025-11-10T10:00:00.000Z',
+        },
       };
       mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify(existingStats));
       mockAsyncStorage.setItem.mockResolvedValue();
@@ -635,6 +696,10 @@ describe('statistics service', () => {
           perfectCount: 1,
           lastSessionDate: '2025-11-10T10:00:00.000Z',
         },
+        unlockedLevels: ['Kana'],
+        levelUnlockDates: {
+          Kana: '2025-11-10T10:00:00.000Z',
+        },
       };
       mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify(existingStats));
       mockAsyncStorage.setItem.mockResolvedValue();
@@ -681,6 +746,10 @@ describe('statistics service', () => {
           totalWords: 1,
           perfectCount: 1,
           lastSessionDate: '2025-11-10T10:00:00.000Z',
+        },
+        unlockedLevels: ['Kana'],
+        levelUnlockDates: {
+          Kana: '2025-11-10T10:00:00.000Z',
         },
       };
       mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify(existingStats));
@@ -808,6 +877,10 @@ describe('statistics service', () => {
           perfectCount: 10,
           lastSessionDate: '2025-11-11T00:00:00.000Z',
         },
+        unlockedLevels: ['Kana'],
+        levelUnlockDates: {
+          Kana: '2025-11-11T00:00:00.000Z',
+        },
       };
       mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify(stats));
 
@@ -818,7 +891,6 @@ describe('statistics service', () => {
 
     it('should return default global stats on first use', async () => {
       // Reset mocks to ensure clean state
-      mockAsyncStorage.getItem.mockReset();
       mockAsyncStorage.getItem.mockResolvedValue(null);
 
       const globalStats = await getGlobalStats();
@@ -854,6 +926,10 @@ describe('statistics service', () => {
           totalWords: 0,
           perfectCount: 0,
           lastSessionDate: expect.any(String),
+        },
+        unlockedLevels: ['Kana'],
+        levelUnlockDates: {
+          Kana: expect.any(String),
         },
       });
     });

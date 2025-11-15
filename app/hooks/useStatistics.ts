@@ -7,9 +7,10 @@ import {
   isLevelUnlocked,
   unlockLevel,
   getUnlockedLevels,
+  registerUnlockCallback,
   type UserStatistics,
 } from '../services/statistics';
-import type { AttemptData, LevelProgress } from '../types/statistics';
+import type { AttemptData, LevelProgress, LevelUnlockEvent } from '../types/statistics';
 import type { JLPTLevel } from '../types/word';
 
 /**
@@ -103,6 +104,26 @@ export function useStatistics() {
     []
   );
 
+  /**
+   * Register a callback to be notified when a level is automatically unlocked
+   * The callback will receive a LevelUnlockEvent with unlock details
+   * Returns an unregister function to clean up the callback
+   *
+   * @example
+   * useEffect(() => {
+   *   const unregister = registerUnlockCallbackHook((event) => {
+   *     console.log(`Level ${event.level} unlocked!`);
+   *   });
+   *   return unregister; // Cleanup on unmount
+   * }, []);
+   */
+  const registerUnlockCallbackHook = useCallback(
+    (callback: (event: LevelUnlockEvent) => void): (() => void) => {
+      return registerUnlockCallback(callback);
+    },
+    []
+  );
+
   return {
     statistics,
     isLoading,
@@ -112,5 +133,6 @@ export function useStatistics() {
     checkLevelUnlocked,
     unlockLevel: unlockLevelHook,
     getUnlockedLevels: getUnlockedLevelsHook,
+    registerUnlockCallback: registerUnlockCallbackHook,
   };
 }
