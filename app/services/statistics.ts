@@ -653,8 +653,11 @@ export async function checkAndUnlockNextLevel(): Promise<LevelUnlockEvent | null
  */
 export async function getWordProgressForLevel(level: JLPTLevel): Promise<WordProgress[]> {
   try {
+    // Kana uses N5 word list (same vocabulary)
+    const dataLevel: DataLevel = level === 'Kana' ? 'N5' : (level as DataLevel);
+
     // Load all words for this level
-    const wordList = getWordsByLevel(level as DataLevel);
+    const wordList = getWordsByLevel(dataLevel);
     const allWords = wordList.words;
 
     // Load user statistics

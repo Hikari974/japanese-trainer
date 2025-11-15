@@ -4,7 +4,7 @@ import { YStack, Text } from 'tamagui';
 import { LevelProgressView } from '../../components/LevelProgressView';
 import type { JLPTLevel } from '../../types/word';
 
-const VALID_LEVELS: JLPTLevel[] = ['KANA', 'N5', 'N4', 'N3', 'N2', 'N1'];
+const VALID_LEVELS: JLPTLevel[] = ['Kana', 'N5', 'N4', 'N3', 'N2', 'N1'];
 
 /**
  * Route wrapper for level progress screen
@@ -15,8 +15,8 @@ export default function LevelProgressScreen() {
   const { level } = useLocalSearchParams<{ level: string }>();
   const router = useRouter();
 
-  // Validate and convert level parameter
-  const normalizedLevel = level?.toUpperCase() as JLPTLevel;
+  // Validate and convert level parameter (normalize to proper case)
+  const normalizedLevel = (level === 'kana' ? 'Kana' : level?.toUpperCase()) as JLPTLevel;
   const isValidLevel = normalizedLevel && VALID_LEVELS.includes(normalizedLevel);
 
   // Redirect to home if invalid level

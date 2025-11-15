@@ -113,16 +113,19 @@ export function LevelProgressView({ level }: LevelProgressViewProps) {
     <Button
       size="$3"
       backgroundColor={filterMode === mode ? '$blue10' : '$backgroundHover'}
-      color={filterMode === mode ? '$background' : '$color'}
       onPress={() => setFilterMode(mode)}
       pressStyle={{ opacity: 0.8 }}
       borderRadius="$10"
-      fontWeight="600"
-      fontSize={14}
       accessibilityLabel={`Filtrer par ${label}`}
       accessibilityState={{ selected: filterMode === mode }}
     >
-      {label} ({count})
+      <Text
+        color={filterMode === mode ? '$background' : '$color'}
+        fontWeight="600"
+        fontSize={14}
+      >
+        {label} ({count})
+      </Text>
     </Button>
   );
 
@@ -131,14 +134,17 @@ export function LevelProgressView({ level }: LevelProgressViewProps) {
     <Button
       size="$3"
       chromeless
-      color={sortMode === mode ? '$blue10' : '$gray11'}
       onPress={() => setSortMode(mode)}
-      fontWeight={sortMode === mode ? '600' : '400'}
-      fontSize={14}
       accessibilityLabel={`Trier par ${label}`}
       accessibilityState={{ selected: sortMode === mode }}
     >
-      {label}
+      <Text
+        color={sortMode === mode ? '$blue10' : '$gray11'}
+        fontWeight={sortMode === mode ? '600' : '400'}
+        fontSize={14}
+      >
+        {label}
+      </Text>
     </Button>
   );
 

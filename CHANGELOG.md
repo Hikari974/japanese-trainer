@@ -156,7 +156,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Completed levels: checkmark icon, 100% progress, still selectable
   - Accessibility: ARIA labels with progress percentage, 44px+ touch targets
   - Tests: 20/20 unit tests passing (LevelButton), integration tests for home screen
-- **US-006.5**: Affichage Progression Détaillée par Mot (Session 10)
+- **US-006.5**: Affichage Progression Détaillée par Mot (Session 10 + Hotfix Session 11)
   - Complete word-level progress view with FlashList virtualization (handles N1's ~2000 words, 60fps)
   - WordProgress and LevelStatsSummary interfaces in `app/types/progress.ts`
   - WordProgressItem component: status icons (✅🔄⚪), stats, mini progress bars
@@ -169,6 +169,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Performance validated: <150ms load time, 60fps scrolling
   - Files: 4 new (485 lines), 2 modified (138 lines), total ~623 lines
   - Testing: Manual testing passed, unit tests deferred
+  - **Hotfix Session 11**: Fixed Text component wrapping in Button (LevelProgressView.tsx, level-progress/[level].tsx route validation)
+- **US-006.6**: Feedback Visuel Déblocage Niveau avec Modal et Confetti (Session 11)
+  - ConfettiEffect component: Custom emoji particle animation using react-native-reanimated (121 lines)
+    - 8 emoji types: 🎉🎊✨🌟⭐💫🎈🎁
+    - Physics-based animation: randomized velocity, angle, rotation, gravity
+    - configurable particle count and duration
+    - Reanimated shared values for 60fps performance
+  - LevelUnlockModal component: Celebration modal with haptic feedback (168 lines)
+    - Success haptic on mount (expo-haptics notificationAsync)
+    - Visual design: level badge, unlock message, stats summary
+    - ConfettiEffect overlay during celebration
+    - "Continue" button with 300ms delay before navigation
+    - onContinue callback for smooth modal close before route transition
+  - useLevelUnlockListener hook: Event handling and modal state management (66 lines)
+    - Subscribes to unlock events from statistics.ts
+    - Auto-shows modal on level unlock
+    - Manages modal visibility state
+    - Navigation with delay for smooth animation
+  - Global integration in app/_layout.tsx (+10 lines)
+    - Global modal overlay accessible from any screen
+    - Event-driven unlock detection
+  - Dependencies added: expo-haptics
+  - Tests: 13/13 unit tests passing (100% coverage), manual test plan documented
+  - Performance: Smooth 60fps confetti animation, no UI blocking
 
 ### Fixed
 - Memory leak: setTimeout cleanup on component unmount (training.tsx)
@@ -178,6 +202,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Button delay/double-click issue** (Session 3): Disabled animations, immediate state resets
 - **modalColor null regression** (Session 3): Removed problematic setTimeout
 - **Start button color bug** (Session 4): Fixed hardcoded `$levelN3`, now uses dynamic `levelColors[selectedLevel]`
+- **US-006.5 Hotfix** (Session 11): Text components wrapped in Button (LevelProgressView.tsx filter/sort buttons)
+- **US-006.5 Hotfix** (Session 11): Route validation in level-progress/[level].tsx (prevents crashes on invalid routes)
 
 ### Changed
 - Home screen (`app/index.tsx`) now loads and saves user preferences automatically
@@ -228,6 +254,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Technical Details
 - Added dependency: `@react-native-async-storage/async-storage` v2.1.0
 - Added dependency: `expo-localization` v16.0.0
+- Added dependency: `expo-haptics` (Session 11)
 - AsyncStorage mock added to `jest.setup.js` for testing
 - expo-localization mock added to `jest.setup.js` for testing
 - Error handling with graceful fallback to defaults on all storage errors
@@ -279,4 +306,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ---
 
 **Current Version:** 0.1.0
-**Last Updated:** 2025-11-10
+**Last Updated:** 2025-11-15
