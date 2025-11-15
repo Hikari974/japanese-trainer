@@ -111,11 +111,17 @@ export default function HomeScreen() {
       return; // Don't allow selection of locked levels
     }
 
+    // Navigate to progress view for this level
+    router.push({
+      pathname: '/(tabs)/level-progress/[level]',
+      params: { level: level.toLowerCase() }
+    });
+
+    // Also save as selected level for training button
     setSelectedLevel(level);
-    // Save preference immediately
     updatePreferences({ lastLevel: level });
     if (__DEV__) {
-      console.log(`Level saved: ${level}`);
+      console.log(`Navigating to progress view for ${level}`);
     }
   };
 

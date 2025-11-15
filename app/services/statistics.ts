@@ -10,6 +10,7 @@ import type {
 import { JLPT_LEVEL_ORDER } from '../types/statistics';
 import type { JLPTLevel, DataLevel, DisplayMode } from '../types/word';
 import { getWordsByLevel } from './wordLoader';
+import type { WordProgress, LevelStatsSummary } from '../types/progress';
 
 const STORAGE_KEY = '@japanese_trainer:user_statistics';
 
@@ -636,5 +637,138 @@ export async function checkAndUnlockNextLevel(): Promise<LevelUnlockEvent | null
       console.error('Failed to check and unlock next level:', error);
     }
     return null;
+  }
+}
+
+/**
+ * Get aggregated progress data for all words in a specific JLPT level
+ * Combines statistics across all 4 difficulties (Facile, Normal, Difficile, Extrême)
+ * 
+ * @param level - JLPT level to get progress for
+ * @returns Array of WordProgress objects, one per word in the level
+ * 
+ * @example
+ * const progress = await getWordProgressForLevel('N5');
+ * // Returns array with totalPoints, isMastered, successRate for each word
+ */
+export async function getWordProgressForLevel(level: JLPTLevel): Promise<WordProgress[]> {
+  try {
+    // Load all words for this level
+    const wordList = getWordsByLevel(level as DataLevel);
+    const allWords = wordList.words;
+
+    // Load user statistics
+    const stats = await loadStatistics();
+
+    // Create a map to aggregate stats by wordId
+    const wordProgressMap = new Map<number, WordProgress>();
+
+    // Initialize all words with zero stats
+    for (const word of allWords) {
+      wordProgressMap.set(word.id, {
+        wordId: word.id,
+        kanji: word.kanji,
+        kana: word.kana,
+        romaji: word.romaji,
+        totalPoints: 0,
+        totalAttempts: 0,
+        successCount: 0,
+        perfectAttempts: 0,
+        isMastered: false,
+        successRate: 0,
+        lastAttemptDate: undefined,
+      });
+    }
+    
+    // Aggregate stats across all 4 difficulties
+    const difficulties = ['Facile', 'Normal', 'Difficile', 'Extrême'] as const;
+    
+    for (const word of allWords) {
+      const wordProgress = wordProgressMap.get(word.id)!;
+      
+      for (const difficulty of difficulties) {
+        const key = `${word.id}-${level}-${difficulty}`;
+        const wordStat = stats.words[key];
+        
+        if (wordStat) {
+          // Aggregate stats
+          wordProgress.totalPoints += wordStat.points;
+          wordProgress.totalAttempts += wordStat.totalAttempts;
+          wordProgress.successCount += wordStat.successCount;
+          wordProgress.perfectAttempts += wordStat.perfectAttempts;
+          
+          // Track most recent attempt
+          if (!wordProgress.lastAttemptDate || wordStat.lastAttemptDate > wordProgress.lastAttemptDate) {
+            wordProgress.lastAttemptDate = wordStat.lastAttemptDate;
+          }
+        }
+      }
+      
+      // Calculate derived fields
+      wordProgress.isMastered = wordProgress.totalPoints >= 5;
+      wordProgress.successRate = wordProgress.totalAttempts > 0
+        ? Math.round((wordProgress.successCount / wordProgress.totalAttempts) * 100)
+        : 0;
+    }
+    
+    // Return as array
+    return Array.from(wordProgressMap.values());
+  } catch (error) {
+    if (__DEV__) {
+      console.error(`Failed to get word progress for level ${level}:`, error);
+    }
+    return [];
+  }
+}
+
+/**
+ * Get summary statistics for a specific JLPT level
+ * Returns counts of mastered/in-progress/not-started words
+ * 
+ * @param level - JLPT level to get summary for
+ * @returns LevelStatsSummary with counts and percentages
+ * 
+ * @example
+ * const summary = await getLevelStatsSummary('N5');
+ * // Returns { totalWords: 120, masteredWords: 45, inProgressWords: 30, ... }
+ */
+export async function getLevelStatsSummary(level: JLPTLevel): Promise<LevelStatsSummary> {
+  try {
+    // Get progress for all words
+    const wordProgress = await getWordProgressForLevel(level);
+    
+    // Count words in each category
+    const totalWords = wordProgress.length;
+    const masteredWords = wordProgress.filter(w => w.isMastered).length;
+    const inProgressWords = wordProgress.filter(w => w.totalPoints > 0 && w.totalPoints < 5).length;
+    const notStartedWords = wordProgress.filter(w => w.totalAttempts === 0).length;
+    
+    // Calculate mastery percentage
+    const masteryPercentage = totalWords > 0
+      ? Math.round((masteredWords / totalWords) * 100 * 100) / 100  // Round to 2 decimals
+      : 0;
+    
+    return {
+      level,
+      totalWords,
+      masteredWords,
+      inProgressWords,
+      notStartedWords,
+      masteryPercentage,
+    };
+  } catch (error) {
+    if (__DEV__) {
+      console.error(`Failed to get level stats summary for ${level}:`, error);
+    }
+    
+    // Return empty summary on error
+    return {
+      level,
+      totalWords: 0,
+      masteredWords: 0,
+      inProgressWords: 0,
+      notStartedWords: 0,
+      masteryPercentage: 0,
+    };
   }
 }

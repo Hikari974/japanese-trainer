@@ -1,7 +1,7 @@
 # TODO - japanese-trainer
 
 **Version:** 0.1.0
-**Dernière mise à jour:** 2025-11-15 (Session 9)
+**Dernière mise à jour:** 2025-11-15 (Session 10)
 
 ## 🔴 P0 - Technical Debt (AVANT toute nouvelle feature)
 
@@ -63,7 +63,7 @@
 - [x] US-006.2 - Gestion de l'État de Déblocage des Niveaux (P0, S) - Session 7
 - [x] US-006.3 - Logique de Déblocage Séquentiel (P0, M) - Session 8
 - [x] US-006.4 - UI Sélection Niveau avec États Locked/Unlocked (P1, L) - Session 9
-- [ ] US-006.5 - Affichage Progression Détaillée par Mot (P1, M)
+- [x] US-006.5 - Affichage Progression Détaillée par Mot (P1, M) - Session 10
 - [ ] US-006.6 - Feedback Visuel Déblocage Niveau (P2, S)
 - [ ] US-006.7 - Page Statistiques Enrichie avec Vue Progression Globale (P2, M)
 - [ ] US-006.8 - Migration État Initial pour Utilisateurs Existants (P1, S)
