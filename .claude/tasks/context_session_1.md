@@ -200,12 +200,28 @@ japanese-trainer/
   - **Solution 4 :** Animation single-pass (loop infini → une fois puis hide)
   - **Résultat :** ScrollingText aussi fluide que POC, zéro saccades
 
+### Session 7 (2025-11-15) : US-006.2 + Performance Fix
+
+- [x] **Epic-006 User Story 006.2** "Gestion de l'État de Déblocage des Niveaux" (commit pending)
+  - Extension interface `UserStatistics` : `unlockedLevels: JLPTLevel[]` + `levelUnlockDates`
+  - Nouveaux utilisateurs : Kana débloqué par défaut (`['Kana']`)
+  - Migration automatique : idempotente, non-destructive, préserve 100% données existantes
+  - Méthodes implémentées : `isLevelUnlocked()`, `unlockLevel()`, `getUnlockedLevels()`
+  - Hook React étendu : `checkLevelUnlocked`, `unlockLevel`, `getUnlockedLevels`
+  - Tests : 15/15 passent, 100% couverture (statistics.unlock.test.ts, 462 lignes)
+  - Code Review : APPROVE WITH CHANGES (High Priority: cache performance)
+  - **Performance Fix** : Cache in-memory avec TTL 5s pour `isLevelUnlocked()`
+    - Variables cache : `unlockedLevelsCache`, `cacheTimestamp`, `CACHE_TTL_MS`
+    - Fonction invalidation : `invalidateUnlockedLevelsCache()`
+    - Invalidation automatique après `unlockLevel()` (données fraîches garanties)
+    - Impact tests : 0 (15/15 unlock + 23/23 progression passent toujours)
+  - Lignes changées : 234 (US-006.2 complète + fix performance)
+
 ### Ce qui reste à faire
-- [ ] Définir les Epic et User Stories pour l'apprentissage du japonais
+- [ ] Implémenter US-006.3 : Logique déblocage automatique (progression 80% → unlock next)
 - [ ] Créer la page stats (actuellement placeholder)
 - [ ] Ajouter tests pour training.tsx (dette technique P0 - 239 lignes)
 - [ ] Ajouter tests pour ScrollingText, ScrollingTextContainer, RomajiKeyboard
-- [ ] Ajouter statistiques persistantes (étendre système AsyncStorage)
 - [ ] Améliorer page settings (actuellement sélecteur langue basique)
 
 ---
@@ -845,4 +861,42 @@ const pointsEarned = await recordAttempt({
 - app/services/statistics.ts (+142 lignes)
 - app/hooks/useStatistics.ts (+12 lignes)
 - app/services/__tests__/statistics.levelProgress.test.ts (NEW, 865 lignes)
+
+---
+
+## Session 7 : Epic-006 US-006.2 - État Déblocage Niveaux (2025-11-15)
+
+### Fonctionnalités Ajoutées
+- [x] US-006.2: Gestion de l'État de Déblocage des Niveaux
+  - Extension UserStatistics avec champs unlockedLevels et levelUnlockDates
+  - Migration automatique non-destructive intégrée dans loadStatistics()
+  - Kana débloqué par défaut pour nouveaux utilisateurs (default: ['Kana'])
+  - Méthodes: isLevelUnlocked(), unlockLevel(), getUnlockedLevels()
+  - Hooks React exposés via useStatistics: checkLevelUnlocked, unlockLevel, getUnlockedLevels
+  - 15 tests unitaires (15/15 passing, 100% coverage)
+
+### Décisions Techniques
+- Migration idempotente: appliquée automatiquement dans loadStatistics()
+- Format timestamps: ISO 8601 pour levelUnlockDates (new Date().toISOString())
+- Clone array: getUnlockedLevels() retourne copie (immutabilité)
+- Default behavior: nouveaux users ont ['Kana'] dans unlockedLevels
+- Persistence: saveStatistics() appelée automatiquement après unlockLevel()
+
+### Fichiers Modifiés
+- app/types/statistics.ts (+2 lignes)
+  - Ajout unlockedLevels: string[]
+  - Ajout levelUnlockDates: Record<string, string>
+- app/services/statistics.ts (+87 lignes)
+  - migrateStatistics() fonction pour ajouter unlock fields si manquants
+  - isLevelUnlocked(level) vérifie si niveau débloqué
+  - unlockLevel(level) débloque niveau avec timestamp + save
+  - getUnlockedLevels() retourne copie array niveaux débloqués
+- app/hooks/useStatistics.ts (+43 lignes)
+  - checkLevelUnlocked(level) wrapper React hook
+  - unlockLevel(level) wrapper React hook avec state update
+  - getUnlockedLevels() wrapper React hook
+- app/services/__tests__/statistics.unlock.test.ts (NEW, 462 lignes)
+  - 15 tests unitaires unlock functionality
+  - Coverage: 100% statements, 100% branches, 100% functions, 100% lines
+  - Tests: migration, isLevelUnlocked, unlockLevel, getUnlockedLevels, hook wrappers
 

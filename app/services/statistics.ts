@@ -11,6 +11,11 @@ import { getWordsByLevel } from './wordLoader';
 
 const STORAGE_KEY = '@japanese_trainer:user_statistics';
 
+// Cache for unlock status checks (performance optimization)
+let unlockedLevelsCache: JLPTLevel[] | null = null;
+let cacheTimestamp: number = 0;
+const CACHE_TTL_MS = 5000; // 5 seconds
+
 /**
  * Default empty statistics for first use
  */
@@ -23,7 +28,20 @@ const DEFAULT_STATISTICS: UserStatistics = {
     perfectCount: 0,
     lastSessionDate: new Date().toISOString(),
   },
+  unlockedLevels: ['Kana'],  // Kana unlocked by default for new users
+  levelUnlockDates: {
+    Kana: new Date().toISOString(),
+  },
 };
+
+/**
+ * Invalidate the unlock status cache
+ * Called internally after unlockLevel() to ensure fresh data
+ */
+function invalidateUnlockedLevelsCache(): void {
+  unlockedLevelsCache = null;
+  cacheTimestamp = 0;
+}
 
 /**
  * Generate composite key for word statistics
@@ -51,8 +69,30 @@ export function calculatePoints(
 }
 
 /**
+ * Migrate old statistics to add unlock fields if missing
+ * Preserves all existing data (words, globalStats)
+ */
+function migrateUnlockFields(oldStats: any): UserStatistics {
+  const migrated = { ...oldStats };
+
+  // Add unlock fields if missing
+  if (!migrated.unlockedLevels) {
+    migrated.unlockedLevels = ['Kana'];
+  }
+
+  if (!migrated.levelUnlockDates) {
+    migrated.levelUnlockDates = {
+      Kana: oldStats.globalStats?.lastSessionDate || new Date().toISOString(),
+    };
+  }
+
+  return migrated as UserStatistics;
+}
+
+/**
  * Load user statistics from local storage
  * Returns default empty statistics on first use or if data is corrupted
+ * Automatically migrates old statistics to add unlock fields
  */
 export async function loadStatistics(): Promise<UserStatistics> {
   try {
@@ -66,7 +106,7 @@ export async function loadStatistics(): Promise<UserStatistics> {
 
     // Validate structure and provide fallbacks
     if (typeof parsed === 'object' && parsed !== null) {
-      return {
+      const stats: UserStatistics = {
         words: parsed.words ?? {},
         globalStats: {
           totalPoints: parsed.globalStats?.totalPoints ?? 0,
@@ -75,7 +115,18 @@ export async function loadStatistics(): Promise<UserStatistics> {
           perfectCount: parsed.globalStats?.perfectCount ?? 0,
           lastSessionDate: parsed.globalStats?.lastSessionDate ?? new Date().toISOString(),
         },
+        unlockedLevels: parsed.unlockedLevels ?? ['Kana'],
+        levelUnlockDates: parsed.levelUnlockDates ?? { Kana: new Date().toISOString() },
       };
+
+      // Migrate if unlock fields were missing
+      if (!parsed.unlockedLevels || !parsed.levelUnlockDates) {
+        const migrated = migrateUnlockFields(parsed);
+        await saveStatistics(migrated);  // Persist migration immediately
+        return migrated;
+      }
+
+      return stats;
     }
 
     return DEFAULT_STATISTICS;
@@ -328,5 +379,92 @@ export async function calculateLevelProgress(level: JLPTLevel): Promise<LevelPro
       masteredWords: 0,
       percentage: 0,
     };
+  }
+}
+
+/**
+ * Check if a JLPT level is unlocked
+ * Called frequently by UI components, performance-critical
+ * Uses in-memory cache with 5-second TTL to minimize AsyncStorage reads
+ *
+ * @param level - The JLPT level to check
+ * @returns true if level is unlocked, false otherwise
+ */
+export async function isLevelUnlocked(level: JLPTLevel): Promise<boolean> {
+  try {
+    const now = Date.now();
+
+    // Use cache if valid (within TTL)
+    if (unlockedLevelsCache !== null && (now - cacheTimestamp) < CACHE_TTL_MS) {
+      return unlockedLevelsCache.includes(level);
+    }
+
+    // Cache miss or expired - reload from storage
+    const stats = await loadStatistics();
+
+    // Update cache
+    unlockedLevelsCache = [...stats.unlockedLevels]; // Clone for safety
+    cacheTimestamp = now;
+
+    return stats.unlockedLevels.includes(level);
+  } catch (error) {
+    if (__DEV__) {
+      console.error('Failed to check level unlock status:', error);
+    }
+    return false;
+  }
+}
+
+/**
+ * Unlock a JLPT level
+ * Adds level to unlocked list and records unlock timestamp
+ * Idempotent - safe to call multiple times for same level
+ *
+ * @param level - The JLPT level to unlock
+ * @returns true if level was newly unlocked, false if already unlocked
+ */
+export async function unlockLevel(level: JLPTLevel): Promise<boolean> {
+  try {
+    const stats = await loadStatistics();
+
+    // Check if already unlocked
+    if (stats.unlockedLevels.includes(level)) {
+      return false;  // Already unlocked
+    }
+
+    // Unlock the level
+    stats.unlockedLevels.push(level);
+    stats.levelUnlockDates[level] = new Date().toISOString();
+
+    // Persist changes
+    await saveStatistics(stats);
+
+    // Invalidate cache to reflect new unlock
+    invalidateUnlockedLevelsCache();
+
+    return true;  // Newly unlocked
+  } catch (error) {
+    if (__DEV__) {
+      console.error('Failed to unlock level:', error);
+    }
+    return false;
+  }
+}
+
+/**
+ * Get all unlocked JLPT levels
+ * Returns a copy to prevent external mutation
+ *
+ * @returns Array of unlocked levels (chronological order)
+ */
+export async function getUnlockedLevels(): Promise<JLPTLevel[]> {
+  try {
+    const stats = await loadStatistics();
+    return [...stats.unlockedLevels];  // Return clone for immutability
+  } catch (error) {
+    if (__DEV__) {
+      console.error('Failed to get unlocked levels:', error);
+    }
+    return ['Kana'];  // Return default on error
   }
 }

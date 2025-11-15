@@ -1,7 +1,7 @@
 # TODO - japanese-trainer
 
 **Version:** 0.1.0
-**Dernière mise à jour:** 2025-11-15
+**Dernière mise à jour:** 2025-11-15 (Session 7)
 
 ## 🔴 P0 - Technical Debt (AVANT toute nouvelle feature)
 
@@ -60,7 +60,7 @@
 ## Phase: Epic-006 - Système de Progression et Déblocage Séquentiel des Niveaux JLPT
 
 - [x] US-006.1 - Calcul Automatique de Progression par Niveau (P0, M)
-- [ ] US-006.2 - Gestion de l'État de Déblocage des Niveaux (P0, S)
+- [x] US-006.2 - Gestion de l'État de Déblocage des Niveaux (P0, S)
 - [ ] US-006.3 - Logique de Déblocage Séquentiel (P0, M)
 - [ ] US-006.4 - UI Sélection Niveau avec États Locked/Unlocked (P1, L)
 - [ ] US-006.5 - Affichage Progression Détaillée par Mot (P1, M)

@@ -36,6 +36,8 @@ export interface GlobalStatistics {
 export interface UserStatistics {
   words: Record<string, WordStatistic>;  // Key: "${wordId}-${level}-${difficulty}"
   globalStats: GlobalStatistics;
+  unlockedLevels: JLPTLevel[];           // Array of unlocked levels (e.g., ["kana", "n5"])
+  levelUnlockDates: Partial<Record<JLPTLevel, string>>;  // ISO 8601 timestamps for unlock events
 }
 
 /**

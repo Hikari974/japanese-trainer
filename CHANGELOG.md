@@ -19,6 +19,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Fonction calculateLevelProgress() avec règles pioche cumulative
   - Hook useStatistics.calculateProgress() pour UI
   - 23 tests unitaires (coverage 97%)
+- US-006.2: Gestion état déblocage niveaux JLPT avec AsyncStorage persistence et in-memory cache (Epic-006)
+  - Extension UserStatistics avec champs unlockedLevels et levelUnlockDates
+  - Migration automatique stats existantes (non-destructive, idempotent)
+  - Méthodes isLevelUnlocked(), unlockLevel(), getUnlockedLevels()
+  - Hook useStatistics exposant checkLevelUnlocked, unlockLevel, getUnlockedLevels
+  - Kana débloqué par défaut pour nouveaux utilisateurs
+  - Timestamps ISO 8601 pour dates déblocage (levelUnlockDates)
+  - In-memory cache avec TTL 5 secondes pour isLevelUnlocked() (performance optimization)
+  - Invalidation automatique après unlockLevel() pour cohérence données
+  - 15 tests unitaires (100% passing, 100% coverage)
 - Complete training session page with 5 UI zones (239 lines)
   - Compact session info (level + difficulty)
   - ScrollingText integration with difficulty-based parameters

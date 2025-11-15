@@ -4,6 +4,9 @@ import {
   recordAttempt,
   resetStatistics,
   calculateLevelProgress,
+  isLevelUnlocked,
+  unlockLevel,
+  getUnlockedLevels,
   type UserStatistics,
 } from '../services/statistics';
 import type { AttemptData, LevelProgress } from '../types/statistics';
@@ -61,11 +64,53 @@ export function useStatistics() {
     []
   );
 
+  /**
+   * Check if a JLPT level is unlocked
+   */
+  const checkLevelUnlocked = useCallback(
+    async (level: JLPTLevel): Promise<boolean> => {
+      return await isLevelUnlocked(level);
+    },
+    []
+  );
+
+  /**
+   * Unlock a JLPT level
+   * Returns true if newly unlocked, false if already unlocked
+   */
+  const unlockLevelHook = useCallback(
+    async (level: JLPTLevel): Promise<boolean> => {
+      const wasUnlocked = await unlockLevel(level);
+
+      // Reload statistics to refresh UI if level was newly unlocked
+      if (wasUnlocked) {
+        const updatedStats = await loadStatistics();
+        setStatistics(updatedStats);
+      }
+
+      return wasUnlocked;
+    },
+    []
+  );
+
+  /**
+   * Get all unlocked JLPT levels
+   */
+  const getUnlockedLevelsHook = useCallback(
+    async (): Promise<JLPTLevel[]> => {
+      return await getUnlockedLevels();
+    },
+    []
+  );
+
   return {
     statistics,
     isLoading,
     recordAttempt: recordAttemptHook,
     resetStats: resetStatsHook,
     calculateProgress,
+    checkLevelUnlocked,
+    unlockLevel: unlockLevelHook,
+    getUnlockedLevels: getUnlockedLevelsHook,
   };
 }
