@@ -231,6 +231,48 @@ export default function SettingsScreen() {
                 </Text>
               </Button>
             </YStack>
+
+            {/* DEBUG: Unlock all levels button (DEV only) */}
+            {__DEV__ && (
+              <YStack
+                backgroundColor="$backgroundHover"
+                padding="$3"
+                borderRadius="$3"
+                gap="$2"
+              >
+                <Text fontSize={15} color="$color" marginBottom="$1">
+                  {preferences?.translationLanguage === 'fr'
+                    ? '🔓 Débloquer tous les niveaux'
+                    : '🔓 Unlock all levels'}
+                </Text>
+
+                <Text fontSize={13} color="$gray11" marginBottom="$2">
+                  {preferences?.translationLanguage === 'fr'
+                    ? 'Déverrouille Kana, N5, N4, N3, N2 et N1 pour tester l\'application. (DEV uniquement)'
+                    : 'Unlocks Kana, N5, N4, N3, N2 and N1 for testing purposes. (DEV only)'}
+                </Text>
+
+                <Button
+                  backgroundColor="$blue10"
+                  color="white"
+                  pressStyle={{ opacity: 0.8, scale: 0.98 }}
+                  animation="quick"
+                  onPress={async () => {
+                    const levels: JLPTLevel[] = ['Kana', 'N5', 'N4', 'N3', 'N2', 'N1'];
+                    for (const level of levels) {
+                      await unlockLevel(level);
+                    }
+                    if (__DEV__) {
+                      console.log('✅ All levels unlocked for testing');
+                    }
+                  }}
+                >
+                  <Text fontSize={14} fontWeight="600" color="white">
+                    {preferences?.translationLanguage === 'fr' ? 'Débloquer tout' : 'Unlock all'}
+                  </Text>
+                </Button>
+              </YStack>
+            )}
           </YStack>
         </YStack>
       </ScrollView>
