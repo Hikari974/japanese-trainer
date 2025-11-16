@@ -420,12 +420,18 @@ useEffect(() => {
    - Vérifier compatibility Expo SDK 52
 
 3. **Epic-006 Almost Complete :**
-   - 6/8 stories complétées (75%)
-   - US-006.7 et US-006.8 restants (Medium + Small)
-   - Peut consider Epic-006 "production-ready" après US-006.8
+   - 7/8 stories complétées (87.5%)
+   - US-006.8 restant (Migration - décision: SKIP car aucun utilisateur réel)
+   - Epic-006 considéré COMPLETE pour usage actuel
+
+4. **Debug Tool Added :**
+   - Bouton "Unlock All Levels" dans settings.tsx (DEV only)
+   - Permet tester US-006.7 progression visualization
+   - 42 lignes, __DEV__ flag protection
+   - Utilisateur peut maintenant tester tous les états (locked/unlocked/completed)
 
 ---
 
 **Dernière mise à jour :** 2025-11-15
-**Statut Session :** ✅ Implementation complète, ⏳ Pending commit
-**Prochaine action :** Orchestrator validation → Commit
+**Statut Session :** ✅ US-006.7 committed (73b257a), ⏳ Debug tool pending commit
+**Prochaine action :** Doc Maintainer → Orchestrator → Commit debug tool

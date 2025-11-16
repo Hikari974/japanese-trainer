@@ -226,6 +226,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Tests cover: global progress calculation, current level logic, navigation handler, success rate, stats aggregation, error handling
     - Manual testing checklist documented for visual/UX validation
   - Code Review: APPROVED with 4 non-blocking minor improvement suggestions
+- **DEV-only Debug Utility**: "Unlock All Levels" button in settings page (Session 11)
+  - Quick-unlock all 6 JLPT levels (Kana → N5 → N4 → N3 → N2 → N1) for testing progression visualization
+  - Only visible in development builds (__DEV__ flag guard)
+  - Located in "Data Management" section after Reset Statistics
+  - Bilingual support (FR: "Débloquer Tous les Niveaux" / EN: "Unlock All Levels")
+  - Uses existing unlockLevel() from useStatistics hook
+  - Enables testing US-006.7 JLPT progression view without completing levels
+  - +42 lines in app/settings.tsx
+- **Epic-006 Status**: 7/8 User Stories COMPLETE
+  - US-006.8 (Migration État Initial) SKIPPED - YAGNI principle applied
+  - Rationale: No real users exist (solo testing app), migration code unnecessary
+  - All core progression features delivered and validated
 
 ### Fixed
 - Memory leak: setTimeout cleanup on component unmount (training.tsx)

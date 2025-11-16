@@ -57,7 +57,7 @@
   - Impact: MEDIUM (affecte ~10 mots)
   - Estimation: 30min (décision) + 30min (implementation si changement)
 
-## Phase: Epic-006 - Système de Progression et Déblocage Séquentiel des Niveaux JLPT
+## Phase: Epic-006 - Système de Progression et Déblocage Séquentiel des Niveaux JLPT (7/8 COMPLETE)
 
 - [x] US-006.1 - Calcul Automatique de Progression par Niveau (P0, M) - Session 6
 - [x] US-006.2 - Gestion de l'État de Déblocage des Niveaux (P0, S) - Session 7
@@ -66,7 +66,7 @@
 - [x] US-006.5 - Affichage Progression Détaillée par Mot (P1, M) - Session 10 + Hotfix Session 11
 - [x] US-006.6 - Feedback Visuel Déblocage Niveau (P2, S) - Session 11
 - [x] US-006.7 - Page Statistiques Enrichie avec Vue Progression Globale (P2, M) - Session 11
-- [ ] US-006.8 - Migration État Initial pour Utilisateurs Existants (P1, S)
+- [ ] ~~US-006.8 - Migration État Initial pour Utilisateurs Existants (P1, S)~~ **SKIPPED** (YAGNI: no real users exist, solo testing only)
 
 ## Prochaine tâche immédiate
 
