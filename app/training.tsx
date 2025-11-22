@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { YStack, XStack, Button, Text, Input, Sheet } from 'tamagui';
-import { useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AppHeader } from './components/AppHeader';
 import { ScrollingTextContainer } from './components/ScrollingTextContainer';
@@ -79,6 +79,7 @@ const normalizeRomaji = (text: string): string => {
 
 export default function TrainingScreen() {
   const insets = useSafeAreaInsets();
+  const router = useRouter();
   const params = useLocalSearchParams<{ level: string; difficulty: string }>();
 
   const level = (params.level || 'Kana') as JLPTLevel;
@@ -86,17 +87,17 @@ export default function TrainingScreen() {
   const config = difficultyConfig[difficulty];
 
   // Load user preferences
-  const { preferences } = usePreferences();
+  const { preferences, isLoading: isLoadingPrefs } = usePreferences();
   const wordsPerSession = preferences?.wordsPerSession ?? 10;
 
   // Load user statistics
   const { recordAttempt } = useStatistics();
 
-  // Load words for training
+  // Load words for training - only when preferences are loaded
   const { words, isLoading } = useWords({
     level,
     difficulty,
-    count: wordsPerSession,
+    count: isLoadingPrefs ? 0 : wordsPerSession,
   });
 
   // États
@@ -183,14 +184,16 @@ export default function TrainingScreen() {
     // Close the modal immediately
     setIsModalOpen(false);
 
-    // Move to next word IMMEDIATELY - no delay for user interaction
-    setCurrentWordIndex(prev => {
-      const next = prev + 1;
-      if (next >= words.length) {
-        return 0; // Loop to start
-      }
-      return next;
-    });
+    // Check if this was the last word
+    const next = currentWordIndex + 1;
+    if (next >= words.length) {
+      // Session complete - return to home
+      router.replace('/');
+      return;
+    }
+
+    // Move to next word
+    setCurrentWordIndex(next);
 
     // Reset input immediately so user can start typing right away
     setInputText('');
@@ -233,14 +236,14 @@ export default function TrainingScreen() {
     return '$borderColor';
   };
 
-  // Loading state
-  if (isLoading || !currentWord) {
+  // Loading state - wait for preferences AND words to load
+  if (isLoadingPrefs || isLoading || !currentWord) {
     return (
       <YStack flex={1} backgroundColor="$background">
         <AppHeader title="Session d'entraînement" showBackButton />
         <YStack flex={1} justifyContent="center" alignItems="center">
           <Text fontSize={16} color="$color">
-            Chargement des mots...
+            Chargement...
           </Text>
         </YStack>
       </YStack>
@@ -388,7 +391,7 @@ export default function TrainingScreen() {
         onOpenChange={() => {
           // Force user to click "Suivant" button - don't allow closing by backdrop
         }}
-        snapPoints={[45]}
+        snapPoints={[55]}
         dismissOnSnapToBottom={false}
         animation="quick"
         animationConfig={{
@@ -412,6 +415,7 @@ export default function TrainingScreen() {
           borderTopLeftRadius="$6"
           borderTopRightRadius="$6"
           padding="$6"
+          paddingBottom={insets.bottom + 24}
           animation="quick"
           enterStyle={{ y: 100, opacity: 0 }}
           exitStyle={{ y: 100, opacity: 0 }}
@@ -446,14 +450,21 @@ export default function TrainingScreen() {
 
             {/* Translation (always shown) */}
             {currentWord && (
-              <Text
-                fontSize={18}
-                color="white"
-                opacity={0.9}
-                textAlign="center"
+              <YStack
+                backgroundColor="rgba(255, 255, 255, 0.15)"
+                paddingHorizontal="$4"
+                paddingVertical="$2"
+                borderRadius="$3"
               >
-                {currentWord.translations[preferences?.translationLanguage || 'fr']}
-              </Text>
+                <Text
+                  fontSize={22}
+                  fontWeight="600"
+                  color="white"
+                  textAlign="center"
+                >
+                  {currentWord.translations[preferences?.translationLanguage || 'fr']}
+                </Text>
+              </YStack>
             )}
 
             {/* Next Button */}

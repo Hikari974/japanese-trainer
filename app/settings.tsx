@@ -4,17 +4,31 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AppHeader } from './components/AppHeader';
 import { usePreferences } from './hooks/usePreferences';
 import { useStatistics } from './hooks/useStatistics';
+import type { JLPTLevel } from './types/word';
+
+const JLPT_LEVELS: JLPTLevel[] = ['Kana', 'N5', 'N4', 'N3', 'N2', 'N1'];
 
 export default function SettingsScreen() {
   const insets = useSafeAreaInsets();
   const { preferences, isLoading, updatePreferences } = usePreferences();
-  const { resetStats } = useStatistics();
+  const { resetStats, unlockLevel, lockLevel, getUnlockedLevels } = useStatistics();
+
+  // State for unlocked levels
+  const [unlockedLevels, setUnlockedLevels] = useState<JLPTLevel[]>([]);
+
+  // Load unlocked levels on mount
+  useEffect(() => {
+    getUnlockedLevels().then(setUnlockedLevels);
+  }, [getUnlockedLevels]);
 
   // Local state for slider (5-30, step 5)
   const [wordsPerSession, setWordsPerSession] = useState(10);
 
   // Confirmation dialog state
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+
+  // Slider save feedback
+  const [sliderSaved, setSliderSaved] = useState(false);
 
   // Initialize slider value from preferences
   useEffect(() => {
@@ -23,16 +37,17 @@ export default function SettingsScreen() {
     }
   }, [preferences]);
 
-  // Handle slider drag (visual update only)
+  // Handle slider drag (visual update only) - snap to step
   const handleWordsPerSessionChange = (value: number[]) => {
-    setWordsPerSession(value[0]);
+    const snapped = Math.round(value[0] / 5) * 5;
+    setWordsPerSession(snapped);
   };
 
   // Handle slider release (save to preferences)
-  const handleWordsPerSessionCommit = (value: number[]) => {
-    const newValue = value[0];
-    setWordsPerSession(newValue);
-    updatePreferences({ wordsPerSession: newValue });
+  const handleWordsPerSessionCommit = async (value: number[]) => {
+    const snapped = Math.round(value[0] / 5) * 5;
+    setWordsPerSession(snapped);
+    await updatePreferences({ wordsPerSession: snapped });
   };
 
   // Handle reset statistics confirmation
@@ -165,7 +180,6 @@ export default function SettingsScreen() {
               <Slider
                 value={[wordsPerSession]}
                 onValueChange={handleWordsPerSessionChange}
-                onValueCommit={handleWordsPerSessionCommit}
                 min={5}
                 max={30}
                 step={5}
@@ -175,6 +189,7 @@ export default function SettingsScreen() {
                   <Slider.TrackActive backgroundColor="$difficultyEasy" />
                 </Slider.Track>
                 <Slider.Thumb
+                  index={0}
                   circular
                   size="$1.5"
                   backgroundColor="$difficultyEasy"
@@ -191,6 +206,25 @@ export default function SettingsScreen() {
                   30
                 </Text>
               </XStack>
+
+              <Button
+                marginTop="$2"
+                backgroundColor={sliderSaved ? '$green10' : '$difficultyEasy'}
+                pressStyle={{ opacity: 0.8, scale: 0.98 }}
+                animation="quick"
+                disabled={sliderSaved}
+                onPress={async () => {
+                  await updatePreferences({ wordsPerSession });
+                  setSliderSaved(true);
+                  setTimeout(() => setSliderSaved(false), 1500);
+                }}
+              >
+                <Text fontSize={14} fontWeight="600" color={sliderSaved ? 'white' : '$darkBackground'}>
+                  {sliderSaved
+                    ? '✓'
+                    : (preferences?.translationLanguage === 'fr' ? 'Valider' : 'Save')}
+                </Text>
+              </Button>
             </YStack>
           </YStack>
 
@@ -232,47 +266,53 @@ export default function SettingsScreen() {
               </Button>
             </YStack>
 
-            {/* DEBUG: Unlock all levels button (DEV only) */}
-            {__DEV__ && (
-              <YStack
-                backgroundColor="$backgroundHover"
-                padding="$3"
-                borderRadius="$3"
-                gap="$2"
-              >
-                <Text fontSize={15} color="$color" marginBottom="$1">
-                  {preferences?.translationLanguage === 'fr'
-                    ? '🔓 Débloquer tous les niveaux'
-                    : '🔓 Unlock all levels'}
-                </Text>
+            {/* Toggle lock/unlock levels */}
+            <YStack
+              backgroundColor="$backgroundHover"
+              padding="$3"
+              borderRadius="$3"
+              gap="$2"
+            >
+              <Text fontSize={15} color="$color" marginBottom="$1">
+                {preferences?.translationLanguage === 'fr'
+                  ? '🔐 Gérer niveaux'
+                  : '🔐 Manage levels'}
+              </Text>
 
-                <Text fontSize={13} color="$gray11" marginBottom="$2">
-                  {preferences?.translationLanguage === 'fr'
-                    ? 'Déverrouille Kana, N5, N4, N3, N2 et N1 pour tester l\'application. (DEV uniquement)'
-                    : 'Unlocks Kana, N5, N4, N3, N2 and N1 for testing purposes. (DEV only)'}
-                </Text>
+              <Text fontSize={13} color="$gray11" marginBottom="$2">
+                {preferences?.translationLanguage === 'fr'
+                  ? 'Cliquez pour débloquer/verrouiller les niveaux.'
+                  : 'Click to unlock/lock levels.'}
+              </Text>
 
-                <Button
-                  backgroundColor="$blue10"
-                  color="white"
-                  pressStyle={{ opacity: 0.8, scale: 0.98 }}
-                  animation="quick"
-                  onPress={async () => {
-                    const levels: JLPTLevel[] = ['Kana', 'N5', 'N4', 'N3', 'N2', 'N1'];
-                    for (const level of levels) {
-                      await unlockLevel(level);
-                    }
-                    if (__DEV__) {
-                      console.log('✅ All levels unlocked for testing');
-                    }
-                  }}
-                >
-                  <Text fontSize={14} fontWeight="600" color="white">
-                    {preferences?.translationLanguage === 'fr' ? 'Débloquer tout' : 'Unlock all'}
-                  </Text>
-                </Button>
-              </YStack>
-            )}
+              <XStack flexWrap="wrap" gap="$2">
+                {JLPT_LEVELS.map((level) => {
+                  const isUnlocked = unlockedLevels.includes(level);
+                  return (
+                    <Button
+                      key={level}
+                      size="$3"
+                      backgroundColor={isUnlocked ? '$green10' : '$gray8'}
+                      pressStyle={{ opacity: 0.8, scale: 0.98 }}
+                      animation="quick"
+                      onPress={async () => {
+                        if (isUnlocked) {
+                          await lockLevel(level);
+                        } else {
+                          await unlockLevel(level);
+                        }
+                        const updated = await getUnlockedLevels();
+                        setUnlockedLevels(updated);
+                      }}
+                    >
+                      <Text fontSize={12} fontWeight="600" color="white">
+                        {isUnlocked ? '🔓' : '🔒'} {level}
+                      </Text>
+                    </Button>
+                  );
+                })}
+              </XStack>
+            </YStack>
           </YStack>
         </YStack>
       </ScrollView>

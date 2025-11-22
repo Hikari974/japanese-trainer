@@ -6,6 +6,7 @@ import {
   calculateLevelProgress,
   isLevelUnlocked,
   unlockLevel,
+  lockLevel,
   getUnlockedLevels,
   registerUnlockCallback,
   type UserStatistics,
@@ -95,6 +96,25 @@ export function useStatistics() {
   );
 
   /**
+   * Lock a JLPT level (for testing/debugging)
+   * Returns true if newly locked, false if already locked
+   */
+  const lockLevelHook = useCallback(
+    async (level: JLPTLevel): Promise<boolean> => {
+      const wasLocked = await lockLevel(level);
+
+      // Reload statistics to refresh UI if level was newly locked
+      if (wasLocked) {
+        const updatedStats = await loadStatistics();
+        setStatistics(updatedStats);
+      }
+
+      return wasLocked;
+    },
+    []
+  );
+
+  /**
    * Get all unlocked JLPT levels
    */
   const getUnlockedLevelsHook = useCallback(
@@ -132,6 +152,7 @@ export function useStatistics() {
     calculateProgress,
     checkLevelUnlocked,
     unlockLevel: unlockLevelHook,
+    lockLevel: lockLevelHook,
     getUnlockedLevels: getUnlockedLevelsHook,
     registerUnlockCallback: registerUnlockCallbackHook,
   };

@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { YStack, XStack, H1, Button, Text } from 'tamagui';
-import { Link, useRouter } from 'expo-router';
+import { Link, useRouter, useFocusEffect } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { DifficultySelector, type Difficulty } from './components/DifficultySelector';
 import { LevelButton, type Level } from './components/LevelButton';
@@ -31,37 +31,40 @@ export default function HomeScreen() {
   const [levelsProgress, setLevelsProgress] = useState<Map<Level, LevelProgress>>(new Map());
   const [isLoadingLevels, setIsLoadingLevels] = useState(true);
 
-  // Load level states (unlock status + progression) on mount
-  useEffect(() => {
-    async function loadLevelStates() {
-      setIsLoadingLevels(true);
-      try {
-        // Get unlock status
-        const unlocked = await getUnlockedLevels();
-        setUnlockedLevels(unlocked);
+  // Load level states function
+  const loadLevelStates = useCallback(async () => {
+    setIsLoadingLevels(true);
+    try {
+      // Get unlock status
+      const unlocked = await getUnlockedLevels();
+      setUnlockedLevels(unlocked);
 
-        // Get progression for all levels
-        const progressMap = new Map<Level, LevelProgress>();
-        for (const level of levels) {
-          const progress = await calculateProgress(level);
-          progressMap.set(level, progress);
-        }
-        setLevelsProgress(progressMap);
-
-        if (__DEV__) {
-          console.log('Levels loaded:', { unlocked, progressMap });
-        }
-      } catch (error) {
-        if (__DEV__) {
-          console.error('Failed to load level states:', error);
-        }
-      } finally {
-        setIsLoadingLevels(false);
+      // Get progression for all levels
+      const progressMap = new Map<Level, LevelProgress>();
+      for (const level of levels) {
+        const progress = await calculateProgress(level);
+        progressMap.set(level, progress);
       }
-    }
+      setLevelsProgress(progressMap);
 
-    loadLevelStates();
+      if (__DEV__) {
+        console.log('Levels loaded:', { unlocked, progressMap });
+      }
+    } catch (error) {
+      if (__DEV__) {
+        console.error('Failed to load level states:', error);
+      }
+    } finally {
+      setIsLoadingLevels(false);
+    }
   }, [calculateProgress, getUnlockedLevels]);
+
+  // Reload level states when screen gains focus (e.g., returning from settings)
+  useFocusEffect(
+    useCallback(() => {
+      loadLevelStates();
+    }, [loadLevelStates])
+  );
 
   // Register event listener for auto-unlock events (from US-006.3)
   useEffect(() => {

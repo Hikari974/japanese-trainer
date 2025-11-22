@@ -472,6 +472,38 @@ export async function unlockLevel(level: JLPTLevel): Promise<boolean> {
 }
 
 /**
+ * Lock a JLPT level (remove from unlocked levels)
+ * Used for testing/debugging purposes
+ */
+export async function lockLevel(level: JLPTLevel): Promise<boolean> {
+  try {
+    const stats = await loadStatistics();
+
+    // Check if already locked
+    if (!stats.unlockedLevels.includes(level)) {
+      return false;  // Already locked
+    }
+
+    // Lock the level
+    stats.unlockedLevels = stats.unlockedLevels.filter(l => l !== level);
+    delete stats.levelUnlockDates[level];
+
+    // Persist changes
+    await saveStatistics(stats);
+
+    // Invalidate cache to reflect lock
+    invalidateUnlockedLevelsCache();
+
+    return true;  // Newly locked
+  } catch (error) {
+    if (__DEV__) {
+      console.error('Failed to lock level:', error);
+    }
+    return false;
+  }
+}
+
+/**
  * Get all unlocked JLPT levels
  * Returns a copy to prevent external mutation
  *
