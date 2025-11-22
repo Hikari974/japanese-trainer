@@ -264,67 +264,23 @@ export async function resetStatistics(): Promise<void> {
 }
 
 /**
- * Get all available word IDs for a specific level
- * Mirrors the word selection logic from wordSelection.ts
+ * Get word IDs available for a specific JLPT level
+ * Returns only the words from the direct data level for accurate counting
  *
- * Rules (cumulative pattern):
- * - Kana: N5 romaji
- * - N5: N5 kanji + N4 romaji
- * - N4: N5 kanji + N4 kanji + N3 romaji
- * - N3: N5 kanji + N4 kanji + N3 kanji + N2 romaji
- * - N2: N5 kanji + N4 kanji + N3 kanji + N2 kanji + N1 romaji
- * - N1: N5 kanji + N4 kanji + N3 kanji + N2 kanji + N1 kanji
+ * Mapping:
+ * - Kana: N5 words (displayed in kana-only mode)
+ * - N5: N5 words
+ * - N4: N4 words
+ * - N3: N3 words
+ * - N2: N2 words
+ * - N1: N1 words
  */
 function getAvailableWordIdsForLevel(level: JLPTLevel): number[] {
-  const wordIds = new Set<number>();
+  // Map level to data source
+  const dataLevel = level === 'Kana' ? 'N5' : level;
 
-  switch (level) {
-    case 'Kana':
-      // Kana: N5 romaji only
-      getWordsByLevel('N5').words.forEach(w => wordIds.add(w.id));
-      break;
-
-    case 'N5':
-      // N5 kanji + N4 romaji
-      getWordsByLevel('N5').words.forEach(w => wordIds.add(w.id));
-      getWordsByLevel('N4').words.forEach(w => wordIds.add(w.id));
-      break;
-
-    case 'N4':
-      // N5 kanji + N4 kanji + N3 romaji
-      getWordsByLevel('N5').words.forEach(w => wordIds.add(w.id));
-      getWordsByLevel('N4').words.forEach(w => wordIds.add(w.id));
-      getWordsByLevel('N3').words.forEach(w => wordIds.add(w.id));
-      break;
-
-    case 'N3':
-      // N5 kanji + N4 kanji + N3 kanji + N2 romaji
-      getWordsByLevel('N5').words.forEach(w => wordIds.add(w.id));
-      getWordsByLevel('N4').words.forEach(w => wordIds.add(w.id));
-      getWordsByLevel('N3').words.forEach(w => wordIds.add(w.id));
-      getWordsByLevel('N2').words.forEach(w => wordIds.add(w.id));
-      break;
-
-    case 'N2':
-      // N5 kanji + N4 kanji + N3 kanji + N2 kanji + N1 romaji
-      getWordsByLevel('N5').words.forEach(w => wordIds.add(w.id));
-      getWordsByLevel('N4').words.forEach(w => wordIds.add(w.id));
-      getWordsByLevel('N3').words.forEach(w => wordIds.add(w.id));
-      getWordsByLevel('N2').words.forEach(w => wordIds.add(w.id));
-      getWordsByLevel('N1').words.forEach(w => wordIds.add(w.id));
-      break;
-
-    case 'N1':
-      // N5 kanji + N4 kanji + N3 kanji + N2 kanji + N1 kanji
-      getWordsByLevel('N5').words.forEach(w => wordIds.add(w.id));
-      getWordsByLevel('N4').words.forEach(w => wordIds.add(w.id));
-      getWordsByLevel('N3').words.forEach(w => wordIds.add(w.id));
-      getWordsByLevel('N2').words.forEach(w => wordIds.add(w.id));
-      getWordsByLevel('N1').words.forEach(w => wordIds.add(w.id));
-      break;
-  }
-
-  return Array.from(wordIds);
+  // Return word IDs from the direct data level only
+  return getWordsByLevel(dataLevel).words.map(w => w.id);
 }
 
 /**

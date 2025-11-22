@@ -4,6 +4,7 @@ import { YStack, XStack, Text, Button, H2, ScrollView } from 'tamagui';
 import { FlashList } from '@shopify/flash-list';
 import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Ionicons } from '@expo/vector-icons';
 import { WordProgressItem } from './WordProgressItem';
 import type { WordProgress, FilterMode, SortMode, LevelStatsSummary } from '../types/progress';
 import type { JLPTLevel } from '../types/word';
@@ -171,12 +172,14 @@ export function LevelProgressView({ level }: LevelProgressViewProps) {
         {/* Back button + Title */}
         <XStack alignItems="center" gap="$3">
           <Button
-            size="$3"
+            size="$4"
             chromeless
             onPress={() => router.back()}
             accessibilityLabel="Retour"
+            pressStyle={{ opacity: 0.6, scale: 0.95 }}
+            animation="quick"
           >
-            <Text fontSize={24}>←</Text>
+            <Ionicons name="arrow-back" size={28} color="#fff" />
           </Button>
 
           <H2 fontSize={24} fontWeight="bold" color="$color" flex={1}>

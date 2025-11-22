@@ -176,11 +176,11 @@ export default function HomeScreen() {
           日本語 Trainer
         </H1>
 
-        {/* Settings & POC */}
+        {/* Settings & Tutorial */}
         <XStack gap="$2">
-          <Link href="/poc-scroll" asChild>
-            <Button size="$3" chromeless accessibilityLabel="Tester le POC">
-              <Text fontSize={16}>🧪</Text>
+          <Link href="/tutorial" asChild>
+            <Button size="$3" chromeless accessibilityLabel="Tutoriel">
+              <Text fontSize={16}>📖</Text>
             </Button>
           </Link>
           <Link href="/settings" asChild>
