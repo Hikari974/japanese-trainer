@@ -20,6 +20,7 @@ describe('preferences service', () => {
         lastDifficulty: 'Normal',
         wordsPerSession: 10,
         translationLanguage: 'en',
+        showFuriganaByDefault: true,
       });
       expect(mockAsyncStorage.getItem).toHaveBeenCalledWith('@japanese_trainer:user_preferences');
     });
@@ -30,12 +31,28 @@ describe('preferences service', () => {
         lastDifficulty: 'Difficile',
         wordsPerSession: 10,
         translationLanguage: 'en',
+        showFuriganaByDefault: true,
       };
       mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify(validPrefs));
 
       const prefs = await loadPreferences();
 
       expect(prefs).toEqual(validPrefs);
+    });
+
+    it('should load showFuriganaByDefault when set to false', async () => {
+      const prefsWithFuriganaOff: UserPreferences = {
+        lastLevel: 'N3',
+        lastDifficulty: 'Normal',
+        wordsPerSession: 10,
+        translationLanguage: 'en',
+        showFuriganaByDefault: false,
+      };
+      mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify(prefsWithFuriganaOff));
+
+      const prefs = await loadPreferences();
+
+      expect(prefs.showFuriganaByDefault).toBe(false);
     });
 
     it('should use defaults for missing fields in stored preferences', async () => {
@@ -49,7 +66,23 @@ describe('preferences service', () => {
         lastDifficulty: 'Normal', // fallback to default
         wordsPerSession: 10,
         translationLanguage: 'en',
+        showFuriganaByDefault: true, // fallback to default
       });
+    });
+
+    it('should migrate old preferences without showFuriganaByDefault', async () => {
+      // Simulate old user data without showFuriganaByDefault
+      const oldPrefs = {
+        lastLevel: 'N3',
+        lastDifficulty: 'Difficile',
+        wordsPerSession: 15,
+        translationLanguage: 'fr',
+      };
+      mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify(oldPrefs));
+
+      const prefs = await loadPreferences();
+
+      expect(prefs.showFuriganaByDefault).toBe(true); // Should default to true for migration
     });
 
     it('should handle corrupted JSON and return defaults', async () => {
@@ -62,6 +95,7 @@ describe('preferences service', () => {
         lastDifficulty: 'Normal',
         wordsPerSession: 10,
         translationLanguage: 'en',
+        showFuriganaByDefault: true,
       });
     });
 
@@ -75,6 +109,7 @@ describe('preferences service', () => {
         lastDifficulty: 'Normal',
         wordsPerSession: 10,
         translationLanguage: 'en',
+        showFuriganaByDefault: true,
       });
     });
 
@@ -88,6 +123,7 @@ describe('preferences service', () => {
         lastDifficulty: 'Normal',
         wordsPerSession: 10,
         translationLanguage: 'en',
+        showFuriganaByDefault: true,
       });
     });
 
@@ -102,6 +138,7 @@ describe('preferences service', () => {
         lastDifficulty: 'Normal',
         wordsPerSession: 10,
         translationLanguage: 'en',
+        showFuriganaByDefault: true,
       });
 
       consoleWarnSpy.mockRestore();
@@ -115,6 +152,7 @@ describe('preferences service', () => {
         lastDifficulty: 'Facile',
         wordsPerSession: 10,
         translationLanguage: 'en',
+        showFuriganaByDefault: true,
       };
       mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify(existingPrefs));
 
@@ -123,6 +161,7 @@ describe('preferences service', () => {
         lastDifficulty: 'Normal',
         wordsPerSession: 10,
         translationLanguage: 'en',
+        showFuriganaByDefault: true,
       };
 
       await savePreferences(newPrefs);
@@ -139,6 +178,7 @@ describe('preferences service', () => {
         lastDifficulty: 'Normal',
         wordsPerSession: 10,
         translationLanguage: 'en',
+        showFuriganaByDefault: true,
       };
       mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify(existingPrefs));
 
@@ -151,6 +191,7 @@ describe('preferences service', () => {
           lastDifficulty: 'Normal', // preserved
           wordsPerSession: 10,
           translationLanguage: 'en',
+          showFuriganaByDefault: true, // preserved
         })
       );
     });
@@ -167,6 +208,31 @@ describe('preferences service', () => {
           lastDifficulty: 'Normal', // default
           wordsPerSession: 10,
           translationLanguage: 'en',
+          showFuriganaByDefault: true, // default
+        })
+      );
+    });
+
+    it('should save showFuriganaByDefault when changed to false', async () => {
+      const existingPrefs: UserPreferences = {
+        lastLevel: 'N3',
+        lastDifficulty: 'Normal',
+        wordsPerSession: 10,
+        translationLanguage: 'en',
+        showFuriganaByDefault: true,
+      };
+      mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify(existingPrefs));
+
+      await savePreferences({ showFuriganaByDefault: false });
+
+      expect(mockAsyncStorage.setItem).toHaveBeenCalledWith(
+        '@japanese_trainer:user_preferences',
+        JSON.stringify({
+          lastLevel: 'N3',
+          lastDifficulty: 'Normal',
+          wordsPerSession: 10,
+          translationLanguage: 'en',
+          showFuriganaByDefault: false, // changed
         })
       );
     });
@@ -187,6 +253,7 @@ describe('preferences service', () => {
         lastDifficulty: 'Normal',
         wordsPerSession: 10,
         translationLanguage: 'en',
+        showFuriganaByDefault: true,
       };
       mockAsyncStorage.getItem.mockResolvedValue(JSON.stringify(existingPrefs));
 
@@ -199,6 +266,7 @@ describe('preferences service', () => {
           lastDifficulty: 'Extrême',
           wordsPerSession: 10,
           translationLanguage: 'en',
+          showFuriganaByDefault: true, // preserved
         })
       );
     });

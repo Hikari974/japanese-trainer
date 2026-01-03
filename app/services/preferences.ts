@@ -8,6 +8,7 @@ export interface UserPreferences {
   lastDifficulty: Difficulty;
   wordsPerSession: number;           // Number of words per training session
   translationLanguage: 'fr' | 'en';  // Preferred translation language
+  showFuriganaByDefault: boolean;    // Show furigana above kanji by default
 }
 
 const STORAGE_KEY = '@japanese_trainer:user_preferences';
@@ -16,6 +17,7 @@ const DEFAULT_PREFERENCES: UserPreferences = {
   lastDifficulty: 'Normal',
   wordsPerSession: 10,
   translationLanguage: 'fr',  // Will be overridden by detectLanguage() on first use
+  showFuriganaByDefault: true,
 };
 
 /**
@@ -40,13 +42,14 @@ export async function loadPreferences(): Promise<UserPreferences> {
 
     const parsed = JSON.parse(stored);
 
-    // Validate structure and provide fallbacks
+    // Validate structure and provide fallbacks for migration
     if (typeof parsed === 'object' && parsed !== null) {
       return {
         lastLevel: parsed.lastLevel ?? DEFAULT_PREFERENCES.lastLevel,
         lastDifficulty: parsed.lastDifficulty ?? DEFAULT_PREFERENCES.lastDifficulty,
         wordsPerSession: parsed.wordsPerSession ?? DEFAULT_PREFERENCES.wordsPerSession,
         translationLanguage: parsed.translationLanguage ?? DEFAULT_PREFERENCES.translationLanguage,
+        showFuriganaByDefault: parsed.showFuriganaByDefault ?? DEFAULT_PREFERENCES.showFuriganaByDefault,
       };
     }
 

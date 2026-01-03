@@ -4,7 +4,6 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AppHeader } from './components/AppHeader';
 import { ScrollingTextContainer } from './components/ScrollingTextContainer';
-import { Furigana } from './components/Furigana';
 import { RomajiKeyboard } from './components/RomajiKeyboard';
 import { useWords } from './hooks/useWords';
 import { usePreferences } from './hooks/usePreferences';
@@ -89,6 +88,7 @@ export default function TrainingScreen() {
   // Load user preferences
   const { preferences, isLoading: isLoadingPrefs } = usePreferences();
   const wordsPerSession = preferences?.wordsPerSession ?? 10;
+  const showFuriganaByDefault = preferences?.showFuriganaByDefault ?? true;
 
   // Load user statistics
   const { recordAttempt } = useStatistics();
@@ -285,6 +285,7 @@ export default function TrainingScreen() {
                 speed={scrollSpeed}
                 windowWidth={windowWidth}
                 fontSize={fontSize}
+                showFurigana={showFuriganaByDefault}
                 onScrollComplete={handleScrollComplete}
               />
               <Button

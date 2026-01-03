@@ -8,24 +8,34 @@ import Animated, {
   runOnJS,
   cancelAnimation,
 } from 'react-native-reanimated';
+import { Furigana } from './Furigana';
 
 interface ScrollingTextProps {
-  text: string;
-  speed: number; // pixels per second (0 = stopped)
+  kanji: string;              // Kanji text (empty for kana-only words)
+  kana: string;               // Kana reading (always present)
+  speed: number;              // pixels per second (0 = stopped)
   windowWidth: number;
   fontSize: number;
+  showFurigana: boolean;      // Whether to show furigana above kanji
   onScrollComplete?: () => void; // Callback when scroll animation completes
 }
 
 export const ScrollingText = memo(function ScrollingText({
-  text,
+  kanji,
+  kana,
   speed,
   windowWidth,
   fontSize,
+  showFurigana,
   onScrollComplete
 }: ScrollingTextProps) {
   const translateX = useSharedValue(windowWidth);
   const opacity = useSharedValue(1);
+
+  // Text to display: kanji if available, otherwise kana
+  const displayText = kanji || kana;
+  // Height adjustment: taller when showing furigana
+  const containerHeight = showFurigana && kanji ? fontSize * 2 : fontSize * 1.5;
 
   useEffect(() => {
     if (speed === 0) {
@@ -40,7 +50,7 @@ export const ScrollingText = memo(function ScrollingText({
     opacity.value = 1;
 
     // Estimate text width (rough approximation for Japanese characters)
-    const estimatedTextWidth = fontSize * text.length * 0.9;
+    const estimatedTextWidth = fontSize * displayText.length * 0.9;
     const totalDistance = windowWidth + estimatedTextWidth;
     const duration = (totalDistance / speed) * 1000; // convert to milliseconds
 
@@ -62,7 +72,7 @@ export const ScrollingText = memo(function ScrollingText({
         }
       }
     );
-  }, [text, speed, windowWidth, fontSize]);
+  }, [kanji, kana, speed, windowWidth, fontSize]);
 
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [{ translateX: translateX.value }],
@@ -72,17 +82,27 @@ export const ScrollingText = memo(function ScrollingText({
   return (
     <YStack
       width={windowWidth}
-      height={fontSize * 1.5}
+      height={containerHeight}
       overflow="hidden"
       backgroundColor="$background"
       borderWidth={1}
       borderColor="$borderColor"
       borderRadius="$2"
+      justifyContent="center"
     >
       <Animated.View style={[{ position: 'absolute' }, animatedStyle]}>
-        <Text fontSize={fontSize} fontWeight="bold">
-          {text}
-        </Text>
+        {showFurigana && kanji ? (
+          <Furigana
+            kanji={kanji}
+            kana={kana}
+            showFurigana={true}
+            fontSize={fontSize}
+          />
+        ) : (
+          <Text fontSize={fontSize} fontWeight="bold" color="$color">
+            {displayText}
+          </Text>
+        )}
       </Animated.View>
     </YStack>
   );

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { YStack, XStack, Text, Slider, ScrollView, Button, Sheet } from 'tamagui';
+import { YStack, XStack, Text, Slider, ScrollView, Button, Sheet, Switch } from 'tamagui';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AppHeader } from './components/AppHeader';
 import { usePreferences } from './hooks/usePreferences';
@@ -151,6 +151,47 @@ export default function SettingsScreen() {
                     English
                   </Text>
                 </YStack>
+              </XStack>
+            </YStack>
+          </YStack>
+
+          {/* Section: Display Settings */}
+          <YStack gap="$3">
+            <Text fontSize={18} fontWeight="600" color="$color">
+              {preferences?.translationLanguage === 'fr' ? 'Affichage' : 'Display'}
+            </Text>
+
+            {/* Furigana toggle */}
+            <YStack
+              backgroundColor="$backgroundHover"
+              padding="$3"
+              borderRadius="$3"
+              gap="$2"
+            >
+              <XStack justifyContent="space-between" alignItems="center">
+                <YStack flex={1} marginRight="$3">
+                  <Text fontSize={15} color="$color">
+                    {preferences?.translationLanguage === 'fr'
+                      ? 'Afficher les furigana par défaut'
+                      : 'Show furigana by default'}
+                  </Text>
+                  <Text fontSize={13} color="$gray11" marginTop="$1">
+                    {preferences?.translationLanguage === 'fr'
+                      ? 'Affiche la lecture kana au-dessus des kanji'
+                      : 'Displays kana reading above kanji'}
+                  </Text>
+                </YStack>
+                <Switch
+                  size="$4"
+                  checked={preferences?.showFuriganaByDefault ?? true}
+                  onCheckedChange={(checked) => updatePreferences({ showFuriganaByDefault: checked })}
+                  backgroundColor={preferences?.showFuriganaByDefault ? '$difficultyEasy' : '$gray8'}
+                >
+                  <Switch.Thumb
+                    animation="quick"
+                    backgroundColor="white"
+                  />
+                </Switch>
               </XStack>
             </YStack>
           </YStack>

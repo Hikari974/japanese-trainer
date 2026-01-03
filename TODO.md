@@ -68,12 +68,12 @@
 - [x] US-006.7 - Page Statistiques Enrichie avec Vue Progression Globale (P2, M) - Session 11
 - [ ] ~~US-006.8 - Migration État Initial pour Utilisateurs Existants (P1, S)~~ **SKIPPED** (YAGNI: no real users exist, solo testing only)
 
-## Phase: Epic-009 - Option Furigana par Défaut (1-2 jours)
+## Phase: Epic-009 - Option Furigana par Défaut (COMPLETE)
 
-- [ ] US-009.1 - Extension UserPreferences avec showFuriganaByDefault (S)
-- [ ] US-009.2 - UI Settings - Toggle furigana avec labels bilingues (S)
-- [ ] US-009.3 - Intégration training.tsx - Appliquer préférence furigana (M)
-- [ ] US-009.4 - Tests unitaires (S)
+- [x] US-009.1 - Extension UserPreferences avec showFuriganaByDefault (S) - Session 12
+- [x] US-009.2 - UI Settings - Toggle furigana avec labels bilingues (S) - Session 12
+- [x] US-009.3 - Intégration training.tsx - Appliquer préférence furigana (M) - Session 12
+- [x] US-009.4 - Tests unitaires (S) - Session 12
 
 ## Phase: Epic-008 - Notifications Rappel Quotidien (3-4 jours)
 
