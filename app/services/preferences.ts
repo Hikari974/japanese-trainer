@@ -9,6 +9,8 @@ export interface UserPreferences {
   wordsPerSession: number;           // Number of words per training session
   translationLanguage: 'fr' | 'en';  // Preferred translation language
   showFuriganaByDefault: boolean;    // Show furigana above kanji by default
+  notificationsEnabled: boolean;     // Daily reminder notifications enabled
+  reminderTime: string;              // Reminder time in "HH:mm" format
 }
 
 const STORAGE_KEY = '@japanese_trainer:user_preferences';
@@ -18,6 +20,8 @@ const DEFAULT_PREFERENCES: UserPreferences = {
   wordsPerSession: 10,
   translationLanguage: 'fr',  // Will be overridden by detectLanguage() on first use
   showFuriganaByDefault: true,
+  notificationsEnabled: false,
+  reminderTime: '19:00',
 };
 
 /**
@@ -50,6 +54,8 @@ export async function loadPreferences(): Promise<UserPreferences> {
         wordsPerSession: parsed.wordsPerSession ?? DEFAULT_PREFERENCES.wordsPerSession,
         translationLanguage: parsed.translationLanguage ?? DEFAULT_PREFERENCES.translationLanguage,
         showFuriganaByDefault: parsed.showFuriganaByDefault ?? DEFAULT_PREFERENCES.showFuriganaByDefault,
+        notificationsEnabled: parsed.notificationsEnabled ?? DEFAULT_PREFERENCES.notificationsEnabled,
+        reminderTime: parsed.reminderTime ?? DEFAULT_PREFERENCES.reminderTime,
       };
     }
 

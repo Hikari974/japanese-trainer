@@ -1,10 +1,19 @@
 import { useState, useEffect } from 'react';
-import { YStack, XStack, Text, Slider, ScrollView, Button, Sheet, Switch } from 'tamagui';
+import { YStack, XStack, Text, Slider, ScrollView, Button, Sheet, Switch, Select, Adapt } from 'tamagui';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { ChevronDown, Check } from '@tamagui/lucide-icons';
 import { AppHeader } from './components/AppHeader';
 import { usePreferences } from './hooks/usePreferences';
 import { useStatistics } from './hooks/useStatistics';
+import { requestPermissions, scheduleDailyReminder, cancelAllReminders } from './services/notifications';
 import type { JLPTLevel } from './types/word';
+
+// Available reminder time options (hourly from 6:00 to 22:00)
+const REMINDER_TIME_OPTIONS = [
+  '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00',
+  '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00',
+  '20:00', '21:00', '22:00',
+];
 
 const JLPT_LEVELS: JLPTLevel[] = ['Kana', 'N5', 'N4', 'N3', 'N2', 'N1'];
 
@@ -30,6 +39,9 @@ export default function SettingsScreen() {
   // Slider save feedback
   const [sliderSaved, setSliderSaved] = useState(false);
 
+  // Notification permission denied message
+  const [permissionDenied, setPermissionDenied] = useState(false);
+
   // Initialize slider value from preferences
   useEffect(() => {
     if (preferences) {
@@ -54,6 +66,42 @@ export default function SettingsScreen() {
   const handleResetConfirm = async () => {
     await resetStats();
     setIsConfirmOpen(false);
+  };
+
+  // Handle notification toggle
+  const handleNotificationToggle = async (enabled: boolean) => {
+    setPermissionDenied(false);
+
+    if (enabled) {
+      // Request permission first
+      const granted = await requestPermissions();
+
+      if (!granted) {
+        setPermissionDenied(true);
+        return;
+      }
+
+      // Schedule the reminder with current time preference
+      const time = preferences?.reminderTime ?? '19:00';
+      const language = preferences?.translationLanguage ?? 'fr';
+      await scheduleDailyReminder(time, language);
+      await updatePreferences({ notificationsEnabled: true });
+    } else {
+      // Cancel all reminders
+      await cancelAllReminders();
+      await updatePreferences({ notificationsEnabled: false });
+    }
+  };
+
+  // Handle reminder time change
+  const handleReminderTimeChange = async (time: string) => {
+    await updatePreferences({ reminderTime: time });
+
+    // Reschedule if notifications are enabled
+    if (preferences?.notificationsEnabled) {
+      const language = preferences?.translationLanguage ?? 'fr';
+      await scheduleDailyReminder(time, language);
+    }
   };
 
   if (isLoading) {
@@ -193,6 +241,121 @@ export default function SettingsScreen() {
                   />
                 </Switch>
               </XStack>
+            </YStack>
+          </YStack>
+
+          {/* Section: Reminders */}
+          <YStack gap="$3">
+            <Text fontSize={18} fontWeight="600" color="$color">
+              {preferences?.translationLanguage === 'fr' ? 'Rappels' : 'Reminders'}
+            </Text>
+
+            {/* Notification toggle */}
+            <YStack
+              backgroundColor="$backgroundHover"
+              padding="$3"
+              borderRadius="$3"
+              gap="$2"
+            >
+              <XStack justifyContent="space-between" alignItems="center">
+                <YStack flex={1} marginRight="$3">
+                  <Text fontSize={15} color="$color">
+                    {preferences?.translationLanguage === 'fr'
+                      ? 'Rappels quotidiens'
+                      : 'Daily reminders'}
+                  </Text>
+                  <Text fontSize={13} color="$gray11" marginTop="$1">
+                    {preferences?.translationLanguage === 'fr'
+                      ? 'Recevez une notification pour vous rappeler de pratiquer'
+                      : 'Get a notification to remind you to practice'}
+                  </Text>
+                </YStack>
+                <Switch
+                  size="$4"
+                  checked={preferences?.notificationsEnabled ?? false}
+                  onCheckedChange={handleNotificationToggle}
+                  backgroundColor={preferences?.notificationsEnabled ? '$difficultyEasy' : '$gray8'}
+                >
+                  <Switch.Thumb
+                    animation="quick"
+                    backgroundColor="white"
+                  />
+                </Switch>
+              </XStack>
+
+              {/* Permission denied message */}
+              {permissionDenied && (
+                <Text fontSize={13} color="$red10" marginTop="$2">
+                  {preferences?.translationLanguage === 'fr'
+                    ? 'Permission refusee. Activez les notifications dans les parametres de votre appareil.'
+                    : 'Permission denied. Enable notifications in your device settings.'}
+                </Text>
+              )}
+
+              {/* Time picker - visible only when notifications enabled */}
+              {preferences?.notificationsEnabled && (
+                <YStack marginTop="$3" gap="$2">
+                  <Text fontSize={14} color="$color">
+                    {preferences?.translationLanguage === 'fr'
+                      ? 'Heure du rappel'
+                      : 'Reminder time'}
+                  </Text>
+                  <Select
+                    value={preferences?.reminderTime ?? '19:00'}
+                    onValueChange={handleReminderTimeChange}
+                  >
+                    <Select.Trigger
+                      backgroundColor="$backgroundPress"
+                      borderWidth={0}
+                      iconAfter={ChevronDown}
+                    >
+                      <Select.Value placeholder="19:00" />
+                    </Select.Trigger>
+
+                    <Adapt when="sm" platform="touch">
+                      <Sheet
+                        native
+                        modal
+                        dismissOnSnapToBottom
+                        animation="quick"
+                        snapPoints={[50]}
+                      >
+                        <Sheet.Frame>
+                          <Sheet.ScrollView>
+                            <Adapt.Contents />
+                          </Sheet.ScrollView>
+                        </Sheet.Frame>
+                        <Sheet.Overlay
+                          backgroundColor="rgba(0, 0, 0, 0.6)"
+                          animation="quick"
+                          enterStyle={{ opacity: 0 }}
+                          exitStyle={{ opacity: 0 }}
+                        />
+                      </Sheet>
+                    </Adapt>
+
+                    <Select.Content zIndex={200000}>
+                      <Select.Viewport minWidth={200}>
+                        <Select.Group>
+                          <Select.Label>
+                            {preferences?.translationLanguage === 'fr'
+                              ? 'Heure du rappel'
+                              : 'Reminder time'}
+                          </Select.Label>
+                          {REMINDER_TIME_OPTIONS.map((time, index) => (
+                            <Select.Item key={time} index={index} value={time}>
+                              <Select.ItemText>{time}</Select.ItemText>
+                              <Select.ItemIndicator marginLeft="auto">
+                                <Check size={16} />
+                              </Select.ItemIndicator>
+                            </Select.Item>
+                          ))}
+                        </Select.Group>
+                      </Select.Viewport>
+                    </Select.Content>
+                  </Select>
+                </YStack>
+              )}
             </YStack>
           </YStack>
 

@@ -75,14 +75,14 @@
 - [x] US-009.3 - Intégration training.tsx - Appliquer préférence furigana (M) - Session 12
 - [x] US-009.4 - Tests unitaires (S) - Session 12
 
-## Phase: Epic-008 - Notifications Rappel Quotidien (3-4 jours)
+## Phase: Epic-008 - Notifications Rappel Quotidien (COMPLETE)
 
-- [ ] US-008.1 - Installation et Configuration expo-notifications (S)
-- [ ] US-008.2 - Service de Notification avec Scheduling (M)
-- [ ] US-008.3 - Extension Preferences (S)
-- [ ] US-008.4 - UI Settings - Toggle et Time Picker (M)
-- [ ] US-008.5 - Gestion des Permissions (S)
-- [ ] US-008.6 - Tests sur Device Réel (S)
+- [x] US-008.1 - Installation et Configuration expo-notifications (S) - Session 12
+- [x] US-008.2 - Service de Notification avec Scheduling (M) - Session 12
+- [x] US-008.3 - Extension Preferences (S) - Session 12
+- [x] US-008.4 - UI Settings - Toggle et Time Picker (M) - Session 12
+- [x] US-008.5 - Gestion des Permissions (S) - Session 12 (intégré dans US-008.4)
+- [ ] US-008.6 - Tests sur Device Réel (S) - MANUEL
 
 ## Phase: Epic-007 - Monétisation AdMob + Premium (8-12 jours)
 
