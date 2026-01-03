@@ -75,6 +75,12 @@
 ## Court terme
 
 - [ ] Ajouter tests pour pages placeholder (poc-scroll.tsx)
+- [ ] Ajouter tests pour pages placeholder (poc-scroll.tsx)
+- [ ] Furigana activer ou non (de base a true)
+- [ ] notificaiton de session
+- [ ] 1 pub en debut de session
+- [ ] abonnemetn premiuim 1.5€
+- [ ] Preparation a mise en place sur le store android
 
 ## Moyen terme
 
