@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { YStack, XStack, H1, Button, Text } from 'tamagui';
+import { YStack, XStack, H1, Button, Text, ScrollView } from 'tamagui';
 import { Link, useRouter, useFocusEffect } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { DifficultySelector, type Difficulty } from './components/DifficultySelector';
@@ -195,29 +195,31 @@ export default function HomeScreen() {
       <DifficultySelector value={difficulty} onChange={handleDifficultyChange} />
 
       {/* Level List */}
-      <YStack flex={1} paddingHorizontal="$4" paddingTop="$4" gap="$2.5">
-        {isLoadingLevels ? (
-          <Text textAlign="center" color="$gray11" paddingTop="$8">
-            Chargement des niveaux...
-          </Text>
-        ) : (
-          levels.map((level) => {
-            const isLocked = !unlockedLevels.includes(level);
-            const progress = levelsProgress.get(level);
+      <ScrollView flex={1} showsVerticalScrollIndicator={false}>
+        <YStack paddingHorizontal="$4" paddingTop="$4" paddingBottom="$4" gap="$2.5">
+          {isLoadingLevels ? (
+            <Text textAlign="center" color="$gray11" paddingTop="$8">
+              Chargement des niveaux...
+            </Text>
+          ) : (
+            levels.map((level) => {
+              const isLocked = !unlockedLevels.includes(level);
+              const progress = levelsProgress.get(level);
 
-            return (
-              <LevelButton
-                key={level}
-                level={level}
-                isSelected={selectedLevel === level}
-                isLocked={isLocked}
-                progress={progress}
-                onPress={() => handleLevelPress(level)}
-              />
-            );
-          })
-        )}
-      </YStack>
+              return (
+                <LevelButton
+                  key={level}
+                  level={level}
+                  isSelected={selectedLevel === level}
+                  isLocked={isLocked}
+                  progress={progress}
+                  onPress={() => handleLevelPress(level)}
+                />
+              );
+            })
+          )}
+        </YStack>
+      </ScrollView>
 
       {/* Start Session Button */}
       <YStack paddingHorizontal="$4" paddingBottom={insets.bottom + 16}>
