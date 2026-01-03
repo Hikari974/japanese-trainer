@@ -1,7 +1,7 @@
 # TODO - japanese-trainer
 
-**Version:** 0.1.0
-**Dernière mise à jour:** 2025-11-15 (Session 11)
+**Version:** 0.5.0
+**Dernière mise à jour:** 2026-01-03 (Session 12)
 
 ## 🔴 P0 - Technical Debt (AVANT toute nouvelle feature)
 
@@ -68,26 +68,49 @@
 - [x] US-006.7 - Page Statistiques Enrichie avec Vue Progression Globale (P2, M) - Session 11
 - [ ] ~~US-006.8 - Migration État Initial pour Utilisateurs Existants (P1, S)~~ **SKIPPED** (YAGNI: no real users exist, solo testing only)
 
-## Prochaine tâche immédiate
+## Phase: Epic-009 - Option Furigana par Défaut (1-2 jours)
 
-- [ ] Définir les Epic et User Stories pour l'apprentissage du japonais (via Epic Manager Agent)
+- [ ] US-009.1 - Extension UserPreferences avec showFuriganaByDefault (S)
+- [ ] US-009.2 - UI Settings - Toggle furigana avec labels bilingues (S)
+- [ ] US-009.3 - Intégration training.tsx - Appliquer préférence furigana (M)
+- [ ] US-009.4 - Tests unitaires (S)
 
-## Court terme
+## Phase: Epic-008 - Notifications Rappel Quotidien (3-4 jours)
 
-- [ ] Ajouter tests pour pages placeholder (poc-scroll.tsx)
-- [ ] Ajouter tests pour pages placeholder (poc-scroll.tsx)
-- [ ] Furigana activer ou non (de base a true)
-- [ ] notificaiton de session
-- [ ] 1 pub en debut de session
-- [ ] abonnemetn premiuim 1.5€
-- [ ] Preparation a mise en place sur le store android
+- [ ] US-008.1 - Installation et Configuration expo-notifications (S)
+- [ ] US-008.2 - Service de Notification avec Scheduling (M)
+- [ ] US-008.3 - Extension Preferences (S)
+- [ ] US-008.4 - UI Settings - Toggle et Time Picker (M)
+- [ ] US-008.5 - Gestion des Permissions (S)
+- [ ] US-008.6 - Tests sur Device Réel (S)
+
+## Phase: Epic-007 - Monétisation AdMob + Premium (8-12 jours)
+
+### 🔧 Actions Hors Code REQUISES (voir epic-007.md)
+- [ ] Créer compte AdMob + Ad Unit Interstitial
+- [ ] Créer compte RevenueCat + Projet
+- [ ] Créer Abonnement Google Play Console (1€/mois)
+- [ ] Rédiger + Héberger Privacy Policy
+- [ ] Remplir Data Safety Form Google Play
+
+### User Stories
+- [ ] US-007.1 - Configuration Development Build Expo (M)
+- [ ] US-007.2 - Intégration RevenueCat SDK (L)
+- [ ] US-007.3 - Intégration AdMob SDK (M)
+- [ ] US-007.4 - Logique Affichage Pub Pre-Session (M)
+- [ ] US-007.5 - Écran Paywall / Upgrade Premium (M)
+- [ ] US-007.6 - Persistence Statut Premium (S)
+- [ ] US-007.7 - Privacy Policy (S)
+- [ ] US-007.8 - Consentement RGPD pour Ads (S)
+- [ ] US-007.9 - Tests sur Devices Réels (M)
+- [ ] US-007.10 - UI Settings Premium (S)
 
 ## Moyen terme
 
 - [ ] Améliorer système statistiques (difficulty breakdown, trends, export/import)
 - [ ] Configurer CI/CD avec DevOps Expert
-- [ ] Setup Expo EAS pour déploiement iOS/Android
 - [ ] Augmenter couverture de tests à 80%+
+- [ ] Préparation mise en place sur le store Android
 
 ## Complété
 
