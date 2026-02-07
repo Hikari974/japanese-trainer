@@ -39,8 +39,8 @@ export async function loadPreferences(): Promise<UserPreferences> {
         ...DEFAULT_PREFERENCES,
         translationLanguage: detectedLanguage,
       };
-      // Save detected preferences for future use
-      await savePreferences(firstTimePreferences);
+      // Save directly to avoid infinite recursion (savePreferences calls loadPreferences)
+      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(firstTimePreferences));
       return firstTimePreferences;
     }
 
