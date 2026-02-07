@@ -1,5 +1,5 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
-import { YStack, XStack, Button, Text, Input, Sheet } from 'tamagui';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
+import { YStack, XStack, Button, Text, Input, Sheet, Spinner } from 'tamagui';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AppHeader } from './components/AppHeader';
@@ -8,6 +8,8 @@ import { RomajiKeyboard } from './components/RomajiKeyboard';
 import { useWords } from './hooks/useWords';
 import { usePreferences } from './hooks/usePreferences';
 import { useStatistics } from './hooks/useStatistics';
+// import { usePurchases } from './hooks/usePurchases'; // Temporarily disabled
+// import { useAds } from './hooks/useAds'; // Temporarily disabled
 import type { Level } from './components/LevelButton';
 import type { Difficulty } from './components/DifficultySelector';
 import type { JLPTLevel } from './types/word';
@@ -92,6 +94,34 @@ export default function TrainingScreen() {
 
   // Load user statistics
   const { recordAttempt } = useStatistics();
+
+  // Premium and ads state - Temporarily disabled for testing
+  // const { isPremium, isLoading: isLoadingPurchases } = usePurchases();
+  // const { showAd, isAdReady } = useAds(!isPremium);
+  const isPremium = false;
+  const isLoadingPurchases = false;
+  const hasShownPreSessionAd = useRef(false);
+  const [isShowingAd, setIsShowingAd] = useState(false);
+
+  // Show pre-session ad for non-premium users - Temporarily disabled
+  /*
+  useEffect(() => {
+    async function showPreSessionAd() {
+      if (hasShownPreSessionAd.current || isPremium || isLoadingPurchases) {
+        return;
+      }
+      hasShownPreSessionAd.current = true;
+      setIsShowingAd(true);
+      await new Promise(resolve => setTimeout(resolve, 500));
+      const result = await showAd();
+      if (__DEV__) {
+        console.log('Pre-session ad result:', result);
+      }
+      setIsShowingAd(false);
+    }
+    showPreSessionAd();
+  }, [isPremium, isLoadingPurchases, showAd]);
+  */
 
   // Load words for training - only when preferences are loaded
   const { words, isLoading } = useWords({
@@ -237,13 +267,17 @@ export default function TrainingScreen() {
   };
 
   // Loading state - wait for preferences AND words to load
-  if (isLoadingPrefs || isLoading || !currentWord) {
+  if (isLoadingPrefs || isLoading || !currentWord || isShowingAd) {
     return (
       <YStack flex={1} backgroundColor="$background">
         <AppHeader title="Session d'entraînement" showBackButton />
-        <YStack flex={1} justifyContent="center" alignItems="center">
+        <YStack flex={1} justifyContent="center" alignItems="center" gap="$4">
+          <Spinner size="large" color="$color" />
           <Text fontSize={16} color="$color">
-            Chargement...
+            {isShowingAd
+              ? (preferences?.translationLanguage === 'fr' ? 'Publicité en cours...' : 'Loading ad...')
+              : (preferences?.translationLanguage === 'fr' ? 'Chargement...' : 'Loading...')
+            }
           </Text>
         </YStack>
       </YStack>

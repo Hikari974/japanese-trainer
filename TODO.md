@@ -84,26 +84,27 @@
 - [x] US-008.5 - Gestion des Permissions (S) - Session 12 (intégré dans US-008.4)
 - [ ] US-008.6 - Tests sur Device Réel (S) - MANUEL
 
-## Phase: Epic-007 - Monétisation AdMob + Premium (8-12 jours)
+## Phase: Epic-007 - Monétisation AdMob + Premium (EN COURS)
 
-### 🔧 Actions Hors Code REQUISES (voir epic-007.md)
-- [ ] Créer compte AdMob + Ad Unit Interstitial
-- [ ] Créer compte RevenueCat + Projet
-- [ ] Créer Abonnement Google Play Console (1€/mois)
-- [ ] Rédiger + Héberger Privacy Policy
+### 🔧 Actions Hors Code (voir epic-007.md)
+- [x] Créer compte AdMob + Ad Unit Interstitial (ca-app-pub-6788147097826136~5771561142)
+- [x] Créer compte RevenueCat + Projet (goog_wuVIpJcabYOHFbCwysdMQvsWtWU)
+- [x] Configurer compte marchand Google Payments
+- [x] Rédiger + Héberger Privacy Policy (https://hikari974.github.io/japanese-trainer/privacy-policy.html)
+- [ ] Créer Abonnement Google Play Console (APRÈS upload APK)
+- [ ] Connecter RevenueCat ↔ Google Play (Service Account - APRÈS upload APK)
 - [ ] Remplir Data Safety Form Google Play
+- [ ] Accepter lois américaines sur l'exportation
 
 ### User Stories
-- [ ] US-007.1 - Configuration Development Build Expo (M)
-- [ ] US-007.2 - Intégration RevenueCat SDK (L)
-- [ ] US-007.3 - Intégration AdMob SDK (M)
-- [ ] US-007.4 - Logique Affichage Pub Pre-Session (M)
-- [ ] US-007.5 - Écran Paywall / Upgrade Premium (M)
-- [ ] US-007.6 - Persistence Statut Premium (S)
-- [ ] US-007.7 - Privacy Policy (S)
-- [ ] US-007.8 - Consentement RGPD pour Ads (S)
-- [ ] US-007.9 - Tests sur Devices Réels (M)
-- [ ] US-007.10 - UI Settings Premium (S)
+- [x] US-007.1 - Configuration Development Build EAS (eas.json + app.json) - Session 12
+- [x] US-007.2 - Intégration RevenueCat SDK (purchases.ts + usePurchases.ts) - Session 12
+- [x] US-007.3 - Intégration AdMob SDK (admob.ts + useAds.ts) - Session 12
+- [x] US-007.4 - Logique Affichage Pub Pre-Session (training.tsx) - Session 12
+- [x] US-007.5 - Écran Paywall / Upgrade Premium (paywall.tsx) - Session 12
+- [x] US-007.6 - UI Settings Premium (settings.tsx) - Session 12
+- [ ] US-007.7 - Build Dev + Tests sur Devices Réels (M)
+- [ ] US-007.8 - Consentement RGPD pour Ads (S) - OPTIONNEL
 
 ## Moyen terme
 
