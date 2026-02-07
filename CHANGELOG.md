@@ -350,5 +350,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-**Current Version:** 0.1.0
+**Current Version:** 1.0.0
 **Last Updated:** 2025-11-15

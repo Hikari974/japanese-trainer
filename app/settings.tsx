@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Constants from 'expo-constants';
 import { YStack, XStack, Text, Slider, ScrollView, Button, Sheet, Switch, Spinner } from 'tamagui';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
@@ -251,7 +252,7 @@ export default function SettingsScreen() {
 
           {/* Info text */}
           <Text fontSize={12} color="$gray10" textAlign="center" marginTop="$4">
-            Version 0.6.0-alpha (Premium désactivé temporairement)
+            Version {Constants.expoConfig?.version ?? '1.0.0'}
           </Text>
         </YStack>
       </ScrollView>

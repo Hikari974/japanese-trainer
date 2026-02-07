@@ -1,7 +1,7 @@
 # japanese-trainer
 
-**Version:** 0.1.0
-**Stack:** Expo SDK 52.0.0 (React Native) + Tamagui + expo-router
+**Version:** 1.0.0
+**Stack:** Expo SDK 54.0.23 (React Native 0.81.5) + Tamagui + expo-router
 
 ---
 

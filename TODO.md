@@ -1,6 +1,6 @@
 # TODO - japanese-trainer
 
-**Version:** 0.5.0
+**Version:** 1.0.0
 **Dernière mise à jour:** 2026-01-03 (Session 12)
 
 ## 🔴 P0 - Technical Debt (AVANT toute nouvelle feature)

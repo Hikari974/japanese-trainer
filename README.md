@@ -81,4 +81,4 @@ Ce projet suit la méthodologie Claude Code avec agents spécialisés.
 
 Configuration et contexte: `.claude/`
 
-**Version:** 0.1.0
+**Version:** 1.0.0
