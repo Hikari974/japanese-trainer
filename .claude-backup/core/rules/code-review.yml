@@ -1,0 +1,516 @@
+# ==============================================================================
+# Code Review Rules Configuration - {{PROJECT_NAME}}
+# ==============================================================================
+#
+# This file configures Code Review Agent behavior and rules
+# Modify this file to customize review criteria for your project
+#
+# Severity levels:
+#   - critical: BLOCKS commit in mode exécutant, immediate fix required
+#   - high: Strong warning, fix recommended before merge
+#   - medium: Improvement suggested, fix before release
+#   - low: Nice-to-have, suggestion only
+#
+# ==============================================================================
+
+# ==============================================================================
+# Code Quality - Style & Conventions
+# ==============================================================================
+code_quality:
+  enabled: true
+  description: "Style, conventions, documentation, complexity checks"
+
+  rules:
+    # Python/FastAPI
+    - name: python_type_hints
+      enabled: true
+      severity: medium
+      description: "Type hints required for public functions"
+      scope: ["*.py"]
+      exceptions: ["__init__.py", "tests/"]
+
+    - name: python_docstrings
+      enabled: true
+      severity: low
+      description: "Docstrings required for public classes and functions"
+      scope: ["*.py"]
+      format: "google"  # google, numpy, or sphinx
+      exceptions: ["tests/", "migrations/"]
+
+    - name: function_length
+      enabled: true
+      severity: warning
+      max_lines: 50
+      critical_threshold: 100
+      description: "Functions should be concise and focused"
+      scope: ["*.py", "*.ts", "*.tsx"]
+
+    - name: complexity
+      enabled: true
+      severity: high
+      max_complexity: 10
+      description: "Cyclomatic complexity threshold"
+      scope: ["*.py", "*.ts", "*.tsx"]
+
+    - name: avoid_verbosity
+      enabled: true
+      severity: low
+      description: "Prefer concise, self-documenting code over verbose comments"
+      scope: ["*.py", "*.ts", "*.tsx"]
+      check_redundant_comments: true
+
+    - name: naming_conventions
+      enabled: true
+      severity: medium
+      description: "Follow language-specific naming conventions"
+      python:
+        functions: "snake_case"
+        classes: "PascalCase"
+        constants: "UPPER_SNAKE_CASE"
+      typescript:
+        variables: "camelCase"
+        components: "PascalCase"
+        interfaces: "PascalCase"
+
+    - name: imports_organization
+      enabled: true
+      severity: low
+      description: "Imports should be grouped and sorted"
+      python:
+        groups: ["stdlib", "third_party", "local"]
+        sort: true
+      typescript:
+        prefer_absolute: true  # Use @/ paths
+        sort: true
+
+    # TypeScript/React
+    - name: typescript_strict_mode
+      enabled: true
+      severity: high
+      description: "Avoid 'any' type, use strict mode"
+      scope: ["*.ts", "*.tsx"]
+      max_any_count: 0
+
+    - name: react_component_length
+      enabled: true
+      severity: medium
+      max_lines: 300
+      description: "React components should be concise"
+      scope: ["*.tsx"]
+
+    - name: react_props_types
+      enabled: true
+      severity: high
+      description: "All props must be typed (no implicit any)"
+      scope: ["*.tsx"]
+
+    # General
+    - name: no_commented_code
+      enabled: true
+      severity: low
+      description: "Remove commented code, use git history"
+      scope: ["*.py", "*.ts", "*.tsx", "*.js", "*.jsx"]
+
+    - name: todo_with_tracking
+      enabled: false
+      severity: low
+      description: "TODO/FIXME should reference issue tracker"
+      format: "TODO(#123): description"
+      scope: ["*.py", "*.ts", "*.tsx"]
+
+# ==============================================================================
+# Security - OWASP Vulnerabilities
+# ==============================================================================
+security:
+  enabled: true
+  description: "Security vulnerabilities detection (OWASP Top 10)"
+
+  rules:
+    # Critical vulnerabilities
+    - name: no_hardcoded_secrets
+      enabled: true
+      severity: critical
+      description: "No passwords, API keys, tokens in source code"
+      patterns:
+        - 'password\s*=\s*["\']'
+        - 'api_key\s*=\s*["\']'
+        - 'secret\s*=\s*["\'][^{]'  # Exclude {ENV_VAR}
+        - 'token\s*=\s*["\']'
+      scope: ["*.py", "*.ts", "*.tsx", "*.js"]
+      exceptions: ["tests/", "*.test.ts", "*.spec.ts"]
+
+    - name: sql_injection
+      enabled: true
+      severity: critical
+      description: "Use parameterized queries, not string concatenation"
+      patterns:
+        - 'f"SELECT.*{.*}"'
+        - '"SELECT.*" + '
+        - '`.*(SELECT|INSERT|UPDATE|DELETE).*\${.*}.*`'
+      scope: ["*.py", "*.ts", "*.tsx"]
+      recommendation: "Use SQLAlchemy ORM or parameterized queries"
+
+    - name: xss_protection
+      enabled: true
+      severity: critical
+      description: "Sanitize user inputs, use CSP headers"
+      check_sanitization: true
+      scope: ["*.tsx", "*.jsx"]
+      recommendation: "Use DOMPurify or framework built-in sanitization"
+
+    - name: csrf_protection
+      enabled: true
+      severity: high
+      description: "CSRF tokens required for state-changing operations"
+      scope: ["*.py", "*.ts"]
+      check_endpoints: ["POST", "PUT", "PATCH", "DELETE"]
+
+    # Dependency vulnerabilities
+    - name: vulnerable_dependencies
+      enabled: true
+      severity: high
+      description: "Check for known CVEs in dependencies"
+      scope: ["requirements.txt", "package.json", "package-lock.json"]
+      auto_check: true
+      sources: ["npm audit", "safety check"]
+
+    # Authentication & Authorization
+    - name: password_hashing
+      enabled: true
+      severity: critical
+      description: "Passwords must use bcrypt/argon2, not MD5/SHA1"
+      scope: ["*.py"]
+      allowed_algorithms: ["bcrypt", "argon2"]
+      forbidden_algorithms: ["md5", "sha1", "sha256"]
+
+    - name: jwt_validation
+      enabled: true
+      severity: critical
+      description: "JWT tokens must be validated (signature, expiration, issuer)"
+      scope: ["*.py", "*.ts"]
+      check_signature: true
+      check_expiration: true
+
+    - name: rbac_enforcement
+      enabled: true
+      severity: high
+      description: "Role-based access control must be enforced"
+      scope: ["*.py"]
+      check_decorators: ["@requires_role", "@requires_permission"]
+
+    # Configuration
+    - name: cors_configuration
+      enabled: true
+      severity: high
+      description: "CORS must be explicitly configured, no '*' in production"
+      scope: ["*.py"]
+      allow_wildcard: false  # Set to true for development only
+
+    - name: rate_limiting
+      enabled: true
+      severity: medium
+      description: "Public endpoints should have rate limiting"
+      scope: ["*.py"]
+      check_decorators: ["@limiter.limit"]
+
+    - name: input_validation
+      enabled: true
+      severity: high
+      description: "All inputs must be validated (Pydantic, Zod)"
+      scope: ["*.py", "*.ts"]
+      frameworks: ["pydantic", "zod"]
+
+# ==============================================================================
+# Best Practices - Framework Patterns
+# ==============================================================================
+best_practices:
+  enabled: true
+  description: "Framework-specific best practices and patterns"
+
+  # FastAPI
+  fastapi:
+    enabled: true
+    rules:
+      - name: async_for_io
+        enabled: true
+        severity: medium
+        description: "Use async/await for I/O operations (DB, HTTP, file)"
+        scope: ["backend/app/routes/*.py", "backend/app/services/*.py"]
+
+      - name: dependency_injection
+        enabled: true
+        severity: high
+        description: "Use Depends() for dependency injection, no globals"
+        scope: ["backend/app/routes/*.py"]
+
+      - name: http_exceptions
+        enabled: true
+        severity: medium
+        description: "Use HTTPException with appropriate status codes"
+        scope: ["backend/app/routes/*.py"]
+        check_status_codes: true
+
+      - name: response_models
+        enabled: true
+        severity: medium
+        description: "Use response_model for output validation"
+        scope: ["backend/app/routes/*.py"]
+
+      - name: background_tasks
+        enabled: true
+        severity: low
+        description: "Use BackgroundTasks for long-running operations"
+        scope: ["backend/app/routes/*.py"]
+
+      - name: pydantic_validators
+        enabled: true
+        severity: low
+        description: "Use Pydantic validators for complex validation"
+        scope: ["backend/app/schemas/*.py"]
+
+  # React
+  react:
+    enabled: true
+    rules:
+      - name: hooks_rules
+        enabled: true
+        severity: high
+        description: "Follow React Hooks rules (no conditional calls)"
+        scope: ["frontend/src/**/*.tsx"]
+
+      - name: performance_optimization
+        enabled: true
+        severity: medium
+        description: "Use useMemo/useCallback for expensive computations"
+        scope: ["frontend/src/**/*.tsx"]
+        auto_detect: true
+
+      - name: props_destructuring
+        enabled: true
+        severity: low
+        description: "Destructure props for readability"
+        scope: ["frontend/src/**/*.tsx"]
+
+      - name: event_handler_naming
+        enabled: true
+        severity: low
+        description: "Event handlers should be named handleXxx"
+        scope: ["frontend/src/**/*.tsx"]
+
+      - name: stable_keys
+        enabled: true
+        severity: high
+        description: "Use stable keys for lists (not array index)"
+        scope: ["frontend/src/**/*.tsx"]
+
+      - name: error_boundaries
+        enabled: true
+        severity: medium
+        description: "Wrap critical components with ErrorBoundary"
+        scope: ["frontend/src/**/*.tsx"]
+
+  # PostgreSQL
+  postgresql:
+    enabled: true
+    rules:
+      - name: no_n_plus_one
+        enabled: true
+        severity: high
+        description: "Avoid N+1 queries, use joins or eager loading"
+        scope: ["backend/app/models/*.py", "backend/app/routes/*.py"]
+
+      - name: indexes_on_fk
+        enabled: true
+        severity: medium
+        description: "Foreign keys should have indexes"
+        scope: ["backend/alembic/versions/*.py"]
+
+      - name: transactions
+        enabled: true
+        severity: medium
+        description: "Use transactions for multiple operations"
+        scope: ["backend/app/routes/*.py"]
+
+      - name: no_migration_changes
+        enabled: true
+        severity: critical
+        description: "Never modify existing migrations, create new ones"
+        scope: ["backend/alembic/versions/*.py"]
+
+      - name: naming_conventions
+        enabled: true
+        severity: low
+        description: "Use snake_case for tables and columns"
+        scope: ["backend/app/models/*.py"]
+
+# ==============================================================================
+# Architecture - Project Structure
+# ==============================================================================
+architecture:
+  enabled: true
+  description: "Project structure, separation of concerns, coupling"
+
+  rules:
+    # Structure enforcement
+    - name: respect_folder_structure
+      enabled: true
+      severity: high
+      description: "Files must be in correct folders"
+      structure:
+        backend:
+          routes: "backend/app/routes/"
+          schemas: "backend/app/schemas/"
+          models: "backend/app/models/"
+          services: "backend/app/services/"
+          core: "backend/app/core/"
+        frontend:
+          components: "frontend/src/components/"
+          pages: "frontend/src/pages/"
+          hooks: "frontend/src/hooks/"
+          services: "frontend/src/services/"
+          types: "frontend/src/types/"
+
+    - name: separation_of_concerns
+      enabled: true
+      severity: high
+      description: "Routes, schemas, models, services must be separated"
+      scope: ["backend/app/**/*.py"]
+
+    - name: single_responsibility
+      enabled: true
+      severity: high
+      description: "Each function should have ONE responsibility (SRP - Single Responsibility Principle)"
+      scope: ["*.py", "*.ts", "*.tsx"]
+      max_responsibilities: 1
+      check_function_decomposition: true
+
+    - name: dry_principle
+      enabled: true
+      severity: medium
+      description: "Don't Repeat Yourself - extract duplicate code"
+      threshold: 3  # Flag if same code appears 3+ times
+      scope: ["*.py", "*.ts", "*.tsx"]
+
+    - name: no_circular_imports
+      enabled: true
+      severity: critical
+      description: "Detect and prevent circular imports"
+      scope: ["*.py", "*.ts", "*.tsx"]
+
+    # Backend specific
+    - name: main_entry_point
+      enabled: true
+      severity: high
+      description: "app/main.py should be entry point only, no business logic"
+      scope: ["backend/app/main.py"]
+      max_lines: 100
+
+    - name: routes_organization
+      enabled: true
+      severity: medium
+      description: "One route file per resource"
+      scope: ["backend/app/routes/*.py"]
+
+    # Frontend specific
+    - name: component_reusability
+      enabled: true
+      severity: low
+      description: "Components should be reusable and composable"
+      scope: ["frontend/src/components/**/*.tsx"]
+
+    # Dependencies
+    - name: loose_coupling
+      enabled: true
+      severity: high
+      description: "Modules should be loosely coupled"
+      max_dependencies: 10
+      scope: ["*.py", "*.ts"]
+
+    - name: interface_abstractions
+      enabled: true
+      severity: medium
+      description: "Use interfaces/protocols for external services"
+      scope: ["backend/app/services/*.py", "frontend/src/services/*.ts"]
+
+    - name: configuration_externalized
+      enabled: true
+      severity: high
+      description: "Configuration must be in .env, not hardcoded"
+      scope: ["*.py", "*.ts"]
+
+# ==============================================================================
+# Custom Rules (Add your own rules here)
+# ==============================================================================
+custom_rules:
+  enabled: true
+  description: "Project-specific custom rules"
+
+  rules:
+    # Example: Enforce specific comment format
+    - name: example_custom_rule
+      enabled: false
+      severity: low
+      description: "This is an example custom rule"
+      scope: ["*.py"]
+      pattern: "# Example pattern"
+
+    # Add more custom rules as needed...
+
+# ==============================================================================
+# Exclusions (Files/folders to skip during review)
+# ==============================================================================
+exclusions:
+  paths:
+    - "node_modules/"
+    - ".venv/"
+    - "venv/"
+    - "__pycache__/"
+    - ".pytest_cache/"
+    - "dist/"
+    - "build/"
+    - ".git/"
+    - "alembic/versions/"  # Don't review auto-generated migrations
+    - "*.min.js"
+    - "*.min.css"
+
+  files:
+    - "package-lock.json"
+    - "poetry.lock"
+    - ".env"
+    - ".env.*"
+
+# ==============================================================================
+# Mode Configuration
+# ==============================================================================
+modes:
+  consultant:
+    enabled: true
+    report_all_severities: true  # Include low priority in reports
+    max_issues_per_category: 50  # Limit issues per category to avoid overwhelming reports
+
+  executant:
+    enabled: true
+    block_on_critical: true
+    block_on_high: false  # Only block on critical by default
+    show_warnings: true  # Display high/medium warnings even if not blocking
+    allow_skip: true  # Allow --no-verify to skip
+
+# ==============================================================================
+# Reporting Configuration
+# ==============================================================================
+reporting:
+  format: "markdown"  # markdown or json
+  include_code_snippets: true
+  include_fix_suggestions: true
+  group_by: "severity"  # severity, file, or category
+  max_snippet_lines: 10
+
+# ==============================================================================
+# Notes
+# ==============================================================================
+# - Modify severity levels to match your project needs
+# - Add custom rules in the custom_rules section
+# - Disable rules that don't apply to your project
+# - Adjust thresholds (max_lines, max_complexity) as needed
+# - Review exclusions to ensure critical files aren't skipped
+# ==============================================================================

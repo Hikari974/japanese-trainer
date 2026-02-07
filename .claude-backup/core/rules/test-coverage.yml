@@ -1,0 +1,344 @@
+# Configuration Test Coverage - Test Engineer Agent
+
+version: "1.0.0"
+description: "Seuils de couverture de tests et conventions par stack"
+
+# Seuils de couverture globaux (%)
+coverage_thresholds:
+  default:
+    unit: 80
+    integration: 70
+    e2e: 60
+    critical: 100  # Auth, paiements, sécurité
+
+  # Seuils personnalisables par type de projet
+  strict:
+    unit: 90
+    integration: 80
+    e2e: 70
+    critical: 100
+
+  permissive:
+    unit: 70
+    integration: 60
+    e2e: 50
+    critical: 90
+
+# Patterns de fichiers de tests
+patterns:
+  test_files:
+    python:
+      - "test_*.py"
+      - "*_test.py"
+      - "tests/**/*.py"
+
+    typescript:
+      - "*.test.ts"
+      - "*.test.tsx"
+      - "*.spec.ts"
+      - "*.spec.tsx"
+      - "__tests__/**/*.ts"
+      - "__tests__/**/*.tsx"
+
+    javascript:
+      - "*.test.js"
+      - "*.test.jsx"
+      - "*.spec.js"
+      - "*.spec.jsx"
+      - "__tests__/**/*.js"
+      - "__tests__/**/*.jsx"
+
+  # Fichiers à exclure du calcul de couverture
+  exclude:
+    - "**/node_modules/**"
+    - "**/dist/**"
+    - "**/build/**"
+    - "**/.venv/**"
+    - "**/__pycache__/**"
+    - "**/*.min.js"
+    - "**/*.config.js"
+    - "**/*.config.ts"
+    - "**/migrations/**"
+    - "**/__mocks__/**"
+    - "**/__fixtures__/**"
+    - "**/coverage/**"
+    - "**/.next/**"
+    - "**/vite.config.ts"
+    - "**/jest.config.js"
+    - "**/setupTests.ts"
+
+# Conventions par stack
+stacks:
+  python_fastapi:
+    framework: "pytest"
+    coverage_tool: "pytest-cov"
+    test_directory: "tests/"
+    commands:
+      test: "pytest"
+      coverage: "pytest --cov=app --cov-report=term-missing tests/"
+      watch: "pytest-watch"
+
+    fixtures_location: "tests/conftest.py"
+
+    naming:
+      unit_test: "test_{function_name}"
+      integration_test: "test_integration_{feature}"
+      fixture: "{resource}_fixture"
+
+  python_django:
+    framework: "pytest-django"
+    coverage_tool: "coverage.py"
+    test_directory: "tests/"
+    commands:
+      test: "python manage.py test"
+      coverage: "coverage run --source='.' manage.py test && coverage report"
+      watch: "ptw"
+
+    fixtures_location: "*/fixtures/"
+
+    naming:
+      unit_test: "test_{function_name}"
+      integration_test: "test_{model}_{action}"
+      fixture: "{model}_fixture"
+
+  typescript_react:
+    framework: "vitest"
+    coverage_tool: "vitest --coverage"
+    test_directory: "src/**/__tests__/"
+    commands:
+      test: "npm test"
+      coverage: "npm test -- --coverage"
+      watch: "npm test -- --watch"
+
+    fixtures_location: "src/__fixtures__/"
+
+    naming:
+      unit_test: "describe('{ComponentName}')"
+      integration_test: "describe('{FeatureName} Integration')"
+      fixture: "create{EntityName}Mock"
+
+  typescript_nestjs:
+    framework: "jest"
+    coverage_tool: "jest --coverage"
+    test_directory: "test/"
+    commands:
+      test: "npm run test"
+      coverage: "npm run test:cov"
+      watch: "npm run test:watch"
+
+    fixtures_location: "test/fixtures/"
+
+    naming:
+      unit_test: "describe('{ServiceName}')"
+      integration_test: "describe('{Controller} (e2e)')"
+      fixture: "{entity}Stub"
+
+  javascript_express:
+    framework: "mocha"
+    coverage_tool: "nyc"
+    test_directory: "test/"
+    commands:
+      test: "npm test"
+      coverage: "nyc npm test"
+      watch: "nodemon --exec 'npm test'"
+
+    fixtures_location: "test/fixtures/"
+
+    naming:
+      unit_test: "describe('{functionName}')"
+      integration_test: "describe('API {endpoint}')"
+      fixture: "{resource}Mock"
+
+# Code critique nécessitant 100% de couverture
+critical_code_patterns:
+  - "**/auth/**"
+  - "**/authentication/**"
+  - "**/security/**"
+  - "**/payment/**"
+  - "**/billing/**"
+  - "**/crypto/**"
+  - "**/*password*"
+  - "**/*token*"
+  - "**/*permission*"
+  - "**/*authorization*"
+
+# Seuils par taille de fichier (lignes de code)
+file_size_thresholds:
+  small:
+    max_lines: 50
+    required_coverage: 0  # Pas de test obligatoire
+
+  medium:
+    max_lines: 200
+    required_coverage: 70
+
+  large:
+    max_lines: 500
+    required_coverage: 80
+
+  very_large:
+    max_lines: 999999
+    required_coverage: 90  # Fichiers énormes doivent être bien testés
+
+# Types de tests requis par contexte
+test_types:
+  unit:
+    description: "Tests de fonctions/méthodes isolées"
+    required_for:
+      - "Services"
+      - "Helpers/Utils"
+      - "Pure functions"
+      - "Business logic"
+
+    characteristics:
+      - "Rapides (< 100ms)"
+      - "Aucune dépendance externe"
+      - "Déterministes"
+      - "Mocks pour toutes dépendances"
+
+  integration:
+    description: "Tests d'interactions entre modules"
+    required_for:
+      - "Controllers/Routes"
+      - "Database operations"
+      - "API endpoints"
+      - "Module interactions"
+
+    characteristics:
+      - "Moyennement rapides (< 1s)"
+      - "Database test locale"
+      - "Mocks pour services externes uniquement"
+      - "Fixtures pour données"
+
+  e2e:
+    description: "Tests de flows utilisateur complets"
+    required_for:
+      - "User journeys critiques"
+      - "Authentication flows"
+      - "Payment flows"
+      - "Multi-step processes"
+
+    characteristics:
+      - "Lents (> 1s)"
+      - "Environment quasi-production"
+      - "Mocks minimaux"
+      - "Données réalistes"
+
+# Règles de blocage de commit
+blocking_rules:
+  - id: "MISSING_TESTS"
+    description: "Fichier > 50 lignes sans aucun test"
+    severity: "error"
+    enabled: true
+
+  - id: "FAILING_TESTS"
+    description: "Au moins 1 test échoue"
+    severity: "error"
+    enabled: true
+
+  - id: "LOW_COVERAGE"
+    description: "Couverture < seuil configuré"
+    severity: "error"
+    enabled: true
+
+  - id: "CRITICAL_NO_TESTS"
+    description: "Code critique sans tests (auth, payment, etc.)"
+    severity: "error"
+    enabled: true
+
+  - id: "BREAKING_EXISTING_TESTS"
+    description: "Modification casse tests existants"
+    severity: "error"
+    enabled: true
+
+  - id: "NO_TEST_FRAMEWORK"
+    description: "Framework de tests non configuré"
+    severity: "warning"
+    enabled: true
+
+# Comportement en mode dégradé
+degraded_mode:
+  when:
+    - "Framework de tests non détecté"
+    - "Commande test échoue (erreur config)"
+    - "project.yml manquant"
+
+  behavior:
+    - "Alerter user avec message clair"
+    - "Suggérer configuration dans project.yml"
+    - "Demander confirmation pour commit sans tests"
+    - "Logger warning dans contexte session"
+
+# Métriques à tracker
+metrics:
+  - name: "test_count"
+    description: "Nombre total de tests"
+
+  - name: "test_duration"
+    description: "Durée totale exécution (secondes)"
+
+  - name: "coverage_percentage"
+    description: "Pourcentage couverture global"
+
+  - name: "coverage_by_type"
+    description: "Couverture par type (unit/integration/e2e)"
+
+  - name: "untested_files_count"
+    description: "Nombre fichiers sans tests"
+
+  - name: "critical_untested_count"
+    description: "Nombre fichiers critiques sans tests"
+
+# Templates de rapport
+report_templates:
+  summary: |
+    ## Résumé Tests
+    - **Total tests:** {test_count}
+    - **✅ Passés:** {passed_count}
+    - **❌ Échoués:** {failed_count}
+    - **⏭️ Ignorés:** {skipped_count}
+    - **Durée:** {duration}s
+
+    ## Couverture
+    - **Globale:** {coverage_global}% {status_icon}
+    - **Unitaires:** {coverage_unit}%
+    - **Intégration:** {coverage_integration}%
+    - **E2E:** {coverage_e2e}%
+
+  failed_test: |
+    ### {index}. `{test_name}`
+    **Fichier:** `{test_file}:{line_number}`
+    **Erreur:** {error_message}
+    **Cause:** {root_cause}
+
+  untested_file: |
+    - `{file_path}` ({lines} lignes) {severity_icon}
+
+# Configuration logging
+logging:
+  level: "info"  # debug, info, warning, error
+
+  log_to:
+    - "console"
+    - "context_session"
+
+  include:
+    - "test_execution_start"
+    - "test_execution_end"
+    - "coverage_report"
+    - "commit_blocked"
+    - "commit_authorized"
+
+# Notes d'utilisation
+notes: |
+  Ce fichier configure le comportement du Test Engineer Agent.
+
+  Pour personnaliser :
+  1. Copier vers project.yml sous section 'testing'
+  2. Ajuster seuils selon besoins projet
+  3. Configurer commandes pour votre stack
+
+  Seuils recommandés :
+  - Projets critiques (finance, santé) : "strict"
+  - Projets standard : "default"
+  - Prototypes/POC : "permissive"

@@ -1,0 +1,367 @@
+# Configuration Mobile - Expo Expert & Mobile UI Expert
+
+version: "1.0.0"
+description: "Configuration pour développement mobile Expo + React Native"
+
+# Expo SDK
+expo:
+  sdk_versions:
+    stable: "52.0.0"
+    supported: ["51.0.0", "52.0.0"]
+    minimum: "50.0.0"
+
+  required_packages:
+    - "expo"
+    - "expo-status-bar"
+    - "react-native"
+    - "react-native-safe-area-context"
+    - "react-native-screens"
+
+  optional_modules:
+    camera: "expo-camera"
+    location: "expo-location"
+    notifications: "expo-notifications"
+    auth: "expo-local-authentication"
+    image_picker: "expo-image-picker"
+    file_system: "expo-file-system"
+    secure_store: "expo-secure-store"
+    sharing: "expo-sharing"
+    contacts: "expo-contacts"
+    calendar: "expo-calendar"
+
+# Navigation
+navigation:
+  expo_router:
+    description: "File-based routing (moderne, recommandé)"
+    package: "expo-router"
+    use_case: "Nouveaux projets, routing déclaratif"
+    advantages:
+      - "File-based routing (comme Next.js)"
+      - "Typed routes automatiques"
+      - "Deep linking intégré"
+      - "Layouts partagés"
+
+  react_navigation:
+    description: "Navigation programmatique (classique)"
+    package: "@react-navigation/native"
+    use_case: "Projets existants, contrôle précis"
+    advantages:
+      - "Contrôle programmatique"
+      - "Écosystème mature"
+      - "Navigation complexe"
+      - "Customisation avancée"
+
+  stacks:
+    - "@react-navigation/stack"
+    - "@react-navigation/native-stack"  # Performant, natif
+    - "@react-navigation/bottom-tabs"
+    - "@react-navigation/drawer"
+    - "@react-navigation/material-top-tabs"
+
+# UI Libraries
+ui_libraries:
+  tamagui:
+    description: "UI kit performant avec styling optimisé"
+    package: "tamagui"
+    pros:
+      - "Performance (compilation CSS)"
+      - "Thèmes puissants"
+      - "Animations intégrées"
+      - "Web + Mobile"
+    cons:
+      - "Courbe apprentissage"
+      - "Setup initial complexe"
+    use_case: "Apps performantes, design system custom"
+
+  react_native_paper:
+    description: "Material Design 3 pour React Native"
+    package: "react-native-paper"
+    pros:
+      - "Material Design"
+      - "Composants riches"
+      - "Theming simple"
+      - "Accessibility built-in"
+    cons:
+      - "Style Material imposé"
+      - "Moins performant que Tamagui"
+    use_case: "Apps Material Design, prototypes rapides"
+
+  nativebase:
+    description: "Component library accessible avec thèmes"
+    package: "native-base"
+    pros:
+      - "Composants nombreux"
+      - "Thèmes prédéfinis"
+      - "Accessibility"
+      - "Utility props (style props)"
+    cons:
+      - "Bundle size"
+      - "Moins maintenu récemment"
+    use_case: "Prototypes, MVPs, accessibilité prioritaire"
+
+  rn_elements:
+    description: "React Native Elements (UI toolkit)"
+    package: "@rneui/themed"
+    pros:
+      - "Léger"
+      - "Customizable"
+      - "Simple"
+    cons:
+      - "Moins de composants"
+      - "Design basique"
+    use_case: "Apps simples, design custom"
+
+# Animations & Gestures
+animations:
+  reanimated:
+    package: "react-native-reanimated"
+    version: "3.x"
+    description: "Animations performantes (UI thread)"
+    use_case: "Toute animation mobile (recommandé)"
+    features:
+      - "60 FPS garanti"
+      - "Shared values"
+      - "Worklets (JS UI thread)"
+      - "Layout animations"
+
+  gesture_handler:
+    package: "react-native-gesture-handler"
+    description: "Gestures natifs (swipe, pan, pinch, etc.)"
+    use_case: "Interactions touch avancées"
+    features:
+      - "Gestures natifs"
+      - "Performance optimale"
+      - "Composables"
+
+  moti:
+    package: "moti"
+    description: "Animations déclaratives (built on Reanimated)"
+    use_case: "Animations simples, API déclarative"
+
+  lottie:
+    package: "lottie-react-native"
+    description: "Animations After Effects (JSON)"
+    use_case: "Animations complexes (designers)"
+
+# Platform Guidelines
+platforms:
+  ios:
+    guidelines_url: "https://developer.apple.com/design/human-interface-guidelines/"
+    min_version: "13.0"
+    design_principles:
+      - "Clarity"
+      - "Deference"
+      - "Depth"
+    patterns:
+      navigation: "Tab Bar (bottom)"
+      modal: "Sheet (swipe down to dismiss)"
+      buttons: "SF Symbols icons"
+      typography: "San Francisco font"
+
+  android:
+    guidelines_url: "https://m3.material.io/"
+    min_version: "6.0 (API 23)"
+    design_principles:
+      - "Material You"
+      - "Dynamic Color"
+      - "Motion"
+    patterns:
+      navigation: "Bottom navigation / Navigation rail"
+      modal: "Bottom sheet"
+      buttons: "Material icons"
+      typography: "Roboto font"
+
+# Performance Thresholds
+performance:
+  fps:
+    target: 60
+    warning: 50
+    critical: 30
+
+  bundle_size:
+    ios_max_mb: 150
+    android_max_mb: 100
+    warning_mb: 80
+
+  startup_time:
+    target_ms: 2000
+    warning_ms: 3000
+    critical_ms: 5000
+
+  memory:
+    target_mb: 100
+    warning_mb: 200
+    critical_mb: 300
+
+# Responsive Breakpoints (mobile)
+responsive:
+  phone:
+    small: 320   # iPhone SE
+    medium: 375  # iPhone standard
+    large: 414   # iPhone Plus/Max
+
+  tablet:
+    small: 768   # iPad mini
+    large: 1024  # iPad Pro
+
+  orientation:
+    - portrait
+    - landscape
+
+# Accessibility
+accessibility:
+  requirements:
+    - "Screen reader support (AccessibilityInfo)"
+    - "Minimum touch target: 44x44 (iOS) / 48x48 (Android)"
+    - "Color contrast ratio ≥ 4.5:1"
+    - "Keyboard navigation (Android TV)"
+    - "Haptic feedback (optional)"
+
+  tools:
+    - "Accessibility Inspector (Xcode)"
+    - "TalkBack (Android)"
+    - "VoiceOver (iOS)"
+
+# Build & Deployment
+build:
+  eas:
+    profiles:
+      development:
+        distribution: "internal"
+        ios_simulator: true
+        android: "apk"
+
+      preview:
+        distribution: "internal"
+        channel: "preview"
+
+      production:
+        distribution: "store"
+        autoIncrement: true
+
+  ota_updates:
+    enabled: true
+    channel_strategy: "branch-based"  # development, staging, production
+
+# Testing
+testing:
+  unit:
+    framework: "jest"
+    coverage_target: 80
+
+  component:
+    framework: "@testing-library/react-native"
+    patterns:
+      - "Test user interactions"
+      - "Accessibility tests"
+      - "Snapshot tests (prudent)"
+
+  e2e:
+    framework: "detox"  # ou maestro
+    platforms: ["ios", "android"]
+
+# Patterns Recommandés
+patterns:
+  navigation_ui:
+    bottom_tabs:
+      description: "Navigation principale (3-5 tabs)"
+      use_case: "Apps avec sections principales"
+
+    drawer:
+      description: "Menu latéral (navigation secondaire)"
+      use_case: "Apps avec beaucoup de sections"
+
+    stack:
+      description: "Navigation hiérarchique (drill-down)"
+      use_case: "Flows multi-étapes"
+
+  modals:
+    bottom_sheet:
+      description: "Modal depuis le bas (iOS/Android)"
+      package: "@gorhom/bottom-sheet"
+      use_case: "Filtres, actions, sélections"
+
+    full_screen_modal:
+      description: "Modal plein écran"
+      use_case: "Création contenu, forms complexes"
+
+  lists:
+    flatlist:
+      description: "Liste simple (ScrollView virtualisé)"
+      use_case: "Listes < 1000 items"
+
+    flashlist:
+      description: "Liste ultra-performante"
+      package: "@shopify/flash-list"
+      use_case: "Listes > 1000 items, performance critique"
+
+# Component Architecture
+architecture:
+  atomic_design:
+    atoms: "Buttons, Inputs, Icons, Text"
+    molecules: "SearchBar, ListItem, Card"
+    organisms: "Header, BottomSheet, ProductList"
+    templates: "ScreenLayout, FlowTemplate"
+    pages: "HomeScreen, ProfileScreen"
+
+  folder_structure: |
+    src/
+    ├── components/
+    │   ├── atoms/
+    │   ├── molecules/
+    │   └── organisms/
+    ├── screens/
+    ├── navigation/
+    ├── hooks/
+    ├── utils/
+    ├── services/
+    ├── store/
+    └── theme/
+
+# Theming
+theming:
+  requirements:
+    - "Light mode support"
+    - "Dark mode support (optional but recommended)"
+    - "Dynamic color (Material You on Android 12+)"
+    - "Consistent spacing scale"
+    - "Typography scale"
+
+  tools:
+    - "React Context for theme state"
+    - "AsyncStorage for persistence"
+    - "CSS variables (Tamagui)"
+    - "Theme provider (RN Paper)"
+
+# Common Pitfalls
+pitfalls:
+  - issue: "Animations lag (JS thread blocked)"
+    solution: "Use Reanimated (runs on UI thread)"
+
+  - issue: "FlatList performance poor"
+    solution: "Use FlashList, optimize renderItem, add keys"
+
+  - issue: "Bundle size too large"
+    solution: "Enable Hermes, tree-shaking, lazy load screens"
+
+  - issue: "Inconsistent iOS/Android behavior"
+    solution: "Test both platforms, use Platform.select()"
+
+  - issue: "Accessibility ignored"
+    solution: "Add accessibilityLabel, accessibilityRole, test with screen readers"
+
+# Notes d'utilisation
+notes: |
+  Configuration pour Expo Expert et Mobile UI Expert.
+
+  Expo Expert utilise :
+  - expo.* (SDK, modules, build)
+  - navigation.* (router choice)
+  - build.* (EAS configuration)
+
+  Mobile UI Expert utilise :
+  - ui_libraries.* (UI lib selection)
+  - animations.* (gestures, animations)
+  - patterns.* (UI patterns)
+  - theming.* (theme system)
+  - accessibility.* (accessibility requirements)

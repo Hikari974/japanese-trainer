@@ -1,0 +1,45 @@
+# ==============================================================================
+# Template Synchronization Configuration
+# ==============================================================================
+#
+# This file configures how template updates are synchronized to this project.
+# Used by Template Sync Agent (.claude/core/agents/template-sync.md)
+#
+# ==============================================================================
+
+template:
+  # Path to claude-code-template source (CUSTOMIZE THIS for your environment)
+  source: "{{TEMPLATE_PATH}}"  # Example: "E:/PROJECT/claude-code-template/.claude/core"
+
+  # Template version (auto-updated by sync)
+  version: "1.0.0"
+
+sync:
+  # Files that can be auto-synced without confirmation (safe files)
+  auto_sync:
+    - "core/agents/*.md"           # New agents are safe to add
+    - "core/templates/*"            # Templates are safe to add
+    - "core/rules/*.yml"            # Rules can be auto-updated
+
+  # Files that require manual review before sync (may have customizations)
+  merge_required:
+    - "core/METHODOLOGY.md"         # May have project-specific notes
+    - "core/system.md"              # May have project-specific agent config
+
+  # Files that should NEVER be synced (project-specific)
+  never_sync:
+    - "core/README.md"              # Project-specific setup instructions
+    # Add more project-specific files here
+
+# ==============================================================================
+# Usage
+# ==============================================================================
+#
+# Interactive sync:
+#   User: "Check template updates"     → List changes only
+#   User: "Apply template sync"        → Apply changes interactively
+#
+# Automatic sync:
+#   ./.claude/scripts/sync-template.sh --auto
+#
+# ==============================================================================

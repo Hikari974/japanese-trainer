@@ -1,0 +1,84 @@
+project:
+  name: "japanese-trainer"
+  repository: "git@github.com:user/japanese-trainer.git"
+  version: "0.1.0"
+
+stack:
+  backend:
+    framework: null
+    language: null
+    version: null
+
+  frontend:
+    framework: null
+    meta: null
+    version: null
+
+  database:
+    type: null
+    version: null
+
+  mobile:
+    framework: "expo"
+    sdk_version: "52.0.0"
+    router: "expo-router"
+    ui_library: "tamagui"
+    platforms: ["ios", "android"]
+
+agents:
+  core:
+    - devops-expert
+    - docs-maintainer
+    - code-reviewer
+    - test-engineer
+    - epic-manager
+
+  plugins:
+    backend: []
+    frontend: []
+    database: []
+    mobile: ["expo-expert", "mobile-ui-expert"]
+    other: []
+
+paths:
+  mobile: "app/"
+  docs: ".claude/docs/"
+  tasks: ".claude/tasks/"
+
+testing:
+  coverage:
+    unit: 80
+    integration: 70
+    e2e: 60
+    critical: 100
+
+  commands:
+    test: "npm test"
+    coverage: "npm test -- --coverage"
+    watch: "npm test -- --watch"
+
+  patterns:
+    test_files: ["**/*.test.ts", "**/*.test.tsx"]
+    exclude: ["**/node_modules/**", "**/android/**", "**/ios/**"]
+
+product:
+  estimation_format: "jours-heures"
+  complexity_levels:
+    - "Simple"
+    - "Moyenne"
+    - "Complexe"
+  max_us_per_epic: 8
+  epic_status:
+    - "À planifier"
+    - "En cours"
+    - "En validation"
+    - "Terminé"
+
+conventions:
+  commit:
+    format: "type(scope): description"
+    types: ["feat", "fix", "refactor", "docs", "chore", "test", "style"]
+  versioning:
+    format: "MAJOR.MINOR.PATCH"
+  branches:
+    format: "type/description"
